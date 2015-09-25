@@ -1,0 +1,14 @@
+D:\src\Release\DDTLaucher.exe.config
+D:\src\Release\DDTLaucher.exe
+D:\src\GMTools\obj\Release\GMTools.Form1.resources
+D:\src\GMTools\obj\Release\DDTLaucher.Properties.Resources.resources
+D:\src\GMTools\obj\Release\DDTLaucher.csproj.GenerateResource.Cache
+D:\src\GMTools\obj\Release\DDTLaucher.exe
+D:\src\GMTools\obj\Release\DDTLaucher.csprojResolveAssemblyReference.cache
+D:\Release\DDTLaucher.exe.config
+D:\Release\DDTLaucher.exe
+D:\src\DDTLaucher\obj\Release\DDTLaucher.csprojResolveAssemblyReference.cache
+D:\src\DDTLaucher\obj\Release\DDTLaucher.csproj.GenerateResource.Cache
+D:\src\DDTLaucher\obj\Release\DDTLaucher.exe
+D:\src\DDTLaucher\obj\Release\Game.Launcher.Properties.Resources.resources
+D:\Release\config.ini
