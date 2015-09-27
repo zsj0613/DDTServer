@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Center", "Center\Center.vcx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\GameLibrary.csproj", "{AAEDA28C-53DA-4DF9-852A-AB8AF9E86BD7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fight", "Fight\Fight.vcxproj", "{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,18 @@ Global
 		{AAEDA28C-53DA-4DF9-852A-AB8AF9E86BD7}.Release|x64.Build.0 = Release|x64
 		{AAEDA28C-53DA-4DF9-852A-AB8AF9E86BD7}.Release|x86.ActiveCfg = Release|Any CPU
 		{AAEDA28C-53DA-4DF9-852A-AB8AF9E86BD7}.Release|x86.Build.0 = Release|Any CPU
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Debug|ARM.ActiveCfg = Debug|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Debug|x64.ActiveCfg = Debug|x64
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Debug|x64.Build.0 = Debug|x64
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Debug|x86.ActiveCfg = Debug|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Debug|x86.Build.0 = Debug|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Release|ARM.ActiveCfg = Release|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Release|x64.ActiveCfg = Release|x64
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Release|x64.Build.0 = Release|x64
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Release|x86.ActiveCfg = Release|Win32
+		{988A6BE0-3A9F-4D49-882F-27F8CC46CC5F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
