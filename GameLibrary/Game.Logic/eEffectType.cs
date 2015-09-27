@@ -1,0 +1,45 @@
+using System;
+namespace Game.Logic
+{
+	public enum eEffectType
+	{
+		AddAgilityEffect = 1,
+		AddAttackEffect,
+		AddBloodEffect,
+		AddDamageEffect,
+		AddDefenceEffect,
+		AddLuckyEffect,
+		FatalEffect,
+		HideEffect,
+		IceFronzeEffect,
+		IceFronzeEquipEffect,
+		InvinciblyEffect,
+		NoHoleEffect,
+		NoHoleEquipEffect,
+		ReduceDamageEffect,
+		SealEffect,
+		AtomBomb,
+		ArmorPiercer,
+		SealEquipEffect,
+		AddTurnEquipEffect,
+		AddDander,
+		ReflexDamageEquipEffect,
+		ReduceStrengthEffect,
+		ContinueDamageEffect,
+		AddBombEquipEffect,
+		AvoidDamageEffect,
+		MakeCriticalEffect,
+		AssimilateDamageEffect,
+		AssimilateBloodEffect,
+		ReflexDamageEffect,
+		ReduceStrengthEquipEffect = 31,
+		ContinueReduceBloodEquipEffect,
+		ContinueReduceBloodEffect,
+		LockDirectionEquipEffect,
+		LockDirectionEffect,
+		ContinueReduceBaseDamageEquipEffect = 30,
+		ContinueReduceBaseDamageEffect = 36,
+		RecoverBloodEffect,
+		ContinueReduceDamageEffect
+	}
+}
