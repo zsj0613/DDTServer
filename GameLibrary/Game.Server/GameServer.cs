@@ -535,6 +535,7 @@ namespace Game.Server
             catch (Exception e)
             {
                 GameServer.log.Error("Failed to start the server", e);
+                throw e;
                 result = false;
             }
             return result;
@@ -588,8 +589,8 @@ namespace Game.Server
 		public bool StartScriptComponents()
 		{
 			bool result;
-			try
-			{
+			//try
+			//{
 				ScriptMgr.InsertAssembly(typeof(GameServer).Assembly);
 				ScriptMgr.InsertAssembly(typeof(BaseGame).Assembly);
 				ScriptMgr.InsertAssembly(typeof(BaseServer).Assembly);
@@ -611,13 +612,13 @@ namespace Game.Server
 					GameEventMgr.RegisterGlobalEvents(asm, typeof(ScriptUnloadedEventAttribute), ScriptEvent.Unloaded);
 				}
 				GameServer.log.Debug("Registering global event handlers: true");
-			}
-			catch (Exception e)
-			{
-				GameServer.log.Error("StartScriptComponents", e);
-				result = false;
-				return result;
-			}
+			//}
+			//catch (Exception e)
+			//{
+			//	GameServer.log.Error("StartScriptComponents", e);
+			//	result = false;
+			//	return result;
+			//}
 			result = true;
 			return result;
 		}

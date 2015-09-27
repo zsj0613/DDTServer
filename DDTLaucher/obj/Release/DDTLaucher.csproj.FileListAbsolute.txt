@@ -12,3 +12,11 @@ D:\src\DDTLaucher\obj\Release\DDTLaucher.csproj.GenerateResource.Cache
 D:\src\DDTLaucher\obj\Release\DDTLaucher.exe
 D:\src\DDTLaucher\obj\Release\Game.Launcher.Properties.Resources.resources
 D:\Release\config.ini
+D:\NewProject\Release\DDTLaucher.exe.config
+D:\NewProject\Release\DDTLaucher.exe
+D:\NewProject\new\DDTLaucher\obj\Release\DDTLaucher.csprojResolveAssemblyReference.cache
+D:\NewProject\new\DDTLaucher\obj\Release\Game.Launcher.Loading.resources
+D:\NewProject\new\DDTLaucher\obj\Release\Game.Launcher.MainForm.resources
+D:\NewProject\new\DDTLaucher\obj\Release\Game.Launcher.Properties.Resources.resources
+D:\NewProject\new\DDTLaucher\obj\Release\DDTLaucher.csproj.GenerateResource.Cache
+D:\NewProject\new\DDTLaucher\obj\Release\DDTLaucher.exe

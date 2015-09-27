@@ -68,21 +68,21 @@ namespace Game.Launcher
 
         public bool UpdateStatus()
         {
-            if (Process.GetProcessesByName("Center.Service").Length > 0)
+            if (Process.GetProcessesByName("Center").Length > 0)
                 m_CenterStatus = true;
             else
                 m_CenterStatus = false;
 
-            if (Process.GetProcessesByName("Fighting.Service").Length > 0)
+            if (Process.GetProcessesByName("Fight").Length > 0)
                 m_FightStatus = true;
             else
                 m_FightStatus = false;
 
-            if (Process.GetProcessesByName("Game.Service").Length > 0)
+            if (Process.GetProcessesByName("Game").Length > 0)
                 m_GameStatus = true;
             else
                 m_GameStatus = false;
-            if (Process.GetProcessesByName("Web.Service").Length > 0)
+            if (Process.GetProcessesByName("Web").Length > 0)
                 m_WebStatus = true;
             else
                 m_WebStatus = false;
@@ -111,7 +111,7 @@ namespace Game.Launcher
         public bool StartCenter(string key , bool IsSlient)
         {
             ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.FileName = "Center.Service.exe";
+            startInfo.FileName = "Center.exe";
             startInfo.Arguments = key;
             startInfo.Verb = "runas";
             Process.Start(startInfo);
@@ -131,19 +131,19 @@ namespace Game.Launcher
             if (Centerintptr != IntPtr.Zero)
             {
                 ShowWindow(Centerintptr, 1);
-                Process.GetProcessesByName("Center.Service")[0].CloseMainWindow();
+                Process.GetProcessesByName("Center")[0].CloseMainWindow();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Center.Service")[0].Close();
+                Process.GetProcessesByName("Center.")[0].Close();
                 return true;
             }
         }
         public bool StartFight(string key, bool IsSlient)
         {
             ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.FileName = "Fighting.Service.exe";
+            startInfo.FileName = "Fight.exe";
             startInfo.Arguments = key;
             startInfo.Verb = "runas";
             Process.Start(startInfo);
@@ -163,19 +163,19 @@ namespace Game.Launcher
             if (Fightintptr != IntPtr.Zero)
             {
                 ShowWindow(Fightintptr, 1);
-                Process.GetProcessesByName("Fighting.Service")[0].CloseMainWindow();
+                Process.GetProcessesByName("Fight")[0].CloseMainWindow();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Fighting.Service")[0].Close();
+                Process.GetProcessesByName("Fight")[0].Close();
                 return true;
             }
         }
         public bool StartGame(string key, bool IsSlient)
         {
             ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.FileName = "Game.Service.exe";
+            startInfo.FileName = "Game.exe";
             startInfo.Arguments = key;
             startInfo.Verb = "runas";
             Process.Start(startInfo);
@@ -195,19 +195,19 @@ namespace Game.Launcher
             if (Gameintptr != IntPtr.Zero)
             {
                 ShowWindow(Gameintptr, 1);
-                Process.GetProcessesByName("Game.Service")[0].CloseMainWindow();
+                Process.GetProcessesByName("Game")[0].CloseMainWindow();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Game.Service")[0].Close();
+                Process.GetProcessesByName("Game")[0].Close();
                 return true;
             }
         }
         public bool StartWeb(string key, bool IsSlient)
         {
             ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.FileName = "Web.Service.exe";
+            startInfo.FileName = "Web.exe";
             startInfo.Arguments = key;
             startInfo.Verb = "runas";
             Process.Start(startInfo);
@@ -227,12 +227,12 @@ namespace Game.Launcher
             if (Webintptr != IntPtr.Zero)
             {
                 ShowWindow(Webintptr, 1);
-                Process.GetProcessesByName("Web.Service")[0].CloseMainWindow();
+                Process.GetProcessesByName("Web")[0].CloseMainWindow();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Web.Service")[0].Close();
+                Process.GetProcessesByName("Web")[0].Close();
                 return true;
             }
         }

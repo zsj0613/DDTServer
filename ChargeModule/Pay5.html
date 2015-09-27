@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>充值</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="http://p5m0.357p.com/css/reset.css" />
+    <link type="text/css" rel="stylesheet" href="http://p5m0.357p.com/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="http://p5m0.357p.com/css/template.css" />
+    <script type="text/javascript" src="http://p5m0.357p.com/scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://p5m0.357p.com/scripts/pay.js"></script>
+
+    <script type="text/javascript" src="http://p5m0.357p.com/scripts/common.js"></script>
+
+
+
+
+
+
+
+    <style type="text/css">
+        <!--
+        .STYLE2 {
+            color: #333333;
+        }
+
+        .STYLE3 {
+            color: #FF0000;
+        }
+        -->
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="pagetitle">花千骨1区</div>
+        <div id="utils">
+            <a href="/queryorder.asp" class="underline" target="_blank">订单查询</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="outer">
+        <div id="outerpad">
+            <div id="notice">说明：推荐大家使用支付宝充值，方便，快捷，安全。</div>
+
+            <form name="form" method="post" action="http://p5m0.357p.com/loading.asp" id="ctl01">
+                <div id="statement">
+                    <span class="t1 bold">1元人民币 =</span>
+                    <span class="bold">
+                        <font color='red'>100</font>&nbsp;<font color='red' id="ytype">元宝</font> &nbsp;
+                    </span>
+
+
+
+
+                </div>
+
+                <div id="main">
+                    <div id="progress" class="progress_step3"></div>
+                    <div id="layout">
+
+                        <div id="inputPart">
+                            <h1 class="bigger">使用<span class="bold t1" id="pChannelName">骏网一卡通</span>充值 </h1>
+                            <div class="vspace"></div>
+
+                            <table cellpadding="5" cellspacing="0">
+                                <tr>
+                                    <td width="80"><span class="bold STYLE3">游戏帐号</span><span class="STYLE3">：</span></td>
+                                    <td width="537">
+                                        <span style="width:160px;">$username</span>
+                                        <input value="$userid" name="UserName" type="hidden" id="UserName" />
+                                        &nbsp;<span class="t2">*</span> 请认真核对你的<span class="bold STYLE3">游戏帐号</span>
+                                    </td>
+                                </tr>
+
+                                <tr><td>卡的面值:</td><td>        <select name='ka_type' id="cardAmount_1" class="shurukuang" style="width:166px;">        <option value=''>选择卡的面值..</option><option value='jwk005'>骏网一卡通5元</option><option value='jwk006'>骏网一卡通6元</option><option value='jwk010'>骏网一卡通10元</option><option value='jwk015'>骏网一卡通15元</option><option value='jwk030'>骏网一卡通30元</option><option value='jwk050'>骏网一卡通50元</option><option value='jwk100'>骏网一卡通100元</option><option value='jwk200'>骏网一卡通200元</option><option value='jwk500'>骏网一卡通500元</option><option value='jwk1000'>骏网一卡通1000元</option>        </select>&nbsp;<span class="t2">*</span> 选错面值100%失败，后果自负!</td></td></tr>
+                                <tr><td width="80">卡号:</td><td><input type="text" class="shurukuang" name="mobile" id="cardNo_1" maxlength="50" style="width:160px;" />&nbsp;<span class="t2">*</span> 请输入卡号。</td></td></tr>
+                                <tr><td>卡密码:</td><td>        <input type="text" name="password" class="shurukuang" id="cardPass_1" maxlength="50" style="width:160px;" />&nbsp;<span class="t2">*</span> 请输入卡密码。</td></td></tr>
+
+                                <tr>
+                                    <td><font color=#AAAAAA>QQ号:</font></td>
+                                    <td>
+
+
+                                        <input type="text" class="shurukuang" name="shouji" id="shouji" maxlength="11" style="width:160px;" />
+
+                                        &nbsp;<span class="t2"> </span><font color=#AAAAAA>作为您的充值凭证。</font>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <div class="vspace clear"></div>
+                            <div class="vspace"></div>
+
+                            <div class="center">
+                                <input id="back" type="button" value="上一步" style="width:70px" class="button" onclick="javascript:history.back();" />&nbsp;
+                                <input type="submit" name="subit" value="充值" id="forward" class="button" style="width:70px;" />
+                                <input value="提交" name="forward" type="hidden" id="forward" />
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="PayID" value="5" />
+                        <input type="hidden" name="userid" value="16753" />
+                        <input type="hidden" name="wooolID" value="16623" />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
