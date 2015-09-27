@@ -64,7 +64,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo1.cs" />
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DAL\AsyncComandExecuteHanle.cs" />
     <Compile Include="DAL\SqlHelper.cs" />
     <Compile Include="DAL\SqlHelperParameterCache.cs" />
