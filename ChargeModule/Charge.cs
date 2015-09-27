@@ -7,6 +7,7 @@ using Lsj.Util;
 using Game.Base;
 using System.Reflection;
 using Bussiness;
+using Game.Base.Events;
 
 namespace Web.Server.Module
 {
@@ -56,7 +57,7 @@ namespace Web.Server.Module
 
 
 
-        private static HttpResponse ProcessStep1(Dictionary<string, string> para)
+        private HttpResponse ProcessStep1(Dictionary<string, string> para)
         {
             var response = new HttpResponse();
             response.contenttype = "text/html";
@@ -75,7 +76,7 @@ namespace Web.Server.Module
             return response;
         }
 
-        private static HttpResponse ProcessStep2(Dictionary<string, string> para)
+        private HttpResponse ProcessStep2(Dictionary<string, string> para)
         {
             var response = new HttpResponse();
             response.contenttype = "text/html";
@@ -132,6 +133,11 @@ namespace Web.Server.Module
                 response.WriteError(404);
             }
             return response;
+        }
+        [ScriptLoadedEventAttribute]
+        public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
+        {
+            Server.AddModule("/charge.do?", "Web.Server.Module.Charge");
         }
     }
 }
