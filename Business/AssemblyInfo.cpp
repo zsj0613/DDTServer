@@ -11,12 +11,12 @@ using namespace System::Security::Permissions;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 //
-[assembly:AssemblyTitleAttribute(L"Business")];
-[assembly:AssemblyDescriptionAttribute(L"")];
+[assembly:AssemblyTitleAttribute(L"DDTank Business Library")];
+[assembly:AssemblyDescriptionAttribute(L"DDTank Business Library")];
 [assembly:AssemblyConfigurationAttribute(L"")];
-[assembly:AssemblyCompanyAttribute(L"Lsj")];
-[assembly:AssemblyProductAttribute(L"Business")];
-[assembly:AssemblyCopyrightAttribute(L"Copyright (c) lsj 2015")];
+[assembly:AssemblyCompanyAttribute(L"LSJ")];
+[assembly:AssemblyProductAttribute(L"DDTank Business Library")];
+[assembly:AssemblyCopyrightAttribute(L"Copyright (c) LSJ 2015 - ")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
 

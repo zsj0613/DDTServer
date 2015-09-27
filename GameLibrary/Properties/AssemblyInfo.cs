@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("GameLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DDTank Game Library")]
+[assembly: AssemblyDescription("DDTank Game Library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("GameLibrary")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCompany("LSJ")]
+[assembly: AssemblyProduct("DDTank Game Library")]
+[assembly: AssemblyCopyright("Copyright (c) LSJ 2015 - ")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("aaeda28c-53da-4df9-852a-ab8af9e86bd7")]
+[assembly: Guid("2476271f-aebe-4821-9532-f24a4df7f1df")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
@@ -29,8 +29,5 @@ using System.Runtime.InteropServices;
 //      生成号
 //      修订号
 //
-//可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值，
-// 方法是按如下所示使用“*”: :
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.*")]
+

@@ -76,6 +76,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Bussiness.CenterService\CenterServiceClient.cs" />
     <Compile Include="Bussiness.CenterService\ICenterService.cs" />
     <Compile Include="Bussiness.CenterService\ICenterServiceChannel.cs" />

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DDTank Language Library")]
-[assembly: AssemblyDescription("DDTank Language Library")]
+[assembly: AssemblyTitle("DDTank Business Library")]
+[assembly: AssemblyDescription("DDTank Business Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LSJ")]
-[assembly: AssemblyProduct("DDTank Language Library")]
+[assembly: AssemblyProduct("DDTank Business Library")]
 [assembly: AssemblyCopyright("Copyright (c) LSJ 2015 - ")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

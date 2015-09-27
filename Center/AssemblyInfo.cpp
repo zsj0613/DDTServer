@@ -11,11 +11,11 @@ using namespace System::Security::Permissions;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 //
-[assembly:AssemblyTitleAttribute(L"DDTank Center Server ReBuild With CPP")];
-[assembly:AssemblyDescriptionAttribute(L"DDTank Center Server ReBuild With CPP")];
+[assembly:AssemblyTitleAttribute(L"DDTank Center Server")];
+[assembly:AssemblyDescriptionAttribute(L"DDTank Center Server")];
 [assembly:AssemblyConfigurationAttribute(L"")];
-[assembly:AssemblyCompanyAttribute(L"Lsj")];
-[assembly:AssemblyProductAttribute(L"DDTank Center Server ReBuild With CP")];
+[assembly:AssemblyCompanyAttribute(L"LSJ")];
+[assembly:AssemblyProductAttribute(L"DDTank Center Server")];
 [assembly:AssemblyCopyrightAttribute(L"Copyright (c) LSJ 2015 - ")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
