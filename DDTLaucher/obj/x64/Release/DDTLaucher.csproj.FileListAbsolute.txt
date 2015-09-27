@@ -7,9 +7,9 @@ D:\NewProject\src\DDTLaucher\obj\x64\Release\Game.Launcher.MainForm.resources
 D:\NewProject\src\DDTLaucher\obj\x64\Release\Game.Launcher.Properties.Resources.resources
 D:\NewProject\src\DDTLaucher\obj\x64\Release\DDTLaucher.csproj.GenerateResource.Cache
 D:\NewProject\src\DDTLaucher\obj\x64\Release\DDTLaucher.exe
-D:\NewProject\new\Release\config.ini
 D:\NewProject\new\Release\DDTLaucher.exe.config
 D:\NewProject\new\Release\DDTLaucher.exe
+D:\NewProject\new\Release\DDTLaucher.pdb
 D:\NewProject\new\Release\DDTLaucher.exe.CodeAnalysisLog.xml
 D:\NewProject\new\Release\DDTLaucher.exe.lastcodeanalysissucceeded
 D:\NewProject\new\DDTLaucher\obj\x64\Release\DDTLaucher.csprojResolveAssemblyReference.cache
@@ -18,5 +18,4 @@ D:\NewProject\new\DDTLaucher\obj\x64\Release\Game.Launcher.MainForm.resources
 D:\NewProject\new\DDTLaucher\obj\x64\Release\Game.Launcher.Properties.Resources.resources
 D:\NewProject\new\DDTLaucher\obj\x64\Release\DDTLaucher.csproj.GenerateResource.Cache
 D:\NewProject\new\DDTLaucher\obj\x64\Release\DDTLaucher.exe
-D:\NewProject\new\Release\DDTLaucher.pdb
 D:\NewProject\new\DDTLaucher\obj\x64\Release\DDTLaucher.pdb

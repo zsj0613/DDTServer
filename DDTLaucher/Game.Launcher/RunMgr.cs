@@ -5,7 +5,7 @@ using System.Timers;
 
 namespace Game.Launcher
 {
-    public class RunMgr
+    public class RunMgr 
     {
         public RunMgr()
         {
@@ -16,6 +16,7 @@ namespace Game.Launcher
             aTimer.Interval = 1 * 1000;    //1s
             aTimer.Enabled = true;
         }
+
 
         private bool m_CenterStatus = false;
         private bool m_FightStatus = false;
@@ -245,8 +246,6 @@ namespace Game.Launcher
                 ShowWindow(Gameintptr, (IsSlient ? (uint)0 : (uint)1));
             if (Webintptr != IntPtr.Zero)
                 ShowWindow(Webintptr, (IsSlient ? (uint)0 : (uint)1));
-
         }
-
     }
 }
