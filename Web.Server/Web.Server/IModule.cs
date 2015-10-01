@@ -1,4 +1,5 @@
-﻿using Lsj.Util.Net.Web;
+﻿using Game.Base.Events;
+using Lsj.Util.Net.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace Web.Server
 {
     public interface IModule
     {
-        HttpClient Process(HttpClient request);
+        void Process(ref HttpClient client);
     }
 }

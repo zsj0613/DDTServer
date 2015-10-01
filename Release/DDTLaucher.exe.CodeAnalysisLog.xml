@@ -12,7 +12,7 @@
          <Members>
           <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message Id="runmgr" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2015-10-01 05:00:17Z" FixCategory="NonBreaking">
+            <Message Id="runmgr" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2015-10-01 07:05:58Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning" Path="D:\NewProject\new\DDTLaucher\Game.Launcher" File="Loading.Designer.cs" Line="16">'Loading' 包含 IDisposable 类型的字段 'Loading.runmgr': 'RunMgr'。请更改 'Loading' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
             </Message>
            </Messages>
@@ -23,20 +23,20 @@
          <Members>
           <Member Name="#FindWindow(System.String,System.String)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2015-10-01 05:00:17Z" FixCategory="Breaking">
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2015-10-01 07:05:58Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalWarning">由于是 P/Invoke 方法，因此，应在名为 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的类中定义 'RunMgr.FindWindow(string, string)'。</Issue>
             </Message>
-            <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2015-10-01 05:00:17Z" FixCategory="NonBreaking">
+            <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2015-10-01 07:05:58Z" FixCategory="NonBreaking">
              <Issue Name="ParameterImplicitAnsi" Certainty="75" Level="Error">为了降低安全风险，请将参数 'lpClassName' 封送为 Unicode，方法是将 DllImport.CharSet 设置为 CharSet.Unicode，或者将该参数显式封送为 UnmanagedType.LPWStr。如果您需要将该字符串封送为 ANSI 或者与系统相关的编码，请显式指定 MarshalAs，并设置 BestFitMapping=false；为了提高安全性，还应设置 ThrowOnUnmappableChar=true。</Issue>
             </Message>
-            <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2015-10-01 05:00:17Z" FixCategory="NonBreaking">
+            <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2015-10-01 07:05:58Z" FixCategory="NonBreaking">
              <Issue Name="ParameterImplicitAnsi" Certainty="75" Level="Error">为了降低安全风险，请将参数 'lpWindowName' 封送为 Unicode，方法是将 DllImport.CharSet 设置为 CharSet.Unicode，或者将该参数显式封送为 UnmanagedType.LPWStr。如果您需要将该字符串封送为 ANSI 或者与系统相关的编码，请显式指定 MarshalAs，并设置 BestFitMapping=false；为了提高安全性，还应设置 ThrowOnUnmappableChar=true。</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ShowWindow(System.IntPtr,System.UInt32)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
            <Messages>
-            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2015-10-01 05:00:17Z" FixCategory="Breaking">
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2015-10-01 07:05:58Z" FixCategory="Breaking">
              <Issue Certainty="95" Level="CriticalWarning">由于是 P/Invoke 方法，因此，应在名为 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的类中定义 'RunMgr.ShowWindow(IntPtr, uint)'。</Issue>
             </Message>
            </Messages>

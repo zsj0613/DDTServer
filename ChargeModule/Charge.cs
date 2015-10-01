@@ -15,10 +15,10 @@ using System.Collections;
 
 namespace Web.Server.Module
 {
-    public class Charge : IModule
+    public class Charge :IModule
     {
         public static Log log = new Log(new LogConfig { FilePath = "log/Charge/", UseConsole = true });
-        public HttpClient Process(HttpClient client)
+        public void Process(ref HttpClient client)
         {
             var response = new HttpResponse();
             response.contenttype = "text/html";
@@ -39,7 +39,6 @@ namespace Web.Server.Module
                 response.WriteError(404);
             }
             client.response = response;
-            return client;
         }
 
 

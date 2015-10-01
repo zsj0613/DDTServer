@@ -49,15 +49,16 @@ namespace Web.Server
                     WebServer.log.Debug(a);
                     foreach (string header in m_modules.Keys)
                     {
-                        if (client.request.uri.ToLower().StartsWith(header))
+                        if (client.request.uri.ToLower()==header)
                         {
                             module = (IModule)ScriptMgr.CreateInstance(m_modules[header]);
                         }
                     }
                     if (module != null)
                     {
-                        client = (module as IModule).Process(client);
-                        base.Response(client);
+                        var x = client;
+                        module.Process(ref x);
+                        base.Response(x);
                     }
                     else
                     {
@@ -69,7 +70,7 @@ namespace Web.Server
             {
                 WebServer.log.Error(e);
                 SendErrorAndDisconnect(client, 400);
-                //throw;
+               // throw;
             }
         }
 
