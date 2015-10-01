@@ -308,6 +308,7 @@ namespace Game.Launcher
                 return;
             }
             NotifyIcon.Dispose();
+            runmgr.Dispose();
             System.Environment.Exit(0);
         }
 

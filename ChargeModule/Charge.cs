@@ -4,103 +4,85 @@ using System.Linq;
 using System.Text;
 using Lsj.Util.Net.Web;
 using Lsj.Util;
+using Lsj.Util.Log;
 using Game.Base;
 using System.Reflection;
 using Bussiness;
 using Game.Base.Events;
+using NVelocityTemplateEngine.Interfaces;
+using NVelocityTemplateEngine;
+using System.Collections;
 
 namespace Web.Server.Module
 {
     public class Charge : IModule
     {
-        public HttpResponse Process(HttpRequest request)
+        public static Log log = new Log(new LogConfig { FilePath = "log/Charge/", UseConsole = true });
+        public HttpClient Process(HttpClient client)
         {
             var response = new HttpResponse();
             response.contenttype = "text/html";
-
+            
             //  "/charge.do?"
-            string uri = request.uri.Substring(11);
-            var para = new Dictionary<string, string>();
-            try
+            var request = client.request;
+            log.Info(request.QueryString["step"]);
+            if (request.QueryString["step"].ConvertToInt(0) == 1)
             {
-                var a = uri.Split('&');
-                foreach (var b in a)
-                {
-                    var c = b.Split('=');
-                    para.Add(c[0], c[1]);
-                }
+                response = ProcessStep1(client);
             }
-            catch
+            else if (request.QueryString["step"].ConvertToInt(0) == 2)
             {
-                response.WriteError(404);
-                return response;
-            }
-
-            if (!para.ContainsKey("step"))
-            {
-                response.WriteError(404);
-            }
-            else if (para["step"].ConvertToInt(0) == 1)
-            {
-                response = ProcessStep1(para);
-            }
-            else if (para["step"].ConvertToInt(0) == 2)
-            {
-                response = ProcessStep2(para);
+                response = ProcessStep2(client);
             }
             else
             {
                 response.WriteError(404);
             }
-            return response;
+            client.response = response;
+            return client;
         }
 
 
 
-        private HttpResponse ProcessStep1(Dictionary<string, string> para)
+        private HttpResponse ProcessStep1(HttpClient client)
         {
             var response = new HttpResponse();
             response.contenttype = "text/html";
-            string userid = "";
-            var content = ResourceUtil.GetResourceStream("PayIndex.html", Assembly.GetAssembly(typeof(Charge))).ReadFromStream(Encoding.UTF8).ToStringBuilder();
-            if (!para.ContainsKey("userid") || para["userid"].ConvertToInt(0) == 0)
+            var request = client.request;
+            string userid = request.QueryString["userid"];
+
+
+            
+            log.Info(request.QueryString["userid"]);
+            if (userid.ConvertToInt(0) == 0)
             {
                 response.WriteError(404);
             }
             else
             {
-                userid = para["userid"];
-                content.Replace("$userid", userid);
-                response.Write(content);
+                INVelocityEngine AssemblyEngine = NVelocityEngineFactory.CreateNVelocityAssemblyEngine(Server.ModulePath+"ChargeModule.dll", false);
+                IDictionary context = new Hashtable();
+                
+                context.Add("userid", userid);
+                response.Write(AssemblyEngine.Process(context, "ChargeModule.PayIndex.html"));
             }
             return response;
         }
 
-        private HttpResponse ProcessStep2(Dictionary<string, string> para)
+        private HttpResponse ProcessStep2(HttpClient client)
         {
             var response = new HttpResponse();
             response.contenttype = "text/html";
-            string userid = "";
-            string paytype = "";
+            var request = client.request;
+            string userid = request.QueryString["userid"];
+            string paytype = request.QueryString["paytype"];
 
-            if (!para.ContainsKey("userid") || para["userid"].ConvertToInt(0) == 0)
+
+
+            if (paytype.ConvertToInt(0) == 0 || userid.ConvertToInt(0) == 0)
             {
                 response.WriteError(404);
                 return response;
-            }
-            else
-            {
-                userid = para["userid"];
-            }
-
-            if (!para.ContainsKey("paytype") || para["paytype"].ConvertToInt(0) == 0)
-            {
-                response.WriteError(404);
-                return response;
-            }
-            else
-            {
-                paytype = para["paytype"];
             }
 
             if (paytype.ConvertToInt(0) >= 1 && paytype.ConvertToInt(0) <= 24)
@@ -121,12 +103,15 @@ namespace Web.Server.Module
                         }
                     }
                 }
-                var content = ResourceUtil.GetResourceStream($"Pay{paytype}.html", Assembly.GetAssembly(typeof(Charge))).ReadFromStream(Encoding.UTF8).ToStringBuilder();
-                content.Replace("$userid", userid);
-                content.Replace("$username", username);
-                content.Replace("/queryorder.asp", "http://p5m0.357p.com/queryorder.asp");
-                response.Write(content);
 
+              //  content.Replace("/queryorder.asp", "http://p5m0.357p.com/queryorder.asp");
+
+                INVelocityEngine AssemblyEngine = NVelocityEngineFactory.CreateNVelocityAssemblyEngine(Server.ModulePath + "ChargeModule.dll", false);
+                IDictionary context = new Hashtable();
+
+                context.Add("userid", userid);
+                context.Add("username", username);
+                response.Write(AssemblyEngine.Process(context, $"ChargeModule.Pay{paytype}.html"));
             }
             else
             {
@@ -134,10 +119,11 @@ namespace Web.Server.Module
             }
             return response;
         }
-        [ScriptLoadedEventAttribute]
+        [ScriptLoadedEvent]
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
-            Server.AddModule("/charge.do?", "Web.Server.Module.Charge");
+            Charge.log.Info("Load Charge Module");
+            Server.AddModule(@"\charge.do", "Web.Server.Module.Charge");            
         }
     }
 }

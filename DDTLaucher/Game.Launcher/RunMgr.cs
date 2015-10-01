@@ -2,10 +2,11 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Timers;
+using Lsj.Util;
 
 namespace Game.Launcher
 {
-    public class RunMgr 
+    public class RunMgr : DisposableClass, IDisposable
     {
         public RunMgr()
         {
@@ -246,6 +247,18 @@ namespace Game.Launcher
                 ShowWindow(Gameintptr, (IsSlient ? (uint)0 : (uint)1));
             if (Webintptr != IntPtr.Zero)
                 ShowWindow(Webintptr, (IsSlient ? (uint)0 : (uint)1));
+        }
+        protected override void CleanUpManagedResources()
+        {
+            Marshal.FreeHGlobal(Centerintptr);
+            Centerintptr = IntPtr.Zero;
+            Marshal.FreeHGlobal(Fightintptr);
+            Fightintptr = IntPtr.Zero;
+            Marshal.FreeHGlobal(Fightintptr);
+            Fightintptr = IntPtr.Zero;
+            Marshal.FreeHGlobal(Webintptr);
+            Webintptr = IntPtr.Zero;
+            base.CleanUpManagedResources();
         }
     }
 }

@@ -9,11 +9,13 @@ using Game.Base.Events;
 using Game.Base.Managers;
 using Web.Server;
 using System.Threading;
+using Lsj.Util;
 
 namespace Web.Server
 {
     public class Server: MyHttpWebServer
     {
+        public static string ModulePath = Static.CurrentPath() + @"web\Modules\";
         private static readonly Dictionary<string, string> m_modules = new Dictionary<string, string>();
         private static object @lock = new object();
         public static void AddModule(string header,string @class)
@@ -32,41 +34,44 @@ namespace Web.Server
         public Server(IPAddress ip,int port) : base(ip,port)
         {
         }
-        protected override void Process(HttpRequest request, TcpSocket handle)
+        protected override void Process(HttpClient client)
         {
             try
             {
-                if (request.uri.ToLower().StartsWith("/modules"))
+                if (client.request.uri.ToLower().StartsWith("/modules"))
                 {
-                    SendErrorAndDisconnect(handle, 403);
+                    SendErrorAndDisconnect(client, 403);
                 }
                 else
                 {
                     IModule module = null;
-                    var a = request.uri.ToLower();
+                    var a = client.request.uri.ToLower();
+                    WebServer.log.Debug(a);
                     foreach (string header in m_modules.Keys)
                     {
-                        if (request.uri.ToLower().StartsWith(header))
+                        if (client.request.uri.ToLower().StartsWith(header))
                         {
                             module = (IModule)ScriptMgr.CreateInstance(m_modules[header]);
                         }
                     }
                     if (module != null)
                     {
-                        var response = (module as IModule).Process(request);
-                        base.Response(handle, response);
+                        client = (module as IModule).Process(client);
+                        base.Response(client);
                     }
                     else
                     {
-                        base.Process(request, handle);
+                        base.Process(client);
                     }
                 }
             }
             catch (Exception e)
             {
                 WebServer.log.Error(e);
-                SendErrorAndDisconnect(handle, 400);
+                SendErrorAndDisconnect(client, 400);
+                //throw;
             }
         }
+
     }
 }

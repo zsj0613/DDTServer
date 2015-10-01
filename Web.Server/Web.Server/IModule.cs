@@ -8,6 +8,6 @@ namespace Web.Server
 {
     public interface IModule
     {
-        HttpResponse Process(HttpRequest request);
+        HttpClient Process(HttpClient request);
     }
 }

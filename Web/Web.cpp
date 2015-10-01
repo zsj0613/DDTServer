@@ -25,6 +25,7 @@ int StopServer();
 
 int main(array<String^> ^args)
 {
+
 	if (args->Length>=1)
 	{
 		string key = "$^&^(*&)*(J1534765";

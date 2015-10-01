@@ -55,6 +55,10 @@
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj">
+      <Project>{37ce504d-055a-4c15-9c08-a3f477d1c44b}</Project>
+      <Name>NVelocityTemplateEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
       <Project>{C4267EBB-742F-4698-833E-4B743CAAD015}</Project>
       <Name>SqlDataProvider</Name>

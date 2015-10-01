@@ -26,7 +26,7 @@ namespace Web.Server
         public static readonly string Edition = "10000";
         private static WebServer m_instance;
         private Server server;
-
+        
         public static WebServer Instance
         {
             get
@@ -80,7 +80,7 @@ namespace Web.Server
                 
                 GameEventMgr.Notify(ScriptEvent.Loaded);
                 server = new Server(IPAddress.Parse(AppConfig.AppSettings["IP"]),AppConfig.AppSettings["Port"].ConvertToInt(88));
-                server.Path = "web/";
+                server.Path = @"web\";
                 server.Start();
                 WebServer.log.Warn("Web Service Started!");
 

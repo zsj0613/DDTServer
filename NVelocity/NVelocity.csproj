@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{FB70A974-BF61-4640-93EE-27BD88DC57B8}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>NVelocity</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>..\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commons.Collections\CollectionsUtil.cs" />
+    <Compile Include="Commons.Collections\ExtendedProperties.cs" />
+    <Compile Include="Commons.Collections\IOrderedDictionary.cs" />
+    <Compile Include="Commons.Collections\KeyedList.cs" />
+    <Compile Include="Commons.Collections\KeyedListEnumerator.cs" />
+    <Compile Include="Commons.Collections\LRUMap.cs" />
+    <Compile Include="Commons.Collections\PropertiesReader.cs" />
+    <Compile Include="Commons.Collections\PropertiesTokenizer.cs" />
+    <Compile Include="Commons.Collections\StringTokenizer.cs" />
+    <Compile Include="NVelocity.App.Events\EventCartridge.cs" />
+    <Compile Include="NVelocity.App.Events\EventHandler.cs" />
+    <Compile Include="NVelocity.App.Events\MethodExceptionEventArgs.cs" />
+    <Compile Include="NVelocity.App.Events\MethodExceptionEventHandler.cs" />
+    <Compile Include="NVelocity.App.Events\NullSetEventArgs.cs" />
+    <Compile Include="NVelocity.App.Events\NullSetEventHandler.cs" />
+    <Compile Include="NVelocity.App.Events\ReferenceInsertionEventArgs.cs" />
+    <Compile Include="NVelocity.App.Events\ReferenceInsertionEventHandler.cs" />
+    <Compile Include="NVelocity.App.Tools\VelocityFormatter.cs" />
+    <Compile Include="NVelocity.App\FieldMethodizer.cs" />
+    <Compile Include="NVelocity.App\Velocity.cs" />
+    <Compile Include="NVelocity.App\VelocityEngine.cs" />
+    <Compile Include="NVelocity.Context\AbstractContext.cs" />
+    <Compile Include="NVelocity.Context\IContext.cs" />
+    <Compile Include="NVelocity.Context\IInternalContextAdapter.cs" />
+    <Compile Include="NVelocity.Context\IInternalEventContext.cs" />
+    <Compile Include="NVelocity.Context\IInternalHousekeepingContext.cs" />
+    <Compile Include="NVelocity.Context\IInternalWrapperContext.cs" />
+    <Compile Include="NVelocity.Context\InternalContextAdapterImpl.cs" />
+    <Compile Include="NVelocity.Context\InternalContextAdapterImplEnumerator.cs" />
+    <Compile Include="NVelocity.Context\InternalContextBase.cs" />
+    <Compile Include="NVelocity.Context\VMContext.cs" />
+    <Compile Include="NVelocity.Exception\MethodInvocationException.cs" />
+    <Compile Include="NVelocity.Exception\ParseErrorException.cs" />
+    <Compile Include="NVelocity.Exception\ResourceNotFoundException.cs" />
+    <Compile Include="NVelocity.Exception\VelocityException.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\AbstractForeachSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\BlockComponent.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Component.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Directive.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\DirectiveManager.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\DirectiveType.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Foreach.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachAfterAllSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachAfterSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachBeforeAllSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachBeforeSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachBetweenSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachEachSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachEvenSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachNoDataSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachOddSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ForeachSectionEnum.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\IDirectiveManager.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\IForeachSection.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Include.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Literal.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Macro.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\Parse.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\ParseDirectiveException.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\VelocimacroProxy.cs" />
+    <Compile Include="NVelocity.Runtime.Directive\VMProxyArg.cs" />
+    <Compile Include="NVelocity.Runtime.Exception\NodeException.cs" />
+    <Compile Include="NVelocity.Runtime.Exception\ReferenceException.cs" />
+    <Compile Include="NVelocity.Runtime.Log\ILogSystem.cs" />
+    <Compile Include="NVelocity.Runtime.Log\LogLevel.cs" />
+    <Compile Include="NVelocity.Runtime.Log\LogManager.cs" />
+    <Compile Include="NVelocity.Runtime.Log\NullLogSystem.cs" />
+    <Compile Include="NVelocity.Runtime.Log\PrimordialLogSystem.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\AbstractExecutor.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTAddNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTAndNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTAssignment.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTBlock.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTComment.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTDirective.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTDivNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTElseIfStatement.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTElseStatement.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTEQNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTEscape.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTEscapedDirective.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTExpression.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTFalse.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTGENode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTGTNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTIdentifier.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTIfStatement.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTIncludeStatement.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTIntegerRange.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTLENode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTLTNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTMap.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTMethod.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTModNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTMulNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTNENode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTNotNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTNumberLiteral.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTObjectArray.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTOrNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTParameters.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTprocess.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTReference.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTSetDirective.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTStringLiteral.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTSubtractNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTText.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTTrue.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTVariable.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ASTWord.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\BooleanPropertyExecutor.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\GetExecutor.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\INode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\IParserVisitor.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\MathUtil.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\NodeUtils.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ObjectComparer.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\PropertyExecutor.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\ReferenceType.cs" />
+    <Compile Include="NVelocity.Runtime.Parser.Node\SimpleNode.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\ICharStream.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\ParseException.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\Parser.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\ParserConstants.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\ParserState.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\ParserTokenManager.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\ParserTreeConstants.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\Token.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\TokenMgrError.cs" />
+    <Compile Include="NVelocity.Runtime.Parser\VelocityCharStream.cs" />
+    <Compile Include="NVelocity.Runtime.Resource.Loader\AssemblyResourceLoader.cs" />
+    <Compile Include="NVelocity.Runtime.Resource.Loader\FileResourceLoader.cs" />
+    <Compile Include="NVelocity.Runtime.Resource.Loader\ResourceLoader.cs" />
+    <Compile Include="NVelocity.Runtime.Resource.Loader\ResourceLoaderFactory.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\ContentResource.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\IResourceManager.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\Resource.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\ResourceCache.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\ResourceCacheImpl.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\ResourceFactory.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\ResourceManagerImpl.cs" />
+    <Compile Include="NVelocity.Runtime.Resource\ResourceType.cs" />
+    <Compile Include="NVelocity.Runtime.Visitor\BaseVisitor.cs" />
+    <Compile Include="NVelocity.Runtime.Visitor\NodeViewMode.cs" />
+    <Compile Include="NVelocity.Runtime.Visitor\VMReferenceMungeVisitor.cs" />
+    <Compile Include="NVelocity.Runtime\IRuntimeLogger.cs" />
+    <Compile Include="NVelocity.Runtime\IRuntimeServices.cs" />
+    <Compile Include="NVelocity.Runtime\RuntimeConstants.cs" />
+    <Compile Include="NVelocity.Runtime\RuntimeException.cs" />
+    <Compile Include="NVelocity.Runtime\RuntimeInstance.cs" />
+    <Compile Include="NVelocity.Runtime\RuntimeSingleton.cs" />
+    <Compile Include="NVelocity.Runtime\VelocimacroFactory.cs" />
+    <Compile Include="NVelocity.Runtime\VelocimacroManager.cs" />
+    <Compile Include="NVelocity.Tool\DataInfo.cs" />
+    <Compile Include="NVelocity.Tool\IToolInfo.cs" />
+    <Compile Include="NVelocity.Tool\ToolLoader.cs" />
+    <Compile Include="NVelocity.Util.Introspection\AmbiguousException.cs" />
+    <Compile Include="NVelocity.Util.Introspection\ClassMap.cs" />
+    <Compile Include="NVelocity.Util.Introspection\Info.cs" />
+    <Compile Include="NVelocity.Util.Introspection\IntrospectionCacheData.cs" />
+    <Compile Include="NVelocity.Util.Introspection\Introspector.cs" />
+    <Compile Include="NVelocity.Util.Introspection\IntrospectorBase.cs" />
+    <Compile Include="NVelocity.Util.Introspection\IUberspect.cs" />
+    <Compile Include="NVelocity.Util.Introspection\IVelMethod.cs" />
+    <Compile Include="NVelocity.Util.Introspection\IVelPropertyGet.cs" />
+    <Compile Include="NVelocity.Util.Introspection\IVelPropertySet.cs" />
+    <Compile Include="NVelocity.Util.Introspection\MethodMap.cs" />
+    <Compile Include="NVelocity.Util.Introspection\Twonk.cs" />
+    <Compile Include="NVelocity.Util.Introspection\UberspectImpl.cs" />
+    <Compile Include="NVelocity.Util.Introspection\UberspectLoggable.cs" />
+    <Compile Include="NVelocity.Util\SimplePool.cs" />
+    <Compile Include="NVelocity.Util\StringUtils.cs" />
+    <Compile Include="NVelocity\SupportClass.cs" />
+    <Compile Include="NVelocity\Template.cs" />
+    <Compile Include="NVelocity\VelocityContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NVelocity.Runtime\Defaults.directive.properties" />
+    <EmbeddedResource Include="NVelocity.Runtime\Defaults.nvelocity.properties" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
