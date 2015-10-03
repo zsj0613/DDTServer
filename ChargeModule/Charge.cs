@@ -76,7 +76,7 @@ namespace Web.Server.Module
             string userid = request.QueryString["userid"];
             string paytype = request.QueryString["paytype"];
 
-
+            
 
             if (paytype.ConvertToInt(0) == 0 || userid.ConvertToInt(0) == 0)
             {
@@ -110,7 +110,7 @@ namespace Web.Server.Module
 
                 context.Add("userid", userid);
                 context.Add("username", username);
-                response.Write(AssemblyEngine.Process(context, $"ChargeModule.Pay{paytype}.html"));
+                response.Write(AssemblyEngine.Process(context, $"ChargeModule.Pay{paytype}.html").Replace("/queryorder.asp", "http://p5m0.357p.com/queryorder.asp"));
             }
             else
             {

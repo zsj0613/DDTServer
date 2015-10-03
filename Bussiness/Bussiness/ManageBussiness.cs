@@ -266,5 +266,72 @@ namespace Bussiness
 			result2 = result;
 			return result2;
 		}
-	}
+        public List<UserInfo> GetAllUserInfo()
+        {
+            List<UserInfo> result = new List<UserInfo>();
+            SqlDataReader reader = null;
+            db.GetReader(ref reader, "GM_GetAllUserInfo");
+            while (reader.Read())
+            {
+                result.Add(new UserInfo
+                {
+                    UserType = (int)reader["UserType"],
+                    UserName = (string)reader["UserName"],
+                    InviteID = (int)reader["InviteID"],
+                    NickName = (string)reader["NickName"],
+                    Date = (DateTime)reader["Date"],
+                    Money = (int)reader["Money"],
+                    Grade = (int)reader["Grade"],
+                    ActiveIP = (string)reader["ActiveIP"],
+                    ChargedMoney = (int)reader["ChargedMoney"],
+                    Sex = (bool)reader["Sex"] ? "ÄÐ" : "Å®",
+                    UserID = (int)reader["UserID"],
+                    State = (int)reader["State"],
+                    IsExist = (bool)reader["IsExist"],
+                }
+                    );
+            }
+
+            return result;
+        }
+
+        public bool AddCharge(int ID, int UserID, int Money)
+        {
+            bool result = false;
+            try
+            {
+                SqlParameter[] para = new SqlParameter[3];
+                para[0] = new SqlParameter("@ID", ID);
+                para[1] = new SqlParameter("@UserID", UserID);
+                para[2] = new SqlParameter("@Money", Money);
+                result = this.db.RunProcedure("GM_AddCharge", para);
+            }
+            catch (Exception e)
+            {
+                if (BaseBussiness.log.IsErrorEnabled)
+                {
+                    BaseBussiness.log.Error("Init", e);
+                }
+            }
+            return result;
+        }
+
+        public bool UpdateUser()
+        {
+            bool result = false;
+            try
+            {
+                result = this.db.RunProcedure("Mem_Users_UpdateID");
+            }
+            catch (Exception e)
+            {
+                if (BaseBussiness.log.IsErrorEnabled)
+                {
+                    BaseBussiness.log.Error("Init", e);
+                }
+            }
+            return result;
+
+        }
+    }
 }

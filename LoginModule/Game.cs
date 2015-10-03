@@ -26,7 +26,7 @@ namespace Web.Server.Module
 
             string name = request.Cookies["username"].content;
             string pass = request.Cookies["password"].content;
-
+            
 
             using (MemberShipbussiness a = new MemberShipbussiness())
             {
@@ -40,14 +40,15 @@ namespace Web.Server.Module
 
                     string content = $"user={name}&key={pass}";
 
-                    INVelocityEngine AssemblyEngine = NVelocityEngineFactory.CreateNVelocityAssemblyEngine(Server.ModulePath + "LoginModule.dll", false);
+                    INVelocityEngine FileEngine = NVelocityEngineFactory.CreateNVelocityFileEngine(Server.ModulePath+@"vm", false);
+                                         
                     IDictionary context = new Hashtable();
                     context.Add("Username", name);
                     context.Add("Content", content);
                     context.Add("Edition", "0");
                     context.Add("Rand", DateTime.Now.Ticks.ToString());
                     context.Add("UserType", b.ToString());
-                    response.Write(AssemblyEngine.Process(context, "LoginModule.Game.htm"));
+                    response.Write(FileEngine.Process(context, "Game.vm"));
 
 
                 }

@@ -146,6 +146,7 @@
     <Compile Include="SqlDataProvider.Data\SpaRoomInfo.cs" />
     <Compile Include="SqlDataProvider.Data\StrengthenGoodsInfo.cs" />
     <Compile Include="SqlDataProvider.Data\StrengthenInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\UserInfo.cs" />
     <Compile Include="SqlDataProvider.Data\UsersRecordInfo.cs" />
   </ItemGroup>
   <ItemGroup>

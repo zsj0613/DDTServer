@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game.cs" />
+    <Compile Include="LoginCheck.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="PlayerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,10 @@
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Game.Language\Game.Language.csproj">
+      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
+      <Name>Game.Language</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj">
       <Project>{37ce504d-055a-4c15-9c08-a3f477d1c44b}</Project>
       <Name>NVelocityTemplateEngine</Name>
@@ -67,13 +72,14 @@
       <Project>{fb70a974-bf61-4640-93ee-27bd88dc57b8}</Project>
       <Name>NVelocity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Web.Server\Web.Server.csproj">
       <Project>{510b8eb1-fade-4e77-9eb6-c729ec9886cd}</Project>
       <Name>Web.Server</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Game.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
