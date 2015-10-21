@@ -4,7 +4,7 @@ using Game.Server.GameObjects;
 using SqlDataProvider.Data;
 using System;
 using System.Text;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(139, "更新职务")]

@@ -6,7 +6,7 @@ using Game.Server.Managers;
 using Game.Server.SceneMarryRooms;
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(248, "离婚")]

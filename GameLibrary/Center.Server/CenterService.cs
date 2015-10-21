@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.ServiceModel;
-using Game.Language;
+
 namespace Center.Server
 {
 	public class CenterService : ICenterService

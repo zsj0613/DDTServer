@@ -17,6 +17,7 @@ using System.Net;
 using Lsj.Util;
 using System.Collections;
 using Game.Base.Events;
+using Lsj.Util.Net.Web.Modules;
 
 namespace Web.Server
 {
@@ -70,6 +71,7 @@ namespace Web.Server
                     return result;
                 }
                 WebServer.log.Info("Succeed to connect to SQL!");
+                server = new Server(IPAddress.Parse(AppConfig.AppSettings["IP"]), AppConfig.AppSettings["Port"].ConvertToInt(88));
                 if (!StartScriptComponents())
                 {
                     result = false;
@@ -79,8 +81,8 @@ namespace Web.Server
                 WebServer.log.Info("Succeed to Load Modules!");
                 
                 GameEventMgr.Notify(ScriptEvent.Loaded);
-                server = new Server(IPAddress.Parse(AppConfig.AppSettings["IP"]),AppConfig.AppSettings["Port"].ConvertToInt(88));
-                server.Path = @"web\";
+                
+                FileModule.Path = @"web\";
                 server.Start();
                 WebServer.log.Warn("Web Service Started!");
 

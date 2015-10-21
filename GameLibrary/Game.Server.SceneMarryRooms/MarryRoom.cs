@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.SceneMarryRooms
 {
 	public class MarryRoom

@@ -4,7 +4,7 @@ using Game.Server.GameObjects;
 using Game.Server.GameUtils;
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(77, "物品过期")]

@@ -7,6 +7,7 @@ using SqlDataProvider.Data;
 using Game.Logic;
 using Bussiness;
 
+
 namespace GameServerScript.AI.Messions
 {
     public class CNM1178 : AMissionControl

@@ -2,7 +2,7 @@ using Bussiness;
 using Game.Base.Packets;
 using Game.Server.GameObjects;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(132, "删除公会成员")]

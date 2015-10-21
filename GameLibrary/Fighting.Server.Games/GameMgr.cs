@@ -13,7 +13,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
-using Game.Language;
 namespace Fighting.Server.Games
 {
 	public class GameMgr

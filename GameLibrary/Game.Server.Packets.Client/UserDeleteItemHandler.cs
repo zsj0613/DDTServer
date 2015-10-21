@@ -1,7 +1,7 @@
 using Bussiness;
 using Game.Base.Packets;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(42, "删除物品")]

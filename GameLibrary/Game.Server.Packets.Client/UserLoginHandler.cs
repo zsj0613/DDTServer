@@ -6,7 +6,7 @@ using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
 using System.Text;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(1, "User Login handler")]

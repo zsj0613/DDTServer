@@ -8,7 +8,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Web.Security;
-using Game.Language;
+
 using Lsj.Util.Config;
 using Lsj.Util;
 

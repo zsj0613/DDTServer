@@ -3,7 +3,7 @@ using Game.Server.GameObjects;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.Managers
 {
 	public class LoginMgr

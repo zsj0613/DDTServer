@@ -6,7 +6,7 @@ using Game.Server.GameUtils;
 using SqlDataProvider.Data;
 using System;
 using System.Text.RegularExpressions;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(224, "设置防沉迷系统信息")]

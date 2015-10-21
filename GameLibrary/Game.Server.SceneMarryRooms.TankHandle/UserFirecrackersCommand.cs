@@ -7,7 +7,7 @@ using Game.Server.Packets;
 using SqlDataProvider.Data;
 using System;
 using System.Linq;
-using Game.Language;
+
 namespace Game.Server.SceneMarryRooms.TankHandle
 {
 	[MarryCommandAttbute(6)]

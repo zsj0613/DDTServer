@@ -7,6 +7,7 @@ using Game.Logic.Phy.Object;
 using Game.Logic;
 using Bussiness;
 
+
 namespace GameServerScript.AI.NPC
 {
     public class ThirdTerrorShortNpcThird : ABrain

@@ -15,7 +15,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 namespace Fighting.Server
 {
 	public class ServerClient : BaseClient

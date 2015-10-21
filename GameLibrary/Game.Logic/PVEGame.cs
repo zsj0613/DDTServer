@@ -17,7 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 using Game.Base.Managers;
 namespace Game.Logic
 {

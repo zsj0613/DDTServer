@@ -11,6 +11,7 @@ using System.Collections;
 using Lsj.Util;
 using Bussiness;
 using SqlDataProvider.Data;
+using Lsj.Util.Net.Web.Modules;
 
 namespace Web.Server.Module
 {
@@ -18,13 +19,9 @@ namespace Web.Server.Module
     {
         public static Log log = new Log(new LogConfig { FilePath = "log/Login/", UseConsole = true });
 
-        public void Process(ref HttpClient client)
+        public HttpResponse Process(HttpRequest request)
         {
-
-            var request = client.request;
             var response = new HttpResponse();
-
-
             int inviteid = request.QueryString["i"].ConvertToInt(0);
             response.cookies.Add(new HttpCookie { name = "inviteid", content = inviteid.ToString(), Expires = DateTime.Now.AddYears(1) });
 
@@ -59,7 +56,7 @@ namespace Web.Server.Module
             {
                 response.Write302("http://www.hqgddt.com/login.htm");
             }
-            client.response = response;
+            return response;
 
         }
 
@@ -109,19 +106,20 @@ namespace Web.Server.Module
 
         private void ProcessLogin(ref HttpResponse response, ref HttpRequest request)
         {
-            Login.log.Info(request.postdata.ToSafeString());
-            string username = request.Form["username"];
+            string username = request.Form["user"];
             string password = request.Form["password1"];
-            Login.log.Info(username.ToSafeString());
-            Login.log.Info(password.ToSafeString());
+            Login.log.Debug(username);
+            Login.log.Debug(password);
             response.cookies.Add(new HttpCookie { name = "username", content = username.ToSafeString(), Expires = DateTime.Now.AddYears(1) });
             response.cookies.Add(new HttpCookie { name = "password", content = password.ToSafeString(), Expires = DateTime.Now.AddYears(1) });
             response.Write302("http://www.hqgddt.com/game.htm");
         }
         private void ProcessRegister(ref HttpResponse response, ref HttpRequest request)
         {
-            string username = request.Form["username"];
+            string username = request.Form["user"];
             string password = request.Form["password1"];
+            Login.log.Debug(username);
+            Login.log.Debug(password);
             int inviteid = request.Cookies["inviteid"].content.ConvertToInt(0);
             using (MemberShipbussiness a = new MemberShipbussiness())
             {
@@ -146,9 +144,19 @@ namespace Web.Server.Module
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
             Login.log.Info("Load Login Module");
-            Server.AddModule(@"\", "Web.Server.Module.Login");
-            Server.AddModule(@"\login.do", "Web.Server.Module.Login");
-            Server.AddModule(@"\login.aspx", "Web.Server.Module.Login");
+            Server.AddModule(typeof(Login));
+        }
+        public static bool CanProcess(Lsj.Util.Net.Web.HttpRequest request)
+        {
+            bool result = false;
+            if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)
+            {
+                if (request.uri==(@"\")|| request.uri == (@"\login.do") || request.uri == (@"\login.aspx"))
+                {
+                    result = true;
+                }
+            }
+            return result;
         }
     }
 }

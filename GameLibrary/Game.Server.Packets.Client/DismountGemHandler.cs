@@ -5,7 +5,7 @@ using Game.Logic.LogEnum;
 using Game.Server.GameObjects;
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(125, "取下宝石")]

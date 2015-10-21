@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server
 {
 	public class LoginServerConnector : BaseConnector

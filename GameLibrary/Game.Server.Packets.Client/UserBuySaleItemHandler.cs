@@ -7,7 +7,7 @@ using Game.Server.GameObjects;
 using SqlDataProvider.Data;
 using System;
 using System.Collections.Generic;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(46, "购买优惠物品")]

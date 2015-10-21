@@ -21,7 +21,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.GameObjects
 {
     public class GamePlayer : IGamePlayer

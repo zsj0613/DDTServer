@@ -41,7 +41,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -121,6 +121,7 @@
     <Compile Include="Bussiness\GameProperties.cs" />
     <Compile Include="Bussiness\IniReader.cs" />
     <Compile Include="Bussiness\ItemRecordBussiness.cs" />
+    <Compile Include="Bussiness\LanguageMgr.cs" />
     <Compile Include="Bussiness\ManageBussiness.cs" />
     <Compile Include="Bussiness\MapBussiness.cs" />
     <Compile Include="Bussiness\MemberShipbussiness.cs" />

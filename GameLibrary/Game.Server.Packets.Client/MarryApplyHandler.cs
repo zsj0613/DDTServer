@@ -7,7 +7,7 @@ using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
 using System.Linq;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(247, "求婚")]

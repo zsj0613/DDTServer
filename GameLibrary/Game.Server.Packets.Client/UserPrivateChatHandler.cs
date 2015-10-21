@@ -4,7 +4,7 @@ using Game.Server.GameObjects;
 using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(37, "用户与用户之间的聊天")]

@@ -5,7 +5,7 @@ using Game.Server.Packets;
 using log4net;
 using System;
 using System.Reflection;
-using Game.Language;
+
 namespace Game.Server.SpaRooms.CommandHandle
 {
 	[SpaCommandAttbute(6)]

@@ -12,46 +12,40 @@ using Game.Base.Events;
 using NVelocityTemplateEngine.Interfaces;
 using NVelocityTemplateEngine;
 using System.Collections;
+using Lsj.Util.Net.Web.Modules;
 
 namespace Web.Server.Module
 {
     public class Charge :IModule
     {
         public static Log log = new Log(new LogConfig { FilePath = "log/Charge/", UseConsole = true });
-        public void Process(ref HttpClient client)
+        public HttpResponse Process(HttpRequest request)
         {
             var response = new HttpResponse();
-            response.contenttype = "text/html";
+            response.ContentType = "text/html";
             
             //  "/charge.do?"
-            var request = client.request;
             log.Info(request.QueryString["step"]);
             if (request.QueryString["step"].ConvertToInt(0) == 1)
             {
-                response = ProcessStep1(client);
+                response = ProcessStep1(request,ref response);
             }
             else if (request.QueryString["step"].ConvertToInt(0) == 2)
             {
-                response = ProcessStep2(client);
+                response = ProcessStep2(request, ref response);
             }
             else
             {
                 response.WriteError(404);
             }
-            client.response = response;
+            return response;
         }
 
 
 
-        private HttpResponse ProcessStep1(HttpClient client)
+        private HttpResponse ProcessStep1(HttpRequest request,ref HttpResponse response)
         {
-            var response = new HttpResponse();
-            response.contenttype = "text/html";
-            var request = client.request;
-            string userid = request.QueryString["userid"];
-
-
-            
+            string userid = request.QueryString["userid"];           
             log.Info(request.QueryString["userid"]);
             if (userid.ConvertToInt(0) == 0)
             {
@@ -68,16 +62,10 @@ namespace Web.Server.Module
             return response;
         }
 
-        private HttpResponse ProcessStep2(HttpClient client)
+        private HttpResponse ProcessStep2(HttpRequest request, ref HttpResponse response)
         {
-            var response = new HttpResponse();
-            response.contenttype = "text/html";
-            var request = client.request;
             string userid = request.QueryString["userid"];
             string paytype = request.QueryString["paytype"];
-
-            
-
             if (paytype.ConvertToInt(0) == 0 || userid.ConvertToInt(0) == 0)
             {
                 response.WriteError(404);
@@ -122,7 +110,19 @@ namespace Web.Server.Module
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
             Charge.log.Info("Load Charge Module");
-            Server.AddModule(@"\charge.do", "Web.Server.Module.Charge");            
+            Server.AddModule(typeof(Charge));            
+        }
+        public static bool CanProcess(HttpRequest request)
+        {
+            bool result = false;
+            if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)
+            {
+                if (request.uri==(@"\charge.do"))
+                {
+                    result = true;
+                }
+            }
+            return result;
         }
     }
 }

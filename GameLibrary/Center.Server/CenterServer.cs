@@ -11,7 +11,6 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Threading;
-using Game.Language;
 using SqlDataProvider.BaseClass;
 namespace Center.Server
 {
@@ -129,7 +128,7 @@ namespace Center.Server
 
 
 
-                if (!Game.Language.LanguageMgr.Load())
+                if (!LanguageMgr.Load())
                 {
                     result = false;
                     CenterServer.log.Error("初始化语言包失败，请检查!");

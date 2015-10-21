@@ -19,7 +19,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 using SqlDataProvider.BaseClass;
 namespace Game.Server
 {
@@ -416,7 +416,7 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化公会成功!");
 
-                if (!Language.LanguageMgr.Load())
+                if (!LanguageMgr.Load())
                 {
                     result = false;
                     GameServer.log.Error("初始化语言包失败，请检查!");

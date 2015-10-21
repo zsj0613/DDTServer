@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Game.Language;
+
 namespace Bussiness
 {
 	public class PlayerBussiness : BaseBussiness

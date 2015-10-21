@@ -12,7 +12,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Logic
 {
 	public class PVPGame : BaseGame

@@ -4,7 +4,7 @@ using Game.Logic;
 using Game.Server.GameObjects;
 using Game.Server.Managers;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(19, "用户场景聊天")]

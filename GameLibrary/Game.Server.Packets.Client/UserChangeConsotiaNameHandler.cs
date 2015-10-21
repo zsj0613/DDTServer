@@ -3,7 +3,7 @@ using Game.Base.Packets;
 using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(188, "User ConsotiaName Change")]

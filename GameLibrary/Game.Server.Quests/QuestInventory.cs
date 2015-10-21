@@ -14,7 +14,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.Quests
 {
 	public class QuestInventory

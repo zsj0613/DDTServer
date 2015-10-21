@@ -11,11 +11,12 @@ using System.Collections;
 using Lsj.Util;
 using Bussiness;
 using SqlDataProvider.Data;
-using Game.Language;
+
 using System.Xml.Linq;
 using Bussiness.Interface;
 using System.Web;
 using System.Security.Cryptography;
+using Lsj.Util.Net.Web.Modules;
 
 namespace Web.Server.Module
 {
@@ -23,12 +24,9 @@ namespace Web.Server.Module
     {
         public static Log log = new Log(new LogConfig { FilePath = "log/Login/", UseConsole = true });
 
-        public void Process(ref HttpClient client)
+        public Lsj.Util.Net.Web.HttpResponse Process(Lsj.Util.Net.Web.HttpRequest request)
         {
-
-            var request = client.request;
             var response = new Lsj.Util.Net.Web.HttpResponse();
-
             bool value = false;
             string message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail1", new object[0]);
             bool isError = false;
@@ -146,11 +144,11 @@ namespace Web.Server.Module
             // }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            response.contenttype = "text/plain";
+            response.ContentType = "text/plain";
             response.Write(result.ToString(false));
 
 
-            client.response = response;
+            return response;
 
         }
 
@@ -159,7 +157,19 @@ namespace Web.Server.Module
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
             Login.log.Info("Load Login Module2");
-            Server.AddModule(@"\login.ashx", "Web.Server.Module.LoginCheck");
+            Server.AddModule(typeof(LoginCheck));
+        }
+        public static bool CanProcess(Lsj.Util.Net.Web.HttpRequest request)
+        {
+            bool result = false;
+            if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)
+            {
+                if (request.uri == (@"\login.ashx")|| request.uri == (@"\Login.ashx"))
+                {
+                    result = true;
+                }
+            }
+            return result;
         }
 
 

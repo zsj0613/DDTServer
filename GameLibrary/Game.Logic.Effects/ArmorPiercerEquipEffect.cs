@@ -4,7 +4,7 @@ using Game.Logic.Actions;
 using Game.Logic.Phy.Object;
 using Game.Logic.Spells;
 using System;
-using Game.Language;
+
 namespace Game.Logic.Effects
 {
 	public class ArmorPiercerEquipEffect : BasePlayerEffect

@@ -3,7 +3,7 @@ using Game.Base.Packets;
 using Game.Server.GameObjects;
 using Game.Server.Rooms;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(210, "撮合取消")]

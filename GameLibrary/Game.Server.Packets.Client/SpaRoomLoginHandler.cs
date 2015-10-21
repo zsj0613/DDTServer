@@ -4,7 +4,7 @@ using Game.Server.GameObjects;
 using Game.Server.Managers;
 using Game.Server.SpaRooms;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(202, "进入温泉房间")]

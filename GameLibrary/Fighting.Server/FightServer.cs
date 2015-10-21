@@ -120,7 +120,7 @@ namespace Fighting.Server
                     }
                     FightServer.log.Info("初始化npc成功!");
 
-                    if (!Game.Language.LanguageMgr.Load())
+                    if (!LanguageMgr.Load())
                     {
                         result = false;
                         FightServer.log.Error("初始化语言包失败，请检查!");

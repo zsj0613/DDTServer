@@ -4,7 +4,7 @@ using Game.Server.GameObjects;
 using Game.Server.Packets;
 using System;
 using System.Collections.Generic;
-using Game.Language;
+
 namespace Game.Server.Rooms
 {
 	internal class EnterRoomAction : IAction

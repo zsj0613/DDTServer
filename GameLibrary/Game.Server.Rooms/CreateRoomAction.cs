@@ -5,7 +5,7 @@ using Game.Server.Battle;
 using Game.Server.GameObjects;
 using Game.Server.Packets;
 using System;
-using Game.Language;
+
 namespace Game.Server.Rooms
 {
 	public class CreateRoomAction : IAction

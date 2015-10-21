@@ -8,6 +8,7 @@ using Game.Logic.Actions;
 using System.Drawing;
 using Bussiness;
 
+
 namespace GameServerScript.AI.Messions
 {
     public class CHM1277 : AMissionControl

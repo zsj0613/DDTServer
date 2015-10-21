@@ -3,7 +3,7 @@ using Game.Base.Packets;
 using Game.Server.GameObjects;
 using Game.Server.Managers;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(13, "日常奖励")]

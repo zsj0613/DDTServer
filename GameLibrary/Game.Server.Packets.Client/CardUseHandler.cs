@@ -7,7 +7,7 @@ using Game.Server.GameObjects;
 
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 using System.Collections.Generic;
 namespace Game.Server.Packets.Client
 {

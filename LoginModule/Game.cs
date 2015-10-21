@@ -11,6 +11,7 @@ using System.Collections;
 using Lsj.Util;
 using Bussiness;
 using System.Web;
+using Lsj.Util.Net.Web.Modules;
 
 namespace Web.Server.Module
 {
@@ -18,11 +19,10 @@ namespace Web.Server.Module
     {
         public static Log log = new Log(new LogConfig { FilePath = "log/Login/", UseConsole = true });
 
-        public void Process(ref HttpClient client)
+        public Lsj.Util.Net.Web.HttpResponse Process(Lsj.Util.Net.Web.HttpRequest request)
         {
-            var request = client.request;
             var response = new Lsj.Util.Net.Web.HttpResponse();
-            response.contenttype = "text/html";
+            response.ContentType = "text/html";
 
             string name = request.Cookies["username"].content;
             string pass = request.Cookies["password"].content;
@@ -59,7 +59,7 @@ namespace Web.Server.Module
                     response.ReturnAndRedict("用户名或密码错误！", "login.htm");
                 }
             }
-            client.response = response;
+            return response;
         }
 
         
@@ -68,7 +68,19 @@ namespace Web.Server.Module
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
             Login.log.Info("Load Game Module");
-            Server.AddModule(@"\game.htm", "Web.Server.Module.Game");
+            Server.AddModule(typeof(Game));
+        }
+        public static bool CanProcess(Lsj.Util.Net.Web.HttpRequest request)
+        {
+            bool result = false;
+            if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)
+            {
+                if (request.uri==(@"\game.htm"))
+                {
+                    result = true;
+                }
+            }
+            return result;
         }
     }
 }

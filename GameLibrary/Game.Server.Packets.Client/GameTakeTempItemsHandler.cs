@@ -5,7 +5,7 @@ using Game.Server.GameUtils;
 using SqlDataProvider.Data;
 using System;
 using System.Collections.Generic;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(108, "选取")]

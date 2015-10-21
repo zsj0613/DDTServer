@@ -16,7 +16,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Game.Language;
+
 namespace Game.Logic.Phy.Object
 {
 	public class Player : TurnedLiving

@@ -5,7 +5,7 @@ using Game.Server.Battle;
 using Game.Server.GameObjects;
 using Game.Server.Rooms;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(107, "房间设置")]

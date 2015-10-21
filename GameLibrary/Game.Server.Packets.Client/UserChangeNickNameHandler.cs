@@ -2,7 +2,7 @@ using Bussiness;
 using Game.Base.Packets;
 using SqlDataProvider.Data;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(171, "User NickName Change")]

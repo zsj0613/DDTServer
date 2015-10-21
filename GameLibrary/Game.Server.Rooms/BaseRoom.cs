@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.Rooms
 {
 	public class BaseRoom

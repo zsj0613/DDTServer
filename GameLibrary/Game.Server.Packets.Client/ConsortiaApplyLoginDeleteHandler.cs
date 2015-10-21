@@ -2,7 +2,7 @@ using Bussiness;
 using Game.Base.Packets;
 using Game.Server.GameObjects;
 using System;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(134, "删除进入申请")]

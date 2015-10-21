@@ -2,7 +2,7 @@ using Bussiness;
 using Game.Logic.Actions;
 using Game.Logic.Phy.Object;
 using System;
-using Game.Language;
+
 namespace Game.Logic.Effects
 {
 	public class ContinueReduceBaseDamageEquipEffect : BasePlayerEffect

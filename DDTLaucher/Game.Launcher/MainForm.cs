@@ -302,16 +302,20 @@ namespace Game.Launcher
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("你确定要退出?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (!flag)
             {
-                e.Cancel=true;
-                return;
+                if (MessageBox.Show("你确定要退出?", "Exit", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                NotifyIcon.Dispose();
+                runmgr.Dispose();
+                flag = true;
             }
-            NotifyIcon.Dispose();
-            runmgr.Dispose();
-            System.Environment.Exit(0);
+            Application.Exit();
         }
-
+        bool flag = false;
 
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {

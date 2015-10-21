@@ -3,7 +3,7 @@ using Game.Base.Packets;
 using Game.Logic;
 using Game.Server.Packets;
 using System;
-using Game.Language;
+
 namespace Game.Server.Rooms
 {
 	internal class RoomSetupChangeAction : IAction

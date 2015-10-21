@@ -12,7 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Game.Language;
+
 namespace Game.Logic.Phy.Object
 {
 	public class Living : Physics

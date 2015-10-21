@@ -105,8 +105,7 @@ namespace DDTTools
                         "GameLibrary.dll",
                         "Bussiness.dll",
                         "SqlDataProvider.dll",
-                        "Game.Base.dll",
-                        "Game.Language.dll"
+                        "Game.Base.dll"
                     };
                     string text = "";
                     if (csComplier.Complie(ref text))

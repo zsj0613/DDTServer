@@ -56,6 +56,9 @@
     <Reference Include="Lsj.Util">
       <HintPath>..\..\..\lsjutil\Lsj.Util.dll</HintPath>
     </Reference>
+    <Reference Include="Lsj.Util.Net.Web">
+      <HintPath>..\..\..\lsjutil\Lsj.Util.Net.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web.Server\IModule.cs" />
     <Compile Include="Web.Server\Server.cs" />
     <Compile Include="Web.Server\WebServer.cs" />
   </ItemGroup>

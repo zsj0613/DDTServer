@@ -3,7 +3,7 @@ using Game.Base;
 using Game.Server.Packets;
 using System;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.Commands.Admin
 {
 	[Cmd("&shutdown", ePrivLevel.Admin, "停止服务器的业务,并退出服务器进程", new string[]

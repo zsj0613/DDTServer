@@ -9,7 +9,7 @@ using SqlDataProvider.Data;
 using System;
 using System.Linq;
 using System.Reflection;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(175, "创建温泉房间")]

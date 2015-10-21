@@ -5,7 +5,6 @@ using Game.Logic.AI;
 using Game.Logic.Phy.Object;
 using SqlDataProvider.Data;
 using Bussiness.Managers;
-using Game.Server.Statics;
 using Game.Logic;
 using Game.Base.Packets;
 

@@ -35,6 +35,9 @@
     <Reference Include="Lsj.Util">
       <HintPath>..\..\..\lsjutil\Lsj.Util.dll</HintPath>
     </Reference>
+    <Reference Include="Lsj.Util.Net.Web">
+      <HintPath>..\..\..\lsjutil\Lsj.Util.Net.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

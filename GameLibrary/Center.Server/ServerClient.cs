@@ -549,7 +549,7 @@ namespace Center.Server
         }
         public void SendKitoffUser(int playerid)
         {
-            this.SendKitoffUser(playerid, Game.Language.LanguageMgr.GetTranslation("Center.Server.SendKitoffUser", new object[0]));
+            this.SendKitoffUser(playerid, LanguageMgr.GetTranslation("Center.Server.SendKitoffUser", new object[0]));
         }
         public void SendKitoffUser(int playerid, string msg)
         {

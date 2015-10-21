@@ -7,7 +7,7 @@ using SqlDataProvider.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(116, "发送邮件")]

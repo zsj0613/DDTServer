@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
-using Game.Language;
+
 namespace Game.Server.SpaRooms
 {
 	public class SpaRoom

@@ -7,7 +7,7 @@ using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
 using System.Collections.Generic;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(53, "获取箱子")]

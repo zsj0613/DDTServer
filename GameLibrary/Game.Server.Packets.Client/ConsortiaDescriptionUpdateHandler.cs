@@ -3,7 +3,7 @@ using Game.Base.Packets;
 using Game.Server.GameObjects;
 using System;
 using System.Text;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(149, "更新介绍")]

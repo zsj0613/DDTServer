@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A035025-8D54-44DB-8D1E-6EB2CFAA207E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BaseScripts</RootNamespace>
+    <AssemblyName>BaseScripts</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AI\Game\BossHardGame.cs" />
+    <Compile Include="AI\Game\BossNormalGame.cs" />
+    <Compile Include="AI\Game\BossSimpleGame.cs" />
+    <Compile Include="AI\Game\BossTerrorGame.cs" />
+    <Compile Include="AI\Game\CopyHardGame.cs" />
+    <Compile Include="AI\Game\CopyNormalGame.cs" />
+    <Compile Include="AI\Game\CopySimpleGame.cs" />
+    <Compile Include="AI\Game\CopyTerrorGame.cs" />
+    <Compile Include="AI\Game\ExplorationGame.cs" />
+    <Compile Include="AI\Game\ExplorationGame1.cs" />
+    <Compile Include="AI\Game\ExplorationGame2.cs" />
+    <Compile Include="AI\Game\ExplorationGame3.cs" />
+    <Compile Include="AI\Game\ExplorationGame4.cs" />
+    <Compile Include="AI\Game\ExplorationGame5.cs" />
+    <Compile Include="AI\Game\FightLabHeightHard.cs" />
+    <Compile Include="AI\Game\FightLabHeightNormal.cs" />
+    <Compile Include="AI\Game\FightLabHeightSimple.cs" />
+    <Compile Include="AI\Game\FightLabHeightThrowHard.cs" />
+    <Compile Include="AI\Game\FightLabHeightThrowNormal.cs" />
+    <Compile Include="AI\Game\FightLabHeightThrowSimple.cs" />
+    <Compile Include="AI\Game\FightLabMeasureSpaceHard.cs" />
+    <Compile Include="AI\Game\FightLabMeasureSpaceNormal.cs" />
+    <Compile Include="AI\Game\FightLabMeasureSpaceSimple.cs" />
+    <Compile Include="AI\Game\FightLabSixtyFiveHard.cs" />
+    <Compile Include="AI\Game\FightLabSixtyFiveNormal.cs" />
+    <Compile Include="AI\Game\FightLabSixtyFiveSimple.cs" />
+    <Compile Include="AI\Game\FightLabTwentyHard.cs" />
+    <Compile Include="AI\Game\FightLabTwentyNormal.cs" />
+    <Compile Include="AI\Game\FightLabTwentySimple.cs" />
+    <Compile Include="AI\Game\FourCopySimpleGame.cs" />
+    <Compile Include="AI\Game\NewtPairGame.cs" />
+    <Compile Include="AI\Game\NewTrainingGame.cs" />
+    <Compile Include="AI\Game\SecondCopyNormalGame.cs" />
+    <Compile Include="AI\Game\SecondCopySimpleGame.cs" />
+    <Compile Include="AI\Game\ThirdCopyHardGame.cs" />
+    <Compile Include="AI\Game\ThirdCopyNormalGame.cs" />
+    <Compile Include="AI\Game\ThirdCopySimpleGame.cs" />
+    <Compile Include="AI\Game\ThirdCopyTerrorGame.cs" />
+    <Compile Include="AI\Messions\CHM1271.cs" />
+    <Compile Include="AI\Messions\CHM1272.cs" />
+    <Compile Include="AI\Messions\CHM1273.cs" />
+    <Compile Include="AI\Messions\CHM1274.cs" />
+    <Compile Include="AI\Messions\CHM1275.cs" />
+    <Compile Include="AI\Messions\CHM1276.cs" />
+    <Compile Include="AI\Messions\CHM1277.cs" />
+    <Compile Include="AI\Messions\CHM1278.cs" />
+    <Compile Include="AI\Messions\CNM1171.cs" />
+    <Compile Include="AI\Messions\CNM1172.cs" />
+    <Compile Include="AI\Messions\CNM1173.cs" />
+    <Compile Include="AI\Messions\CNM1174.cs" />
+    <Compile Include="AI\Messions\CNM1175.cs" />
+    <Compile Include="AI\Messions\CNM1176.cs" />
+    <Compile Include="AI\Messions\CNM1177.cs" />
+    <Compile Include="AI\Messions\CNM1178.cs" />
+    <Compile Include="AI\Messions\CSM1071.cs" />
+    <Compile Include="AI\Messions\CSM1072.cs" />
+    <Compile Include="AI\Messions\CSM1073.cs" />
+    <Compile Include="AI\Messions\CSM1074.cs" />
+    <Compile Include="AI\Messions\CSM1075.cs" />
+    <Compile Include="AI\Messions\CSM1076.cs" />
+    <Compile Include="AI\Messions\CSM1077.cs" />
+    <Compile Include="AI\Messions\CSM1078.cs" />
+    <Compile Include="AI\Messions\CTM1371.cs" />
+    <Compile Include="AI\Messions\CTM1372.cs" />
+    <Compile Include="AI\Messions\CTM1373.cs" />
+    <Compile Include="AI\Messions\CTM1374.cs" />
+    <Compile Include="AI\Messions\CTM1375.cs" />
+    <Compile Include="AI\Messions\CTM1376.cs" />
+    <Compile Include="AI\Messions\CTM1377.cs" />
+    <Compile Include="AI\Messions\CTM1378.cs" />
+    <Compile Include="AI\Messions\DCNM2101.cs" />
+    <Compile Include="AI\Messions\DCNM2102.cs" />
+    <Compile Include="AI\Messions\DCSM2001.cs" />
+    <Compile Include="AI\Messions\DCSM2002.cs" />
+    <Compile Include="AI\Messions\ESM1001.cs" />
+    <Compile Include="AI\Messions\ESM1002.cs" />
+    <Compile Include="AI\Messions\ESM1003.cs" />
+    <Compile Include="AI\Messions\ESM1004.cs" />
+    <Compile Include="AI\Messions\ESM1005.cs" />
+    <Compile Include="AI\Messions\ESM1006.cs" />
+    <Compile Include="AI\Messions\ExplorationMission.cs" />
+    <Compile Include="AI\Messions\FHSM4001.cs" />
+    <Compile Include="AI\Messions\FHSM4002.cs" />
+    <Compile Include="AI\Messions\FHSM4003.cs" />
+    <Compile Include="AI\Messions\FLHS121.cs" />
+    <Compile Include="AI\Messions\FLHS122.cs" />
+    <Compile Include="AI\Messions\FLHS123.cs" />
+    <Compile Include="AI\Messions\FLHS124.cs" />
+    <Compile Include="AI\Messions\FLHS125.cs" />
+    <Compile Include="AI\Messions\FLNS111.cs" />
+    <Compile Include="AI\Messions\FLNS112.cs" />
+    <Compile Include="AI\Messions\FLNS113.cs" />
+    <Compile Include="AI\Messions\FLNS114.cs" />
+    <Compile Include="AI\Messions\FLNS115.cs" />
+    <Compile Include="AI\Messions\FLSS101.cs" />
+    <Compile Include="AI\Messions\FLSS102.cs" />
+    <Compile Include="AI\Messions\FLSS103.cs" />
+    <Compile Include="AI\Messions\FLSS104.cs" />
+    <Compile Include="AI\Messions\FLSS105.cs" />
+    <Compile Include="AI\Messions\NTM1083.cs" />
+    <Compile Include="AI\Messions\PSM5001.cs" />
+    <Compile Include="AI\Messions\PSM5002.cs" />
+    <Compile Include="AI\Messions\PSM5003.cs" />
+    <Compile Include="AI\Messions\PSM5004.cs" />
+    <Compile Include="AI\Messions\THSM3001.cs" />
+    <Compile Include="AI\Messions\THSM3002.cs" />
+    <Compile Include="AI\Messions\THSM3003.cs" />
+    <Compile Include="AI\Messions\THSM3004.cs" />
+    <Compile Include="AI\Messions\THSM3005.cs" />
+    <Compile Include="AI\Messions\THSM3006.cs" />
+    <Compile Include="AI\Messions\TNSM3101.cs" />
+    <Compile Include="AI\Messions\TNSM3102.cs" />
+    <Compile Include="AI\Messions\TNSM3103.cs" />
+    <Compile Include="AI\Messions\TNSM3104.cs" />
+    <Compile Include="AI\Messions\TNSM3105.cs" />
+    <Compile Include="AI\Messions\TNSM3106.cs" />
+    <Compile Include="AI\Messions\TSSM3201.cs" />
+    <Compile Include="AI\Messions\TSSM3202.cs" />
+    <Compile Include="AI\Messions\TSSM3203.cs" />
+    <Compile Include="AI\Messions\TSSM3204.cs" />
+    <Compile Include="AI\Messions\TSSM3205.cs" />
+    <Compile Include="AI\Messions\TSSM3206.cs" />
+    <Compile Include="AI\Messions\TTSM3301.cs" />
+    <Compile Include="AI\Messions\TTSM3302.cs" />
+    <Compile Include="AI\Messions\TTSM3303.cs" />
+    <Compile Include="AI\Messions\TTSM3304.cs" />
+    <Compile Include="AI\Messions\TTSM3305.cs" />
+    <Compile Include="AI\Messions\TTSM3306.cs" />
+    <Compile Include="AI\NPC\FourSimpleBlowArmsNpc.cs" />
+    <Compile Include="AI\NPC\FourSimpleCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourSimpleFireNpc.cs" />
+    <Compile Include="AI\NPC\FourSimpleFrantCattleBoss.cs" />
+    <Compile Include="AI\NPC\FourSimpleGunNpc.cs" />
+    <Compile Include="AI\NPC\FourSimpleHawkNpc.cs" />
+    <Compile Include="AI\NPC\FourSimpleShortNpc.cs" />
+    <Compile Include="AI\NPC\FourSimpleWolfNpc.cs" />
+    <Compile Include="AI\NPC\HardCaptainAi.cs" />
+    <Compile Include="AI\NPC\HardKingFirst.cs" />
+    <Compile Include="AI\NPC\HardKingLast.cs" />
+    <Compile Include="AI\NPC\HardKingSecond.cs" />
+    <Compile Include="AI\NPC\HardKingZhen.cs" />
+    <Compile Include="AI\NPC\MonstrousHumanoid.cs" />
+    <Compile Include="AI\NPC\NormalCaptainAi.cs" />
+    <Compile Include="AI\NPC\NormalKingFirst.cs" />
+    <Compile Include="AI\NPC\NormalKingLast.cs" />
+    <Compile Include="AI\NPC\NormalKingSecond.cs" />
+    <Compile Include="AI\NPC\NormalKingZhen.cs" />
+    <Compile Include="AI\NPC\NormalQueenAntAi.cs" />
+    <Compile Include="AI\NPC\PSMNpc5001Ai.cs" />
+    <Compile Include="AI\NPC\PSMNpc5002Ai.cs" />
+    <Compile Include="AI\NPC\PSMNpc5003Ai.cs" />
+    <Compile Include="AI\NPC\PSMNpc5004Ai.cs" />
+    <Compile Include="AI\NPC\PSMNpcAi.cs" />
+    <Compile Include="AI\NPC\SeizeNpcAi.cs" />
+    <Compile Include="AI\NPC\SimpleBomblingNpc.cs" />
+    <Compile Include="AI\NPC\SimpleCaptainAi.cs" />
+    <Compile Include="AI\NPC\SimpleKingFirst.cs" />
+    <Compile Include="AI\NPC\SimpleKingLast.cs" />
+    <Compile Include="AI\NPC\SimpleKingSecond.cs" />
+    <Compile Include="AI\NPC\SimpleKingZhen.cs" />
+    <Compile Include="AI\NPC\SimpleNpcAi.cs" />
+    <Compile Include="AI\NPC\SimpleQueenAntAi.cs" />
+    <Compile Include="AI\NPC\TerrorCaptainAi.cs" />
+    <Compile Include="AI\NPC\TerrorKingFirst.cs" />
+    <Compile Include="AI\NPC\TerrorKingLast.cs" />
+    <Compile Include="AI\NPC\TerrorKingSecond.cs" />
+    <Compile Include="AI\NPC\TerrorKingZhen.cs" />
+    <Compile Include="AI\NPC\ThirdHardBloodNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardBloomNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdHardBlowNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardDoorNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardFixureLongNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardKingFirst.cs" />
+    <Compile Include="AI\NPC\ThirdHardKingFour.cs" />
+    <Compile Include="AI\NPC\ThirdHardKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdHardKingThird.cs" />
+    <Compile Include="AI\NPC\ThirdHardLockNpc.cs" />
+    <Compile Include="AI\NPC\ThirdHardLongNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdHardLongNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdHardShortNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdHardShortNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdHardShortNpcThird.cs" />
+    <Compile Include="AI\NPC\ThirdNormalBloodNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalBloomNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdNormalBlowNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalDoorNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalFixureLongNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalKingFirst.cs" />
+    <Compile Include="AI\NPC\ThirdNormalKingFour.cs" />
+    <Compile Include="AI\NPC\ThirdNormalKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdNormalKingThird.cs" />
+    <Compile Include="AI\NPC\ThirdNormalLockNpc.cs" />
+    <Compile Include="AI\NPC\ThirdNormalLongNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdNormalLongNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdNormalShortNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdNormalShortNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdNormalShortNpcThird.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleBloodNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleBloomNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleBlowNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleDoorNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleFixureLongNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleKingFirst.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleKingFour.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleKingThird.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleLockNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleLongNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleLongNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleLongNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleShortNpc.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleShortNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleShortNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdSimpleShortNpcThird.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorBloodNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorBloomNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorBloomNpcS.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorBlowNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorDoorNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorFagNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorFixureLongNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorKingFirst.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorKingFour.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorKingSecond.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorKingThird.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorLockNpc.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorLongNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorLongNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorShortNpcFirst.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorShortNpcSecond.cs" />
+    <Compile Include="AI\NPC\ThirdTerrorShortNpcThird.cs" />
+    <Compile Include="AI\NPC\TrainingEliteNpc.cs" />
+    <Compile Include="AI\NPC\TrainingNormalNpc.cs" />
+    <Compile Include="AI\NPC\TrainingNpc.cs" />
+    <Compile Include="AI\NPC\TrainingSimpleNpc.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bussiness\Bussiness.csproj">
+      <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game.Base\Game.Base.csproj">
+      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
+      <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game.Language\Game.Language.csproj">
+      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
+      <Name>Game.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameLibrary\GameLibrary.csproj">
+      <Project>{aaeda28c-53da-4df9-852a-ab8af9e86bd7}</Project>
+      <Name>GameLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy $(TargetFileName) $(SolutionDir)Release\Scripts
+Copy BaseScripts.pdb $(SolutionDir)Release\Scripts</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

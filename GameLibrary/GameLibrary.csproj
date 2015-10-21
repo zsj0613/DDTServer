@@ -704,10 +704,6 @@
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Game.Language\Game.Language.csproj">
-      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
-      <Name>Game.Language</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
       <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
       <Name>SqlDataProvider</Name>

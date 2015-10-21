@@ -5,7 +5,7 @@ using Game.Server.GameObjects;
 using Game.Server.Managers;
 using System;
 using System.Collections.Generic;
-using Game.Language;
+
 namespace Game.Server.Packets.Client
 {
 	[PacketHandler(70, "邀请")]

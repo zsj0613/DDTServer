@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using Game.Language;
+
 using Bussiness;
 namespace Game.Server.Managers
 {
@@ -170,7 +170,7 @@ namespace Game.Server.Managers
                     db.AddGoods(item);
                     MailInfo message = new MailInfo();
                     message.Annex1 = item.ItemID.ToString();
-                    message.Content = Language.LanguageMgr.GetTranslation("AwardMgr.AddDailyAward.Content", new object[]
+                    message.Content = LanguageMgr.GetTranslation("AwardMgr.AddDailyAward.Content", new object[]
                     {
                                    item.Template.Name
                     });
@@ -181,13 +181,13 @@ namespace Game.Server.Managers
                     message.ReceiverID = player.PlayerCharacter.ID;
                     message.Sender = message.Receiver;
                     message.SenderID = message.ReceiverID;
-                    message.Title = Language.LanguageMgr.GetTranslation("AwardMgr.AddDailyAward.Title", new object[]
+                    message.Title = LanguageMgr.GetTranslation("AwardMgr.AddDailyAward.Title", new object[]
                     {
                                             item.Template.Name
                     });
                     message.Type = 15;
                     db.SendMail(message);
-                    string full = Language.LanguageMgr.GetTranslation("AwardMgr.AddDailyAward.Mail", new object[0]);
+                    string full = LanguageMgr.GetTranslation("AwardMgr.AddDailyAward.Mail", new object[0]);
                     player.Out.SendMessage(eMessageType.Normal, full);
                     player.Out.SendMailResponse(player.PlayerCharacter.ID, eMailRespose.Receiver);
                 }
