@@ -22,7 +22,7 @@ namespace SqlDataProvider.Data
         public int Grade { get; set; }
         public string ActiveIP { get; set; }
         public int ChargedMoney { get; set; }
-        public string Sex { get; set; }
+        public bool Sex { get; set; }
         public int State { get; set; }
         public bool IsExist { get; set; }
     }

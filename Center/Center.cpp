@@ -16,7 +16,7 @@ using namespace Game::Base;
 void MarshalString(String ^ s, string& os);
 void Start();
 bool WINAPI ConsoleHandler(DWORD CEvent);
-int StopServer();
+bool WINAPI StopServer();
 
 
 
@@ -57,7 +57,7 @@ void Start()
 	}
 }
 
-bool WINAPI ConsoleHandler (DWORD CEvent)
+bool WINAPI ConsoleHandler(DWORD CEvent)
 {
 	switch (CEvent)
 	{
@@ -71,7 +71,7 @@ bool WINAPI ConsoleHandler (DWORD CEvent)
 		return FALSE;
 	}
 }
-int StopServer()
+bool WINAPI StopServer()
 {
 	if (CenterServer::Instance)
 	{

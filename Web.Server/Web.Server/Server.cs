@@ -16,6 +16,7 @@ namespace Web.Server
     public class Server: MyHttpWebServer
     {
         public static string ModulePath = Static.CurrentPath() + @"web\Modules\";
+        public static string WebPath = Static.CurrentPath() + @"web\";
         private static Server instance;
         public static void AddModule(Type type)
         {

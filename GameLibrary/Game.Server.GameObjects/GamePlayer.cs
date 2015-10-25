@@ -1465,10 +1465,6 @@ namespace Game.Server.GameObjects
 			int result;
 			if (value > 0)
 			{
-				if (value > 100000)
-				{
-					GamePlayer.log.Error(string.Format("GamePlayer ===== player.nickname : {0}, player. : {1}, add money : {2}", this.PlayerCharacter.NickName, this.PlayerCharacter.Money, value));
-				}
 				this.m_character.Money += value;
 				this.OnPropertiesChanged();
 				//LogMgr.LogWealthAdd(master, son, this.PlayerCharacter.ID, value, this.m_character.Money);
@@ -3331,8 +3327,8 @@ namespace Game.Server.GameObjects
 		}
         public void UpdateVIP()
         {
+            this.SaveIntoDatabase();
             this.LoadFromDatabase();
-            //Client.Out.SendUpdateVIP(this);
         }
 	}
 }

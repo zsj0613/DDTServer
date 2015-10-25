@@ -153,5 +153,10 @@ namespace Game.Base
 			d.Close();
 			return md.ToArray();
 		}
-	}
+
+        internal static void FreeHGlobal(IntPtr centerintptr)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

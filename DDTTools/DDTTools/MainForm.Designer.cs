@@ -32,7 +32,7 @@ namespace DDTTools
         private Button button5;
 
         private Button button6;
-        private object componentResourceManager;
+       // private object componentResourceManager;
 
         /// <summary>
         /// Clean up any resources being used.

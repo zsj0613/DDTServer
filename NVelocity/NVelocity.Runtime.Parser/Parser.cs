@@ -2198,7 +2198,7 @@ namespace NVelocity.Runtime.Parser
 					}
 					}
 					goto Block_2;
-					continue;
+					//continue;
 				}
 				break;
 			}
@@ -2385,7 +2385,7 @@ namespace NVelocity.Runtime.Parser
 					}
 					}
 					goto Block_2;
-					continue;
+					//continue;
 				}
 				break;
 			}

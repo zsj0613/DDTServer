@@ -26,13 +26,6 @@ namespace Game.Server
 		private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private int m_serverId;
 		private string m_loginKey;
-		//public string HelpStr
-		//{
-		//	get
-		//	{
-		//		return ConfigurationSettings.AppSettings["HelpStr"];
-		//	}
-		//}
 		protected override void OnConnect()
 		{
 			base.OnConnect();
@@ -411,11 +404,12 @@ namespace Game.Server
             if (client != null)
             {
                 client.UpdateVIP();
-
+                //” º˛Ã·–—
                 GSPacketIn pkgMsg = new GSPacketIn(117);
                 pkgMsg.WriteInt(playerID);
                 pkgMsg.WriteInt(1);
                 client.Out.SendTCP(pkgMsg);
+                //
             }
         }
         public void HandleCmd(GSPacketIn packet)

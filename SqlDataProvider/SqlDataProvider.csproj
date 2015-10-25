@@ -54,10 +54,6 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lsj.Util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2daafd37d5bd6bfc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lsjutil\Lsj.Util.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -151,6 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lsj.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -531,7 +531,7 @@ namespace Commons.Collections
 		public bool GetBoolean(string key)
 		{
 			bool boolean = this.GetBoolean(key, ExtendedProperties.DEFAULT_BOOLEAN);
-			if (boolean != null)
+			//if (boolean != null)
 			{
 				return boolean;
 			}
@@ -640,7 +640,7 @@ namespace Commons.Collections
 		public short GetShort(string key)
 		{
 			short @short = this.GetShort(key, ExtendedProperties.DEFAULT_INT16);
-			if (@short != null)
+			//if (@short != null)
 			{
 				return @short;
 			}
@@ -692,7 +692,7 @@ namespace Commons.Collections
 		public int GetInteger(string key)
 		{
 			int integer = this.GetInteger(key, ExtendedProperties.DEFAULT_INT32);
-			if (integer != null)
+			//if (integer != null)
 			{
 				return integer;
 			}
@@ -734,10 +734,10 @@ namespace Commons.Collections
 		public long GetLong(string key)
 		{
 			long @long = this.GetLong(key, ExtendedProperties.DEFAULT_INT64);
-			if (@long != null)
-			{
+			//if (@long != null)
+			//{
 				return @long;
-			}
+			//}
 			throw new Exception('\'' + key + "' doesn't map to an existing object");
 		}
 
@@ -776,7 +776,7 @@ namespace Commons.Collections
 		public float GetFloat(string key)
 		{
 			float @float = this.GetFloat(key, ExtendedProperties.DEFAULT_SINGLE);
-			if (@float != null)
+			//if (@float != null)
 			{
 				return @float;
 			}
@@ -818,7 +818,7 @@ namespace Commons.Collections
 		public double GetDouble(string key)
 		{
 			double @double = this.GetDouble(key, ExtendedProperties.DEFAULT_DOUBLE);
-			if (@double != null)
+			//if (@double != null)
 			{
 				return @double;
 			}

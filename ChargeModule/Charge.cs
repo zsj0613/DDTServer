@@ -13,6 +13,7 @@ using NVelocityTemplateEngine.Interfaces;
 using NVelocityTemplateEngine;
 using System.Collections;
 using Lsj.Util.Net.Web.Modules;
+using Lsj.Util.Net.Web.Response;
 
 namespace Web.Server.Module
 {
@@ -36,7 +37,7 @@ namespace Web.Server.Module
             }
             else
             {
-                response.WriteError(404);
+                return new ErrorResponse(404);
             }
             return response;
         }
@@ -49,7 +50,7 @@ namespace Web.Server.Module
             log.Info(request.QueryString["userid"]);
             if (userid.ConvertToInt(0) == 0)
             {
-                response.WriteError(404);
+                return new ErrorResponse(404);
             }
             else
             {
@@ -68,8 +69,7 @@ namespace Web.Server.Module
             string paytype = request.QueryString["paytype"];
             if (paytype.ConvertToInt(0) == 0 || userid.ConvertToInt(0) == 0)
             {
-                response.WriteError(404);
-                return response;
+                return new ErrorResponse(404);
             }
 
             if (paytype.ConvertToInt(0) >= 1 && paytype.ConvertToInt(0) <= 24)
@@ -85,8 +85,7 @@ namespace Web.Server.Module
                         }
                         else
                         {
-                            response.WriteError(404);
-                            return response;
+                            return new ErrorResponse(404);
                         }
                     }
                 }
@@ -102,7 +101,7 @@ namespace Web.Server.Module
             }
             else
             {
-                response.WriteError(404);
+                response = new ErrorResponse(404);
             }
             return response;
         }

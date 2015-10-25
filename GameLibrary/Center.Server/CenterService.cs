@@ -141,7 +141,6 @@ namespace Center.Server
 				{
 					msg = (string.IsNullOrEmpty(msg) ? "You are kicking out by GM!" : msg);
 					client.SendKitoffUser(playerID, msg);
-					//Console.WriteLine(msg);
 					LoginMgr.RemovePlayer(playerID);
 					result = true;
 					return result;

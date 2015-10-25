@@ -1,5 +1,6 @@
 using NVelocity;
 using NVelocity.Exception;
+using NVelocity.Runtime;
 using NVelocityTemplateEngine.BaseClasses;
 using NVelocityTemplateEngine.Interfaces;
 using System;
@@ -12,7 +13,9 @@ namespace NVelocityTemplateEngine.Engines
 	{
 		internal NVelocityFileEngine(string templateDirectory, bool cacheTemplate) : base(cacheTemplate)
 		{
-			base.SetProperty("resource.loader", "file");
+            base.SetProperty(RuntimeConstants.INPUT_ENCODING, "uft-8");
+            base.SetProperty(RuntimeConstants.OUTPUT_ENCODING, "uft-8");
+            base.SetProperty("resource.loader", "file");
 			base.SetProperty("file.resource.loader.path", templateDirectory);
 			base.Init();
 		}

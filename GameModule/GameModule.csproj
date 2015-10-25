@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{510B8EB1-FADE-4E77-9EB6-C729EC9886CD}</ProjectGuid>
+    <ProjectGuid>{6382D7E6-B35F-43E0-AC9A-33FE01F845B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Web.Server</RootNamespace>
-    <AssemblyName>Web.Server</AssemblyName>
+    <RootNamespace>GameModule</RootNamespace>
+    <AssemblyName>GameModule</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -24,14 +24,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\Release\</OutputPath>
+    <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -39,19 +39,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\Release\</OutputPath>
+    <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <LangVersion>default</LangVersion>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,14 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web.Server.Manager\PlayerManager.cs" />
-    <Compile Include="Web.Server\CenterServerConnector.cs" />
-    <Compile Include="Web.Server\Server.cs" />
-    <Compile Include="Web.Server\WebServer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web.Server\config.Weblogconfig.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lsjutil\Lsj.Util.Net.Web\Lsj.Util.Net.Web.csproj">
@@ -77,16 +70,36 @@
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bussiness\Bussiness.csproj">
+      <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Game.Base\Game.Base.csproj">
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj">
+      <Project>{37ce504d-055a-4c15-9c08-a3f477d1c44b}</Project>
+      <Name>NVelocityTemplateEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NVelocity\NVelocity.csproj">
+      <Project>{fb70a974-bf61-4640-93ee-27bd88dc57b8}</Project>
+      <Name>NVelocity</Name>
     </ProjectReference>
     <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
       <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
       <Name>SqlDataProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Web.Server\Web.Server.csproj">
+      <Project>{510b8eb1-fade-4e77-9eb6-c729ec9886cd}</Project>
+      <Name>Web.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy $(TargetFileName) $(SolutionDir)Release\Web\Modules
+Copy GameModule.pdb $(SolutionDir)Release\Web\Modules</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

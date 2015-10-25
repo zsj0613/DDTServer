@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
+using Game.Base;
 
 namespace Game.Launcher
 {
@@ -51,7 +52,7 @@ namespace Game.Launcher
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
             if (IsLoaded)
-            this.CheckStatus();
+           this.CheckStatus();
         }
 
         private void CheckStatus()

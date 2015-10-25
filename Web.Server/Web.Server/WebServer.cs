@@ -1,33 +1,36 @@
 ﻿using Game.Base;
 using Game.Base.Managers;
-using Game.Base.Config;
-using log4net;
-using log4net.Config;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using SqlDataProvider.BaseClass;
-using Lsj.Util.Net.Web;
 using Lsj.Util.Config;
 using System.Net;
 using Lsj.Util;
 using System.Collections;
 using Game.Base.Events;
 using Lsj.Util.Net.Web.Modules;
+using Lsj.Util.Log;
 
 namespace Web.Server
 {
     public class WebServer
     {
-        public static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        public static Log log = new Log(new LogConfig { FilePath= "/log/web/"});
         public static readonly string Edition = "10000";
         private static WebServer m_instance;
         private Server server;
-        
+        private CenterServerConnector m_centerServer;
+        public bool IsOpen = false;
+        public RunMgr runmgr
+        {
+            get
+            {
+                return m_runmgr;
+            }
+        }
+
         public static WebServer Instance
         {
             get
@@ -42,24 +45,18 @@ namespace Web.Server
             {
                 throw new Exception("Can't create more than one WebServer!");
             }
-            FileInfo logConfig = new FileInfo("Weblogconfig.xml");
-            ResourceUtil.ExtractResource(logConfig.Name, logConfig.FullName, Assembly.GetAssembly(typeof(WebServer)), true);
-            XmlConfigurator.ConfigureAndWatch(logConfig);
             m_instance = new WebServer();
         }
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            WebServer.log.Fatal("Unhandled exception!\n" + e.ExceptionObject.ToString());
-            if (e.IsTerminating)
-            {
-                LogManager.Shutdown();
-            }
+            WebServer.log.Error("Unhandled exception!\n" + e.ExceptionObject.ToString());
         }
         public bool Start()
         {
             bool result = true;
             try
             {
+                AllocatePacketBuffers();
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
                 WebServer.log.Warn("Initiating…………");
@@ -79,7 +76,17 @@ namespace Web.Server
                     return result;
                 }
                 WebServer.log.Info("Succeed to Load Modules!");
-                
+                if (!this.ConnecteToCenterServer())
+                {                    
+                    WebServer.log.Error("Fail to Connect to Center Server");
+                }
+                else
+                {
+                    this.IsOpen = true;
+                    WebServer.log.Info("Succeed to Connect to Center Server!");
+                }
+
+                this.m_runmgr = new RunMgr();
                 GameEventMgr.Notify(ScriptEvent.Loaded);
                 
                 FileModule.Path = @"web\";
@@ -96,6 +103,69 @@ namespace Web.Server
                 result = false;
             }
             return result;
+        }
+
+        private bool ConnecteToCenterServer()
+        {
+            this.m_centerServer = new CenterServerConnector(AppConfig.AppSettings["CenterIP"], AppConfig.AppSettings["CenterPort"].ConvertToInt(25001),this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
+            this.m_centerServer.Disconnected += new ClientEventHandle(this.centerServer_Disconnected);
+            return this.m_centerServer.Connect();
+        }
+        private Queue m_packetBufPool;
+        private RunMgr m_runmgr;
+
+        private bool AllocatePacketBuffers()
+        {
+            int count = 1000;
+            this.m_packetBufPool = new Queue(count);
+            for (int i = 0; i < count; i++)
+            {
+                this.m_packetBufPool.Enqueue(new byte[2048]);
+            }
+            return true;
+        }
+        public byte[] AcquirePacketBuffer()
+        {
+            object syncRoot;
+            Monitor.Enter(syncRoot = this.m_packetBufPool.SyncRoot);
+            byte[] result;
+            try
+            {
+                if (this.m_packetBufPool.Count > 0)
+                {
+                    result = (byte[])this.m_packetBufPool.Dequeue();
+                    return result;
+                }
+            }
+            finally
+            {
+                Monitor.Exit(syncRoot);
+            }
+            WebServer.log.Warn("packet buffer pool is empty!");
+            result = new byte[2048];
+            return result;
+        }
+
+        public void ReleasePacketBuffer(byte[] buf)
+        {
+            if (buf != null && GC.GetGeneration(buf) >= GC.MaxGeneration)
+            {
+                object syncRoot;
+                Monitor.Enter(syncRoot = this.m_packetBufPool.SyncRoot);
+                try
+                {
+                    this.m_packetBufPool.Enqueue(buf);
+                }
+                finally
+                {
+                    Monitor.Exit(syncRoot);
+                }
+            }
+        }
+        private void centerServer_Disconnected(BaseClient client)
+        {
+            this.IsOpen = false;
+            WebServer.log.Warn("Disconnected From Center Server");
         }
         public bool StartScriptComponents()
         {
@@ -135,10 +205,25 @@ namespace Web.Server
         {
             try
             {
+                if(m_centerServer!=null&&m_centerServer.IsConnected)
+                m_centerServer.Disconnect();
                 server.Stop();
             }
             catch
             {
+            }
+        }
+
+        public bool Reconnect()
+        {
+            if (this.ConnecteToCenterServer())
+            {
+                this.IsOpen = true;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

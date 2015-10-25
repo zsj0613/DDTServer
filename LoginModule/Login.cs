@@ -12,6 +12,7 @@ using Lsj.Util;
 using Bussiness;
 using SqlDataProvider.Data;
 using Lsj.Util.Net.Web.Modules;
+using Lsj.Util.Net.Web.Response;
 
 namespace Web.Server.Module
 {
@@ -23,8 +24,10 @@ namespace Web.Server.Module
         {
             var response = new HttpResponse();
             int inviteid = request.QueryString["i"].ConvertToInt(0);
-            response.cookies.Add(new HttpCookie { name = "inviteid", content = inviteid.ToString(), Expires = DateTime.Now.AddYears(1) });
-
+            if (request.Cookies["inviteid"].content == "")
+            {
+                response.cookies.Add(new HttpCookie { name = "inviteid", content = inviteid.ToString(), Expires = DateTime.Now.AddYears(1) });
+            }
 
             if (request.QueryString["method"] == "login")
             {
@@ -48,6 +51,7 @@ namespace Web.Server.Module
             {
                 ProcessInvite(ref response, ref request);
             }
+
             else if (request.Cookies["username"].content != "" && request.Cookies["password"].content != "")
             {
                 response.Write302("http://www.hqgddt.com/game.htm");
@@ -108,8 +112,6 @@ namespace Web.Server.Module
         {
             string username = request.Form["user"];
             string password = request.Form["password1"];
-            Login.log.Debug(username);
-            Login.log.Debug(password);
             response.cookies.Add(new HttpCookie { name = "username", content = username.ToSafeString(), Expires = DateTime.Now.AddYears(1) });
             response.cookies.Add(new HttpCookie { name = "password", content = password.ToSafeString(), Expires = DateTime.Now.AddYears(1) });
             response.Write302("http://www.hqgddt.com/game.htm");

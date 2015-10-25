@@ -16,7 +16,7 @@ namespace Center.Server
 {
 	public class CenterServer : BaseServer
 	{
-		private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		public static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		public static readonly string Edition = "10000";
 		private CenterServerConfig m_config;
 		private Timer m_loginLapseTimer;
@@ -24,7 +24,7 @@ namespace Center.Server
 		private Timer m_scanAuction;
 		private Timer m_scanMail;
 		private Timer m_scanConsortia;
-      private Timer m_ChargeTimer;
+        private Timer m_ChargeTimer;
 		private static CenterServer m_instance;
 		public CenterServerConfig Config
 		{

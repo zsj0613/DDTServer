@@ -13,6 +13,8 @@ using NVelocityTemplateEngine.Interfaces;
 using NVelocityTemplateEngine;
 using System.Collections;
 using Lsj.Util.Net.Web.Modules;
+using Lsj.Util.Net.Web.Response;
+using SqlDataProvider.Data;
 
 namespace Web.Server.Module
 {
@@ -24,7 +26,7 @@ namespace Web.Server.Module
         public HttpResponse Process(HttpRequest request)
         {
             var response = new HttpResponse();
-            response.ContentType = "text/html";
+            response.ContentType = "text/html; charset=utf-8";
             username = request.Cookies["username"].content;
             password = request.Cookies["password"].content;
             if (GetUserType(username, password) <= 1)
@@ -48,21 +50,39 @@ namespace Web.Server.Module
                         ProcessVersion(ref response);
                         break;
                     case "userlist":
-                        ProcessUserList(ref response);
+                        UserList.ProcessUserList(ref response,request);
+                        break;
+                    case "notice":
+                        ProcessNotice(ref response, request);
+                        break;
+                    case "status":
+                        ProcessStatus(ref response, request);
+                        break;
+                    case "mail":
+                        new Mail().ProcessMail(ref response, request);
                         break;
                     default:
-                        response.WriteError(404);
-                        break;
+                        return new ErrorResponse(404);
                 }
             }
             return response;
         }
 
-        private void ProcessUserList(ref HttpResponse response)
+        private void ProcessStatus(ref HttpResponse response, HttpRequest request)
         {
-            
+            INVelocityEngine FileEngine = NVelocityEngineFactory.CreateNVelocityFileEngine(Server.ModulePath + @"vm", false);
+            IDictionary context = new Hashtable();
+            context.Add("Runmgr", WebServer.Instance.runmgr);
+            context.Add("IsConnected", WebServer.Instance.IsOpen);
+            response.Write(FileEngine.Process(context, "Status.vm"));
         }
 
+        private void ProcessNotice(ref HttpResponse response, HttpRequest request)
+        {
+            INVelocityEngine FileEngine = NVelocityEngineFactory.CreateNVelocityFileEngine(Server.ModulePath + @"vm", false);
+            IDictionary context = new Hashtable();
+            response.Write(FileEngine.Process(context, "SysNotice.vm"));
+        }
         private void ProcessIndex(ref HttpResponse response)
         {
             INVelocityEngine FileEngine = NVelocityEngineFactory.CreateNVelocityFileEngine(Server.ModulePath + @"vm", false);
@@ -89,7 +109,7 @@ namespace Web.Server.Module
             response.Write(FileEngine.Process(context, "Admin_Top.vm"));
         }
 
-        public int GetUserType(string name,string pass)
+        public static int GetUserType(string name,string pass)
         {
             int b = 0;
             using (MemberShipbussiness a = new MemberShipbussiness())
@@ -104,7 +124,8 @@ namespace Web.Server.Module
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
             Admin.log.Info("Load Admin Module");
-            Server.AddModule(typeof(Admin));            
+            Server.AddModule(typeof(Admin));
+            Server.AddModule(typeof(GMAction));         
         }
         public static bool CanProcess(HttpRequest request)
         {

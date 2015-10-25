@@ -11,70 +11,70 @@ using System.Collections;
 using Lsj.Util;
 using Bussiness;
 using SqlDataProvider.Data;
-
 using System.Xml.Linq;
 using Bussiness.Interface;
-using System.Web;
 using System.Security.Cryptography;
 using Lsj.Util.Net.Web.Modules;
+using Lsj.Util.Net.Web.Response;
+using Web.Server.Managers;
 
 namespace Web.Server.Module
 {
     public class LoginCheck : IModule
     {
-        public static Log log = new Log(new LogConfig { FilePath = "log/Login/", UseConsole = true });
+        public static Log log = new Log(new LogConfig { FilePath = "log/Game/", UseConsole = true });
 
-        public Lsj.Util.Net.Web.HttpResponse Process(Lsj.Util.Net.Web.HttpRequest request)
+        public HttpResponse Process(Lsj.Util.Net.Web.HttpRequest request)
         {
-            var response = new Lsj.Util.Net.Web.HttpResponse();
+            var response = new HttpResponse();
             bool value = false;
             string message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail1", new object[0]);
             bool isError = false;
             XElement result = new XElement("Result");
             string rsa = "<RSAKeyValue><Modulus>zRSdzFcnZjOCxDMkWUbuRgiOZIQlk7frZMhElQ0a7VqZI9VgU3+lwo0ghZLU3Gg63kOY2UyJ5vFpQdwJUQydsF337ZAUJz4rwGRt/MNL70wm71nGfmdPv4ING+DyJ3ZxFawwE1zSMjMOqQtY4IV8his/HlgXuUfIHVDK87nMNLc=</Modulus><Exponent>AQAB</Exponent><P>7lzjJCmL0/unituEcjoJsZhUDYajgiiIwWwuh0NlCZElmfa5M6l8H+Ahd9yo7ruT6Hrwr4DAdrIKP6LDmFhBdw==</P><Q>3EFKHt4FcDiZXRBLqYZaNSmM1KDrrU97N3CtEDCYS4GimmFOGJhmuK3yGfp/nYLcL2BTKyOZLSQO+/nAjRp2wQ==</Q><DP>SFdkkGsThuiPdrMcxVYb7wxeJiTApxYKOznL/T1VAsxMbyfUGXvMshfh0HDlzF6diycUuQ8IWn26YonRdwECDQ==</DP><DQ>xR9x1NpkB6HAMHhLHzftODMtpYc4Jm5CGsYvPZQgWUN2YbDAkmajWJnlWbbFzBS4N3aAONWtW6cv+ff2itKqgQ==</DQ><InverseQ>oyJzP0Sn+NgdNRRc7/cUKkbbbYaNxkDLDvKLDYMKV6+gcDce85t/FGfaTwkuYQNFqkrRBtDYjtfGsPRTGS6Mow==</InverseQ><D>wM33JNtzUSRwdmDWdZC4BuOYa2vJoD0zc0bNI4x0ml2oyAWdUCMcBfKEds/6i1T6s2e91d2dcJ/aI27o22gO/sfNg3tsr7uYMiUuhSjniqBDB/zyUVig29E4qdfuY1GHxTE8zurroY8mgGEB0aLj+gE0yX9T7sDFkY0QYRqJnwE=</D></RSAKeyValue>";
-            //try
-            //{
-            BaseInterface inter = BaseInterface.CreateInterface();
-            string p = HttpUtility.UrlDecode(request.QueryString["p"]);
-            string site = (request.QueryString["site"] == null) ? "" : HttpUtility.UrlDecode(request.QueryString["site"]);
-            string IP = request.QueryString["IP"];
-            if (!string.IsNullOrEmpty(p))
+            try
             {
-                byte[] src = RsaDecryt2(GetRSACrypto(rsa), p);
-                string[] strList = Encoding.UTF8.GetString(src, 7, src.Length - 7).Split(new char[]
+                BaseInterface inter = BaseInterface.CreateInterface();
+                string p = System.Web.HttpUtility.UrlDecode(request.QueryString["p"]);
+                string site = (request.QueryString["site"] == null) ? "" : System.Web.HttpUtility.UrlDecode(request.QueryString["site"]);
+                string IP = request.QueryString["IP"];
+                if (!string.IsNullOrEmpty(p))
                 {
-                        ','
-                });
-                if (strList.Length == 4)
-                {
-                    message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail100", new object[0]);
-                    string name = strList[0];
-                    string pwd = strList[1];
-                    string newPwd = strList[2];
-                    string nickname = strList[3];
-                    if (PlayerManager.Login(name, pwd))
+                    byte[] src = RsaDecryt2(GetRSACrypto(rsa), p);
+                    string[] strList = Encoding.UTF8.GetString(src, 7, src.Length - 7).Split(new char[]
                     {
-                        message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail1000", new object[0]);
-                        int isFirst = 0;
-                        bool isActive = false;
-                        bool firstValidate = PlayerManager.GetByUserIsFirst(name);
-                        PlayerInfo player = inter.CreateLogin(name, newPwd, ref message, ref isFirst, IP, ref isError, firstValidate, ref isActive, site, nickname);
-                        //message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail10", new object[0]);
-                        if (player != null && !isError)
+                        ','
+                    });
+                    if (strList.Length == 4)
+                    {
+                        message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail100", new object[0]);
+                        string name = strList[0];
+                        string pwd = strList[1];
+                        string newPwd = strList[2];
+                        string nickname = strList[3];
+                        if (PlayerManager.Login(name, pwd))
                         {
-                            message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail10000", new object[0]);
-                            if (isFirst == 0)
+                            message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail1000", new object[0]);
+                            int isFirst = 0;
+                            bool isActive = false;
+                            bool firstValidate = PlayerManager.GetByUserIsFirst(name);
+                            PlayerInfo player = inter.CreateLogin(name, newPwd, ref message, ref isFirst, IP, ref isError, firstValidate, ref isActive, site, nickname);
+                            //message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail10", new object[0]);
+                            if (player != null && !isError)
                             {
-                                PlayerManager.Update(name, newPwd);
-                            }
-                            else
-                            {
-                                PlayerManager.Remove(name);
-                            }
-                            string style = string.IsNullOrEmpty(player.Style) ? ",,,,,,,," : player.Style;
-                            player.Colors = (string.IsNullOrEmpty(player.Colors) ? ",,,,,,,," : player.Colors);
-                            XElement node = new XElement("Item", new object[]
-                            {
+                                message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail10000", new object[0]);
+                                if (isFirst == 0)
+                                {
+                                    PlayerManager.Update(name, newPwd);
+                                }
+                                else
+                                {
+                                    PlayerManager.Remove(name);
+                                }
+                                string style = string.IsNullOrEmpty(player.Style) ? ",,,,,,,," : player.Style;
+                                player.Colors = (string.IsNullOrEmpty(player.Colors) ? ",,,,,,,," : player.Colors);
+                                XElement node = new XElement("Item", new object[]
+                                {
                                     new XAttribute("ID", player.ID),
                                     new XAttribute("IsFirst", isFirst),
                                     new XAttribute("NickName", player.NickName),
@@ -119,29 +119,29 @@ namespace Web.Server.Module
                                     new XAttribute("AnswerSite", player.AnswerSite),
                                     new XAttribute("VIPLevel",player.VipLevel),
                                     new XAttribute("ChargedMoney",player.ChargedMoney)
-                            });
-                            result.Add(node);
-                            value = true;
-                            message = LanguageMgr.GetTranslation("Tank.Request.Login.Success", new object[0]);
+                                });
+                                result.Add(node);
+                                value = true;
+                                message = LanguageMgr.GetTranslation("Tank.Request.Login.Success", new object[0]);
+                            }
+                            else
+                            {
+                                PlayerManager.Remove(name);
+                            }
                         }
                         else
                         {
-                            PlayerManager.Remove(name);
+                            message = LanguageMgr.GetTranslation("登录已失效，请重新登录", new object[0]);
                         }
-                    }
-                    else
-                    {
-                        message = LanguageMgr.GetTranslation("登录已失效，请重新登录", new object[0]);
                     }
                 }
             }
-            //  }
-            // catch (Exception ex)
-            //{
-            //Login.log.Error("User Login error", ex);
-            //  value = false;
-            //  message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail2222", new object[0]);
-            // }
+            catch (Exception ex)
+            {
+                LoginCheck.log.Error("User Login error", ex);
+                value = false;
+                message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail", new object[0]);
+            }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
             response.ContentType = "text/plain";
@@ -152,11 +152,11 @@ namespace Web.Server.Module
 
         }
 
-       
+
         [ScriptLoadedEvent]
         public static void AddModule(RoadEvent e, object sender, EventArgs arguments)
         {
-            Login.log.Info("Load Login Module2");
+            LoginCheck.log.Info("Load Game Module");
             Server.AddModule(typeof(LoginCheck));
         }
         public static bool CanProcess(Lsj.Util.Net.Web.HttpRequest request)
@@ -164,7 +164,7 @@ namespace Web.Server.Module
             bool result = false;
             if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)
             {
-                if (request.uri == (@"\login.ashx")|| request.uri == (@"\Login.ashx"))
+                if (request.uri == (@"\login.ashx") || request.uri == (@"\Login.ashx"))
                 {
                     result = true;
                 }

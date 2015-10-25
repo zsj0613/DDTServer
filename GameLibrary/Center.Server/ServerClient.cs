@@ -21,7 +21,7 @@ namespace Center.Server
         private BaseClient m_currentCmdClient = null;
         public bool IsManager = false;
         public bool NeedSyncMacroDrop = false;
-        public static readonly string MANAGER_KEY = "a3sdfi792kklishu290l-z:)(*";
+        public static readonly string MANAGER_KEY = "a3sdfi792kkliasfasdfshu290l-z:)(*";
         public ServerInfo Info
         {
             get;
@@ -261,11 +261,18 @@ namespace Center.Server
         {
             byte[] rgb = pkg.ReadBytes();
             string content = Encoding.UTF8.GetString(this._rsa.Decrypt(rgb, false));
+            if (content == MANAGER_KEY)
+            {
+                this.IsManager = true;
+                base.Strict = false;
+                CenterServer.log.Info($"Connected to manager  {this.TcpEndpoint}");
+                return;
+            }
             string[] temp = content.Split(new char[]
             {
                 ','
             });
-            if (temp.Length == 2)
+            if (temp!=null&temp.Length == 2)
             {
                 this._rsa = null;
                 int id = int.Parse(temp[0]);

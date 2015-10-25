@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using Game.Base;
+
 namespace Game.Launcher
 {
     public partial class Loading : Form

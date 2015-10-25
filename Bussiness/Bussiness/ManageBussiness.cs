@@ -95,7 +95,24 @@ namespace Bussiness
 			}
 			return result;
 		}
-		private bool ForbidPlayer(string userName, string nickName, int userID, DateTime forbidDate, bool isExist)
+        public void MailNotice(int userID)
+        {
+            try
+            {
+                    using (CenterServiceClient temp = new CenterServiceClient())
+                    {
+                    temp.MailNotice(userID);
+                    }
+            }
+            catch (Exception e)
+            {
+                if (BaseBussiness.log.IsErrorEnabled)
+                {
+                    BaseBussiness.log.Error("MailNotice", e);
+                }
+            }
+        }
+        private bool ForbidPlayer(string userName, string nickName, int userID, DateTime forbidDate, bool isExist)
 		{
 			return this.ForbidPlayer(userName, nickName, userID, forbidDate, isExist, "");
 		}
@@ -284,7 +301,7 @@ namespace Bussiness
                     Grade = (int)reader["Grade"],
                     ActiveIP = (string)reader["ActiveIP"],
                     ChargedMoney = (int)reader["ChargedMoney"],
-                    Sex = (bool)reader["Sex"] ? "ÄÐ" : "Å®",
+                    Sex = (bool)reader["Sex"],
                     UserID = (int)reader["UserID"],
                     State = (int)reader["State"],
                     IsExist = (bool)reader["IsExist"],

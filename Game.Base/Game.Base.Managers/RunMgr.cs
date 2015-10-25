@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Timers;
 using Lsj.Util;
 
-namespace Game.Launcher
+namespace Game.Base
 {
     public class RunMgr : DisposableClass, IDisposable
     {
@@ -98,6 +98,7 @@ namespace Game.Launcher
 
         private void GetIntptr(object source, ElapsedEventArgs e)
         {
+            UpdateStatus();
             GetIntptr();
         }
 
@@ -137,7 +138,7 @@ namespace Game.Launcher
             }
             else
             {
-                Process.GetProcessesByName("Center.")[0].Close();
+                Process.GetProcessesByName("Center")[0].Close();
                 return true;
             }
         }

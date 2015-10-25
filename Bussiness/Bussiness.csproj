@@ -57,10 +57,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lsj.Util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2daafd37d5bd6bfc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lsjutil\Lsj.Util.dll</HintPath>
-    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System" />
@@ -137,6 +133,10 @@
     <Compile Include="Game.Server.Managers\ConsortiaLevelMgr.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Game.Base\Game.Base.csproj">
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
