@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Web.Server.Managers;
 
 namespace Web.Server.Module
 {
@@ -55,11 +56,34 @@ namespace Web.Server.Module
                     case "reconnect":
                         ProcessReconnect(request, ref response);
                         break;
+                    case "loginkey":
+                        ProcessKey(request, ref response);
+                        break;
                     default:
                         return new ErrorResponse(404);
                 }
             }
             return response;
+        }
+
+        private void ProcessKey(HttpRequest request, ref HttpResponse response)
+        {
+            using (MemberShipbussiness a = new MemberShipbussiness())
+            {
+                var name = request.QueryString["UserName"];
+                if (name != "" && a.ExistsUsername(name))
+                {
+                    var pass = Guid.NewGuid().ToString();
+                    PlayerManager.Add(name, pass);
+                    string content = $"user={name}&key={pass}";
+                    response.Write(content);
+                }
+                else
+                {
+                    response.Write("错误");
+                }
+            }
+
         }
 
         private void ProcessReconnect(HttpRequest request, ref HttpResponse response)

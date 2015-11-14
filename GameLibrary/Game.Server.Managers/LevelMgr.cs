@@ -6,6 +6,7 @@ namespace Game.Server.Managers
 	{
         private static int[] levels = new int[]
         {
+            0,
             1000,
             2000,
             3000,

@@ -42,16 +42,15 @@ namespace Game.Server.Managers
                 var b = player.PlayerCharacter.VIPGiftLevel + 1;
                 if (DropInventory.VIPRewardDrop(b, ref a))
                 {
-                    if (a.Count == 0)
-                    {
-                        GameServer.log.Error("VIP" + b.ToString() + "奖励为空！");
-                        return;
-                    }
-                    else
                     {
                         var c = "VIP奖励" + b.ToString();
                         player.SendItemsToMail(a, c, c, eMailType.Default);
                     }
+                }
+                else
+                {
+                    GameServer.log.Error("VIP" + b.ToString() + "奖励为空！");
+                    return;
                 }
                 player.PlayerCharacter.VIPGiftLevel++;
                 CheckReward(player);

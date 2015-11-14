@@ -2164,6 +2164,10 @@ namespace Game.Server.GameObjects
 		public bool LoadFromDatabase()
 		{
 			bool result;
+            if (m_character != null && m_character.IsDirty)
+            {
+                this.SaveIntoDatabase();
+            }
 			using (PlayerBussiness db = new PlayerBussiness())
 			{
 				PlayerInfo detail = db.GetUserSingleByUserID(this.m_character.ID);
@@ -3327,8 +3331,9 @@ namespace Game.Server.GameObjects
 		}
         public void UpdateVIP()
         {
-            this.SaveIntoDatabase();
-            this.LoadFromDatabase();
+            this.m_character.VipLevel = this.VIPLevel;
+            this.LoadFromDatabase();          
+            this.Out.SendUpdateVIP(this);
         }
 	}
 }

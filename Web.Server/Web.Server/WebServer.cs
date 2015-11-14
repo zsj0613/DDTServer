@@ -17,7 +17,7 @@ namespace Web.Server
 {
     public class WebServer
     {
-        public static Log log = new Log(new LogConfig { FilePath= "/log/web/"});
+        public static Log log = new Log(new LogConfig { FilePath= "log/web/"});
         public static readonly string Edition = "10000";
         private static WebServer m_instance;
         private Server server;

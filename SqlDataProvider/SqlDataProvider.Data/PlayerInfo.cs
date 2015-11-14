@@ -1077,7 +1077,11 @@ namespace SqlDataProvider.Data
             }
             set
             {
-                this.m_VipLevel = value;
+                if (m_VipLevel != value)
+                {
+                    this.m_VipLevel = value;
+                    this.IsDirty = true;
+                }
             }
         }
         public int ChargedMoney
@@ -1110,7 +1114,11 @@ namespace SqlDataProvider.Data
             }
             set
             {
-                this.m_VIPGiftLevel = value;
+                if (m_VIPGiftLevel != value)
+                {
+                    this.IsDirty = true;
+                    this.m_VIPGiftLevel = value;
+                }
             }
         }
         public PlayerInfo()

@@ -6,15 +6,15 @@ using System;
 
 namespace GameServerScript.AI.Messions
 {
-	public class FB102 : AMissionControl
+	public class FB106 : AMissionControl
 	{
 		private SimpleBoss boss;
 
 		private SimpleBoss boss2;
 
-		private int bossID = 1000011;
+		private int bossID = 1000051;
 
-		private int boss2ID = 1000012;
+		private int boss2ID = 1000052;
 
 		private int kill;
 

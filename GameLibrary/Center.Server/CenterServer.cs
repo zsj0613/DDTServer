@@ -26,7 +26,9 @@ namespace Center.Server
 		private Timer m_scanConsortia;
         private Timer m_ChargeTimer;
 		private static CenterServer m_instance;
-		public CenterServerConfig Config
+        private Timer m_RenameCheckTimer;
+
+        public CenterServerConfig Config
 		{
 			get
 			{
@@ -145,6 +147,13 @@ namespace Center.Server
                 CenterServer.log.Info("初始化全局Timer成功!");
 
 
+                if (!this.InitRenameCheckTimer())
+                {
+                    result = false;
+                    CenterServer.log.Error("初始化改名卡失败，请检查!");
+                    return result;
+                }
+                CenterServer.log.Info("初始化改名卡成功!");
                 if (!this.InitChargeTimer())
                 {
                     result = false;
@@ -200,15 +209,30 @@ namespace Center.Server
 			return componentInitState;
 		}
 
-        public bool InitChargeTimer()
+        private bool InitChargeTimer()
         {
             int interval = 30 * 1000;//三十秒
             this.m_ChargeTimer = new Timer(new TimerCallback(this.CheckCharge), null, interval, interval);
 
             return true;
         }
+        private bool InitRenameCheckTimer()
+        {
+            int interval = 60 * 1000;//三十秒
+            this.m_RenameCheckTimer = new Timer(new TimerCallback(this.CheckRename), null, interval, interval);
 
-		public bool InitGlobalTimers()
+            return true;
+        }
+
+        private void CheckRename(object state)
+        {
+            CenterServer.log.Debug("检查改名中...");
+            ThreadPriority oldprio = Thread.CurrentThread.Priority;
+            Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+            RenameMgr.Do();
+        }
+
+        public bool InitGlobalTimers()
 		{
 			int interval = this.m_config.SaveIntervalInterval * 60 * 1000;
 			if (this.m_saveDBTimer == null)

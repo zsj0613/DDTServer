@@ -350,5 +350,23 @@ namespace Bussiness
             return result;
 
         }
+        
+             public bool UpdateName()
+        {
+            bool result = false;
+            try
+            {
+                result = this.db.RunProcedure("Sp_Renames_Batch");
+            }
+            catch (Exception e)
+            {
+                if (BaseBussiness.log.IsErrorEnabled)
+                {
+                    BaseBussiness.log.Error("Init", e);
+                }
+            }
+            return result;
+
+        }
     }
 }

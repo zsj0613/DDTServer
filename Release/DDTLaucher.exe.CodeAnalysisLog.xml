@@ -12,7 +12,7 @@
          <Members>
           <Member Name="#Dispose(System.Boolean)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message Id="runmgr" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2015-10-25 18:36:15Z" FixCategory="NonBreaking">
+            <Message Id="runmgr" TypeName="DisposableFieldsShouldBeDisposed" Category="Microsoft.Usage" CheckId="CA2213" Status="Active" Created="2015-11-02 19:34:35Z" FixCategory="NonBreaking">
              <Issue Certainty="75" Level="Warning" Path="D:\NewProject\new\DDTLaucher\Game.Launcher" File="Loading.Designer.cs" Line="16">'Loading' 包含 IDisposable 类型的字段 'Loading.runmgr': 'RunMgr'。请更改 'Loading' 的 Dispose 方法，使其针对该字段调用 Dispose 或 Close。</Issue>
             </Message>
            </Messages>

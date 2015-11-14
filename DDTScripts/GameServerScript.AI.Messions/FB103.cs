@@ -1,4 +1,4 @@
-
+﻿
 using Bussiness;
 using Game.Logic.AI;
 using Game.Logic.Phy.Object;
@@ -12,9 +12,9 @@ namespace GameServerScript.AI.Messions
 
 		private SimpleBoss boss2;
 
-		private int bossID = 1000005;
+		private int bossID = 1000021;
 
-		private int boss2ID = 1000006;
+		private int boss2ID = 1000022;
 
 		private int kill;
 
@@ -56,7 +56,7 @@ namespace GameServerScript.AI.Messions
 			base.Game.LoadResources(npcIds);
 			base.Game.LoadNpcGameOverResources(npcIds2);
 			base.Game.AddLoadingFile(2, "bombs/4.swf", "tank.resource.bombs.Bomb4");
-			base.Game.SetMap(1401);
+			base.Game.SetMap(1214);
 		}
 
 		public override void OnPrepareStartGame()
@@ -72,10 +72,10 @@ namespace GameServerScript.AI.Messions
 		public override void OnPrepareNewGame()
 		{
 			base.OnPrepareNewGame();
-			this.boss = base.Game.CreateBoss(this.bossID, 424, 385, -1, 1);
+			this.boss = base.Game.CreateBoss(this.bossID, 1275, 444, -1, 1);
 			this.boss.SetRelateDemagemRect(-42, -200, 84, 194);
 			this.boss.Say(LanguageMgr.GetTranslation("我老大", new object[0]), 0, 200, 0);
-			this.boss2 = base.Game.CreateBoss(this.boss2ID, 1555, 385, -1, 1);
+			this.boss2 = base.Game.CreateBoss(this.boss2ID, 991, 972, -1, 1);
 			this.boss2.SetRelateDemagemRect(-42, -200, 84, 194);
 			this.boss2.Say(LanguageMgr.GetTranslation("我老二", new object[0]), 0, 200, 0);
 		}

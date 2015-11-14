@@ -1,49 +1,39 @@
-using Game.Logic;
+﻿
+using Bussiness;
 using Game.Logic.AI;
 using Game.Logic.Phy.Object;
 using System;
-using System.Collections.Generic;
 
 namespace GameServerScript.AI.Messions
 {
 	public class FB101 : AMissionControl
 	{
-		private List<SimpleNpc> someNpc = new List<SimpleNpc>();
+		private SimpleBoss boss;
 
-		private int dieRedCount;
+		private SimpleBoss boss2;
 
-		private int[] npcIDs = new int[]
-		{
-			1000001,
-			1000002
-		};
+		private int bossID = 1000001;
 
-		private int[] birthX = new int[]
-		{
-			52,
-			115,
-			183,
-			253,
-			320,
-			1206,
-			1275,
-			1342,
-			1410,
-			1475
-		};
+		private int boss2ID = 1000002;
+
+		private int kill;
+
+		private PhysicalObj m_moive;
+
+		private PhysicalObj m_front;
 
 		public override int CalculateScoreGrade(int score)
 		{
 			base.CalculateScoreGrade(score);
-			if (score > 1870)
+			if (score > 1750)
 			{
 				return 3;
 			}
-			if (score > 1825)
+			if (score > 1675)
 			{
 				return 2;
 			}
-			if (score > 1780)
+			if (score > 1600)
 			{
 				return 1;
 			}
@@ -55,19 +45,18 @@ namespace GameServerScript.AI.Messions
 			base.OnPrepareNewSession();
 			int[] npcIds = new int[]
 			{
-				this.npcIDs[0],
-				this.npcIDs[1]
+				this.bossID,
+				this.boss2ID
 			};
 			int[] npcIds2 = new int[]
 			{
-				this.npcIDs[1],
-				this.npcIDs[0],
-				this.npcIDs[0],
-				this.npcIDs[0]
+				this.bossID,
+				this.boss2ID
 			};
 			base.Game.LoadResources(npcIds);
 			base.Game.LoadNpcGameOverResources(npcIds2);
-			base.Game.SetMap(11003);
+			base.Game.AddLoadingFile(2, "bombs/4.swf", "tank.resource.bombs.Bomb4");
+			base.Game.SetMap(1214);
 		}
 
 		public override void OnPrepareStartGame()
@@ -83,89 +72,41 @@ namespace GameServerScript.AI.Messions
 		public override void OnPrepareNewGame()
 		{
 			base.OnPrepareNewGame();
-			int num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 52, 506, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 100, 507, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 155, 508, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 210, 507, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 253, 507, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 1275, 508, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 1325, 506, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 1360, 508, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 1410, 506, 1));
-			num = base.Game.Random.Next(0, this.npcIDs.Length);
-			this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[num], 1475, 508, 1));
+			this.boss = base.Game.CreateBoss(this.bossID, 1275, 444, -1, 1);
+			this.boss.SetRelateDemagemRect(-42, -200, 84, 194);
+			this.boss.Say(LanguageMgr.GetTranslation("我老大", new object[0]), 0, 200, 0);
+			this.boss2 = base.Game.CreateBoss(this.boss2ID, 991, 972, -1, 1);
+			this.boss2.SetRelateDemagemRect(-42, -200, 84, 194);
+			this.boss2.Say(LanguageMgr.GetTranslation("我老二", new object[0]), 0, 200, 0);
 		}
 
 		public override void OnNewTurnStarted()
 		{
-			base.OnNewTurnStarted();
-			PVEGame game = base.Game;
-			int key = game.FindTurnNpcRank();
-			if (base.Game.GetLivedLivings().Count == 0)
-			{
-				game.NpcTurnQueue[key] = 0;
-			}
-			if (base.Game.TurnIndex > 1 && base.Game.CurrentPlayer.Delay > game.NpcTurnQueue[key] && base.Game.GetLivedLivings().Count < 10)
-			{
-				for (int i = 0; i < 10 - base.Game.GetLivedLivings().Count; i++)
-				{
-					if (this.someNpc.Count == base.Game.MissionInfo.TotalCount)
-					{
-						return;
-					}
-					int num = base.Game.Random.Next(0, this.birthX.Length);
-					int num2 = this.birthX[num];
-					int direction = -1;
-					if (num2 <= 320)
-					{
-						direction = 1;
-					}
-					num = base.Game.Random.Next(0, this.npcIDs.Length);
-					if (num == 1 && this.GetNpcCountByID(this.npcIDs[1]) < 10)
-					{
-						this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[1], num2, 506, 1, direction));
-					}
-					else
-					{
-						this.someNpc.Add(base.Game.CreateNpc(this.npcIDs[0], num2, 506, 1, direction));
-					}
-				}
-			}
 		}
 
 		public override void OnBeginNewTurn()
 		{
 			base.OnBeginNewTurn();
+			if (base.Game.TurnIndex > 1)
+			{
+				if (this.m_moive != null)
+				{
+					base.Game.RemovePhysicalObj(this.m_moive, true);
+					this.m_moive = null;
+				}
+				if (this.m_front != null)
+				{
+					base.Game.RemovePhysicalObj(this.m_front, true);
+					this.m_front = null;
+				}
+			}
 		}
 
 		public override bool CanGameOver()
 		{
-			bool flag = true;
-			base.CanGameOver();
-			this.dieRedCount = 0;
-			foreach (SimpleNpc current in this.someNpc)
+			if (!this.boss.IsLiving && !this.boss2.IsLiving)
 			{
-				if (current.IsLiving)
-				{
-					flag = false;
-				}
-				else
-				{
-					this.dieRedCount++;
-				}
-			}
-			if (flag && this.dieRedCount == base.Game.MissionInfo.TotalCount)
-			{
-				base.Game.IsWin = true;
+				this.kill++;
 				return true;
 			}
 			return false;
@@ -173,7 +114,8 @@ namespace GameServerScript.AI.Messions
 
 		public override int UpdateUIData()
 		{
-			return base.Game.TotalKillCount;
+			base.UpdateUIData();
+			return this.kill;
 		}
 
 		public override void OnPrepareGameOver()
@@ -184,30 +126,12 @@ namespace GameServerScript.AI.Messions
 		public override void OnGameOver()
 		{
 			base.OnGameOver();
-			if (base.Game.GetLivedLivings().Count == 0)
+			if (!this.boss.IsLiving && !this.boss2.IsLiving)
 			{
 				base.Game.IsWin = true;
+				return;
 			}
-			else
-			{
-				base.Game.IsWin = false;
-			}
-			List<LoadingFileInfo> list = new List<LoadingFileInfo>();
-			list.Add(new LoadingFileInfo(2, "image/map/2/show2", ""));
-			base.Game.SendLoadResource(list);
-		}
-
-		protected int GetNpcCountByID(int Id)
-		{
-			int num = 0;
-			foreach (SimpleNpc current in this.someNpc)
-			{
-				if (current.NpcInfo.ID == Id)
-				{
-					num++;
-				}
-			}
-			return num;
+			base.Game.IsWin = false;
 		}
 	}
 }

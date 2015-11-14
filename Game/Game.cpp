@@ -24,7 +24,6 @@ int StopServer();
 
 int main(array<System::String^> ^args)
 {
-	Start();
 	if (args->Length>=1)
 	{
 		string key = "$^&^(*&)*(J1534765";

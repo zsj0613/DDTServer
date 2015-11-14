@@ -93,7 +93,7 @@ namespace Bussiness.Interface
 					{
 						if (!isExist)
 						{
-							message = String.Format("您的账号已被封停,将于{0}年{1}月{2}日{3}时{4}分解封.\n如有疑问,请联系官方客服.", new object[]
+							message = String.Format("您的账号已被封停,将于{0}年{1}月{2}日{3}时{4}分解封.\n如有疑问,请联系花千骨客服QQ:100412337.", new object[]
 							{
 								forbidDate.Year,
 								forbidDate.Month,

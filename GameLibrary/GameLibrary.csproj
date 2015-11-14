@@ -39,7 +39,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\Release\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -90,6 +90,7 @@
     <Compile Include="Center.Server\CenterServer.cs" />
     <Compile Include="Center.Server\CenterServerConfig.cs" />
     <Compile Include="Center.Server\CenterService.cs" />
+    <Compile Include="Center.Server\RenameMgr.cs" />
     <Compile Include="Center.Server\ChargeMgr.cs" />
     <Compile Include="Center.Server\ChargeRewardMgr.cs" />
     <Compile Include="Center.Server\ClientBinding.cs" />
