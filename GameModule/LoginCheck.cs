@@ -17,6 +17,8 @@ using System.Security.Cryptography;
 using Lsj.Util.Net.Web.Modules;
 using Lsj.Util.Net.Web.Response;
 using Web.Server.Managers;
+using Lsj.Util.Net.Web.Protocol;
+using Lsj.Util.Net.Web.Request;
 
 namespace Web.Server.Module
 {
@@ -159,7 +161,7 @@ namespace Web.Server.Module
             LoginCheck.log.Info("Load Game Module");
             Server.AddModule(typeof(LoginCheck));
         }
-        public static bool CanProcess(Lsj.Util.Net.Web.HttpRequest request)
+        public bool CanProcess(HttpRequest request,ref int code)
         {
             bool result = false;
             if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)

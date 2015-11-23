@@ -2,6 +2,8 @@
 using Lsj.Util;
 using Lsj.Util.Net.Web;
 using Lsj.Util.Net.Web.Modules;
+using Lsj.Util.Net.Web.Protocol;
+using Lsj.Util.Net.Web.Request;
 using Lsj.Util.Net.Web.Response;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ namespace Web.Server.Module
         string password;
         public HttpResponse Process(HttpRequest request)
         {
-            var response = new HttpResponse();
+            var response = new HttpResponse(request);
             response.ContentType = "text/plain; charset=utf-8";
             username = request.Cookies["username"].content;
             password = request.Cookies["password"].content;
@@ -293,7 +295,7 @@ namespace Web.Server.Module
             }
         }
         
-        public static bool CanProcess(HttpRequest request)
+        public bool CanProcess(HttpRequest request,ref int code)
         {
             bool result = false;
             if (request.Method == eHttpMethod.GET|| request.Method == eHttpMethod.POST)

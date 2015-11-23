@@ -10,6 +10,8 @@ using Game.Base.Managers;
 using Web.Server;
 using System.Threading;
 using Lsj.Util;
+using Lsj.Util.Net.Web.Website;
+using Lsj.Util.Net.Web.Modules;
 
 namespace Web.Server
 {
@@ -18,14 +20,18 @@ namespace Web.Server
         public static string ModulePath = Static.CurrentPath() + @"web\Modules\";
         public static string WebPath = Static.CurrentPath() + @"web\";
         private static Server instance;
-        public static void AddModule(Type type)
+        private static HttpWebsite website;
+        public static void AddModule(IModule module)
         {
-            instance.InsertModule(type);
+            website.modules.Add(module);
         }
 
         public Server(IPAddress ip,int port) : base(ip,port)
         {
             instance = this;
+            var website = new HttpWebsite();
+            Server.website = website;
+            instance.AddWebsite(website);
         }
         
 

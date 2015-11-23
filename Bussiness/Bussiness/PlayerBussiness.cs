@@ -923,6 +923,7 @@ namespace Bussiness
 
             player.VipLevel = (int)reader["VIPLevel"];
             player.InviteID = (int)reader["InviteID"];
+            player.VIPGiftLevel = (int)reader["VIPGiftLevel"];
 
             if ((DateTime)reader["LastFindDate"] != DateTime.Today.Date)
 			{

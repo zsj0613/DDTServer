@@ -14,6 +14,8 @@ using NVelocityTemplateEngine;
 using System.Collections;
 using Lsj.Util.Net.Web.Modules;
 using Lsj.Util.Net.Web.Response;
+using Lsj.Util.Net.Web.Protocol;
+using Lsj.Util.Net.Web.Request;
 
 namespace Web.Server.Module
 {
@@ -111,7 +113,7 @@ namespace Web.Server.Module
             Charge.log.Info("Load Charge Module");
             Server.AddModule(typeof(Charge));            
         }
-        public static bool CanProcess(HttpRequest request)
+        public bool CanProcess(HttpRequest request,ref int code)
         {
             bool result = false;
             if (request.Method == eHttpMethod.GET || request.Method == eHttpMethod.POST)
