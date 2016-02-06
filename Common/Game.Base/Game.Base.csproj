@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{CECA9C66-CA0B-4565-8CFF-5343F6878BBD}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Game.Base</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>lsj.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="zlib.net">
+      <HintPath>..\..\zlib.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Game.Base.Commands\BuildScriptCommand.cs" />
+    <Compile Include="Game.Base.Commands\CommandMgrSetupCommand.cs" />
+    <Compile Include="Game.Base.Commands\ListAllCommand.cs" />
+    <Compile Include="Game.Base.Commands\ScriptManagerCommand.cs" />
+    <Compile Include="Game.Base.Config\BaseAppConfig.cs" />
+    <Compile Include="Game.Base.Config\Config.cs" />
+    <Compile Include="Game.Base.Config\ConfigPropertyAttribute.cs" />
+    <Compile Include="Game.Base.Events\GameEventMgr.cs" />
+    <Compile Include="Game.Base.Events\GameServerEvent.cs" />
+    <Compile Include="Game.Base.Events\GameServerStartedEventAttribute.cs" />
+    <Compile Include="Game.Base.Events\GameServerStoppedEventAttribute.cs" />
+    <Compile Include="Game.Base.Events\RoadEvent.cs" />
+    <Compile Include="Game.Base.Events\RoadEventHandler.cs" />
+    <Compile Include="Game.Base.Events\RoadEventHandlerCollection.cs" />
+    <Compile Include="Game.Base.Events\ScriptEvent.cs" />
+    <Compile Include="Game.Base.Events\ScriptLoadedEventAttribute.cs" />
+    <Compile Include="Game.Base.Events\ScriptUnloadedEventAttribute.cs" />
+    <Compile Include="Game.Base.Managers\RunMgr.cs" />
+    <Compile Include="Game.Base.Packets\eMessageType.cs" />
+    <Compile Include="Game.Base.Packets\EmptyAsyncResult.cs" />
+    <Compile Include="Game.Base.Packets\FSM.cs" />
+    <Compile Include="Game.Base.Packets\GSPacketIn.cs" />
+    <Compile Include="Game.Base.Packets\IStreamProcessor.cs" />
+    <Compile Include="Game.Base.Packets\StreamProcessor.cs" />
+    <Compile Include="Game.Base\AbstractCommandHandler.cs" />
+    <Compile Include="Game.Base\BaseClient.cs" />
+    <Compile Include="Game.Base\BaseConnector.cs" />
+    <Compile Include="Game.Base\BaseServer.cs" />
+    <Compile Include="Game.Base\ClientEventHandle.cs" />
+    <Compile Include="Game.Base\CmdAttribute.cs" />
+    <Compile Include="Game.Base\CommandMgr.cs" />
+    <Compile Include="Game.Base\ConsoleClient.cs" />
+    <Compile Include="Game.Base\ePrivLevel.cs" />
+    <Compile Include="Game.Base\GameCommand.cs" />
+    <Compile Include="Game.Base\ICommandHandler.cs" />
+    <Compile Include="Game.Base\LogClient.cs" />
+    <Compile Include="Game.Base\Marshal.cs" />
+    <Compile Include="Game.Base\PacketIn.cs" />
+    <Compile Include="Game.Base\ResourceUtil.cs" />
+    <Compile Include="Game.Base\Statistics.cs" />
+    <Compile Include="Game.Base\ThreadHelper.cs" />
+    <Compile Include="Game.Base\WeakMulticastDelegate.cs" />
+    <Compile Include="Game.Base\WeakRef.cs" />
+    <Compile Include="Game.Base.Managers\ScriptMgr.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lsj.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

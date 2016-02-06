@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1DDBDF6-B2D5-4875-94FC-7138C39424DA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fighting.Server</RootNamespace>
+    <AssemblyName>Fighting.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>lsj.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fighting.Server.Commands.admin\ClientMgrCommand.cs" />
+    <Compile Include="Fighting.Server.Commands.admin\ConsoleStartCommand.cs" />
+    <Compile Include="Fighting.Server.Commands.admin\ListObjectsCommand.cs" />
+    <Compile Include="Fighting.Server.Commands.admin\ReloadCommand.cs" />
+    <Compile Include="Fighting.Server.Commands.admin\RoomMgrCommand.cs" />
+    <Compile Include="Fighting.Server.Commands.admin\StackTraceCommand.cs" />
+    <Compile Include="Fighting.Server.GameObjects\ProxyPlayer.cs" />
+    <Compile Include="Fighting.Server.GameObjects\ProxyPlayerInfo.cs" />
+    <Compile Include="Fighting.Server.Games\BattleGame.cs" />
+    <Compile Include="Fighting.Server.Games\GameMgr.cs" />
+    <Compile Include="Fighting.Server.Guild\GuildMgr.cs" />
+    <Compile Include="Fighting.Server.Managers\RateMgr.cs" />
+    <Compile Include="Fighting.Server.Rooms\AddRoomAction.cs" />
+    <Compile Include="Fighting.Server.Rooms\IAction.cs" />
+    <Compile Include="Fighting.Server.Rooms\ProxyRoom.cs" />
+    <Compile Include="Fighting.Server.Rooms\ProxyRoomMgr.cs" />
+    <Compile Include="Fighting.Server.Rooms\RandomNPCAction.cs" />
+    <Compile Include="Fighting.Server.Rooms\RemoveRoomAction.cs" />
+    <Compile Include="Fighting.Server.Servers\ServerMgr.cs" />
+    <Compile Include="Fighting.Server\FightServer.cs" />
+    <Compile Include="Fighting.Server\FightServerConfig.cs" />
+    <Compile Include="Fighting.Server\ServerClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fighting.Server\Config.Fightlogconfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Bussiness\Bussiness.csproj">
+      <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Game.Base\Game.Base.csproj">
+      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
+      <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Game.Logic\Game.Logic.csproj">
+      <Project>{0b216b04-55c0-412e-8987-fa8fbd525110}</Project>
+      <Name>Game.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lsj.pfx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

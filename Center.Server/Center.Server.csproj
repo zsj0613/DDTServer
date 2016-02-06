@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5EA5980B-80C2-4BFC-A014-AD9B63199BDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Center.Server</RootNamespace>
+    <AssemblyName>Center.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>lsj.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Center.Server.Commands\DataTimeCommand.cs" />
+    <Compile Include="Center.Server.Commands\LoginPlayerCommand.cs" />
+    <Compile Include="Center.Server.Commands\ReloadComand.cs" />
+    <Compile Include="Center.Server.Commands\ServerCmdCommand.cs" />
+    <Compile Include="Center.Server.Commands\ShutDownCommand.cs" />
+    <Compile Include="Center.Server.Managers\MacroDropMgr.cs" />
+    <Compile Include="Center.Server.Statics\LogMgr.cs" />
+    <Compile Include="Center.Server\AreaBigBugleMgr.cs" />
+    <Compile Include="Center.Server\CenterServer.cs" />
+    <Compile Include="Center.Server\CenterServerConfig.cs" />
+    <Compile Include="Center.Server\CenterService.cs" />
+    <Compile Include="Center.Server\ChargeMgr.cs" />
+    <Compile Include="Center.Server\ChargeRewardMgr.cs" />
+    <Compile Include="Center.Server\ClientBinding.cs" />
+    <Compile Include="Center.Server\ConsortiaLevelMgr.cs" />
+    <Compile Include="Center.Server\ConsortiaMrg.cs" />
+    <Compile Include="Center.Server\eMailRespose.cs" />
+    <Compile Include="Center.Server\eMessageType.cs" />
+    <Compile Include="Center.Server\ePackageType.cs" />
+    <Compile Include="Center.Server\ePlayerState.cs" />
+    <Compile Include="Center.Server\ICenterService.cs" />
+    <Compile Include="Center.Server\LoginMgr.cs" />
+    <Compile Include="Center.Server\Player.cs" />
+    <Compile Include="Center.Server\RenameMgr.cs" />
+    <Compile Include="Center.Server\ServerClient.cs" />
+    <Compile Include="Center.Server\ServerData.cs" />
+    <Compile Include="Center.Server\ServerMgr.cs" />
+    <Compile Include="Center.Server\SystemConsortiaMrg.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Bussiness\Bussiness.csproj">
+      <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Game.Base\Game.Base.csproj">
+      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
+      <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Game.Language\Game.Language.csproj">
+      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
+      <Name>Game.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lsj.pfx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

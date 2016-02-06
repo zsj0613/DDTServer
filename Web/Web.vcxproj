@@ -78,14 +78,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\Release</OutDir>
+    <OutDir>..\..\..\Server</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\Release</OutDir>
+    <OutDir>..\..\..\Server</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -143,12 +143,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Lsj.Util">
-      <HintPath>..\..\..\lsjutil\Lsj.Util.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -174,24 +168,21 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game.Base\Game.Base.csproj">
-      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Game.Language\Game.Language.csproj">
-      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
-      <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Web.Server\Web.Server.csproj">
-      <Project>{510b8eb1-fade-4e77-9eb6-c729ec9886cd}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config">
       <DeploymentContent>true</DeploymentContent>
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Game.Base\Game.Base.csproj">
+      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Server\Web.Server.csproj">
+      <Project>{510b8eb1-fade-4e77-9eb6-c729ec9886cd}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

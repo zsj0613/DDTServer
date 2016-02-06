@@ -16,7 +16,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"LSJ")];
 [assembly:AssemblyProductAttribute(L"DDTank Game Server")];
-[assembly:AssemblyCopyrightAttribute(L"Copyright (c) LSJ 2015 - ")];
+[assembly:AssemblyCopyrightAttribute(L"Copyright (c) LSJ 2016 - ")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
 
@@ -31,7 +31,7 @@ using namespace System::Security::Permissions;
 // 您可以指定所有值，也可以使用“修订号”和“生成号”的默认值，
 // 方法是按如下所示使用“*”: :
 
-[assembly:AssemblyVersionAttribute("1.0.*")];
+[assembly:AssemblyVersionAttribute("2.0.0.0")];
 
 [assembly:ComVisible(false)];
 

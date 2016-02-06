@@ -10,17 +10,17 @@ using System.Net;
 using Lsj.Util;
 using System.Collections;
 using Game.Base.Events;
-using Lsj.Util.Net.Web.Modules;
-using Lsj.Util.Log;
+using Game.Base.Config;
+using Lsj.Util.Logs;
 
 namespace Web.Server
 {
     public class WebServer
     {
-        public static Log log = new Log(new LogConfig { FilePath= "log/web/"});
+        public static LogProvider log = LogProvider.Default;
         public static readonly string Edition = "10000";
         private static WebServer m_instance;
-        private Server server;
+       // private Server server;
         private CenterServerConnector m_centerServer;
         public bool IsOpen = false;
         public RunMgr runmgr
@@ -37,6 +37,11 @@ namespace Web.Server
             {
                 return WebServer.m_instance;
             }
+        }
+        public Config config
+        {
+            get;
+            private set;
         }
 
         public static void CreateInstance()
@@ -56,6 +61,8 @@ namespace Web.Server
             bool result = true;
             try
             {
+                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/web/" });
+                config = new Config();
                 AllocatePacketBuffers();
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
@@ -68,7 +75,7 @@ namespace Web.Server
                     return result;
                 }
                 WebServer.log.Info("Succeed to connect to SQL!");
-                server = new Server(IPAddress.Parse(AppConfig.AppSettings["IP"]), AppConfig.AppSettings["Port"].ConvertToInt(88));
+              //  server = new Server(IPAddress.Parse(config.WebIP), config.WebPort,  "./WebPath/");
                 if (!StartScriptComponents())
                 {
                     result = false;
@@ -85,13 +92,22 @@ namespace Web.Server
                     this.IsOpen = true;
                     WebServer.log.Info("Succeed to Connect to Center Server!");
                 }
+                if (!WCFService.Start())
+                {
+                    WebServer.log.Error("Fail to Start WCFService");
+                }
+                else
+                {
+                    this.IsOpen = true;
+                    WebServer.log.Info("Succeed to Start WCFService!");
+                }
 
                 this.m_runmgr = new RunMgr();
                 GameEventMgr.Notify(ScriptEvent.Loaded);
-                
-                FileModule.Path = @"web\";
-                server.Start();
-                WebServer.log.Warn("Web Service Started!");
+
+               
+                //server.Start();
+                WebServer.log.Warn("WebHelper Service Started!");
 
 
 
@@ -207,7 +223,7 @@ namespace Web.Server
             {
                 if(m_centerServer!=null&&m_centerServer.IsConnected)
                 m_centerServer.Disconnect();
-                server.Stop();
+               // server.Stop();
             }
             catch
             {

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{15D431FD-0DF9-4876-973E-36D0C0BE6886}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChargeModule</RootNamespace>
+    <AssemblyName>ChargeModule</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lsj.Util">
+      <HintPath>..\..\..\lsjutil\Lsj.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsj.Util.Net.Web">
+      <HintPath>..\..\..\lsjutil\Lsj.Util.Net.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Charge.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bussiness\Bussiness.csproj">
+      <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game.Base\Game.Base.csproj">
+      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
+      <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj">
+      <Project>{37ce504d-055a-4c15-9c08-a3f477d1c44b}</Project>
+      <Name>NVelocityTemplateEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{C4267EBB-742F-4698-833E-4B743CAAD015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Server\Web.Server.csproj">
+      <Project>{510b8eb1-fade-4e77-9eb6-c729ec9886cd}</Project>
+      <Name>Web.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay1.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PayIndex.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay14.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay15.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay16.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay24.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay3.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay4.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay5.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay6.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay9.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay8.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay22.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay10.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay13.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay18.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay19.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay20.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay23.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay17.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay11.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay7.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pay12.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pay2.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy $(TargetFileName) $(SolutionDir)Release\Web\Modules
+Copy ChargeModule.pdb $(SolutionDir)Release\Web\Modules</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

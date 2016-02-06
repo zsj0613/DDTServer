@@ -78,14 +78,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\Release</OutDir>
+    <OutDir>..\..\Server</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\Release</OutDir>
+    <OutDir>..\..\Server</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -168,17 +168,17 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game.Base\Game.Base.csproj">
-      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\GameLibrary\GameLibrary.csproj">
-      <Project>{aaeda28c-53da-4df9-852a-ab8af9e86bd7}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config">
       <DeploymentContent>true</DeploymentContent>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Game.Base\Game.Base.csproj">
+      <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Game.Server\Game.Server.csproj">
+      <Project>{c4bffbc1-d64e-42d8-a848-bda617a8d413}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

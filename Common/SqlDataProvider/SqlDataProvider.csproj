@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{C4267EBB-742F-4698-833E-4B743CAAD015}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SqlDataProvider</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>lsj.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="DAL\AsyncComandExecuteHanle.cs" />
+    <Compile Include="DAL\SqlHelper.cs" />
+    <Compile Include="DAL\SqlHelperParameterCache.cs" />
+    <Compile Include="SqlDataProvider.BaseClass\ApplicationLog.cs" />
+    <Compile Include="SqlDataProvider.BaseClass\Sql_DbObject.cs" />
+    <Compile Include="SqlDataProvider.Data\AASInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\AchievementConditionInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\AchievementDataInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\AchievementInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\AchievementRewardInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ActiveAwardInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ActiveConditionInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ActiveInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\AuctionInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\BallInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\BestEquipInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\BigBugleInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\BoxInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\BufferInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\CategoryInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ChargeInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ChargeRecordInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaAllyInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaApplyAllyInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaApplyUserInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaDutyInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaEquipControlInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaEventInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaInviteUserInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaLevelInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ConsortiaUserInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\DailyAwardInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\DataObject.cs" />
+    <Compile Include="SqlDataProvider.Data\DropCondiction.cs" />
+    <Compile Include="SqlDataProvider.Data\DropInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\DropItem.cs" />
+    <Compile Include="SqlDataProvider.Data\eBageType.cs" />
+    <Compile Include="SqlDataProvider.Data\eItemAddType.cs" />
+    <Compile Include="SqlDataProvider.Data\eItemRemoveType.cs" />
+    <Compile Include="SqlDataProvider.Data\FightRateInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\FriendInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\FusionInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ItemBoxInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ItemInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ItemJoinShopInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ItemRecordTypeInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ItemTemplateInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\LogFight.cs" />
+    <Compile Include="SqlDataProvider.Data\LogItem.cs" />
+    <Compile Include="SqlDataProvider.Data\LogMoney.cs" />
+    <Compile Include="SqlDataProvider.Data\LogServer.cs" />
+    <Compile Include="SqlDataProvider.Data\MailInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\MapGoodsInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\MapInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\MarryApplyInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\MarryInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\MarryProp.cs" />
+    <Compile Include="SqlDataProvider.Data\MarryRoomInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\MissionInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\NpcInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\PlayerInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\PropInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\PveInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\QuestAwardInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\QuestConditionInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\QuestDataInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\QuestInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\RateInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\RebateChargeInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\RebateItemInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\RecordInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\RefineryInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ServerInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ServerMapInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ServerProperty.cs" />
+    <Compile Include="SqlDataProvider.Data\ShopInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ShopItemInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\SpaRoomInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\StrengthenGoodsInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\StrengthenInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\UserInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\UsersRecordInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lsj.pfx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

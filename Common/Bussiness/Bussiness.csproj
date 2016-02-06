@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{AC36126F-BF61-4775-9FF6-C411C9DC902B}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Bussiness</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>lsj.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Bussiness.CenterService\CenterServiceClient.cs" />
+    <Compile Include="Bussiness.CenterService\ICenterService.cs" />
+    <Compile Include="Bussiness.CenterService\ICenterServiceChannel.cs" />
+    <Compile Include="Bussiness.CenterService\ServerData.cs" />
+    <Compile Include="Bussiness.Interface\BaseInterface.cs" />
+    <Compile Include="Bussiness.Interface\InterfaceType.cs" />
+    <Compile Include="Bussiness.Interface\LsjInterface.cs" />
+    <Compile Include="Bussiness.Managers\AchievementMgr.cs" />
+    <Compile Include="Bussiness.Managers\ActiveMgr.cs" />
+    <Compile Include="Bussiness.Managers\DropMgr.cs" />
+    <Compile Include="Bussiness.Managers\ItemBoxMgr.cs" />
+    <Compile Include="Bussiness.Managers\ItemMgr.cs" />
+    <Compile Include="Bussiness.Managers\QuestMgr.cs" />
+    <Compile Include="Bussiness.Managers\ShopMgr.cs" />
+    <Compile Include="Bussiness.Protocol\eDropType.cs" />
+    <Compile Include="Bussiness.Protocol\eReloadType.cs" />
+    <Compile Include="Bussiness.WebLogin\ChenckValidateRequest.cs" />
+    <Compile Include="Bussiness.WebLogin\ChenckValidateRequest1.cs" />
+    <Compile Include="Bussiness.WebLogin\ChenckValidateResponse.cs" />
+    <Compile Include="Bussiness.WebLogin\ChenckValidateResponse1.cs" />
+    <Compile Include="Bussiness.WebLogin\Get_UserSexRequest.cs" />
+    <Compile Include="Bussiness.WebLogin\Get_UserSexRequest1.cs" />
+    <Compile Include="Bussiness.WebLogin\Get_UserSexRequest2.cs" />
+    <Compile Include="Bussiness.WebLogin\Get_UserSexResponse.cs" />
+    <Compile Include="Bussiness.WebLogin\Get_UserSexResponse1.cs" />
+    <Compile Include="Bussiness.WebLogin\Get_UserSexResponse2.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortHttpGet.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortHttpGetChannel.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortHttpGetClient.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortHttpPost.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortHttpPostChannel.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortHttpPostClient.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortSoap.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortSoapChannel.cs" />
+    <Compile Include="Bussiness.WebLogin\PassPortSoapClient.cs" />
+    <Compile Include="Bussiness\ActiveBussiness.cs" />
+    <Compile Include="Bussiness\BaseBussiness.cs" />
+    <Compile Include="Bussiness\CheckCode.cs" />
+    <Compile Include="Bussiness\ConsortiaBussiness.cs" />
+    <Compile Include="Bussiness\CookieInfoBussiness.cs" />
+    <Compile Include="Bussiness\CountBussiness.cs" />
+    <Compile Include="Bussiness\IniReader.cs" />
+    <Compile Include="Bussiness\ItemRecordBussiness.cs" />
+    <Compile Include="Bussiness\LanguageMgr.cs" />
+    <Compile Include="Bussiness\ManageBussiness.cs" />
+    <Compile Include="Bussiness\MapBussiness.cs" />
+    <Compile Include="Bussiness\MemberShipbussiness.cs" />
+    <Compile Include="Bussiness\OrderBussiness.cs" />
+    <Compile Include="Bussiness\PlayerBussiness.cs" />
+    <Compile Include="Bussiness\ProduceBussiness.cs" />
+    <Compile Include="Bussiness\PveBussiness.cs" />
+    <Compile Include="Bussiness\ServiceBussiness.cs" />
+    <Compile Include="Bussiness\ThreadSafeRandom.cs" />
+    <Compile Include="Bussiness\UserInfoBussiness.cs" />
+    <Compile Include="Bussiness\XmlExtends.cs" />
+    <Compile Include="Game.Server.Managers\ConsortiaLevelMgr.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game.Language\Game.Language.csproj">
+      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
+      <Name>Game.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{c4267ebb-742f-4698-833e-4b743caad015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lsj.pfx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

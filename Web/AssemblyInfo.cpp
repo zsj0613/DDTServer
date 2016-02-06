@@ -11,12 +11,12 @@ using namespace System::Security::Permissions;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 //
-[assembly:AssemblyTitleAttribute(L"DDTank Web Server")];
-[assembly:AssemblyDescriptionAttribute(L"DDTank Web Server")];
+[assembly:AssemblyTitleAttribute(L"DDTank WebHelper Server")];
+[assembly:AssemblyDescriptionAttribute(L"DDTank WebHelper Server")];
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"LSJ")];
-[assembly:AssemblyProductAttribute(L"DDTank Web Server")];
-[assembly:AssemblyCopyrightAttribute(L"Copyright (c) LSJ 2015 - ")];
+[assembly:AssemblyProductAttribute(L"DDTank WebHelper Server")];
+[assembly:AssemblyCopyrightAttribute(L"Copyright (c) LSJ 2016 - ")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
 
@@ -31,7 +31,7 @@ using namespace System::Security::Permissions;
 // 您可以指定所有值，也可以使用“修订号”和“生成号”的默认值，
 // 方法是按如下所示使用“*”: :
 
-[assembly:AssemblyVersionAttribute("1.0.*")];
+[assembly:AssemblyVersionAttribute("2.0.0.0")];
 
 [assembly:ComVisible(false)];
 
