@@ -38,11 +38,7 @@ namespace Web.Server
                 return WebServer.m_instance;
             }
         }
-        public Config config
-        {
-            get;
-            private set;
-        }
+
 
         public static void CreateInstance()
         {
@@ -62,7 +58,6 @@ namespace Web.Server
             try
             {
                 LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/web/" });
-                config = new Config();
                 AllocatePacketBuffers();
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
@@ -76,13 +71,7 @@ namespace Web.Server
                 }
                 WebServer.log.Info("Succeed to connect to SQL!");
               //  server = new Server(IPAddress.Parse(config.WebIP), config.WebPort,  "./WebPath/");
-                if (!StartScriptComponents())
-                {
-                    result = false;
-                    WebServer.log.Error("Fail to Load Modules!");
-                    return result;
-                }
-                WebServer.log.Info("Succeed to Load Modules!");
+        
                 if (!this.ConnecteToCenterServer())
                 {                    
                     WebServer.log.Error("Fail to Connect to Center Server");

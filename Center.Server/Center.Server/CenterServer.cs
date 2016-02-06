@@ -11,47 +11,52 @@ using System.Reflection;
 using System.Threading;
 using SqlDataProvider.BaseClass;
 using Lsj.Util.Logs;
+using Lsj.Util.Config;
+using Lsj.Util;
 
 namespace Center.Server
 {
-	public class CenterServer : BaseServer
-	{
+    public class CenterServer : BaseServer
+    {
         public static LogProvider log = LogProvider.Default;
-		public static readonly string Edition = "10000";
-		private CenterServerConfig m_config;
-		private Timer m_loginLapseTimer;
-		private Timer m_saveDBTimer;
-		private Timer m_scanAuction;
-		private Timer m_scanMail;
-		private Timer m_scanConsortia;
+        public static readonly string Edition = "10000";
+        private CenterServerConfig m_config;
+        private Timer m_loginLapseTimer;
+        private Timer m_saveDBTimer;
+        private Timer m_scanAuction;
+        private Timer m_scanMail;
+        private Timer m_scanConsortia;
         private Timer m_ChargeTimer;
-		private static CenterServer m_instance;
+        private static CenterServer m_instance;
         private Timer m_RenameCheckTimer;
+        private CrossServerConnector connector;
 
         public CenterServerConfig Config
-		{
-			get
-			{
-				return this.m_config;
-			}
-		}
-		public static CenterServer Instance
-		{
-			get
-			{
-				return CenterServer.m_instance;
-			}
-		}
-		private CenterServer(CenterServerConfig config)
-		{
-			this.m_config = config;
-		}
-		protected override BaseClient GetNewClient()
-		{
-			return new ServerClient(this);
-		}
-      public override bool Start()
-      {
+        {
+            get
+            {
+                return this.m_config;
+            }
+        }
+        public static CenterServer Instance
+        {
+            get
+            {
+                return CenterServer.m_instance;
+            }
+        }
+
+
+        private CenterServer(CenterServerConfig config)
+        {
+            this.m_config = config;
+        }
+        protected override BaseClient GetNewClient()
+        {
+            return new ServerClient(this);
+        }
+        public override bool Start()
+        {
             bool result = true;
             try
             {
@@ -73,12 +78,12 @@ namespace Center.Server
 
 
 
-              //  if (!this.InitComponent(GameProperties.EDITION == CenterServer.Edition, "检查服务端版本:" + CenterServer.Edition))
-              //  {
-              //      result = false;
-              //      CenterServer.log.Error("检查服务端版本错误，请检查!");
-               //     return result;
-               // }
+                //  if (!this.InitComponent(GameProperties.EDITION == CenterServer.Edition, "检查服务端版本:" + CenterServer.Edition))
+                //  {
+                //      result = false;
+                //      CenterServer.log.Error("检查服务端版本错误，请检查!");
+                //     return result;
+                // }
 
                 if (!Sql_DbObject.TryConnection())
                 {
@@ -173,6 +178,16 @@ namespace Center.Server
                 }
                 CenterServer.log.Info("初始化宏观掉落成功!");
 
+                if (!this.ConnectToCrossServer())
+                {
+
+                    result = false;
+                    CenterServer.log.Error("Failed to Connect to CrossServer");
+                    return result;
+                }
+
+                CenterServer.log.Info("Succeed to Connect to CrossServer");
+
                 if (!base.Start())
                 {
 
@@ -193,18 +208,32 @@ namespace Center.Server
             return result;
         }
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-		{
-			CenterServer.log.Error("Unhandled exception!\n" + e.ExceptionObject.ToString());
-		}
-		protected bool InitComponent(bool componentInitState, string text)
-		{
-			CenterServer.log.Debug(text + ": " + componentInitState);
-			if (!componentInitState)
-			{
-				this.Stop();
-			}
-			return componentInitState;
-		}
+        {
+            CenterServer.log.Error("Unhandled exception!\n" + e.ExceptionObject.ToString());
+        }
+        protected bool InitComponent(bool componentInitState, string text)
+        {
+            CenterServer.log.Debug(text + ": " + componentInitState);
+            if (!componentInitState)
+            {
+                this.Stop();
+            }
+            return componentInitState;
+        }
+        private bool ConnectToCrossServer()
+        {
+            var result = false;
+            try
+            {
+                connector = new CrossServerConnector(AppConfig.AppSettings["CrossServerIP"], AppConfig.AppSettings["CrossServerPort"].ConvertToInt(30000), AppConfig.AppSettings["CrossServerKey"], new byte[2048], new byte[2048]);
+                result = connector.Connect();
+            }
+            catch(Exception e)
+            {
+                log.Error(e);
+            }
+            return result;
+        }
 
         private bool InitChargeTimer()
         {
@@ -230,81 +259,81 @@ namespace Center.Server
         }
 
         public bool InitGlobalTimers()
-		{
-			int interval = this.m_config.SaveIntervalInterval * 60 * 1000;
-			if (this.m_saveDBTimer == null)
-			{
-				this.m_saveDBTimer = new Timer(new TimerCallback(this.SaveTimerProc), null, interval, interval);
-			}
-			else
-			{
-				this.m_saveDBTimer.Change(interval, interval);
-			}
-			interval = 60000;
-			if (this.m_loginLapseTimer == null)
-			{
-				this.m_loginLapseTimer = new Timer(new TimerCallback(this.LoginLapseTimerProc), null, interval, interval);
-			}
-			else
-			{
-				this.m_loginLapseTimer.Change(interval, interval);
-			}
-			interval = this.m_config.ScanAuctionInterval * 60 * 1000;
-			if (this.m_scanAuction == null)
-			{
-				this.m_scanAuction = new Timer(new TimerCallback(this.ScanAuctionProc), null, interval, interval);
-			}
-			else
-			{
-				this.m_scanAuction.Change(interval, interval);
-			}
-			interval = this.m_config.ScanMailInterval * 60 * 1000;
-			if (this.m_scanMail == null)
-			{
-				this.m_scanMail = new Timer(new TimerCallback(this.ScanMailProc), null, interval, interval);
-			}
-			else
-			{
-				this.m_scanMail.Change(interval, interval);
-			}
-			interval = this.m_config.ScanConsortiaInterval * 60 * 1000;
-			if (this.m_scanConsortia == null)
-			{
-				this.m_scanConsortia = new Timer(new TimerCallback(this.ScanConsortiaProc), null, interval, interval);
-			}
-			else
-			{
-				this.m_scanConsortia.Change(interval, interval);
-			}
-			return true;
-		}
-		public void DisposeGlobalTimers()
-		{
-			if (this.m_saveDBTimer != null)
-			{
-				this.m_saveDBTimer.Dispose();
-			}
-			if (this.m_loginLapseTimer != null)
-			{
-				this.m_loginLapseTimer.Dispose();
-			}
-			if (this.m_scanAuction != null)
-			{
-				this.m_scanAuction.Dispose();
-			}
-			if (this.m_scanMail != null)
-			{
-				this.m_scanMail.Dispose();
-			}
-			if (this.m_scanConsortia != null)
-			{
-				this.m_scanConsortia.Dispose();
-			}
+        {
+            int interval = this.m_config.SaveIntervalInterval * 60 * 1000;
+            if (this.m_saveDBTimer == null)
+            {
+                this.m_saveDBTimer = new Timer(new TimerCallback(this.SaveTimerProc), null, interval, interval);
+            }
+            else
+            {
+                this.m_saveDBTimer.Change(interval, interval);
+            }
+            interval = 60000;
+            if (this.m_loginLapseTimer == null)
+            {
+                this.m_loginLapseTimer = new Timer(new TimerCallback(this.LoginLapseTimerProc), null, interval, interval);
+            }
+            else
+            {
+                this.m_loginLapseTimer.Change(interval, interval);
+            }
+            interval = this.m_config.ScanAuctionInterval * 60 * 1000;
+            if (this.m_scanAuction == null)
+            {
+                this.m_scanAuction = new Timer(new TimerCallback(this.ScanAuctionProc), null, interval, interval);
+            }
+            else
+            {
+                this.m_scanAuction.Change(interval, interval);
+            }
+            interval = this.m_config.ScanMailInterval * 60 * 1000;
+            if (this.m_scanMail == null)
+            {
+                this.m_scanMail = new Timer(new TimerCallback(this.ScanMailProc), null, interval, interval);
+            }
+            else
+            {
+                this.m_scanMail.Change(interval, interval);
+            }
+            interval = this.m_config.ScanConsortiaInterval * 60 * 1000;
+            if (this.m_scanConsortia == null)
+            {
+                this.m_scanConsortia = new Timer(new TimerCallback(this.ScanConsortiaProc), null, interval, interval);
+            }
+            else
+            {
+                this.m_scanConsortia.Change(interval, interval);
+            }
+            return true;
+        }
+        public void DisposeGlobalTimers()
+        {
+            if (this.m_saveDBTimer != null)
+            {
+                this.m_saveDBTimer.Dispose();
+            }
+            if (this.m_loginLapseTimer != null)
+            {
+                this.m_loginLapseTimer.Dispose();
+            }
+            if (this.m_scanAuction != null)
+            {
+                this.m_scanAuction.Dispose();
+            }
+            if (this.m_scanMail != null)
+            {
+                this.m_scanMail.Dispose();
+            }
+            if (this.m_scanConsortia != null)
+            {
+                this.m_scanConsortia.Dispose();
+            }
             if (this.m_ChargeTimer != null)
             {
                 this.m_ChargeTimer.Dispose();
             }
-		}
+        }
         protected void CheckCharge(object sender)
         {
             CenterServer.log.Debug("检查充值中...");
@@ -312,28 +341,28 @@ namespace Center.Server
             Thread.CurrentThread.Priority = ThreadPriority.Lowest;
             ChargeMgr.Do();
         }
-		protected void SaveTimerProc(object state)
-		{
-			try
-			{
-				int startTick = Environment.TickCount;
-				CenterServer.log.Debug("Saving database...");
-				CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				ThreadPriority oldprio = Thread.CurrentThread.Priority;
-				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-				ServerMgr.SaveToDatabase();
-				Thread.CurrentThread.Priority = oldprio;
-				startTick = Environment.TickCount - startTick;
-				CenterServer.log.Debug("Saving database complete!");
-				CenterServer.log.Debug("Saved all databases " + startTick + "ms");
-			}
-			catch (Exception e)
-			{
-				
-					CenterServer.log.Error("SaveTimerProc", e);
-				
-			}
-		}
+        protected void SaveTimerProc(object state)
+        {
+            try
+            {
+                int startTick = Environment.TickCount;
+                CenterServer.log.Debug("Saving database...");
+                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+                ThreadPriority oldprio = Thread.CurrentThread.Priority;
+                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+                ServerMgr.SaveToDatabase();
+                Thread.CurrentThread.Priority = oldprio;
+                startTick = Environment.TickCount - startTick;
+                CenterServer.log.Debug("Saving database complete!");
+                CenterServer.log.Debug("Saved all databases " + startTick + "ms");
+            }
+            catch (Exception e)
+            {
+
+                CenterServer.log.Error("SaveTimerProc", e);
+
+            }
+        }
         protected void LoginLapseTimerProc(object sender)
         {
             try
@@ -360,291 +389,291 @@ namespace Center.Server
             }
             catch (Exception ex)
             {
-                
-                    CenterServer.log.Error("LoginLapseTimer callback", ex);
-                
+
+                CenterServer.log.Error("LoginLapseTimer callback", ex);
+
             }
         }
-		protected void ScanAuctionProc(object sender)
-		{
-			try
-			{
-				int startTick = Environment.TickCount;
-				CenterServer.log.Debug("Saving Record...");
-				CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				ThreadPriority oldprio = Thread.CurrentThread.Priority;
-				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-				string noticeUserID = "";
-				using (PlayerBussiness db = new PlayerBussiness())
-				{
-					db.ScanAuction(ref noticeUserID);
-				}
-				string[] userIDs = noticeUserID.Split(new char[]
-				{
-					','
-				});
-				string[] array = userIDs;
-				for (int i = 0; i < array.Length; i++)
-				{
-					string s = array[i];
-					if (!string.IsNullOrEmpty(s))
-					{
-						GSPacketIn pkg = new GSPacketIn(117);
-						pkg.WriteInt(int.Parse(s));
-						pkg.WriteInt(1);
-						this.SendToALL(pkg);
-					}
-				}
-				Thread.CurrentThread.Priority = oldprio;
-				startTick = Environment.TickCount - startTick;
-				CenterServer.log.Debug("Scan Auction complete!");
-				if (startTick > 120000)
-				{
-					CenterServer.log.WarnFormat("Scan all Auction  in {0} ms", startTick);
-				}
-			}
-			catch (Exception e)
-			{
-				
-					CenterServer.log.Error("ScanAuctionProc", e);
-				
-			}
-		}
-		protected void ScanMailProc(object sender)
-		{
-			try
-			{
-				int startTick = Environment.TickCount;
-				CenterServer.log.Debug("Saving Record...");
-				CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				ThreadPriority oldprio = Thread.CurrentThread.Priority;
-				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-				string noticeUserID = "";
-				using (PlayerBussiness db = new PlayerBussiness())
-				{
-					db.ScanMail(ref noticeUserID);
-				}
-				string[] userIDs = noticeUserID.Split(new char[]
-				{
-					','
-				});
-				string[] array = userIDs;
-				for (int i = 0; i < array.Length; i++)
-				{
-					string s = array[i];
-					if (!string.IsNullOrEmpty(s))
-					{
-						GSPacketIn pkg = new GSPacketIn(117);
-						pkg.WriteInt(int.Parse(s));
-						pkg.WriteInt(1);
-						this.SendToALL(pkg);
-					}
-				}
-				Thread.CurrentThread.Priority = oldprio;
-				startTick = Environment.TickCount - startTick;
-				CenterServer.log.Debug("Scan Mail complete!");
-				if (startTick > 120000)
-				{
-					CenterServer.log.WarnFormat("Scan all Mail in {0} ms", startTick);
-				}
-			}
-			catch (Exception e)
-			{
-				
-					CenterServer.log.Error("ScanMailProc", e);
-				
-			}
-		}
-		protected void ScanConsortiaProc(object sender)
-		{
-			try
-			{
-				int startTick = Environment.TickCount;
-				CenterServer.log.Debug("Saving Record...");
-				CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				ThreadPriority oldprio = Thread.CurrentThread.Priority;
-				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-				string noticeID = "";
-				using (ConsortiaBussiness db = new ConsortiaBussiness())
-				{
-					db.ScanConsortia(ref noticeID);
-				}
-				string[] noticeIDs = noticeID.Split(new char[]
-				{
-					','
-				});
-				string[] array = noticeIDs;
-				for (int i = 0; i < array.Length; i++)
-				{
-					string s = array[i];
-					if (!string.IsNullOrEmpty(s))
-					{
-						GSPacketIn pkg = new GSPacketIn(128);
-						pkg.WriteByte(2);
-						pkg.WriteInt(int.Parse(s));
-						this.SendToALL(pkg);
-					}
-				}
-				Thread.CurrentThread.Priority = oldprio;
-				startTick = Environment.TickCount - startTick;
-				CenterServer.log.Debug("Scan Consortia complete!");
-				if (startTick > 120000)
-				{
-					CenterServer.log.WarnFormat("Scan all Consortia in {0} ms", startTick);
-				}
-			}
-			catch (Exception e)
-			{
-				
-					CenterServer.log.Error("ScanConsortiaProc", e);
-				
-			}
-		}
-		public override void Stop()
-		{
-			try
-			{
-				SystemConsortiaMrg.Stop();
-				this.DisposeGlobalTimers();
-				this.SaveTimerProc(null);
-				CenterService.Stop();
-				base.Stop();
-			}
-			catch (Exception ex)
-			{
-				CenterServer.log.Error("Center service stopp error:", ex);
-			}
-			CenterServer.log.Warn("Center Server Stopped!");
-		}
-		public new ServerClient[] GetAllClients()
-		{
-			ServerClient[] list = null;
-			object syncRoot;
-			Monitor.Enter(syncRoot = this._clients.SyncRoot);
-			try
-			{
-				list = new ServerClient[this._clients.Count];
-				this._clients.Keys.CopyTo(list, 0);
-			}
-			finally
-			{
-				Monitor.Exit(syncRoot);
-			}
-			return list;
-		}
-		public void SendToALL(GSPacketIn pkg)
-		{
-			this.SendToALL(pkg, null);
-		}
-		public void SendToALL(GSPacketIn pkg, ServerClient except)
-		{
-			ServerClient[] list = this.GetAllClients();
-			if (list != null)
-			{
-				ServerClient[] array = list;
-				for (int i = 0; i < array.Length; i++)
-				{
-					ServerClient client = array[i];
-					if (client != except)
-					{
-						client.SendTCP(pkg);
-					}
-				}
-			}
-		}
-		public void SendConsortiaDelete(int consortiaID)
-		{
-			GSPacketIn pkg = new GSPacketIn(128);
-			pkg.WriteByte(5);
-			pkg.WriteInt(consortiaID);
-			this.SendToALL(pkg);
-		}
-		public void SendSystemNotice(string msg)
-		{
-			GSPacketIn pkg = new GSPacketIn(10);
-			pkg.WriteInt(0);
-			pkg.WriteString(msg);
-			this.SendToALL(pkg, null);
-		}
-		public int RateUpdate(int serverId)
-		{
-			ServerClient[] list = this.GetAllClients();
-			int result;
-			if (list != null)
-			{
-				ServerClient[] array = list;
-				for (int i = 0; i < array.Length; i++)
-				{
-					ServerClient client = array[i];
-					if (client.Info.ID == serverId)
-					{
-						GSPacketIn pkg = new GSPacketIn(177);
-						pkg.WriteInt(serverId);
-						client.SendTCP(pkg);
-						result = 0;
-						return result;
-					}
-				}
-			}
-			result = 1;
-			return result;
-		}
-		public int NoticeServerUpdate(int serverId, int type)
-		{
-			ServerClient[] list = this.GetAllClients();
-			int result;
-			if (list != null)
-			{
-				ServerClient[] array = list;
-				for (int i = 0; i < array.Length; i++)
-				{
-					ServerClient client = array[i];
-					if (client.Info.ID == serverId)
-					{
-						GSPacketIn pkg = new GSPacketIn(11);
-						pkg.WriteInt(type);
-						client.SendTCP(pkg);
-						result = 0;
-						return result;
-					}
-				}
-			}
-			result = 1;
-			return result;
-		}
-		public bool ClientsExecuteCmd(string cmdLine)
-		{
-			bool result;
-			try
-			{
-				LogClient client = new LogClient();
-				ServerClient[] list = CenterServer.Instance.GetAllClients();
-				if (list != null)
-				{
-					ServerClient[] array = list;
-					for (int i = 0; i < array.Length; i++)
-					{
-						ServerClient c = array[i];
-						c.SendCmd(client, cmdLine);
-					}
-				}
-				result = true;
-				return result;
-			}
-			catch (Exception ex)
-			{
-				CenterServer.log.Error(ex.Message, ex);
-			}
-			result = false;
-			return result;
-		}
-		public static void CreateInstance(CenterServerConfig config)
-		{
+        protected void ScanAuctionProc(object sender)
+        {
+            try
+            {
+                int startTick = Environment.TickCount;
+                CenterServer.log.Debug("Saving Record...");
+                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+                ThreadPriority oldprio = Thread.CurrentThread.Priority;
+                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+                string noticeUserID = "";
+                using (PlayerBussiness db = new PlayerBussiness())
+                {
+                    db.ScanAuction(ref noticeUserID);
+                }
+                string[] userIDs = noticeUserID.Split(new char[]
+                {
+                    ','
+                });
+                string[] array = userIDs;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    string s = array[i];
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        GSPacketIn pkg = new GSPacketIn(117);
+                        pkg.WriteInt(int.Parse(s));
+                        pkg.WriteInt(1);
+                        this.SendToALL(pkg);
+                    }
+                }
+                Thread.CurrentThread.Priority = oldprio;
+                startTick = Environment.TickCount - startTick;
+                CenterServer.log.Debug("Scan Auction complete!");
+                if (startTick > 120000)
+                {
+                    CenterServer.log.WarnFormat("Scan all Auction  in {0} ms", startTick);
+                }
+            }
+            catch (Exception e)
+            {
+
+                CenterServer.log.Error("ScanAuctionProc", e);
+
+            }
+        }
+        protected void ScanMailProc(object sender)
+        {
+            try
+            {
+                int startTick = Environment.TickCount;
+                CenterServer.log.Debug("Saving Record...");
+                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+                ThreadPriority oldprio = Thread.CurrentThread.Priority;
+                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+                string noticeUserID = "";
+                using (PlayerBussiness db = new PlayerBussiness())
+                {
+                    db.ScanMail(ref noticeUserID);
+                }
+                string[] userIDs = noticeUserID.Split(new char[]
+                {
+                    ','
+                });
+                string[] array = userIDs;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    string s = array[i];
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        GSPacketIn pkg = new GSPacketIn(117);
+                        pkg.WriteInt(int.Parse(s));
+                        pkg.WriteInt(1);
+                        this.SendToALL(pkg);
+                    }
+                }
+                Thread.CurrentThread.Priority = oldprio;
+                startTick = Environment.TickCount - startTick;
+                CenterServer.log.Debug("Scan Mail complete!");
+                if (startTick > 120000)
+                {
+                    CenterServer.log.WarnFormat("Scan all Mail in {0} ms", startTick);
+                }
+            }
+            catch (Exception e)
+            {
+
+                CenterServer.log.Error("ScanMailProc", e);
+
+            }
+        }
+        protected void ScanConsortiaProc(object sender)
+        {
+            try
+            {
+                int startTick = Environment.TickCount;
+                CenterServer.log.Debug("Saving Record...");
+                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+                ThreadPriority oldprio = Thread.CurrentThread.Priority;
+                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+                string noticeID = "";
+                using (ConsortiaBussiness db = new ConsortiaBussiness())
+                {
+                    db.ScanConsortia(ref noticeID);
+                }
+                string[] noticeIDs = noticeID.Split(new char[]
+                {
+                    ','
+                });
+                string[] array = noticeIDs;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    string s = array[i];
+                    if (!string.IsNullOrEmpty(s))
+                    {
+                        GSPacketIn pkg = new GSPacketIn(128);
+                        pkg.WriteByte(2);
+                        pkg.WriteInt(int.Parse(s));
+                        this.SendToALL(pkg);
+                    }
+                }
+                Thread.CurrentThread.Priority = oldprio;
+                startTick = Environment.TickCount - startTick;
+                CenterServer.log.Debug("Scan Consortia complete!");
+                if (startTick > 120000)
+                {
+                    CenterServer.log.WarnFormat("Scan all Consortia in {0} ms", startTick);
+                }
+            }
+            catch (Exception e)
+            {
+
+                CenterServer.log.Error("ScanConsortiaProc", e);
+
+            }
+        }
+        public override void Stop()
+        {
+            try
+            {
+                SystemConsortiaMrg.Stop();
+                this.DisposeGlobalTimers();
+                this.SaveTimerProc(null);
+                CenterService.Stop();
+                base.Stop();
+            }
+            catch (Exception ex)
+            {
+                CenterServer.log.Error("Center service stopp error:", ex);
+            }
+            CenterServer.log.Warn("Center Server Stopped!");
+        }
+        public new ServerClient[] GetAllClients()
+        {
+            ServerClient[] list = null;
+            object syncRoot;
+            Monitor.Enter(syncRoot = this._clients.SyncRoot);
+            try
+            {
+                list = new ServerClient[this._clients.Count];
+                this._clients.Keys.CopyTo(list, 0);
+            }
+            finally
+            {
+                Monitor.Exit(syncRoot);
+            }
+            return list;
+        }
+        public void SendToALL(GSPacketIn pkg)
+        {
+            this.SendToALL(pkg, null);
+        }
+        public void SendToALL(GSPacketIn pkg, ServerClient except)
+        {
+            ServerClient[] list = this.GetAllClients();
+            if (list != null)
+            {
+                ServerClient[] array = list;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    ServerClient client = array[i];
+                    if (client != except)
+                    {
+                        client.SendTCP(pkg);
+                    }
+                }
+            }
+        }
+        public void SendConsortiaDelete(int consortiaID)
+        {
+            GSPacketIn pkg = new GSPacketIn(128);
+            pkg.WriteByte(5);
+            pkg.WriteInt(consortiaID);
+            this.SendToALL(pkg);
+        }
+        public void SendSystemNotice(string msg)
+        {
+            GSPacketIn pkg = new GSPacketIn(10);
+            pkg.WriteInt(0);
+            pkg.WriteString(msg);
+            this.SendToALL(pkg, null);
+        }
+        public int RateUpdate(int serverId)
+        {
+            ServerClient[] list = this.GetAllClients();
+            int result;
+            if (list != null)
+            {
+                ServerClient[] array = list;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    ServerClient client = array[i];
+                    if (client.Info.ID == serverId)
+                    {
+                        GSPacketIn pkg = new GSPacketIn(177);
+                        pkg.WriteInt(serverId);
+                        client.SendTCP(pkg);
+                        result = 0;
+                        return result;
+                    }
+                }
+            }
+            result = 1;
+            return result;
+        }
+        public int NoticeServerUpdate(int serverId, int type)
+        {
+            ServerClient[] list = this.GetAllClients();
+            int result;
+            if (list != null)
+            {
+                ServerClient[] array = list;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    ServerClient client = array[i];
+                    if (client.Info.ID == serverId)
+                    {
+                        GSPacketIn pkg = new GSPacketIn(11);
+                        pkg.WriteInt(type);
+                        client.SendTCP(pkg);
+                        result = 0;
+                        return result;
+                    }
+                }
+            }
+            result = 1;
+            return result;
+        }
+        public bool ClientsExecuteCmd(string cmdLine)
+        {
+            bool result;
+            try
+            {
+                LogClient client = new LogClient();
+                ServerClient[] list = CenterServer.Instance.GetAllClients();
+                if (list != null)
+                {
+                    ServerClient[] array = list;
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        ServerClient c = array[i];
+                        c.SendCmd(client, cmdLine);
+                    }
+                }
+                result = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                CenterServer.log.Error(ex.Message, ex);
+            }
+            result = false;
+            return result;
+        }
+        public static void CreateInstance(CenterServerConfig config)
+        {
             if (CenterServer.m_instance != null)
             {
                 throw new Exception("Can't create more than one CenterServer!");
             }
             CenterServer.m_instance = new CenterServer(config);
-		}
-	}
+        }
+    }
 }

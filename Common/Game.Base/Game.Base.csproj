@@ -49,7 +49,6 @@
     <Compile Include="Game.Base.Commands\ListAllCommand.cs" />
     <Compile Include="Game.Base.Commands\ScriptManagerCommand.cs" />
     <Compile Include="Game.Base.Config\BaseAppConfig.cs" />
-    <Compile Include="Game.Base.Config\Config.cs" />
     <Compile Include="Game.Base.Config\ConfigPropertyAttribute.cs" />
     <Compile Include="Game.Base.Events\GameEventMgr.cs" />
     <Compile Include="Game.Base.Events\GameServerEvent.cs" />

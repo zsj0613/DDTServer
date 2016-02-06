@@ -44,6 +44,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="Fight.exe.config" />
   </ItemGroup>
 </Project>

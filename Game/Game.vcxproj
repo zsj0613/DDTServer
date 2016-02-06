@@ -168,7 +168,7 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
+    <None Include="Game.exe.config">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>

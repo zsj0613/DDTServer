@@ -45,9 +45,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="app.ico">
       <Filter>资源文件</Filter>
     </Image>

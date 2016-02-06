@@ -10,7 +10,7 @@ namespace Game.Base
 {
 	public class BaseServer
 	{
-        protected static LogProvider log => LogProvider.Default;
+        public static LogProvider log => LogProvider.Default;
 		private static readonly int SEND_BUFF_SIZE = 16384;
 		protected readonly HybridDictionary _clients = new HybridDictionary();
 		protected Socket _linstener;

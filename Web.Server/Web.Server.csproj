@@ -92,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lsj.pfx" />
+    <Content Include="Web.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
