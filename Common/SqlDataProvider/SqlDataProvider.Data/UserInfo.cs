@@ -8,8 +8,10 @@ namespace SqlDataProvider.Data
     /// <summary>
     /// UserInfo 的摘要说明
     /// </summary>
+    [Serializable]
     public class UserInfo
     {
+        
         public int UserType { get; set; }
         public string UserName { get; set; }
         public int UserID { get; set; }

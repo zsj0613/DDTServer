@@ -18,7 +18,7 @@ namespace Center.Server
 {
 	public class CrossServerConnector : BaseConnector
 	{
-		private static LogProvider log => LogProvider.Default;
+		private new static LogProvider log => LogProvider.Default;
 
 		private string key;
 		protected override void OnConnect()

@@ -61,7 +61,7 @@ namespace Bussiness.Interface
 		}
 		public virtual PlayerInfo CreateLogin(string name, string password, ref string message, ref int isFirst, string IP, ref bool isError, bool firstValidate, ref bool isActive, string site, string nickname)
 		{
-			PlayerInfo result;
+            PlayerInfo result;
 			try
 			{
 				using (PlayerBussiness db = new PlayerBussiness())

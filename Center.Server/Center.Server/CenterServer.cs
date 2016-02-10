@@ -18,7 +18,7 @@ namespace Center.Server
 {
     public class CenterServer : BaseServer
     {
-        public static LogProvider log = LogProvider.Default;
+        public new static LogProvider log = LogProvider.Default;
         public static readonly string Edition = "10000";
         private CenterServerConfig m_config;
         private Timer m_loginLapseTimer;

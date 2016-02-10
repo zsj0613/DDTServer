@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using Lsj.Util.Config;
+using Lsj.Util.Logs;
+
 namespace SqlDataProvider.BaseClass
 {
 	public sealed class Sql_DbObject : IDisposable
@@ -286,6 +288,7 @@ namespace SqlDataProvider.BaseClass
 			bool result;
 			if (!Sql_DbObject.OpenConnection(this._SqlConnection))
 			{
+                LogProvider.Default.Debug("Open Failed");
 				result = false;
 			}
 			else
@@ -305,7 +308,6 @@ namespace SqlDataProvider.BaseClass
 				}
 				catch (SqlException ex)
 				{
-                    //throw ex;
 					ApplicationLog.WriteError("执行存储过程: " + ProcedureName + "错误信息为: " + ex.Message.Trim());
 					result = false;
 					return result;

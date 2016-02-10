@@ -39,6 +39,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://127.0.0.1:12345", "h
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{9C7A6205-33D6-4A0A-85FE-459556AFF800}|Lsj.Util.Native.dll;{fb70a974-bf61-4640-93ee-27bd88dc57b8}|NVelocity.dll;{37ce504d-055a-4c15-9c08-a3f477d1c44b}|NVelocityTemplateEngine.dll;{ac36126f-bf61-4775-9ff6-c411c9dc902b}|Bussiness.dll;{86DFB123-9E12-4351-9A61-C738C11C1C7E}|Game.Language.dll;{C4267EBB-742F-4698-833E-4B743CAAD015}|SqlDataProvider.dll;{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}|Lsj.Util.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/127.0.0.1_12345"
 		Debug.AspNetCompiler.PhysicalPath = "..\NewWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\127.0.0.1_12345\"

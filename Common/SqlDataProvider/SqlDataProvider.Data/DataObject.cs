@@ -1,6 +1,7 @@
 using System;
 namespace SqlDataProvider.Data
 {
+    [Serializable]
 	public class DataObject
 	{
 		protected bool _isDirty;

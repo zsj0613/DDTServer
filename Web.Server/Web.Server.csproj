@@ -10,6 +10,7 @@
     <AssemblyName>Web.Server</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,20 +58,27 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="zlib.net, Version=1.0.3.0, Culture=neutral, PublicKeyToken=47d7877cb3620160">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\zlib.net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web.Server.Manager\PlayerManager.cs" />
     <Compile Include="Web.Server\CenterServerConnector.cs" />
-    <Compile Include="Web.Server\IWCFService.cs" />
-    <Compile Include="Web.Server\WCFService.cs" />
+    <Compile Include="Web.Server\IWebHelperService.cs" />
+    <Compile Include="Web.Server\WebHelperService.cs" />
     <Compile Include="Web.Server\WebServer.cs" />
+    <Compile Include="Web.Server\XMLBuild.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\lsjutil\Lsj.Util.Net.Web\Lsj.Util.Net.Web.csproj">
@@ -80,6 +88,10 @@
     <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Bussiness\Bussiness.csproj">
+      <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
+      <Name>Bussiness</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Game.Base\Game.Base.csproj">
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>

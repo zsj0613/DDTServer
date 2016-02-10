@@ -168,11 +168,6 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Game.exe.config">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Common\Game.Base\Game.Base.csproj">
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
     </ProjectReference>

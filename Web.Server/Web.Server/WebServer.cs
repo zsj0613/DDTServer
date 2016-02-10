@@ -22,7 +22,11 @@ namespace Web.Server
         private static WebServer m_instance;
        // private Server server;
         private CenterServerConnector m_centerServer;
-        public bool IsOpen = false;
+        public bool IsOpen
+        {
+            get;
+            private set;
+        }=false;
         public RunMgr runmgr
         {
             get
@@ -81,13 +85,12 @@ namespace Web.Server
                     this.IsOpen = true;
                     WebServer.log.Info("Succeed to Connect to Center Server!");
                 }
-                if (!WCFService.Start())
+                if (!WebHelperService.Start())
                 {
                     WebServer.log.Error("Fail to Start WCFService");
                 }
                 else
                 {
-                    this.IsOpen = true;
                     WebServer.log.Info("Succeed to Start WCFService!");
                 }
 

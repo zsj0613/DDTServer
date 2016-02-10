@@ -102,7 +102,7 @@ namespace DDTTools
                     csComplier.@using = new string[]
                     {
                         "System.Drawing.dll",
-                        "GameLibrary.dll",
+                        "Game.Logic.dll",
                         "Bussiness.dll",
                         "SqlDataProvider.dll",
                         "Game.Base.dll"
