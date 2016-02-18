@@ -20,12 +20,12 @@ namespace Game.Base.Packets
 		}
 		public void HandlePacket(GSPacketIn packet)
 		{
-            PacketProcessor.log.Debug("HandlePacket!");
+           // PacketProcessor.log.Debug("HandlePacket!");
             int code = (int)packet.Code;
 			Statistics.BytesIn += (long)packet.Length;
 			Statistics.PacketsIn += 1L;
 			IPacketHandler packetHandler = null;
-            PacketProcessor.log.Debug("code"+ code.ToString());
+            //PacketProcessor.log.Debug("code"+ code.ToString());
             if (code < PacketProcessor.m_packetHandlers.Length)
 			{
 				packetHandler = PacketProcessor.m_packetHandlers[code];
@@ -45,13 +45,13 @@ namespace Game.Base.Packets
 					}), packet.Buffer));
 				}
 			}
-            PacketProcessor.log.Debug("PacketProcessorDebug1");
+          //  PacketProcessor.log.Debug("PacketProcessorDebug1");
             if (packetHandler != null)
 			{
 				long start = (long)Environment.TickCount;
 				try
 				{
-                    PacketProcessor.log.Debug("PacketProcessorDebug2");
+                   // PacketProcessor.log.Debug("PacketProcessorDebug2");
                     packetHandler.HandlePacket(this.m_client, packet);
 				}
 				catch (Exception e)

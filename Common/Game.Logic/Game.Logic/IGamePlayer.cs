@@ -1,12 +1,10 @@
 using Game.Base.Packets;
 using Game.Logic.LogEnum;
-using Game.Base.Packets;
 using SqlDataProvider.Data;
-using System;
 using System.Collections.Generic;
 namespace Game.Logic
 {
-	public interface IGamePlayer
+    public interface IGamePlayer
 	{
 		PlayerInfo PlayerCharacter
 		{

@@ -52,7 +52,14 @@ namespace Fighting.Server.Rooms
 				return this.m_game;
 			}
 		}
-		public ProxyRoom(int roomId, int orientRoomId, IGamePlayer[] players, ServerClient client, int totallevel, int totalFightPower)
+
+        public bool IsArea
+        {
+            get;
+            private set;
+        }
+
+        public ProxyRoom(int roomId, int orientRoomId, IGamePlayer[] players, ServerClient client, int totallevel, int totalFightPower,bool IsArea)
 		{
 			this.m_roomId = roomId;
 			this.m_orientRoomId = orientRoomId;
@@ -62,6 +69,7 @@ namespace Fighting.Server.Rooms
 			this.FightPower = totalFightPower;
 			this.AvgLevel = totallevel / players.Count<IGamePlayer>();
 			this.PickUpCount = 0;
+            this.IsArea = IsArea;
 		}
 		public void SendToAll(GSPacketIn pkg)
 		{

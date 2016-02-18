@@ -11,7 +11,7 @@ namespace Game.Server
 {
 	public class GameClient : BaseClient
 	{
-		private static LogProvider log => LogProvider.Default;
+		private new static LogProvider log => LogProvider.Default;
 		private static readonly byte[] POLICY = Encoding.UTF8.GetBytes("<?xml version=\"1.0\"?><!DOCTYPE cross-domain-policy SYSTEM \"http://www.adobe.com/xml/dtds/cross-domain-policy.dtd\"><cross-domain-policy><allow-access-from domain=\"*\" to-ports=\"*\" /></cross-domain-policy>\0");
 		public static readonly string MANAGER_KEY = "kutlizlii8so0023k987sdf()*";
 		protected GamePlayer m_player;

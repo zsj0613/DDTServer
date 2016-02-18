@@ -72,16 +72,6 @@ namespace Game.Server.Commands.Admin
 				}
 				if (args.Contains("/rate"))
 				{
-					if (BattleMgr.InitAreaFightInfo())
-					{
-						this.DisplayMessage(client, "AreaFightInfo load success!");
-						success.Append("/AreaFightInfo,");
-					}
-					else
-					{
-						this.DisplayMessage(client, "AreaFightInfo load failed!");
-						failed.Append("/AreaFightInfo,");
-					}
 					if (RateMgr.ReLoad())
 					{
 						this.DisplayMessage(client, "Rates load success!");

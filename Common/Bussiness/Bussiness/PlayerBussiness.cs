@@ -12,6 +12,36 @@ namespace Bussiness
 {
     public class PlayerBussiness : BaseBussiness
     {
+
+        public bool CreateUsername(string username, int inviteid)
+        {
+            SqlParameter[] para = new SqlParameter[]
+            {
+                new SqlParameter("@UserName", username),
+                new SqlParameter("@Inviteid", inviteid),
+                new SqlParameter("@Result", SqlDbType.Int)
+            };
+            para[2].Direction = ParameterDirection.ReturnValue;
+            bool result = this.db.RunProcedure("Mem_Users_CreateUser", para);
+            if (result)
+            {
+                result = ((int)para[2].Value > 0);
+            }
+            return result;
+        }
+        public int GetUserType(string username)
+        {
+            SqlParameter[] array = new SqlParameter[]
+            {
+                new SqlParameter("@UserName", username),
+                new SqlParameter("@result", SqlDbType.Int)
+            };
+            array[1].Direction = ParameterDirection.ReturnValue;
+            bool flag = this.db.RunProcedure("Mem_Users_GetType", array);
+            int num = 0;
+            int.TryParse(array[1].Value.ToString(), out num);
+            return num;
+        }
         public bool ActivePlayer(ref PlayerInfo player, string userName, string passWord, bool sex, int gold, int money, int giftToken, string IP, string site)
         {
             LogProvider.Default.Debug("ActivePlayer");
@@ -706,10 +736,10 @@ namespace Bussiness
             result = null;
             return result;
         }
-        public PlayerInfo GetUserSingleByUserName(string userName)
+        public PlayerInfo[] GetUserSingleByUserName(string userName)
         {
             SqlDataReader reader = null;
-            PlayerInfo result;
+            List<PlayerInfo> result = new List<PlayerInfo>();
             try
             {
                 SqlParameter[] para = new SqlParameter[]
@@ -719,17 +749,13 @@ namespace Bussiness
                 para[0].Value = userName;
                 this.db.GetReader(ref reader, "SP_Users_SingleByUserName", para);
                 if (reader.Read())
-                {
-                    result = this.InitPlayerInfo(reader);
-                    return result;
+                {                    
+                      result.Add(this.InitPlayerInfo(reader));
                 }
+                return result.ToArray();
             }
-            catch (Exception e)
+            catch
             {
-                if (true)
-                {
-                    BaseBussiness.log.Error("Init", e);
-                }
             }
             finally
             {
@@ -738,8 +764,7 @@ namespace Bussiness
                     reader.Close();
                 }
             }
-            result = null;
-            return result;
+            return null;
         }
         public PlayerInfo GetUserSingleByNickName(string nickName)
         {
@@ -1841,20 +1866,20 @@ namespace Bussiness
             this.SendMailAndItem(message, userGoods, ref returnValue);
             return returnValue;
         }
-        public int SendMailAndItemByUserName(string title, string content, string userName, int templateID, int count, int validDate, int gold, int money, int StrengthenLevel, int AttackCompose, int DefendCompose, int AgilityCompose, int LuckCompose, bool isBinds)
-        {
-            PlayerInfo player = this.GetUserSingleByUserName(userName);
-            int result;
-            if (player != null)
-            {
-                result = this.SendMailAndItem(title, content, player.ID, templateID, count, validDate, gold, money, StrengthenLevel, AttackCompose, DefendCompose, AgilityCompose, LuckCompose, isBinds);
-            }
-            else
-            {
-                result = 2;
-            }
-            return result;
-        }
+       // public int SendMailAndItemByUserName(string title, string content, string userName, int templateID, int count, int validDate, int gold, int money, int StrengthenLevel, int AttackCompose, int DefendCompose, int AgilityCompose, int LuckCompose, bool isBinds)
+      //  {
+      //      PlayerInfo player = this.GetUserSingleByUserName(userName);
+      //      int result;
+      //      if (player != null)
+      //      {
+      //          result = this.SendMailAndItem(title, content, player.ID, templateID, count, validDate, gold, money, StrengthenLevel, AttackCompose, DefendCompose, AgilityCompose, LuckCompose, isBinds);
+      //      }
+      //      else
+      //      {
+      //          result = 2;
+      //      }
+      //      return result;
+      //  }
         public int SendMailAndItemByNickName(string title, string content, string NickName, int templateID, int count, int validDate, int gold, int money, int StrengthenLevel, int AttackCompose, int DefendCompose, int AgilityCompose, int LuckCompose, bool isBinds)
         {
             PlayerInfo player = this.GetUserSingleByNickName(NickName);
@@ -1909,20 +1934,20 @@ namespace Bussiness
             }
             return returnValue;
         }
-        public int SendMailAndItemByUserName(string title, string content, string userName, int gold, int money, int giftToken, string param)
-        {
-            PlayerInfo player = this.GetUserSingleByUserName(userName);
-            int result;
-            if (player != null)
-            {
-                result = this.SendMailAndItem(title, content, player.ID, gold, money, giftToken, param);
-            }
-            else
-            {
-                result = 2;
-            }
-            return result;
-        }
+      //  public int SendMailAndItemByUserName(string title, string content, string userName, int gold, int money, int giftToken, string param)
+      //  {
+      //      PlayerInfo player = this.GetUserSingleByUserName(userName);
+      //      int result;
+      //      if (player != null)
+       //     {
+        //        result = this.SendMailAndItem(title, content, player.ID, gold, money, giftToken, param);
+      //      }
+      //      else
+      //      {
+      //          result = 2;
+      //      }
+      //      return result;
+      //  }
         public int SendMailAndItemByNickName(string title, string content, string nickName, int gold, int money, int giftToken, string param)
         {
             PlayerInfo player = this.GetUserSingleByNickName(nickName);

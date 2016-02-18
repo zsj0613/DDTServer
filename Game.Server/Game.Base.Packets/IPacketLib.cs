@@ -27,7 +27,8 @@ namespace Game.Base.Packets
 		GSPacketIn SendUpdatePublicPlayer(PlayerInfo info);
 		GSPacketIn SendNetWork(int id, long delay);
 		GSPacketIn SendUserEquip(PlayerInfo info, List<ItemInfo> items);
-		GSPacketIn SendMessage(eMessageType type, string message);
+        void SendEnterWorldBossRoom(GamePlayer player);
+        GSPacketIn SendMessage(eMessageType type, string message);
 		void SendWaitingRoom(bool result);
 		GSPacketIn SendUpdateRoomList(List<BaseRoom> room);
 		GSPacketIn SendSceneAddPlayer(GamePlayer player);

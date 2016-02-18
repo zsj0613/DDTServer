@@ -15,11 +15,11 @@ namespace Web.Server
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/Register", ReplyAction = "http://127.0.0.1/WebHelperClient/RegisterResponse")]
         bool Register(string username, string password, int inviteid);
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/GetIDByUserName", ReplyAction = "http://127.0.0.1/WebHelperClient/GetIDByUserNameResponse")]
-        int GetIDByUserName(string username);
+        int[] GetIDByUserName(string username);
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/IsOpen", ReplyAction = "http://127.0.0.1/WebHelperClient/IsOpenResponse")]
         bool IsOpen();
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/CheckUser", ReplyAction = "http://127.0.0.1/WebHelperClient/CheckUserResponse")]
-        bool CheckUser(string username, string password);
+        bool CheckUser(string username, string password,int inviteid);
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/GetUserType", ReplyAction = "http://127.0.0.1/WebHelperClient/GetUserTypeResponse")]
         int GetUserType(string name);
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/GetUserNameByID", ReplyAction = "http://127.0.0.1/WebHelperClient/GetUserNameByIDResponse")]
@@ -47,5 +47,7 @@ namespace Web.Server
         string GMAction(string action, Dictionary<string, string> param);
         [OperationContract(Action = "http://127.0.0.1/WebHelperClient/ServerList", ReplyAction = "http://127.0.0.1/WebHelperClient/ServerListResponse")]
         string ServerList();
+        [OperationContract(Action = "http://127.0.0.1/WebHelperClient/MailNotice", ReplyAction = "http://127.0.0.1/WebHelperClient/MailNoticeResponse")]
+        void MailNotice(int userid);
     }
 }

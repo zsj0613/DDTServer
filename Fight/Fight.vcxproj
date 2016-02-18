@@ -134,7 +134,8 @@
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
-      <Command>copy app.config "$(TargetPath).config"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

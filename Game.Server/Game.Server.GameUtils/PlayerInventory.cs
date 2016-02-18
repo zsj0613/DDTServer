@@ -111,7 +111,11 @@ namespace Game.Server.GameUtils
 					for (int i = 0; i < list.Length; i++)
 					{
 						ItemInfo item = list[i];
-						if (item.BagType == base.BagType && item.Count <= item.Template.MaxCount && item.Count > 0)
+                        if (item == null)
+                        {
+                            log.Warn("Null item");
+                        }
+						else if (item.BagType == base.BagType && item.Count <= item.Template.MaxCount && item.Count > 0)
 						{
 							this.AddItemTo(item, item.Place);
 						}

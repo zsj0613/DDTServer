@@ -1,6 +1,7 @@
 ﻿using Bussiness;
 using Game.Base.Packets;
 using Game.Logic;
+using Game.Logic.Phy.Object;
 using Game.Server.GameObjects;
 using Game.Server.Managers;
 using Game.Server.Packets;
@@ -19,17 +20,21 @@ namespace Game.Server.Managers
     {
         public static int Blood
         {
-            get
-            {
-                return m_Blood;
-            }
+            get;
+            private set;
+        }
+        public static int MaxBlood
+        {
+            get;
+            private set;
         }
 
-        private static int m_Blood;
 
 
         private static Dictionary<int, int> Damages = new Dictionary<int, int>();
         private static int KillerID;
+
+        public static List<GamePlayer> players = new List<GamePlayer>();
 
         public static LogProvider log => LogProvider.Default;
         private static Timer m_TenTimer = null;
@@ -48,12 +53,12 @@ namespace Game.Server.Managers
         public static bool Init()
         {
             InitTimer();
+
             return true;
         }
         private static void InitTimer()
         {
             InitBlood();
-            m_CanJoin = true; //just for test;
             var Twenty = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0, 0, DateTimeKind.Local);
             var Fourteen = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0, 0, DateTimeKind.Local);
             var Ten = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0, 0, DateTimeKind.Local);
@@ -72,7 +77,7 @@ namespace Game.Server.Managers
         }
         private static void OnTime(object state)
         {
-            m_CheckTimer = new Timer(new TimerCallback(OnOverTime), null, 0, 60 * 60 * 1000);
+            m_CheckTimer = new Timer(new TimerCallback(OnOverTime), null, 60*60*1000, 60 * 60 * 1000);
             WorldBossMgr.log.Warn(DateTime.Now.Hour.ToString() + "时世界Boss开始");
             GamePlayer[] players = WorldMgr.GetAllPlayers();
             foreach (var player in players)
@@ -107,7 +112,11 @@ namespace Game.Server.Managers
 
         private static void InitBlood()
         {
-            m_Blood = new ProduceBussiness().GetAllNPCInfo().ToList().Find((b) =>  b.ID == 70002 ).Blood;
+            using (var a = new ProduceBussiness())
+            {
+                MaxBlood = a.GetAllNPCInfo().ToList().Find((b) => b.ID == 70002).Blood;
+                Blood = MaxBlood;
+            }
         }
 
 
@@ -117,12 +126,12 @@ namespace Game.Server.Managers
         {
             Monitor.Enter(@lock);
             {
-                if (m_Blood > 0)
+                if (Blood > 0)
                 {
-                    m_Blood -= damage;
+                    Blood -= damage;
                     Damages[PlayerID] += damage;
                 }
-                if (m_Blood <= 0)
+                if (Blood <= 0)
                 {
                     KillerID = PlayerID;
                     OnKilled();
@@ -140,6 +149,13 @@ namespace Game.Server.Managers
                 player.Out.SendMessage(eMessageType.ChatNormal, $"世界Boss已被{new PlayerBussiness().GetUserSingleByUserID(KillerID).NickName}击杀，开始结算奖励！");
             }
             OnOver();
+        }
+
+
+        public static void AddPlayer(GamePlayer player)
+        {
+            players.Add(player);
+
         }
 
     }

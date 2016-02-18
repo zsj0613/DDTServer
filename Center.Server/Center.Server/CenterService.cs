@@ -1,5 +1,6 @@
 using Bussiness;
 using Bussiness.Interface;
+using Center.Server.Managers;
 using Game.Base.Packets;
 using Lsj.Util.Logs;
 using SqlDataProvider.Data;
@@ -53,22 +54,7 @@ namespace Center.Server
 			}
 			return true;
 		}
-		public bool ChargeMoney(int userID, string chargeID)
-		{
-			ServerClient client = LoginMgr.GetServerClient(userID);
-			ChargeRewardMgr.DoChargeReward(userID);
-			bool result;
-			if (client != null)
-			{
-				client.SendChargeMoney(userID, chargeID);
-				result = true;
-			}
-			else
-			{
-				result = false;
-			}
-			return result;
-		}
+		
 		public bool ChargeGiftToken(int userID, int giftToken)
 		{
 			PlayerInfo info = null;

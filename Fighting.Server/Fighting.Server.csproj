@@ -12,23 +12,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
@@ -68,27 +51,20 @@
     <Compile Include="Fighting.Server.Commands.admin\ListObjectsCommand.cs" />
     <Compile Include="Fighting.Server.Commands.admin\ReloadCommand.cs" />
     <Compile Include="Fighting.Server.Commands.admin\RoomMgrCommand.cs" />
-    <Compile Include="Fighting.Server.Commands.admin\StackTraceCommand.cs" />
     <Compile Include="Fighting.Server.GameObjects\ProxyPlayer.cs" />
     <Compile Include="Fighting.Server.GameObjects\ProxyPlayerInfo.cs" />
     <Compile Include="Fighting.Server.Games\BattleGame.cs" />
     <Compile Include="Fighting.Server.Games\GameMgr.cs" />
-    <Compile Include="Fighting.Server.Guild\GuildMgr.cs" />
-    <Compile Include="Fighting.Server.Managers\RateMgr.cs" />
     <Compile Include="Fighting.Server.Rooms\AddRoomAction.cs" />
     <Compile Include="Fighting.Server.Rooms\IAction.cs" />
     <Compile Include="Fighting.Server.Rooms\ProxyRoom.cs" />
     <Compile Include="Fighting.Server.Rooms\ProxyRoomMgr.cs" />
     <Compile Include="Fighting.Server.Rooms\RandomNPCAction.cs" />
     <Compile Include="Fighting.Server.Rooms\RemoveRoomAction.cs" />
-    <Compile Include="Fighting.Server.Servers\ServerMgr.cs" />
     <Compile Include="Fighting.Server\FightServer.cs" />
     <Compile Include="Fighting.Server\FightServerConfig.cs" />
     <Compile Include="Fighting.Server\ServerClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fighting.Server\Config.Fightlogconfig.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">

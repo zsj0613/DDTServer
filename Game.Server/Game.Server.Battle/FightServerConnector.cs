@@ -20,7 +20,7 @@ namespace Game.Server.Battle
 {
 	public class FightServerConnector : BaseConnector
 	{
-		private static LogProvider log => LogProvider.Default;
+        private new static LogProvider log => GameServer.log;
 		private BattleServer m_server;
 		private string m_key;
 		public override void OnRecvPacket(GSPacketIn pkg)
@@ -376,7 +376,8 @@ namespace Game.Server.Battle
 			pkg.WriteInt((int)room.GameType);
 			pkg.WriteInt(room.GuildId);
 			pkg.WriteInt(GameServer.Instance.Configuration.AreaID);
-			List<GamePlayer> players = room.GetPlayers();
+            pkg.WriteBoolean(room.IsArea);
+            List<GamePlayer> players = room.GetPlayers();
 			pkg.WriteInt(players.Count);
 			foreach (GamePlayer p in players)
 			{

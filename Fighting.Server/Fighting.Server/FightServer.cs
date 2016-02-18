@@ -15,13 +15,11 @@ using System.Net;
 using System.Reflection;
 using System.Threading;
 using SqlDataProvider.BaseClass;
-using Fighting.Server.Managers;
 
 namespace Fighting.Server
 {
 	public class FightServer : BaseServer
-	{
-		private static LogProvider log => LogProvider.Default;
+    {
 		//private static bool KeepRunning = false;
 		private FightServerConfig m_config;
 		private bool m_running;
@@ -64,7 +62,7 @@ namespace Fighting.Server
                     }
                     FightServer.log.Info("数据库连接成功!");
 
-                    if (!this.InitSocket(IPAddress.Parse(this.m_config.Ip), this.m_config.Port))
+                    if (!this.InitSocket(IPAddress.Parse(this.m_config.IP), this.m_config.Port))
                     {
                         result = false;
                         FightServer.log.Error("初始化监听端口失败，请检查!");
@@ -129,14 +127,6 @@ namespace Fighting.Server
                         return result;
                     }
                     FightServer.log.Info("初始化语言包成功!");
-
-                    if (!RateMgr.Init(this.Configuration))
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化倍率失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化倍率成功!");
 
 
                     if (!base.Start())

@@ -15,7 +15,7 @@ namespace Center.Server
 {
     public class ServerClient : BaseClient
     {
-        private static LogProvider log => CenterServer.log;
+        private new static LogProvider log => CenterServer.log;
         private RSACryptoServiceProvider _rsa;
         private CenterServer _svr;
         private BaseClient m_currentCmdClient = null;
@@ -131,6 +131,9 @@ namespace Center.Server
                 {
                     switch (code)
                     {
+                        case 73:
+                            this.HandleAreaBigBugle(pkg);
+                            break;
                         case 117:
                             this.HandleMailResponse(pkg);
                             break;
@@ -187,10 +190,6 @@ namespace Center.Server
                                     this.HandleUpdateLimitCount(pkg);
                                     break;
                                 default:
-                                    if (code == 178)
-                                    {
-                                        this.HandleMacroDrop(pkg);
-                                    }
                                     break;
                             }
                             break;
@@ -228,6 +227,9 @@ namespace Center.Server
                 }
             }
         }
+
+
+
         public void HandleManagerLogin(GSPacketIn pkg)
         {
             string key = pkg.ReadString();
@@ -391,6 +393,14 @@ namespace Center.Server
         {
             this._svr.SendToALL(pkg, this);
         }
+
+
+        private void HandleAreaBigBugle(GSPacketIn pkg)
+        {
+            this._svr.connector.SendTCP(pkg);
+        }
+
+
         //private void HandleAreaBigBugle(GSPacketIn pkg)
         //{
         //    ClientBinding vBinding = new ClientBinding();
@@ -527,19 +537,7 @@ namespace Center.Server
                 Console.WriteLine(serverID + "  is stoped !");
             }
         }
-        public void HandleMacroDrop(GSPacketIn pkg)
-        {
-            Dictionary<int, int> temp = new Dictionary<int, int>();
-            int count = pkg.ReadInt();
-            for (int i = 0; i < count; i++)
-            {
-                int templateId = pkg.ReadInt();
-                int dropCount = pkg.ReadInt();
-                temp.Add(templateId, dropCount);
-            }
-            MacroDropMgr.DropNotice(temp);
-            this.NeedSyncMacroDrop = true;
-        }
+        
         public void SendRSAKey(byte[] m, byte[] e)
         {
             GSPacketIn pkg = new GSPacketIn(0);

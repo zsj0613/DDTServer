@@ -1,25 +1,21 @@
 using Bussiness;
-using Center.Server.Managers;
 using Game.Base;
-using Game.Base.Events;
 using Game.Base.Packets;
-using Game.Server.Managers;
 using System;
-using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Threading;
 using SqlDataProvider.BaseClass;
 using Lsj.Util.Logs;
 using Lsj.Util.Config;
 using Lsj.Util;
+using Center.Server.Managers;
 
 namespace Center.Server
 {
     public class CenterServer : BaseServer
     {
         public new static LogProvider log = LogProvider.Default;
-        public static readonly string Edition = "10000";
+        public static readonly string Edition = "11000";
         private CenterServerConfig m_config;
         private Timer m_loginLapseTimer;
         private Timer m_saveDBTimer;
@@ -29,7 +25,11 @@ namespace Center.Server
         private Timer m_ChargeTimer;
         private static CenterServer m_instance;
         private Timer m_RenameCheckTimer;
-        private CrossServerConnector connector;
+        public CrossServerConnector connector
+        {
+            get;
+            private set;
+        }
 
         public CenterServerConfig Config
         {
@@ -93,7 +93,7 @@ namespace Center.Server
                 }
                 CenterServer.log.Info("数据库连接成功!");
 
-                if (!this.InitSocket(IPAddress.Parse(this.m_config.Ip), this.m_config.Port))
+                if (!this.InitSocket(IPAddress.Parse(this.m_config.IP), this.m_config.Port))
                 {
                     result = false;
                     CenterServer.log.Error("初始化监听端口失败，请检查!");
@@ -116,23 +116,6 @@ namespace Center.Server
                     return result;
                 }
                 CenterServer.log.Info("加载服务器列表成功!");
-
-                if (!ConsortiaLevelMgr.Init())
-                {
-                    result = false;
-                    CenterServer.log.Error("加载公会等级信息失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("加载公会等级信息成功!");
-
-
-                if (!SystemConsortiaMrg.Init())
-                {
-                    result = false;
-                    CenterServer.log.Error("加载系统公会失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("加载系统公会成功!");
 
 
 
@@ -167,16 +150,6 @@ namespace Center.Server
                     return result;
                 }
                 CenterServer.log.Info("初始化充值服务成功!");
-
-                if (!Center.Server.Managers.MacroDropMgr.Init() || !Center.Server.Managers.MacroDropMgr.Start())
-                {
-
-                    result = false;
-
-                    CenterServer.log.Error("初始化宏观掉落失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("初始化宏观掉落成功!");
 
                 if (!this.ConnectToCrossServer())
                 {
@@ -533,7 +506,6 @@ namespace Center.Server
         {
             try
             {
-                SystemConsortiaMrg.Stop();
                 this.DisposeGlobalTimers();
                 this.SaveTimerProc(null);
                 CenterService.Stop();

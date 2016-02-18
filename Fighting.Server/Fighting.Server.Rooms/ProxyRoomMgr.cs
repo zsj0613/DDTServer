@@ -158,7 +158,7 @@ namespace Fighting.Server.Rooms
 			long begin = TickHelper.GetTickCount();
 			if (ProxyRoomMgr.ShowTick)
 			{
-				Console.WriteLine("-----begin pickup----tick:{0}-----rooms:{1}", begin, rooms.Count);
+				log.DebugFormat("-----begin pickup----tick:{0}-----rooms:{1}", begin, rooms.Count);
 			}
 			foreach (ProxyRoom red in rooms)
 			{
@@ -171,6 +171,7 @@ namespace Fighting.Server.Rooms
 					{
 						foreach (ProxyRoom blue in rooms)
 						{
+                            //判断是不是同一个公会或不是同一个区
 							if (blue.GuildId != red.GuildId || blue.AreaID != red.AreaID)
 							{
 								if (blue != red && !blue.IsPlaying && blue.PlayerCount == red.PlayerCount)
@@ -178,8 +179,11 @@ namespace Fighting.Server.Rooms
 									int score = ProxyRoomMgr.CalculateScore(red, blue);
 									if (score > maxScore || matchRoom == null)
 									{
-										maxScore = score;
-										matchRoom = blue;
+                                        if (red.AreaID == blue.AreaID || red.IsArea && blue.IsArea)
+                                        {
+                                            maxScore = score;
+                                            matchRoom = blue;
+                                        }
 									}
 								}
 							}
@@ -198,9 +202,12 @@ namespace Fighting.Server.Rooms
 										int score = ProxyRoomMgr.CalculateScore(red, blue);
 										if (score >= maxScore || matchRoom == null)
 										{
-											maxScore = score;
-											matchRoom = blue;
-										}
+                                            if (red.AreaID == blue.AreaID || red.IsArea && blue.IsArea)
+                                            {
+                                                maxScore = score;
+                                                matchRoom = blue;
+                                            }
+                                        }
 									}
 								}
 							}
@@ -216,9 +223,12 @@ namespace Fighting.Server.Rooms
 										int score = ProxyRoomMgr.CalculateScore(red, blue);
 										if (score >= maxScore || matchRoom == null)
 										{
-											maxScore = score;
-											matchRoom = blue;
-										}
+                                            if (red.AreaID == blue.AreaID || red.IsArea && blue.IsArea)
+                                            {
+                                                maxScore = score;
+                                                matchRoom = blue;
+                                            }
+                                        }
 									}
 								}
 							}

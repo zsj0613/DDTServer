@@ -54,8 +54,28 @@ namespace Cross
                 case 1:
                     HandleLogin(pkg);
                     break;
+                case 73:
+                    HandleAreaBigBugle(pkg);
+                    break;
                 default:
                     break;
+            }
+        }
+
+        private void HandleAreaBigBugle(GSPacketIn pkg)
+        {
+            var x = new GSPacketIn(25);
+            x.WriteInt(pkg.ReadInt());
+            x.WriteInt(pkg.ReadInt());
+            x.WriteString(Name);
+            x.WriteString(pkg.ReadString());
+            x.WriteString(pkg.ReadString());
+
+
+
+            foreach (var a in server.GetAllClients())
+            {
+                a.SendTCP(x);
             }
         }
 

@@ -20,7 +20,7 @@ namespace Fighting.Server
 {
 	public class ServerClient : BaseClient
 	{
-		private static LogProvider log => LogProvider.Default;
+        private new static LogProvider log => FightServer.log;
 		private RSACryptoServiceProvider m_rsa;
 		private FightServer m_svr;
 		private Dictionary<int, ProxyRoom> m_rooms = new Dictionary<int, ProxyRoom>();
@@ -320,6 +320,13 @@ namespace Fighting.Server
 				this.m_rsa = null;
 				int id = int.Parse(temp[0]);
 				base.Strict = false;
+                if (temp[1] != FightServer.Instance.Configuration.Key)
+                {
+                    log.Debug(temp[1]);
+                    ServerClient.log.ErrorFormat("Error Login Packet from {0}", base.TcpEndpoint);
+                    this.Disconnect();
+                }
+
 			}
 			else
 			{
@@ -335,6 +342,7 @@ namespace Fighting.Server
 			int gameType = pkg.ReadInt();
 			int guildId = pkg.ReadInt();
 			int areaId = pkg.ReadInt();
+            bool IsArea = pkg.ReadBoolean();
 			int count = pkg.ReadInt();
 			IGamePlayer[] players = new IGamePlayer[count];
 			for (int i = 0; i < count; i++)
@@ -416,7 +424,7 @@ namespace Fighting.Server
 			}
 			if (players.Length != 0)
 			{
-				ProxyRoom room = new ProxyRoom(ProxyRoomMgr.NextRoomId(), roomId, players, this, totalLevel, totalFightPower);
+				ProxyRoom room = new ProxyRoom(ProxyRoomMgr.NextRoomId(), roomId, players, this, totalLevel, totalFightPower,IsArea);
 				room.GuildId = guildId;
 				room.AreaID = areaId;
 				room.GameType = (eGameType)gameType;

@@ -13,12 +13,8 @@ namespace Game.Server
 		public string RootDirectory;
 		public int MaxRoomCount = 1000;
 		public int MaxPlayerCount = 2000;
-		[ConfigProperty("MaxClientCount", "最大连接数", 8000)]
-		public int MaxClientCount = 2000;
-		[ConfigProperty("AppID", "代理商编号", 1)]
-		public int AppID;
-		[ConfigProperty("AppName", "代理商名称", "7Road")]
-		public string AppName;
+        [ConfigProperty("MaxClientCount", "最大连接数", 8000)]
+        public int MaxClientCount = 2000;
 		[ConfigProperty("AreaID", "区编号", 1)]
 		public int AreaID;
 		[ConfigProperty("AreaName", "区名称", "7Road")]
@@ -28,25 +24,13 @@ namespace Game.Server
 		[ConfigProperty("ServerName", "频道的名称", "7Road")]
 		public string ServerName;
 		[ConfigProperty("IP", "频道的IP", "127.0.0.1")]
-		public string Ip;
+		public string IP;
 		[ConfigProperty("Port", "频道开放端口", 9200)]
 		public int Port;
 		[ConfigProperty("LoginServerIp", "中心服务器的IP", "192.168.0.2")]
 		public string LoginServerIp;
 		[ConfigProperty("LoginServerPort", "中心服务器的端口", 9202)]
 		public int LoginServerPort;
-		[ConfigProperty("ScriptAssemblies", "脚本编译引用库", "")]
-		public string ScriptAssemblies;
-		[ConfigProperty("ScriptCompilationTarget", "脚本编译目标名称", "")]
-		public string ScriptCompilationTarget;
-		[ConfigProperty("LogConfigFile", "日志配置文件", "logconfig.xml")]
-		public string LogConfigFile;
-		[ConfigProperty("LogPath", "日志路径", "RecordLog")]
-		public string LogPath;
-		[ConfigProperty("CountRecord", "是否记录日志", true)]
-		public bool CountRecord;
-		[ConfigProperty("TxtRecord", "是否记录统计信息", true)]
-		public bool TxtRecord;
 		[ConfigProperty("SaveRecordInterval", "统计信息保存的时间间隔,分钟为单位", 5)]
 		public int SaveRecordInterval;
 		[ConfigProperty("PrivateKey", "RSA的私钥", "")]

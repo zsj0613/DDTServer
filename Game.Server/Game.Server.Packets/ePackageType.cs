@@ -1,7 +1,7 @@
 using System;
 namespace Game.Server.Packets
 {
-	public enum ePackageType
+	public enum ePackageType : byte
 	{
 		SERVER_READY,
 		LOGIN,
@@ -31,7 +31,7 @@ namespace Game.Server.Packets
         //AREA_BIG_BUGLE,÷ÿ∏¥
         PASSWORD_TWO,
         VIP_UPDATE, //ADD BY LSJ
-        WORLDBOSS_CMD,//ADD BY LSJ
+        WORLDBOSS_JOIN,//ADD BY LSJ
 
         //27
 

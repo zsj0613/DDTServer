@@ -334,5 +334,10 @@ namespace Game.Server.Packets.Server
         {
             throw new NotImplementedException();
         }
+
+        public void SendEnterWorldBossRoom(GamePlayer player)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

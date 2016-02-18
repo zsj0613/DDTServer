@@ -15,13 +15,20 @@ namespace Bussiness
 			int result2;
 			using (PlayerBussiness db = new PlayerBussiness())
 			{
-				PlayerInfo player = db.GetUserSingleByUserName(name);
-				if (player == null)
+				PlayerInfo[] players = db.GetUserSingleByUserName(name);
+				if (players == null)
 				{
 					result2 = 2;
 					return result2;
 				}
-				result = this.KitoffUser(player.ID, msg);
+                foreach (var player in players)
+                {
+                    var a = this.KitoffUser(player.ID, msg);
+                    if (result != 0)
+                    {
+                        result = a;
+                    }
+                }
 			}
 			result2 = result;
 			return result2;

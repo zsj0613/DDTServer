@@ -89,13 +89,19 @@ namespace Game.Server.Battle
 				return this.m_loginKey;
 			}
 		}
-		public BattleServer(int serverId, string ip, int port, string loginKey, bool isOpen)
+        public bool IsArea
+        {
+            get;
+            private set;
+        }
+		public BattleServer(int serverId, string ip, int port, string loginKey, bool isOpen,bool IsArea)
 		{
 			this.m_serverId = serverId;
 			this.m_ip = ip;
 			this.m_port = port;
 			this.m_loginKey = loginKey;
 			this.IsOpen = isOpen;
+            this.IsArea = IsArea;
 			this.m_server = new FightServerConnector(this, ip, port, loginKey);
 			this.m_rooms = new Dictionary<int, BaseRoom>();
 			this.m_server.Disconnected += new ClientEventHandle(this.m_server_Disconnected);
@@ -103,7 +109,7 @@ namespace Game.Server.Battle
 		}
 		public BattleServer Clone()
 		{
-			return new BattleServer(this.m_serverId, this.m_ip, this.m_port, this.m_loginKey, this.IsOpen);
+			return new BattleServer(this.m_serverId, this.m_ip, this.m_port, this.m_loginKey, this.IsOpen,this.IsArea);
 		}
 		public void Start()
 		{

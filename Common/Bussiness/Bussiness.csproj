@@ -91,21 +91,16 @@
     <Compile Include="Bussiness\BaseBussiness.cs" />
     <Compile Include="Bussiness\CheckCode.cs" />
     <Compile Include="Bussiness\ConsortiaBussiness.cs" />
-    <Compile Include="Bussiness\CookieInfoBussiness.cs" />
     <Compile Include="Bussiness\CountBussiness.cs" />
-    <Compile Include="Bussiness\IniReader.cs" />
-    <Compile Include="Bussiness\ItemRecordBussiness.cs" />
     <Compile Include="Bussiness\LanguageMgr.cs" />
     <Compile Include="Bussiness\ManageBussiness.cs" />
     <Compile Include="Bussiness\MapBussiness.cs" />
     <Compile Include="Bussiness\MemberShipbussiness.cs" />
-    <Compile Include="Bussiness\OrderBussiness.cs" />
     <Compile Include="Bussiness\PlayerBussiness.cs" />
     <Compile Include="Bussiness\ProduceBussiness.cs" />
     <Compile Include="Bussiness\PveBussiness.cs" />
     <Compile Include="Bussiness\ServiceBussiness.cs" />
     <Compile Include="Bussiness\ThreadSafeRandom.cs" />
-    <Compile Include="Bussiness\UserInfoBussiness.cs" />
     <Compile Include="Bussiness\XmlExtends.cs" />
     <Compile Include="Game.Server.Managers\ConsortiaLevelMgr.cs" />
   </ItemGroup>

@@ -31,15 +31,6 @@ namespace Game.Server.Commands.Admin
 					this.DisplayMessage(client, string.Format("TotalFightServerCount : {0}", BattleMgr.GetAllBattles().Count));
 					result = true;
 					return result;
-				case "-connect":
-					if (args.Length == 6)
-					{
-						BattleMgr.ConnectTo(int.Parse(args[2]), args[3], int.Parse(args[4]), args[5]);
-						this.DisplayMessage(client, "connect completed!");
-						result = true;
-						return result;
-					}
-					break;
 				case "-disconnect":
 					if (args.Length == 3)
 					{

@@ -12,23 +12,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
@@ -38,7 +21,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;DebugWorldBoss</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -135,7 +118,6 @@
     <Compile Include="Game.Server.Commands.Admin\MapManagerCommand.cs" />
     <Compile Include="Game.Server.Commands.Admin\ReloadCommand.cs" />
     <Compile Include="Game.Server.Commands.Admin\ShutDownCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\StackTraceCommand.cs" />
     <Compile Include="Game.Server.Enumerate\eConsumerType.cs" />
     <Compile Include="Game.Server.Enumerate\eSubConsumerType.cs" />
     <Compile Include="Game.Server.GameObjects\eClientType.cs" />
@@ -431,7 +413,7 @@
     <Compile Include="Game.Server\GameClient.cs" />
     <Compile Include="Game.Server\GameServer.cs" />
     <Compile Include="Game.Server\GameServerConfig.cs" />
-    <Compile Include="Game.Server\LoginServerConnector.cs" />
+    <Compile Include="Game.Server\CenterServerConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

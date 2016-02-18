@@ -21,14 +21,11 @@ namespace Game.Server.Packets.Client
 				byte hardLevel = packet.ReadByte();
 				int levelLimits = packet.ReadInt();
 				bool IsArea = packet.ReadBoolean();
-				if (!IsArea && BattleMgr.IsOpenAreaFight && roomType == eRoomType.Match)
-				{
-					player.Out.SendMessage(eMessageType.Normal, LanguageMgr.GetTranslation("GameUserSetUpHandler.required", new object[0]));
-				}
-				else
-				{
-					RoomMgr.UpdateRoomGameType(player.CurrentRoom, packet, roomType, timeType, (eHardLevel)hardLevel, levelLimits, mapId, IsArea);
-				}
+                if (IsArea && !BattleMgr.IsOpenAreaFight)
+                {
+                    player.SendMessage(eMessageType.ChatNormal, "尚未开放跨服战斗");
+                }
+				RoomMgr.UpdateRoomGameType(player.CurrentRoom, packet, roomType, timeType, (eHardLevel)hardLevel, levelLimits, mapId, IsArea);
 			}
 			return 0;
 		}

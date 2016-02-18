@@ -31,13 +31,13 @@ namespace Web.Server
             try
             {
                 var myBinding = new WSHttpBinding();
-                Uri baseAddress = new Uri("http://127.0.0.1:46001/");
+                Uri baseAddress = new Uri("http://127.0.0.1:"+AppConfig.AppSettings["WCFPort"]+"/");
                 WebHelperService.host = new ServiceHost(typeof(WebHelperService), baseAddress);
                 WebHelperService.host.AddServiceEndpoint(typeof(IWebHelperService), myBinding, "WebHelperService");
-                ServiceMetadataBehavior behavior = new ServiceMetadataBehavior();
-                behavior.HttpGetEnabled = true;
-                behavior.HttpGetUrl = new Uri("http://127.0.0.1:46000/");
-                WebHelperService.host.Description.Behaviors.Add(behavior);
+               // ServiceMetadataBehavior behavior = new ServiceMetadataBehavior();
+               // behavior.HttpGetEnabled = true;
+               // behavior.HttpGetUrl = new Uri("http://127.0.0.1:46000/");
+               // WebHelperService.host.Description.Behaviors.Add(behavior);
                 WebHelperService.host.Open();
 
                 WebHelperService.log.Info("WCF Service started!");
@@ -83,33 +83,44 @@ namespace Web.Server
             }
             return false;
         }
-        public int GetIDByUserName(string username)
+        public int[] GetIDByUserName(string username)
         {
             using (PlayerBussiness a = new PlayerBussiness())
             {
-                PlayerInfo b = a.GetUserSingleByUserName(username);
+                PlayerInfo[] b = a.GetUserSingleByUserName(username);
                 if (b != null)
-                    return b.ID;
+                {
+                    return b.Where((x) => (x.ID != 0)).Select((x) => (x.ID)).ToArray();
+                }
+                return null;
             }
-            return 0;
         }
         public bool IsOpen()
         {
             return WebServer.Instance.IsOpen;
         }
 
-        public bool CheckUser(string username, string password)
+        public bool CheckUser(string username, string password ,int inviteid)
         {
             using (var a = new MemberShipbussiness())
             {
-                return a.CheckUser(username, password);
+                var result = a.CheckUser(username, password);
+                if (result)
+                {
+                    using (var b = new PlayerBussiness())
+                    {
+                        b.CreateUsername(username, inviteid);
+                        return true;
+                    }
+                }
+                return false;
             }
 
         }
 
         public int GetUserType(string name)
         {
-            using (var a = new MemberShipbussiness())
+            using (var a = new PlayerBussiness())
             {
                 return a.GetUserType(name);
             }
@@ -349,7 +360,6 @@ namespace Web.Server
             var runmgr = WebServer.Instance.runmgr;
             var WebPath = AppConfig.AppSettings["WebPath"].ToSafeString();
             string path = WebPath + @"xml\";
-
             switch (action)
             {
                 case "start":
@@ -579,6 +589,14 @@ namespace Web.Server
             result.Add(new XAttribute("agentId", "1"));
             result.Add(new XAttribute("AreaName", "DDT"));
             return result.ToString(false);
+        }
+
+        public void MailNotice(int userid)
+        {
+            using (var a = new CenterServiceClient())
+            {
+                a.MailNotice(userid);
+            }
         }
     }
 }

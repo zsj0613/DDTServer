@@ -100,6 +100,7 @@ namespace Bussiness.Managers
 				ItemMgr.m_lock.ReleaseReaderLock();
 			}
 			result = null;
+            log.Warn("Null item" + templateId);
 			return result;
 		}
 		public static ItemTemplateInfo GetGoodsbyFusionTypeandQuality(int fusionType, int quality)

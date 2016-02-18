@@ -83,7 +83,6 @@
     <Compile Include="Game.Base\PacketIn.cs" />
     <Compile Include="Game.Base\ResourceUtil.cs" />
     <Compile Include="Game.Base\Statistics.cs" />
-    <Compile Include="Game.Base\ThreadHelper.cs" />
     <Compile Include="Game.Base\WeakMulticastDelegate.cs" />
     <Compile Include="Game.Base\WeakRef.cs" />
     <Compile Include="Game.Base.Managers\ScriptMgr.cs" />

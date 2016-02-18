@@ -45,6 +45,9 @@ namespace Center.Server
                     case 0:
                         this.HandleRSAKey(pkg);
                         break;
+                    case 25:
+                        this.HandleAreaBigBugle(pkg);
+                        break;
                     default:
                         break;
                 }
@@ -54,6 +57,11 @@ namespace Center.Server
 				CenterServer.log.Error("AsynProcessPacket", ex);
 			}
 		}
+
+        private void HandleAreaBigBugle(GSPacketIn pkg)
+        {
+            CenterServer.Instance.SendToALL(pkg);
+        }
 
         protected void HandleRSAKey(GSPacketIn packet)
         {

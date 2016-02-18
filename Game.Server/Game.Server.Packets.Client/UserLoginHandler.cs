@@ -22,7 +22,7 @@ namespace Game.Server.Packets.Client
 				pkg.ClearContext();
 				if (client.Player == null)
 				{
-                    GameServer.log.Debug("TryLogin");
+                  //  GameServer.log.Debug("TryLogin");
                     int version = packet.ReadInt();
 					int clientType = packet.ReadInt();
 					byte[] src = packet.ReadBytes();
@@ -52,7 +52,7 @@ namespace Game.Server.Packets.Client
 					if (version < int.Parse(GameServer.Edition) ||version >= int.Parse(GameServer.Edition)+1000)
 					{
 						client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.EditionError", new object[0]));
-                        GameServer.log.Error("Edition Error");
+                       // GameServer.log.Error("Edition Error");
                         client.Disconnect();
 						result = 0;
 						return result;
@@ -61,25 +61,25 @@ namespace Game.Server.Packets.Client
 					{
 						','
 					});
-                    GameServer.log.Debug("Debug1");
+                  //  GameServer.log.Debug("Debug1");
                     if (temp.Length == 2)
 					{
 						string user = temp[0];
 						string pass = temp[1];
-                        GameServer.log.Debug("Debug2");
+                       // GameServer.log.Debug("Debug2");
                         if (!LoginMgr.ContainsUser(user))
 						{
-                            GameServer.log.Debug("Debug3");
+                          //  GameServer.log.Debug("Debug3");
                             bool isFirst = false;
 							BaseInterface inter = BaseInterface.CreateInterface();
 							PlayerInfo cha = inter.LoginGame(user, pass, ref isFirst);
                            
                             if (cha != null && cha.ID != 0)
 							{
-                                GameServer.log.Debug("Debug4");
+                            //    GameServer.log.Debug("Debug4");
                                 if (cha.ID == -2)
 								{
-                                    GameServer.log.Debug("Debug5");
+                              //      GameServer.log.Debug("Debug5");
                                     client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.Forbid", new object[0]));
 									client.Disconnect();
 									result = 0;
@@ -91,33 +91,33 @@ namespace Game.Server.Packets.Client
 									LoginMgr.Add(cha.ID, client);
 									client.Server.LoginServer.SendAllowUserLogin(cha.ID);
 									client.Version = version;
-                                    GameServer.log.Warn("Logined");
+                                  //  GameServer.log.Warn("Logined");
                                 }
 								else
 								{
-                                    GameServer.log.Debug("Debug6");
+                                  //  GameServer.log.Debug("Debug6");
                                     client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.Register", new object[0]));
 									client.Disconnect();
 								}
 							}
 							else
 							{
-                                GameServer.log.Debug("Debug7");
-                                GameServer.log.Debug("cha.ID");
+                            //    GameServer.log.Debug("Debug7");
+                             //   GameServer.log.Debug("cha.ID");
                                 client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.OverTime", new object[0]));
 								client.Disconnect();
 							}
 						}
 						else
 						{
-                            GameServer.log.Debug("Debug8");
+                            //GameServer.log.Debug("Debug8");
                             client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.LoginError", new object[0]));
 							client.Disconnect();
 						}
 					}
 					else
 					{
-                        GameServer.log.Debug("Debug9");
+                        //GameServer.log.Debug("Debug9");
                         client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.LengthError", new object[0]));
 						client.Disconnect();
 					}
@@ -125,7 +125,7 @@ namespace Game.Server.Packets.Client
 			}
 			catch (Exception ex)
 			{
-                GameServer.log.Debug("Debug10");
+                //GameServer.log.Debug("Debug10");
                 client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.ServerError", new object[0]));
 				client.Disconnect();
 				GameServer.log.Error(LanguageMgr.GetTranslation("UserLoginHandler.ServerError", new object[0]), ex);

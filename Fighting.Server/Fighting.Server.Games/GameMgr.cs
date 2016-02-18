@@ -1,6 +1,5 @@
 using Bussiness;
 using Fighting.Server.GameObjects;
-using Fighting.Server.Managers;
 using Fighting.Server.Rooms;
 using Game.Base.Packets;
 using Game.Logic;
@@ -204,7 +203,7 @@ namespace Fighting.Server.Games
 				Map map = MapMgr.AllocateMapInstance(index);
 				if (map != null)
 				{
-					BattleGame game = new BattleGame(GameMgr.m_gameId++, red, roomRed, blue, roomBlue, map, roomType, gameType, timeType, RateMgr.GetNpcID());
+					BattleGame game = new BattleGame(GameMgr.m_gameId++, red, roomRed, blue, roomBlue, map, roomType, gameType, timeType, 0);
 					game.GameOverLog += new BaseGame.GameOverLogEventHandle(roomRed.LogFight);
 					Dictionary<int, BaseGame> games;
 					Monitor.Enter(games = GameMgr.m_games);

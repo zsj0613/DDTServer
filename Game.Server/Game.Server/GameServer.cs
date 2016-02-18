@@ -28,14 +28,14 @@ namespace Game.Server
 	public class GameServer : BaseServer
 	{
 		private const int BUF_SIZE = 2048;
-		public static LogProvider log => LogProvider.Default;
-		public static readonly string Edition = "10000";
+		public new static LogProvider log => LogProvider.Default;
+		public static readonly string Edition = "11000";
 		public static bool KeepRunning = false;
 		public static bool ManagerLogined = false;
 		private static GameServer m_instance = null;
 		private bool m_isRunning;
 		private GameServerConfig m_config;
-		private LoginServerConnector _loginServer;
+		private CenterServerConnector _loginServer;
 		private Queue m_packetBufPool;
 		private bool m_debugMenory = false;
 		private static int m_tryCount = 4;
@@ -70,7 +70,7 @@ namespace Game.Server
 				return this.m_config;
 			}
 		}
-		public LoginServerConnector LoginServer
+		public CenterServerConnector LoginServer
 		{
 			get
 			{
@@ -211,7 +211,7 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化脚本成功!");
 
-                if (!this.InitSocket(IPAddress.Parse(this.Configuration.Ip), this.Configuration.Port))
+                if (!this.InitSocket(IPAddress.Parse(this.Configuration.IP), this.Configuration.Port))
                 {
                     result = false;
                     GameServer.log.Error("初始化监听端口失败，请检查!");
@@ -499,13 +499,13 @@ namespace Game.Server
                     return result;
                 }
                 GameServer.log.Info("初始化等级成功!");
-                /*if (!WorldBossMgr.Init())
+                if (!WorldBossMgr.Init())
                 {
                     result = false;
                     GameServer.log.Error("初始化世界Boss失败，请检查!");
                     return result;
                 }
-                GameServer.log.Info("初始化世界Boss成功!");*/
+                GameServer.log.Info("初始化世界Boss成功!");
 
                 RoomMgr.Start();
                 GameMgr.Start();
@@ -539,7 +539,7 @@ namespace Game.Server
         }
 		private bool InitLoginServer()
 		{
-			this._loginServer = new LoginServerConnector(this.m_config.LoginServerIp, this.m_config.LoginServerPort, this.m_config.ServerID, this.m_config.ServerName, this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
+			this._loginServer = new CenterServerConnector(this.m_config.LoginServerIp, this.m_config.LoginServerPort, this.m_config.ServerID, this.m_config.ServerName, this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
 			this._loginServer.Disconnected += new ClientEventHandle(this.loginServer_Disconnected);
 			return this._loginServer.Connect();
 		}
@@ -1035,7 +1035,6 @@ namespace Game.Server
 				}
 				ThreadPriority oldprio = Thread.CurrentThread.Priority;
 				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-				BattleMgr.Update();
 				Thread.CurrentThread.Priority = oldprio;
 				startTick = Environment.TickCount - startTick;
 				//if (GameServer.log.IsInfoEnabled)

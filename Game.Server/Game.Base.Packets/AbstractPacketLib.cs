@@ -1084,13 +1084,15 @@ namespace Game.Base.Packets
 			pkg.WriteInt(player.PlayerCharacter.ID);
 			pkg.WriteString(player.PlayerCharacter.NickName);
 			pkg.WriteString(msg);
-			GamePlayer[] players = WorldMgr.GetAllPlayers();
-			GamePlayer[] array = players;
-			for (int i = 0; i < array.Length; i++)
-			{
-				GamePlayer p = array[i];
-				p.Out.SendTCP(pkg);
-			}
+            //GamePlayer[] players = WorldMgr.GetAllPlayers();
+            //GamePlayer[] array = players;
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //	GamePlayer p = array[i];
+            //	p.Out.SendTCP(pkg);
+            //}
+            GameServer.Instance.LoginServer.SendTCP(pkg);
+
 			return pkg;
 		}
 		public GSPacketIn SendDispatchesMsg(GSPacketIn pkg)
@@ -1439,6 +1441,13 @@ namespace Game.Base.Packets
                 
             }
             return result;
+        }
+
+        public void SendEnterWorldBossRoom(GamePlayer player)
+        {
+            GSPacketIn pkg = new GSPacketIn((byte)ePackageType.WORLDBOSS_JOIN, player.PlayerCharacter.ID);
+            pkg.WriteInt(0);
+            this.SendTCP(pkg);
         }
     }
 }

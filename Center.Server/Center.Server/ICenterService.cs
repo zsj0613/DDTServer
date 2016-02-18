@@ -9,8 +9,6 @@ namespace Center.Server
 		[OperationContract]
 		List<ServerData> GetServerList();
 		[OperationContract]
-		bool ChargeMoney(int userID, string chargeID);
-		[OperationContract]
 		bool ChargeGiftToken(int userID, int giftToken);
 		[OperationContract]
 		bool SystemNotice(string msg);

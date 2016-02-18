@@ -56,7 +56,7 @@ namespace Fighting.Server.GameObjects
 		{
 			get
 			{
-				return FightServer.Instance.Configuration.ServerType != 0;
+				return false;
 			}
 		}
 		public int GamePlayerId
