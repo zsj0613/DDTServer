@@ -24,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NVecolity", "NVecolity", "{
 		Center.Server\Center.Server\ChargeMgr.cs = Center.Server\Center.Server\ChargeMgr.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVelocity", "..\NVelocity\NVelocity\NVelocity.csproj", "{FB70A974-BF61-4640-93EE-27BD88DC57B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVelocity", "NVelocity\NVelocity\NVelocity.csproj", "{FB70A974-BF61-4640-93EE-27BD88DC57B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVelocityTemplateEngine", "..\NVelocity\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj", "{37CE504D-055A-4C15-9C08-A3F477D1C44B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVelocityTemplateEngine", "NVelocity\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj", "{37CE504D-055A-4C15-9C08-A3F477D1C44B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Launcher", "Launcher", "{EB519A07-36E4-4699-A0EC-5E3EC43CDF24}"
 EndProject
