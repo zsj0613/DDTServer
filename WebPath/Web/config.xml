@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <config>
+    <VERSION value="11001" />
+    <NOTICE value="         花千骨弹弹堂2016年2月20号火爆公测！
+本服唯一客服QQ：726325986      唯一官方Q群：306759             定制武器-称号咨询群主QQ：726325986" />
+    <POLICY_FILE value="http://cdn.hqgddt.com/crossdomain.xml" />
+    <RES_PATH value="http://s1.hqgddt.com/cdn/res/" />
+    <SWF_PATH value="http://s1.hqgddt.com/cdn/swf/" />
+    <XML_PATH value="http://s1.hqgddt.com/xml/" />
+    <ASHX_PATH value="http://s1.hqgddt.com/ashx/" />
+    <ALLOW_MULTI value="true" />
+    <setting>
+        <Expericence value="0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,120000,140000,160000,180000,200000,220000,240000,260000,280000,300000,320000,340000,360000,380000,400000,420000,440000,460000,480000,500000,550000,600000,650000,700000,750000,800000,850000,900000,950000,1000000,1050000,1100000,1150000,1200000,1250000,1300000,1350000,1400000,1450000,1500000,1600000,1700000,1800000,1900000,2000000,2100000,2200000,2300000,2400000,2500000,2700000,2900000,3100000,3300000,3500000,3700000,3900000,4100000,4300000,4500000,5000000,5500000,6000000,6500000,7000000,7500000,8000000,8500000,9000000,9500000,10500000,11500000,12500000,13500000,14500000,16500000,18500000,20500000,22500000,25000000,30000000,2147483647" />
+	<MAX_LEVEL value="100" />
+        <VIP_Moneys value="0,5,30,50,100,200,500,1000,1500,2500,5000,2147483647"/>
+    </setting>
+  </config>
+  <module>
+    <hall value="hall_en.swf" />
+    <font value="font_en.swf" />
+    <setting value="setting_en.swf" />
+    <vip value="vip.swf" />
+  </module>
+  <update>
+     <version from="3" to="4">
+        <file value="setting.swf" />
+     </version>
+     <version from="2" to="3">
+        <file value="setting.swf" />
+        <file value="vip.swf" />
+     </version>
+     <version from="1" to="2">
+        <file value="setting.swf" />
+     </version>
+     <version from="-1" to="1">
+        <file value="setting_en.swf" />
+     </version>
+  </update>
+</root>

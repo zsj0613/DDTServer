@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style>
+
+body{
+	padding:0px;
+	margin:0px;
+	font-size:14px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	line-height:22px;
+	background-image:url(../cdn/images/top_bg.jpg);
+}
+img{
+	border:0px;
+}
+a{
+	color:#003399;
+	text-decoration: underline;
+}
+a:hover{
+	color:#003399;
+}
+.top_title{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #FFF;
+	text-decoration: none;
+	padding-left:24px;
+}
+.top_time{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#FFFFFF;
+	text-decoration:none;
+	padding-left:24px;
+}
+.user_login{	
+	font-size:14px;
+	text-align:right;
+	padding-right:12px;
+	padding-top:6px;
+    color:#FFFFFF;
+}
+</style>
+<script language="javascript">
+  function hideinfo(){ 
+    if(event.srcElement.tagName=="A" || event.srcElement.tagName=="IMG"){ 
+    window.status="";return true; 
+		}
+	}
+	document.onmouseover=hideinfo 
+	
+</script></head>
+
+<body scrolling="No">
+<div>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="50">
+          <td class="top_title"></td>
+    <td class="user_login">欢迎你，管理员$UserName&nbsp;&nbsp;&nbsp; 
+    <a href="javascript:location.replace('../login.do?method=logout')" target="_parent" onClick="return confirm('确认注销吗？');">注销</a></td>
+</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

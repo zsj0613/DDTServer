@@ -1,0 +1,155 @@
+﻿<SCRIPT language=JavaScript>alert(" ①：本服玩家必看：新手上线起步装备一套+12 \n ②：本服因之前BUG问题，进行的删档重开，只保留的排行榜前20的玩家数据。 \n ③：充值排行榜奖励分配：2月20号-2月27号中午12点刷新排行榜\n 充值排行第一的玩家给予定制武器一把全属性：888 伤害500  定制称号一个：全属性：500  元宝58888 全区唯一\n充值排行第二的玩家给予定制武器一把全属性：777 伤害500  定制称号一个：全属性：400  元宝38888 全区唯一\n充值排行第三的玩家给予定制武器一把全属性：666 伤害500  定制称号一个：全属性：300  元宝28888 全区唯一\n以上奖励必须1000元以上，负责不予计算到前三名。\n充值排行榜第四-第十名均奖励宫铃2000个、元宝10000！\n④：等级排名奖励分配：2月20号-2月27号中午12点刷新排行榜\n 战斗力排行第一的玩家给予 S伤害4*20 宫铃*5000 元宝30000\n 战斗力排行第二的玩家给予 S伤害4*15 宫铃*3000 元宝20000\n 战斗力排行第三的玩家给予 S伤害4*10 宫铃*2000 元宝10000\n 战斗力排行第四-第十名均奖励 S伤害4*5 宫铃*1000 元宝5000\n ⑤开通VIP方法：5元,30元,50元,100元,200元,500元,1000元,1500元,2500元,5000元。\n  ⑥降低副本难度50%。\n ⑦本服可以定制任意装备，你想怎么定制均可以，看要求付费。\n ⑧本服唯一Q群：306759（玩家必加哦）\n ⑨屌丝玩家可以选择推广，加群联系花心哦。\n")</SCRIPT> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>花千骨弹弹堂</title>
+    <link href="cdn/style/loginManager.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="cdn/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="cdn/js/md5.js"></script>
+    <script>
+    var a = false;
+    function fEvent(sType,oInput){
+        switch (sType){
+            case "focus" :
+                oInput.isfocus = true;
+                oInput.style.backgroundColor='#FFFF66';
+            case "mouseover" :
+                oInput.style.borderColor = '#FFFF66';
+                break;
+            case "blur" :
+                oInput.isfocus = false;
+                oInput.style.backgroundColor="";
+            case "mouseout" :
+                if(!oInput.isfocus){
+                    oInput.style.borderColor='#FFFF66';
+                }
+                break;
+        }
+    }
+    function register() {
+        if (a)
+            return false;
+        if (document.form1.user.value == "") {
+            document.form1.user.focus();
+            alert("用户名不能为空！！！");
+            return false;
+        }
+        else if (document.form1.pass.value == "") {
+            document.form1.pass.focus();
+            alert("密码不能为空！！！");
+            return false;
+        }
+        else {
+            a = true;
+            document.form1.password1.value = md5(document.form1.pass.value);
+            document.form1.action = 'login?method=register';
+            document.form1.method = 'post';
+            document.form1.submit();
+        }
+    }
+    function login() {
+        if (a)
+            return false;
+        if (document.form1.user.value == "") {
+            document.form1.user.focus();
+            alert("用户名不能为空！！");
+	    return false;
+
+        }
+        else if (document.form1.pass.value == "") {
+            document.form1.pass.focus();
+            alert("密码不能为空！！");
+            return false;
+        }
+        else {
+            a = true;
+
+            document.form1.password1.value = md5(document.form1.pass.value);
+            document.form1.action = 'login?method=login';
+            document.form1.method = 'post';
+            document.form1.submit();
+        }
+    }
+
+    window.onload=function()  {
+              document.form1.user.focus();
+    }
+    function BindEnter(obj) {
+        if (obj.keyCode == 13) {
+            login();
+        }
+    }
+
+
+
+
+    </script>
+
+
+</head>
+ 
+<body onkeydown="BindEnter(event)" >
+    <form name="form1">
+        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td align="center" valign="middle">
+                    <table width="974" height="787" border="0" cellspacing="0" cellpadding="0" class="login_bg">
+                        <tr>
+                            <td height="311">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="354" align="center" valign="top">
+                                <table width="320" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td height="50" align="center">用户名</td>
+                                        <td align="left"><input type="text" name="user" id="user" class="ip" onMouseOver="fEvent('mouseover',this)" onFocus="fEvent('focus',this)" onBlur="fEvent('blur',this)" onMouseOut="fEvent('mouseout',this)" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="50" align="center">密&nbsp;&nbsp;&nbsp;码</td>
+                                        <td align="left"><input type="password" name="pass" id="pass" class="ip" onmouseover="fEvent('mouseover',this)" onfocus="fEvent('focus',this)" onblur="fEvent('blur',this)" onmouseout="fEvent('mouseout',this)" style="border-color: rgb(255, 255, 102);" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="2"><input type="submit" value="" onclick="return register();" class="btn1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="" class="btn" onclick="return login();" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="107" align="center" valign="top"><p class="copyright">【免责声明】本游戏全部内容来自互联网，纯属网络游戏技术爱好研究，玩家捐助全部用来维持服务器费用，纯属自愿如有侵犯请第一时间联系.</p></td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="password1" id="password1" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+<link type="text/css" rel="stylesheet" href="cdn/style/css.css"/>
+<div class="sq-tip-inset sq-tip" style="right: 1px; z-index: 101; display: block;">
+<div class="sq-tip-head">
+<p> <font color="#FF00000">★花千骨唯一客服QQ：726325986★</font></p>
+<a class="sq-tip-close" title="关闭" href="javascript:;"></a>
+</div>
+<div class="sq-tip-content">
+<div>
+<a href="http://jq.qq.com/?_wv=1027&k=amNeaa" ><font color="#FF0099">[顶]花千骨弹弹堂官方群：306759-★点击加入★</font></a><br>
+<a href="http://swjt.yeyou360.com" target="_blank" ><font color="#8000ff">高端神武九天私服★点击进入游戏★</font></a><br>
+<a href="http://www.hqgddt.com" target="_blank" ><font color="#ff0080">花千骨弹弹堂测试-test3-★点击进入查询★</font></a><br>
+<a href="http://www.hqgddt.com" target="_blank" ><font color="#006600">花千骨弹弹堂测试-test4-★点击进入查询★</font></a><br>
+<a href="http://www.hqgddt.com" target="_blank" ><font color="#0080ff">花千骨弹弹堂测试-test5-★点击进入查询★</font></a><br>
+<a href="http://www.hqgddt.com" target="_blank" ><font color="#ff0000">花千骨弹弹堂测试-test6-★点击进入查询★</font></a><br>
+<a href="http://www.hqgddt.com" target="_blank" ><font color="#CC0099">花千骨弹弹堂测试-test7-★点击进入查询★</font></a><br>
+</div>
+</div>
+</div>
+<script>
+$(function(){
+	//$('.sq-tip-inset').animate({left:'0'},0);
+	$('.sq-tip-inset .sq-tip-close').click(function(){
+	   $('.sq-tip-inset').animate({right:'-300px'},200);
+	});
+});
+</script>
+</body>
+</html>

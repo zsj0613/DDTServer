@@ -1,0 +1,1073 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE>发送邮件</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset="UTF-8" />
+<link type="text/css" rel="stylesheet" href="../CDN/style/SendGoodStyleCss.css" />
+<script type="text/javascript" src="../CDN/js/Jquery.js"></script>
+<script type="text/javascript" src="../CDN/js/gm.js"></script>
+
+<script type="text/javascript">
+function showDivDate(){
+		var selectValues = document.getElementById("select6").value;
+		if(selectValues == "自定义"){
+			document.getElementById("zjyDiv").style.display = 'block';
+			document.getElementById("yxqDiv").style.display = 'none';
+		}
+	}
+//物品
+function showDiv(values,values2,values3){
+		if(document.getElementById(values).style.display=="none"){
+			document.getElementById(values).style.display="block";
+			document.getElementById(values2).style.display="none";
+			document.getElementById(values3).style.display="none";
+			document.getElementById("sf").style.display="none";
+		}else{
+			document.getElementById(values).style.display="none";
+			document.getElementById("sf").style.display="block";
+		}
+	}
+	function closeDiv(values){
+		document.getElementById(values).style.display="none";
+	}
+function closeGoodSelectDiv(closeDivName){
+	document.getElementById(closeDivName).style.display="none";
+	document.getElementById("sf").style.display="none";
+}
+
+//物品结束
+
+//判断确定按钮事件
+
+	function checkYXDate(){
+		var goodName = document.getElementById("txt_goodName").value;
+		var goodNumber = document.getElementById("txt_num").value;
+		var Money = document.getElementById("txt_money").value;
+		var Gold = document.getElementById("txt_gold").value;
+		var Lijuan = document.getElementById("txt_liJuan").value;
+		var SelectDate = document.getElementById("select6").value;
+		var ZdyDate = document.getElementById("txt_zdy").value;
+		if(goodNumber.length==0 || Money.length==0 ||Gold.length==0 || Lijuan.length==0)
+		{
+			alert("请检查参数是否输入完整！");
+			return false;
+		}else if(goodName.length==0 && Money=="0" && Gold=="0" && Lijuan=="0" || Money.length==0 || Gold.length==0 || Lijuan.length==0){
+			alert("请检查参数是否输入完整！");
+			return false;
+		}else if(goodName.length!=0 && SelectDate=="select" || SelectDate=="自定义" && ZdyDate=="请输入有效期"){
+			alert("请检查参数是否输入完整！");
+			return false;
+		}else if(isNaN(goodNumber) || isNaN(Money) || isNaN(Gold) || isNaN(Lijuan)){
+			alert("您输入的数值格式不正确！");
+			return false;
+		}else if(ZdyDate<0 || ZdyDate>365 || /^\d+$/.test(ZdyDate)==false && ZdyDate!="请输入有效期"){
+			alert("有效期的范围过大，标准为：0-365！");
+			document.getElementById("txt_zdy").value="";
+			document.getElementById("txt_zdy").focus();
+			return false;
+		}else if(/^\d+$/.test(Money)==false){
+			alert("格式有误，请重新输入！");
+			document.getElementById("txt_money").value="";
+			document.getElementById("txt_money").focus();
+			return false;
+		}else if(/^\d+$/.test(Gold)==false){
+			alert("格式有误，请重新输入！");
+			document.getElementById("txt_gold").value="";
+			document.getElementById("txt_gold").focus();
+			return false;
+		}else if(/^\d+$/.test(goodNumber)==false){
+			alert("格式有误，请重新输入！");
+			document.getElementById("txt_num").value="";
+			document.getElementById("txt_num").focus();
+			return false;
+		}else if(/^\d+$/.test(Lijuan)==false){
+			alert("格式有误，请重新输入！");
+			document.getElementById("txt_Lijuan").value="";
+			document.getElementById("txt_Lijuan").focus();
+			return false;
+		}else{
+			//return true;
+			var goodId = document.getElementById("hind_goodId").value;
+
+			var datetime = 1;
+			if((document.getElementById("select6").value!="select") && (document.getElementById("select6").value!="自定义")){
+				datetime=document.getElementById("select6").value;
+			}
+			if(document.getElementById("select6").value=="自定义" && document.getElementById("txt_zdy").value!="请输入有效期"){
+				datetime = document.getElementById("txt_zdy").value;
+			}
+			var isBind = "True";
+			if(document.getElementById("radiono").checked){
+				isBind="False";
+			}
+			var isSex = 0;
+			if(document.getElementById("radio1").checked){
+				isSex=1;
+			}
+			
+			if(document.getElementById("radio2").checked){
+				isSex=2;
+			}
+			
+			if(document.getElementById("radio3").checked){
+				isSex=0;
+			}
+			
+			var dj = document.getElementById("select").value;
+			var gj = document.getElementById("select2").value;
+			var fy = document.getElementById("select3").value;
+			var mj = document.getElementById("select4").value;
+			var xy = document.getElementById("select5").value;
+			var templateID = document.getElementById("txt_goodId").value;
+			var CategoryID =document.getElementById("hind_CategoryID").value;
+			var isCanStrengthen = document.getElementById("hind_CanStrengthen").value;
+			var isCanCompose = document.getElementById("hind_CanCompose").value;
+			var goodIds = document.getElementById("hind_goodId").value;
+			var goodName = document.getElementById("txt_goodName").value;
+            {
+				var params = goodNumber+","+datetime+","+isBind+","+isSex+","+dj+","+gj+","+fy+","+mj+","+xy+","+Money+","+Gold+","+Lijuan+","+templateID+","+CategoryID+","+isCanStrengthen+","+isCanCompose+","+escape(goodName);
+			}
+            window.location="?page=mail&getGoodId="+goodId+"&params="+params;
+		}	
+	}
+	
+	function closeDiv(){
+			document.getElementById("zjyDiv").style.display = 'none';
+			document.getElementById("txt_zdy").value="请输入有效期";
+			document.getElementById("yxqDiv").style.display = 'block';
+	}
+//取消按钮
+	function cleareText(){
+		document.getElementById("txt_goodName").value="";
+		document.getElementById("txt_num").value="1";
+		document.getElementById("txt_money").value="0";
+		document.getElementById("txt_gold").value="0";
+		document.getElementById("txt_Lijuan").value="0";
+		document.getElementById("txt_goodId").value="";
+		document.getElementById("isTrue").innerHTML="";
+		document.getElementById("txt_categoryID").value="";
+		document.getElementById("select6").options[0].selected=false;
+				document.getElementById("select").disabled=false;
+				document.getElementById("select2").disabled=false;
+				document.getElementById("select3").disabled=false;
+				document.getElementById("select4").disabled=false;
+				document.getElementById("select5").disabled=false;
+				document.getElementById("select6").disabled=false;
+				document.getElementById("select6").options[0].selected=true;
+		document.getElementById("txt_zdy").value="请输入有效期";
+			if(document.getElementById("dateDiv").innerHTML=="此物品为永久的"){
+				document.getElementById("dateDiv").innerHTML="单位(天)";
+			}
+	}
+
+//鼠标点下清除“请输入物品有效期”文字
+
+	function ClearText(){
+		if(document.getElementById("txt_zdy").value=="请输入有效期"){
+			document.getElementById("txt_zdy").value="";
+		}
+	}
+	function checkDateValue(){
+		if(document.getElementById("txt_zdy").value==""){
+			document.getElementById("txt_zdy").value="请输入有效期";
+		}else if(document.getElementById("txt_zdy").value.length!=0 && isNaN(document.getElementById("txt_zdy").value)){
+			alert("有效期格式输入错误！");
+			document.getElementById("txt_zdy").value="";
+			document.getElementById("txt_zdy").focus();
+		}
+		}
+
+//判断收件人、赠送内容、赠送原因
+
+	function checkMsg(){
+			var receiver = document.getElementById("txt_userID").value;
+			var contents = document.getElementById("txt_Title").value;
+			var result = document.getElementById("txt_Content").value;
+			if(receiver.length==0 || contents.length==0 || result.length==0){
+				alert("请检查信息是否填写完整！");
+				return false;
+			}else{
+				document.getElementById("sendDiv").style.display="block";
+				return true;
+			}
+		}
+	
+
+
+	
+	function closeGoodDiv(goodId,CategoryID,ids,Names,sex,divName,isCanStrengthen,isCanCompose,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11){
+            {
+			document.getElementById("txt_goodId").value=ids;
+			document.getElementById("txt_categoryID").value=CategoryID;
+			document.getElementById(divName).style.display="none";
+
+			document.getElementById("sf").style.display="block";
+			document.getElementById("gjxx").style.display="block";
+			document.getElementById("sendDiv").style.display="block";
+			document.getElementById("hind_goodId").value=goodId;
+			document.getElementById("hind_CategoryID").value=CategoryID;
+			document.getElementById("hind_CanStrengthen").value=isCanStrengthen;
+			document.getElementById("hind_CanCompose").value=isCanCompose;
+			document.getElementById("txt_goodName").value=Names;
+
+			document.getElementById("txt_num").value=param1;
+			if(param2=="0"){
+				document.getElementById("select6").options[1].selected=true;
+			}else if(param2=="1"){
+				document.getElementById("select6").options[2].selected=true;
+		
+			}else if(param2=="3"){
+				document.getElementById("select6").options[3].selected=true;
+			}else if(param2=="7"){
+				document.getElementById("select6").options[4].selected=true;
+			}else if(param2=="30"){
+				document.getElementById("select6").options[5].selected=true;
+			}else if(param2=="365"){
+				document.getElementById("select6").options[6].selected=true;
+			}else{
+				document.getElementById("select6").options[0].selected=true;
+			}
+			document.getElementById("select").options[param3].selected=true;
+			document.getElementById("select2").options[param4/10].selected=true;
+			document.getElementById("select3").options[param5/10].selected=true;
+			document.getElementById("select4").options[param6/10].selected=true;
+			document.getElementById("select5").options[param7/10].selected=true;	
+			if(param8=="True"){
+				document.getElementById("radioyes").checked=true;
+			}else{
+				document.getElementById("radiono").checked=true;
+			}
+			document.getElementById("txt_goodName").value=Names;
+			if((CategoryID==10 || CategoryID==11) && ids!=11995 && ids!=11996 && ids!= 11997 && ids!=11998){
+				document.getElementById("select6").options[1].selected=true;
+				document.getElementById("select6").disabled="disabled";
+				document.getElementById("dateDiv").innerHTML="此物品为永久的";
+
+			}else{
+				document.getElementById("select6").disabled=false;
+				document.getElementById("dateDiv").innerHTML="单位(天)";
+			}
+			if(ids==11995 || ids==11996 || ids== 11997 || ids==11998){
+				document.getElementById("dateDiv").innerHTML="为0时，只有1天";
+			}
+			if(sex==1){
+				document.getElementById("radio1").checked="checked";
+			}
+			if(sex==2){
+				document.getElementById("radio2").checked="checked";
+			}
+			if(sex==0){
+				document.getElementById("radio3").checked="checked";
+			}
+			if(isCanStrengthen=="True"){
+				document.getElementById("select").disabled=false;
+				document.getElementById("isTrue").innerHTML="";
+			}
+			if(isCanCompose=="True"){
+				document.getElementById("select2").disabled=false;
+				document.getElementById("select3").disabled=false;
+				document.getElementById("select4").disabled=false;
+				document.getElementById("select5").disabled=false;
+				document.getElementById("isTrue").innerHTML="";
+			}
+			if(isCanStrengthen=="False"){
+				document.getElementById("select").disabled=true;
+				document.getElementById("isTrue").innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该物品没有强化功能！";
+			}
+			if(isCanCompose=="False"){
+				document.getElementById("select2").disabled=true;
+				document.getElementById("select3").disabled=true;
+				document.getElementById("select4").disabled=true;
+				document.getElementById("select5").disabled=true;
+				document.getElementById("isTrue").innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该物品没有合成功能！";
+			}
+			if(isCanStrengthen=="False" && isCanCompose=="False"){
+				document.getElementById("isTrue").innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该物品没有强化和合成功能！";
+			}
+		}
+	}
+
+
+	function test(){flag=false;}
+
+	function showChilesRowDJ(numId,TrId){
+		if(flag){
+			 var tabRows  = $("#tbDJ tr");
+			var j=0;
+			$(tabRows).each(function(i){
+				if($(this).attr("id")==11){
+				    if($(this).attr("key")=="block" || $(this).attr("sel") ==TrId || (TrId==0 && $(this).attr("sel")>3) ||(TrId>3 && $(this).attr("sel")>3 )||(TrId>3 && $(this).attr("sel")==0) )
+				    {
+					if($(this).css("display")=="none"){
+						j++;
+						$(this).css("display","block");
+						numId.style.display="block";
+					}else{
+						j--;
+						numId.style.display="block";
+						$(this).css("display","none");
+					     }
+				    }
+				}
+			});
+			if(j>0){ isblock=false; }
+			if(j<0){ isblock =true;}
+		}
+		flag=true;
+	}
+	function ShowDJ(){
+	       var tabRows  = $("#tbDJ tr");
+		$(tabRows).each(function(i){
+			if($(this).attr("id")==11){
+			    if($(this).attr("key")=="block" || $(this).attr("key")=="Priorblock")
+			    {
+				$(this).css("display","block");
+			    }else{
+				$(this).css("display","none"); 
+			    }
+			}
+		});
+		isblock =true;
+		window.location.hash= 'top';
+	}
+
+	function closeShuXiDiv(){
+		if(document.getElementById("sf").style.display=="block"){
+			document.getElementById("sf").style.display="none";
+		}else{
+			document.getElementById("sf").style.display="block";
+		}
+	}
+	
+	//全选
+
+	function checkAll(params,names){
+		if(names=="all"){
+			var checkBoxs = document.getElementsByTagName("input");
+			for(var i=0; i<checkBoxs.length;i++)
+				{
+				checkBoxs[i].checked=params.checked;
+				}
+			}else{
+				var checkBoxs = document.getElementsByName(names);			
+				for(var i=0; i<checkBoxs.length;i++)
+				{
+				checkBoxs[i].checked=params.checked;
+				}
+				}
+	}
+
+	function getClickId(){
+		var ids="";
+		var checkBoxs = document.getElementsByTagName("input");
+		for(var i=0; i<checkBoxs.length;i++)
+		{
+			if(checkBoxs[i].checked==true && checkBoxs[i].type=="checkbox"){
+				ids+=checkBoxs[i].id+",";
+			}
+		}
+		if(ids=="" && confirm("您还没有选择物品,是否取消？")==true){
+			return false;
+		}else{
+		    window.location="?page=mail&ids="+ids;
+		}
+	}
+	function showShuXingDiv(){
+		if(document.getElementById("sf").style.display=="none"){
+			document.getElementById("sf").style.display="block";
+			document.getElementById("wpYl").style.display="none";
+		}else{
+			document.getElementById("sf").style.display="none";
+			document.getElementById("wpYl").style.display="block";
+		}
+			document.getElementById("sendDiv").style.display="block";
+	}
+
+	function selectUser(){
+		var values = 3;
+		var num = document.getElementById("selectSendUsers");
+		for(var i =0; i<num.length;i++){
+			if(num.options[i].value=="$!selectSendUsers"){
+				num.options[i].selected=true;
+			}
+		}
+	}
+
+	function showSendMoneyDiv(){
+		if(document.getElementById("sendMoney").style.display=="none"){
+			document.getElementById("sendMoney").style.display="block";
+			document.getElementById("wpyl").style.display="block";
+				
+		}else{
+			document.getElementById("sendMoney").style.display="none";
+		}
+	}
+
+	function closeSendMoneyDiv(){
+			document.getElementById("sendMoney").style.display="none";
+			document.getElementById("wpyl").style.display="block";
+			document.getElementById("sendDiv").style.display="block";
+	}
+
+	//Jquery加载用户ID
+	$(function (){
+		$('#sub_searchUserId').click(function (){
+		if($('#userMsg').val()==""){
+			alert("Text box can not be empty");
+			$('#userMsg').focus();
+			$('#searchUserId').val("");
+			return false;
+		}
+		jQuery.ajax({
+			type:"POST",
+			url:"?page=mail&sub_searchUserId=search&userMsg="+escape($('#userMsg').val()),
+			success:function(param){
+			$('#searchUserId').val(param);
+		}
+	});
+	});
+	});
+
+	function showMoreEdit(){
+				var str = "";
+				var isNo = "ok";
+				$('#wpYl input[type=checkbox]:checked').each(function(){
+				if($(this).val()!=""){
+				str+=$(this).val()+",";
+				}
+				});
+				if(str==""){
+				alert("您还没有选择项,请选择!");
+				return false;
+				}else{
+				$('#wpYl input[type=checkbox]:checked').each(function(){
+				var idstr = $(this).val();
+				var idValue = $('#id_'+idstr).text();
+				if(idValue=="货币"){
+					isNo="货币";
+				}
+			});
+				if(isNo =="货币"){
+					alert("货币类型数据不能在此修改!");
+					return false;
+				}else{
+				document.getElementById("sf").style.display="block";
+				document.getElementById("gjxx").style.display="none";
+				document.getElementById("wpYl").style.display="none";
+				document.getElementById("txt_goodName").innerHTML="批量修改";
+				}
+		}
+	}
+//设定物品预览和待发送物品复选框的点击事件
+	$(function(){
+		$('#get_AllSelectGoods').click(function (){
+			if($(this).attr("checked")==true){
+				$('#wpYl input[type=checkbox]').each(function(){
+					$(this).attr("checked",true);
+				});
+			}else{
+				$('#wpYl input[type=checkbox]').each(function(){
+					$(this).attr("checked",false);
+				});
+			}
+
+
+
+		});
+		$('#get_AllSelectSends').click(function (){
+		if($(this).attr("checked")==true){
+			$('#Tab_Send_Goods input[type=checkbox]').each(function(){
+				$(this).attr("checked",true);
+			});
+		}else{
+			$('#Tab_Send_Goods input[type=checkbox]').each(function(){
+				$(this).attr("checked",false);
+			});
+		}
+		});
+	});
+//批量删除物品按钮的事件
+	function deleteGoodAry(){
+				var str = "";
+				$('#wpYl input[type=checkbox]:checked').each(function(){
+				if($(this).val()!=""){
+				str+=$(this).val()+",";
+				}
+				});
+			if(str==""){
+				alert("您还没有选择项,请选择!");
+				return false;
+			}
+			if(confirm("您确定要删除此信息吗?")){
+				window.location = "Send_Goods.aspx?GoodIdArray="+str;
+			}else{
+				return false;
+			}
+	}
+//批量删除待发送物品的事件
+	function deleteSendGoodAry(){
+				var str = "";
+				$('#Tab_Send_Goods input[type=checkbox]:checked').each(function(){
+				if($(this).val()!=""){
+				str+=$(this).val()+",";
+				}
+				});
+			if(str==""){
+				alert("您还没有选择项,请选择!");
+				return false;
+			}
+			if(confirm("您确定要取消选中的项吗?")){
+				window.location = "Send_Goods.aspx?SendGoodArray="+str;
+			}else{
+				return false;
+			}
+	}
+//批量发送待发送物品的事件
+	function SendGoodAry(){
+				var str = "";
+				$('#Tab_Send_Goods input[type=checkbox]:checked').each(function(){
+				if($(this).attr("key")!=""){
+				str+=$(this).attr("key")+",";
+				}
+				});
+			if(str==""){
+				alert("您还没有选择项,请选择!");
+				return false;
+			}else{
+				window.location = "Send_Goods.aspx?SendArray="+encodeURIComponent(str);
+			}
+	}
+
+	$(function(){
+		$('#btn_importExcele').click(function (){
+		if($('#file_Excel').val()==""){
+			alert("文件路径不能为空！");
+			$('#file_Excel').focus();
+			return false;
+		}	
+		jQuery.ajax({
+		type:"POST",
+		cache:false,
+		url:"Send_Goods.aspx?btn_importExcel=ImportExcel&file_Excel="+$('#file_Excel').val(),
+		success:function(param){
+			$('#txt_userMore').val(param);
+		}
+	});
+	});
+	});
+
+	function cleareTexts(params){
+		var values = document.getElementById(params);
+		if(values.value=="0"){
+			values.value="";
+		}
+	}
+
+	function checkSearchBtn(){
+		if(document.getElementById("selectSendUsers").value=="no"){
+			alert("请选择信息!");
+			document.getElementById("selectSendUsers").options[0].selected=true;
+			return false;
+		}
+	}
+	function uniteTable(thistab,j)
+	  {  
+		
+	    var   rn=thistab.rows.length;//取得行数 alert(rn);  
+	    var   rowspann=0;   
+	    var k=2,l=1,m=0;
+
+	       for(i=rn-1;i>0;i--)
+	       {//从倒数第一行开始往上检查   
+		  if(thistab.rows[i].cells[j].innerText==thistab.rows[i-1].cells[j].innerText&&thistab.rows[i].cells[j].colSpan==thistab.rows[i-1].cells[j].colSpan)
+		  {//与上面一行比较，如果两行相等就合计当前行的合并行数，并删除当前行。   
+		     rowspann+=thistab.rows[i].cells[j].rowSpan;   
+		       
+		    thistab.rows[i].deleteCell(j); 
+		    thistab.rows[i].deleteCell(k); 
+		    thistab.rows[i].deleteCell(l); 
+		    thistab.rows[i].deleteCell(m); 
+		    
+		  }
+		  else
+		  {   
+		    
+		    thistab.rows[i].cells[j].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		    thistab.rows[i].cells[k].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		    thistab.rows[i].cells[l].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		    thistab.rows[i].cells[m].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+
+		    rowspann=0;   
+		  }   
+	       } 
+	       //检测无表头的表   
+	       if(i==0&&rowspann>0)
+	       {   
+		 thistab.rows[i].cells[j].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		 thistab.rows[i].cells[k].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		 thistab.rows[i].cells[l].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		 thistab.rows[i].cells[m].rowSpan+=rowspann;//如果不等就完成当前相同数据的合并。 
+		 rowspann=0;   
+	       }   
+	      
+	  }   
+	  $(document).ready(function(){
+		uniteTable(document.getElementById("Tab_Send_Goods"),3);//执行测试。  
+	  })  
+	  
+</script>
+
+
+<BODY style="MARGIN: 0px" onload="selectUser()">
+<!--导航部分-->
+<form id="form1" name="form1" method="post" action="?page=mail">
+<a name="top" href="#top" ></a>
+<TABLE style="BACKGROUND: #fff" height="92%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+    
+    <TABLE cellSpacing=0 cellPadding=0 width="100%" bgColor=#fff border=0>
+        <TBODY>
+          <TR height=32>
+            <TD vAlign=top width=19 background="../CDN/images/m_right1a.jpg"><img alt=""src="../CDN/images/m_right1ss.jpg"></TD>
+            <TD width=100% align="left" background="../CDN/images/m_right1fa.jpg"><font id="font4">物品赠送</font></TD>
+            <TD width="100%" background="../CDN/images/m_right1fa.jpg" style="COLOR: #fff; TEXT-ALIGN: right">&nbsp;</TD>
+            <TD vAlign=top align=right width=100% background="../CDN/images/m_right1a.jpg">&nbsp;</TD>
+            <TD align=right width=64 bgColor=#508ADC><IMG 
+            src="../CDN/images/m_right1b.jpg" alt="" width="64" height="36"></TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      <div id="m_right">
+      <div id="m_right2">
+      <div  class="wp">
+      <div> <font id="font3">物品选择</font> </div>
+      <div class="wpps">
+        <ul>
+          <li>
+            <input type="submit" name = "btn_wq" id = "btn_wq" value="选择武器"/>
+          </li>
+          <li>
+            <input type = "submit" name = "btn_zb" id = "btn_zb" value="选择装备" />
+          </li>
+          <li>
+            <input type = "submit" name = "btn_dj" id ="btn_dj" value = "选择道具"/>
+          </li>
+        </ul>
+
+        <div class="containDivyy">
+          <div style="display:none">
+            <input type="text" name="txt_goodId" id="txt_goodId" value=""/>
+            <input type="text" name="txt_categoryID" id="txt_categoryID" value=""/>
+          </div>
+        </div>
+      </div>
+
+
+      #if($!GoodsWeapons)
+      <!--武器DIV-->
+      <div id = "LayerWQ">
+        <table cellspacing="0" cellpadding="0" width="98%" bgcolor="#fff" border="0">
+          <tr height="30">
+            <td valign="top" width="12" background="../cdn/images/m_right1a.jpg"><img alt="" src="../cdn/images/dc1.jpg" /></td>
+            <td background="../cdn/images/dc2.jpg">&nbsp;</td>
+            <td valign="top" align="right" width="58"><img src="../cdn/images/dc3.jpg" width="58" height="30" /></td>
+            <td align="right" width="31" bgcolor="#fff"><img onclick="closeGoodSelectDiv('LayerWQ')" title="关闭" style="cursor: hand" src="../cdn/images/dc4.jpg" width="31" height="30" /></td>
+          </tr>
+        </table>
+        <table id="tbWQ" width="98%" border="0" cellspacing="1" bgcolor="#999999" class="table1">
+          <tr>
+            <td bgcolor="#E1FFE1" width="4%"></td>
+            <td bgcolor="#E1FFE1" width="6%"> 编号</td>
+            <td bgcolor="#E1FFE1" width="10%">图片</td>
+            <td bgcolor="#E1FFE1" width="12%">商品名称</td>
+            <td bgcolor="#E1FFE1" width="8%">性别</td>
+            <td bgcolor="#E1FFE1" width="54%">商品描述</td>
+            <td bgcolor="#E1FFE1" width="4%">选择</td>
+          </tr>
+          #foreach($g in $GoodsWeapons)
+          <tr bgcolor="#ffffff" id="$!g.TemplateID">
+            <td width="4%"><input type="checkbox" name="$!g.TemplateID" id="$!g.TemplateID" onclick="this.onclick =null;"  /></td>
+            <td width="6%">&nbsp;$!g.TemplateID</td>
+            <td width="10%">&nbsp;<a href="$this.GetImage($g.CategoryID,$g.pic)" target="_blank" onmouseover="toolTip('<img src=$this.GetImage($g.CategoryID,$g.pic)>')" onMouseOut="toolTip()">$!g.Pic</a></td>
+            <td width="12%">&nbsp;$!g.Name</td>
+            <td width="8%">&nbsp;#if($!g.NeedSex==0)男女不限#elseif($!g.NeedSex==1)男#elseif($!g.NeedSex==2)女#end</td>
+            <td width="54%" align="left">&nbsp;$!g.Description</td>
+            <td width="4%"><a href="?page=mail&ids=$!g.TemplateID," title="选择当前物品">选择</a></td>
+          </tr>
+          
+          #end
+          <tr>
+            <td bgcolor="#cccccc"  colspan="7"><input type="button" onClick="getClickId()" name="btn_subWq" id="btn_subWq" value=" 确 定 " /></td>
+          </tr>
+        </table>
+      </div>
+      <!--武器DIV结束-->
+      #end
+      
+      #if($!GoodsEquipment)
+      <!--装备DIV-->
+      <div id = "LayerZB">
+        <table cellspacing="0" cellpadding="0" width="98%" bgcolor="#fff" 
+        border="0">
+          <tbody width="100%">
+            <tr height="30">
+              <td valign="top" width="12" 
+          background="../cdn/images/m_right1a.jpg"><img alt="" 
+            src="../cdn/images/dc1.jpg" /></td>
+              <td
+          background="../cdn/images/dc2.jpg">&nbsp;</td>
+              <td valign="top" align="right" width="58"><img src="../cdn/images/dc3.jpg" width="58" height="30" /></td>
+              <td align="right" width="31" bgcolor="#fff"><img src="../cdn/images/dc4.jpg" onclick="closeGoodSelectDiv('LayerZB')" style="cursor: hand" title="关闭"  width="31" height="30" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <table id="tbZB" width="98%" border="0" cellspacing="1" bgcolor="#999999" class="table1">
+            <tr>
+              <td bgcolor="#E1FFE1" width="4%"></td>
+              <td bgcolor="#E1FFE1" width="6%"> 编号</td>
+
+              <td bgcolor="#E1FFE1" width="10%">图片</td>
+              <td bgcolor="#E1FFE1" width="12%">商品名称</td>
+              <td bgcolor="#E1FFE1" width="8%">性别</td>
+              <td bgcolor="#E1FFE1" width="53%">商品描述</td>
+              <td bgcolor="#E1FFE1" width="4%">选择</td>
+            </tr>
+            #foreach($g2 in $GoodsEquipment)
+            <tr bgcolor="#ffffff" id="$!g2.TemplateID">
+              <td width="4%"  ><input type="checkbox" name="$!g2.TemplateID" id="$!g2.TemplateID" /></td>
+              <td width="6%">&nbsp;$!g2.TemplateID</td>
+              <td width="10%">&nbsp;<a href="$this.GetImage($g2.CategoryID,$g2.pic,$g2.NeedSex)" target="_blank" onmouseover="toolTip('<img src=$this.GetImage($g2.CategoryID,$g2.pic,$g2.NeedSex)>')" onMouseOut="toolTip()">$!g2.Pic</a></td>
+              <td width="12%">&nbsp;$!g2.Name</td>
+              <td width="8%">&nbsp;#if($!g2.NeedSex==0)男女不限#elseif($!g2.NeedSex==1)男#elseif($!g2.NeedSex==2)女#end</td>
+              <td width="53%" align="left">&nbsp;$!g2.Description</td>
+              <td width="4%"><a href="?page=mail&ids=$!g2.TemplateID," title="选择当前物品">选择</a></td>
+            </tr>
+            #set($goodNames2=$g2.Pic)
+            #end
+            <tr>
+              <td bgcolor="#cccccc"  colspan="7"><input type="button" onClick="getClickId()" name="btn_subZb" id="btn_subZb" value=" 确 定 " /></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--装备DIV结束 -->
+      #end
+      
+      
+      #if($!GoodsProps)
+      <!--道具DIV-->
+      <div id = "LayerDJ">
+        <table cellspacing="0" cellpadding="0" width="98%" bgcolor="#fff" 
+        border="0">
+          <tbody width="100%">
+            <tr height="30">
+              <td valign="top" width="12" 
+          background="../cdn/images/m_right1a.jpg"><img alt="" 
+            src="../cdn/images/dc1.jpg" /></td>
+              <td
+          background="../cdn/images/dc2.jpg">&nbsp;</td>
+              <td valign="top" align="right" width="58"><img src="../cdn/images/dc3.jpg" width="58" height="30" /></td>
+              <td align="right" width="31" bgcolor="#fff"><img src="../cdn/images/dc4.jpg" onclick="closeGoodSelectDiv('LayerDJ')" style="cursor: hand" title="关闭"  width="31" height="30" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <table id="tbDJ" width="98%" border="0" cellspacing="1" bgcolor="#999999" class="table1">
+            <tr>
+              <td bgcolor="#E1FFE1" width="4%"></td>
+              <td bgcolor="#E1FFE1" width="6%"> 编号</td>
+              <td bgcolor="#E1FFE1" width="10%">图片</td>
+              <td bgcolor="#E1FFE1" width="12%">商品名称</td>
+              <td bgcolor="#E1FFE1" width="8%">性别</td>
+              <td bgcolor="#E1FFE1" width="53%">商品描述</td>
+              <td bgcolor="#E1FFE1" width="4%">选择</td>
+
+
+            </tr>
+            #foreach($g3 in $GoodsProps)				
+
+			    <tr bgcolor="#ffffff" id="$!g3.TemplateID">
+			      <td width="5%"><input type="checkbox" name="$!g3.TemplateID" id="$!g3.TemplateID"/>
+			      </td>
+			      <td width="6%">&nbsp;$!g3.TemplateID</td>
+			      <td width="10%">&nbsp;<a href="$this.GetImage($g3.CategoryID,$g3.pic)" target="_blank" onmouseover="toolTip('<img src=$this.GetImage($g3.CategoryID,$g3.pic)>')" onMouseOut="toolTip()">$!g3.Pic</a></td>
+			      <td width="12%">&nbsp;$!g3.Name</td>
+			      <td width="8%">&nbsp;#if($!g3.NeedSex==0)男女不限#elseif($!g3.NeedSex==1)男#elseif($!g3.NeedSex==2)女#end</td>
+			      <td width="53%" align="left">&nbsp;$!g3.Description</td>
+			      <td width="4%"><a href="?page=mail&ids=$!g3.TemplateID," title="选择">选择</a></td>
+			    </tr>
+            #end
+            <tr>
+              <td bgcolor="#cccccc"  colspan="7"><input type="button" onClick="getClickId()" name="btn_subDj" id="btn_subDj" value=" 确 定 " /></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--道具DIV结束 -->
+      #end
+
+	
+     
+
+       
+      <div id="wpYl" style="margin-top:20px;">
+        <div> <font id="font3">物品预览</font> </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="1" bordercolor="#BDC6D0" bgcolor="#999999" class="table3">
+          <tr bgcolor="#d3e1f9">
+            <td width="3%" bgcolor="#FFFF99"><input type="checkbox" name="get_Goods" id="get_AllSelectGoods" value=""/></td>
+            <td width="10%" bgcolor="#FFFF99"><span class="STYLE2"> 物品名称</span></td>
+            <td width="3%" bgcolor="#FFFF99"><span class="STYLE2">性别</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">数量</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">有效期</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">点卷</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">金币</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">礼卷</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">等级</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">攻击</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">防御</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">敏捷</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">幸运</span></td>
+            <td width="6%" bgcolor="#FFFF99"><span class="STYLE2">是否绑定</span></td>
+            <td width="4%" bgcolor="#FFFF99"><span class="STYLE2">编辑</span></td>
+            <td width="4%" bgcolor="#FFFF99"><span class="STYLE2">删除</span></td>
+          </tr>
+          #foreach($a in $ResultGoods.Rows)
+          <tr>
+            <td width="3%" bgcolor="#FFFFE1"><input type="checkbox" name="get_Goods"  value="$!a.ID"/></td>
+            <td bgcolor="#FFFFFF" id="id_$a.ID">#if($a.GoodName=="")无#else$!a.GoodName#end</td>
+            <td id="sex" bgcolor="#FFFFFF">&nbsp;#if($!a.Sex=="0")不限#elseif($!a.Sex=="1")男#else女#end</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.GoodNumber</td>
+            <td bgcolor="#FFFFFF">&nbsp;#if($!a.ValidDate==0)
+		永久 #else $!a.ValidDate 天#end</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.Money</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.Gold</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.Lijuan</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.StrengthenLevel</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.AttackCompose</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.DefendCompose</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.AgilityCompose</td>
+            <td bgcolor="#FFFFFF">&nbsp;$!a.LuckCompose</td>
+            <td bgcolor="#FFFFFF">&nbsp;#if($!a.IsBind=="True")是#else 否 #end</td>
+            <td bgcolor="#FFFFFF">&nbsp;
+	    #if($!isSelect==$!a.TemplateID) 
+		<script type="text/javascript"> window.onload= function(){closeGoodDiv($a.ID,$!a.CategoryID,$!a.TemplateID,'$!a.GoodName',$!a.Sex,'wpYl','$!a.CanStrengthen','$!a.CanCompose','$!a.GoodNumber','$!a.ValidDate','$!a.StrengthenLevel','$!a.AttackCompose','$!a.DefendCompose','$!a.AgilityCompose','$!a.LuckCompose','$!a.IsBind','$!a.Money','$!a.Gold','$!a.Lijuan')}</script> 
+	    #else
+		<a href="#" id="testId" style="cursor:hand;"onClick="closeGoodDiv($a.ID,$!a.CategoryID,$!a.TemplateID,'$!a.GoodName',$!a.Sex,'wpYl','$!a.CanStrengthen','$!a.CanCompose','$!a.GoodNumber','$!a.ValidDate','$!a.StrengthenLevel','$!a.AttackCompose','$!a.DefendCompose','$!a.AgilityCompose','$!a.LuckCompose','$!a.IsBind','$!a.Money','$!a.Gold','$!a.Lijuan')">编辑</a>
+	    #end
+	    </td>
+            <td bgcolor="#FFFFFF">&nbsp;<a onclick="return confirm('您确定要删除该项的值吗？')" href='?page=mail&deletegoodid=$a.id' title="取消当前选项">删除</a></td>
+          </tr>
+          #end
+          </tr>
+          
+          <tr>
+            <td colspan="16" bgcolor="#FFFFE1"><span class="STYLE2">点击可查询用户ID</span></td>
+          </tr>
+          <tr>
+            <td bgcolor="#CCCCCC" colspan="8"><span class="STYLE2">用户信息</span></td>
+            <td bgcolor="#CCCCCC" colspan="4"><span class="STYLE2">操作</span></td>
+            <td bgcolor="#CCCCCC" colspan="4"><span class="STYLE2">用户编号(ID)</span></td>
+          </tr>
+          <tr>
+            <td bgcolor="#FFFFFF" colspan="8"><textarea name="userMsg" style="width:89%" rows="3" id="userMsg"></textarea></td>
+            <td bgcolor="#FFFFFF" colspan="4"><input type="button" name="sub_searchUserId" id="sub_searchUserId" class="send_s" value=" 查 询 "/></td>
+            <td bgcolor="#FFFFFF" colspan="4"><textarea name="searchUserId" rows="3" style="width:89%" id="searchUserId"></textarea></td>
+          </tr>
+        </table>
+      </div>
+      <br/>
+      <!-- <div id="testDiv" style="height:419px;></div>  -->
+        <div style="display:none">
+          <input type="text" size="10px" name="hind_goodId" id="hind_goodId" value="" />
+          <input type="text" size="10px" name="hind_CategoryID" id="hind_CategoryID" value="" />
+          <input type="text" size="10px" name="hind_CanStrengthen" id="hind_CanStrengthen" value="" />
+          <input type="text" size="10px" name="hind_CanCompose" id="hind_CanCompose" value="" />
+        </div>
+
+      <div id="sf" style="display:none;top:150px;border-width:1px; border-style:solid; border-color:#cccccc; background-color:#FFFFFF">
+        <div ><font id="font3">物品属性</font></div>
+        <table width="683" border="0" cellpadding="0" cellspacing="1" bordercolor="#BDC6D0" bgcolor="#999999" class="table3">
+          <tr bgcolor="#d3e1f9">
+            <td width="176" bgcolor="#E1FFE1"><span class="STYLE2"> 商品名</span></td>
+            <td width="150" bgcolor="#E1FFE1"><span class="STYLE2">数量</span></td>
+            <td width="305" bgcolor="#E1FFE1"><span class="STYLE2">有效期</span></td>
+            <td width="200" bgcolor="#E1FFE1"><span class="STYLE2">绑定</span></td>
+            <td width="254" bgcolor="#E1FFE1"><span class="STYLE2">性别</span></td>
+          </tr>
+          <tr>
+            <td height="32" bgcolor="#FFFFFF"><input type="text" name="txt_goodName" readonly="readonly" id="txt_goodName" /></td>
+            <td bgcolor="#FFFFFF"><input type="text" name="txt_num" class="text_input" value="1" id="txt_num" /></td>
+            <td bgcolor="#FFFFFF"><div id="yxqDiv" style="width:150px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="select6" width="120px" id="select6" onChange="showDivDate()">
+                  <option value="select">--请选择有效期--</option>
+                  <option value="0">永久</option>
+                  <option value="1">1天</option>
+                  <option value="3">3天</option>
+                  <option value="7">7天</option>
+                  <option value="30">30天</option>
+                  <option value="365">365天</option>
+                  <option value="自定义">自定义...</option>
+                </select>
+              </div>
+              <div style="display:none" id="zjyDiv">
+                <input name="txt_zdy" type="text" id="txt_zdy" onfocus="ClearText()" onblur="checkDateValue()" class="text_Dateinput" value="请输入有效期" />
+                <a href="javascript:closeDiv()" title="结束当前输入">取消</a></div>
+              <div id="dateDiv" style="color:red; font-weight:bold">单位(天)</div></td>
+            <td bgcolor="#FFFFFF"><input type="radio" name="radiobBind" id="radioyes" value="true" checked="checked"  />
+              <label for="radioyes">是 </label>
+              <input name="radiobBind" type="radio" id="radiono" value="false"/>
+              <label for="radiono">否 </label></td>
+            <td bgcolor="#FFFFFF"><input type="radio" name="radioSex" id="radio1" value="1" />
+              <label for="radio1">男</label>
+              <input type="radio" name="radioSex" id="radio2" value="2" />
+              <label for="radio2">女</label>
+              <input type="radio" name="radioSex" id="radio3" value="0" checked="checked" />
+              <label for="radio3">不限</label></td>
+          </tr>
+        </table>
+	<div id="gjxx">
+        <div > <font id="font3">&nbsp;</font> </div>
+        <div style="float:left"> <font id="font3">高级选项</font> </div>
+        <div id="isTrue" style="float:left;color:red; font-weight:bold"></div>
+        <table width="683" border="0" cellpadding="0" cellspacing="1" bordercolor="#BDC6D0" bgcolor="#999999" class="table3">
+          <tr bgcolor="#d3e1f9">
+            <td width="176" bgcolor="#E1FFE1"><span class="STYLE2"> 等级</span></td>
+            <td width="150" bgcolor="#E1FFE1"><span class="STYLE2">攻击</span></td>
+            <td width="305" bgcolor="#E1FFE1"><span class="STYLE2">防御</span></td>
+            <td width="200" bgcolor="#E1FFE1"><span class="STYLE2">敏捷</span></td>
+            <td width="254" bgcolor="#E1FFE1"><span class="STYLE2">幸运</span></td>
+          </tr>
+          <tr>
+            <td height="32" align="center" bgcolor="#FFFFFF"><select name="select" class="select" id="select">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+              </select>
+            </td>
+            <td align="center" bgcolor="#FFFFFF"><select name="select2" class="select" id="select2">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </td>
+            <td align="center" bgcolor="#FFFFFF"><select name="select3" class="select" id="select3">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </td>
+            <td align="center" bgcolor="#FFFFFF"><select name="select4" class="select" id="select4">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </td>
+            <td align="center" bgcolor="#FFFFFF"><select name="select5" class="select" id="select5">
+                <option value="0">0</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+	</div>
+        <div > <font id="font3">&nbsp;</font> </div>
+        <div>
+          <ul>
+            <li class="li1a">
+              <input class="submit1" type="button" onClick="return checkYXDate()" name="sub_ok" style="cursor: hand" title="添加物品" id = "sub_ok" value="" />
+              <input class="quxiao" type="button" onClick="showShuXingDiv()" name="btn_no" style="cursor: hand" title="取消" id = "btn_no" value="" />
+            </li>
+            <li class="li1a"></li>
+            <li class="li1a"></li>
+          </ul>
+        </div>
+      </div>
+     
+      <br/>
+      <div id="sendDiv"  class="wp3">
+      <div > <font id="font3">发送邮件</font> </div>
+      <table width="683" border="0" cellspacing="1" bgcolor="#999999" class="table3">
+        <tr bgcolor="">
+          <td width="14%" bgcolor="#FFFFFF"> 收件人</td>
+          <td align="left" bgcolor="#FFFFFF" colspan="3"><textarea name="txt_userID" rows="8" style="width:800px;" class="user_txt_01" id="txt_userID"></textarea>
+            <br/>
+            (注：收件人不能重复出现。收件人的ID请用逗号分开，如1,2,);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td height="41" bgcolor="#FFFFFF">邮件标题</td>
+          <td align="left" bgcolor="#FFFFFF" colspan="3"><input name="txt_Title" id="txt_Title" type="text" class="text_input2" value="GM给您赠送了一件物品，请注意查收！" />
+            （必填）</td>
+        </tr>
+        <tr>
+          <td height="38" bgcolor="#FFFFFF">邮件内容</td>
+          <td bgcolor="#FFFFFF" align="left" colspan="3"><input type="text" name="txt_Content" class="text_input2" id="txt_Content" value="GM给您赠送了一件物品，请注意查收！"/>
+            （必填）</td>
+        </tr>
+          <tr bgcolor="#d3e1f9">
+            <td width="176" bgcolor="#E1FFE1"></td>
+            <td width="150" bgcolor="#E1FFE1" style="width: 0"><span class="STYLE2">点劵</span></td>
+            <td width="305" bgcolor="#E1FFE1" style="width: 0"><span class="STYLE2">金币</span></td>
+            <td width="305" bgcolor="#E1FFE1" style="width: 152px"><span class="STYLE2">礼券</span></td>
+          </tr>
+          <tr>
+            <td height="32" align="center" bgcolor="#FFFFFF"></td>
+            <td align="center" bgcolor="#FFFFFF"><input type="text" name="txt_money" class="text_input" onClick="cleareTexts('txt_money')" onblur="if(this.value=='')this.value='0'" id="txt_money" value="0" /></td>
+            <td align="center" bgcolor="#FFFFFF"><input type="text" name="txt_gold" class="text_input" id="txt_gold"onClick="cleareTexts('txt_gold')" onblur="if(this.value=='')this.value='0'" value="0" /></td>
+            <td align="center" bgcolor="#FFFFFF"><input type="text" name="txt_liJuan" class="text_input" id="txt_liJuan"onClick="cleareTexts('txt_liJuan')" onblur="if(this.value=='')this.value='0'" value="0" /></td>
+          </tr>
+
+        <tr>
+          <td bgcolor="#FFFFFF">&nbsp;</td>
+          <td align="left" bgcolor="#FFFFFF" colspan="3"><span class="li1a">
+            <input class="submit5" type="submit" style="cursor: hand" title="提交物品" onClick="return checkMsg()"  name="btn_tj" id="btn_tj" value="" />
+            </span></td>
+        </tr>
+      </table>
+      <div > <font id="font3">&nbsp;</font></div>
+      <TABLE width="100%" border=0 cellPadding=0 cellSpacing=0 bgcolor="#ACC7EF" style="BACKGROUND: #c4d8ed">
+        <TBODY>
+          <TR>
+            <TD background="../CDN/images/r_b2.jpg"><IMG height=11 alt="" 
+            src="../CDN/images/r_b1.jpg" 
+            width=15></TD>
+            <TD align=right background="../CDN/images/r_b2.jpg"><IMG height=11 alt="" 
+            src="../CDN/images/r_b3.jpg" 
+            width=8></TD>
+          </TR>
+        </TBODY>
+      </TABLE></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+</form>
+ <script type="text/javascript" src="../CDN/js/ToolTip.js"></script>
+</BODY>
+</HTML>

@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>弹弹堂GM-V2.0管理系统</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="../cdn/style/SendGoodStyleCss.css" type=text/css rel=stylesheet>
+<SCRIPT language=javascript src="../cdn/js/gm.js"></SCRIPT>
+<META content="MSHTML 6.00.2900.5726" name=GENERATOR>
+<style>
+#warp {
+  position: absolute;
+  width:550px;
+  height:200px;
+  left:50%;
+  top:50%;
+  margin-left:-250px;
+  margin-top:-250px;
+  border: solid 3px #CDCBFE;
+  background-color:#F7F9FF;
+  text-align:left;
+}
+</style>
+<script language="javascript">
+function Divclose(id){
+document.getElementById(id).style.display="none";
+}
+function DivOpen(id){
+document.getElementById(id).style.display="block";
+}
+</script>
+</HEAD>
+<BODY style="MARGIN: 0px"><!--导航部分-->
+<!--<DIV style="BACKGROUND: #fff HEIGHT:5px"></DIV>导航部分结束-->
+<DIV id=dvbbsannounce_true style="DISPLAY: none"></DIV>
+<TABLE style="BACKGROUND: #fff" height="92%" cellSpacing=0 cellPadding=0 
+width="100%" border=0>
+  <TBODY>
+    <TR>
+      <TD align="center" valign="top" bgColor=#FFFEFF style="WIDTH: 100%"><TABLE cellSpacing=0 cellPadding=0 width="100%" bgColor=#fff 
+        border=0>
+        <TBODY>
+          <TR height=32>
+            <TD vAlign=top width=19 
+          background="../cdn/images/m_right1a.jpg"><img alt="" 
+            src="../cdn/images/m_right1ss.jpg"></TD>
+              <TD width=100% align="left" 
+          background="../cdn/images/m_right1fa.jpg"><font id="font4"></font></TD>
+              <TD width="100%" 
+          background="../cdn/images/m_right1fa.jpg" style="COLOR: #fff; TEXT-ALIGN: right">&nbsp;</TD>
+              <TD vAlign=top align=right width=100% 
+          background="../cdn/images/m_right1a.jpg">&nbsp;</TD>
+              <TD align=right width=64 bgColor=#508ADC><IMG 
+            src="../cdn/images/m_right1b.jpg" alt="" width="64" height="36"></TD>
+            </TR>
+          </TBODY>
+      </TABLE>
+        <div id="m_right">
+          <div id="m_right2">
+            <div  class="wp">
+              <div >
+                <div >
+                  <table width="21%" border="0" cellspacing="0">
+                    <tr>
+                      <td><font id="font3a"><a href="#"></a></font></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="pay_main">
+                  <table width="800" border="0" align="center"  cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="100%" valign="top" background="../cdn/images/hy.jpg"><div >
+            <table width="800" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="156">&nbsp;</td>
+              </tr>
+              <tr>
+                <td valign="top"><table width="800" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="40" colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td height="35" colspan="2">&nbsp;</td>
+                      <td width="555"><label> </label>
+                      <label></label></td>
+                    </tr>
+                    <tr>
+                      <td height="57" colspan="2">&nbsp;</td>
+                      <td align="left"><table width="268" height="64" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td height="30" align="center"  class="">欢迎进入弹弹堂GM后台</td>
+                          </tr>
+                      </table></td>
+                    </tr>
+                    <tr>
+                      <td height="66" colspan="2">&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+ 
+                </table></td>
+              </tr>
+            </table>
+ 
+      </tr>
+    </table>
+                </div>
+              </div>
+            </div>
+            <div class="wp2a" id="sf">
+              <ul>
+                <li class="li1a"></li>
+                <li class="li1a"></li>
+                <li class="li1a"></li>
+              </ul>
+              <div ></div>
+            </div>
+          </div >
+        </div>        <TABLE 
+      width="100%" border=0 cellPadding=0 cellSpacing=0 bgcolor="#ACC7EF" style="BACKGROUND: #c4d8ed">
+            <TBODY>
+              <TR>
+                <TD background="../cdn/images/r_b2.jpg"><IMG height=11 alt="" 
+            src="../cdn/images/r_b1.jpg" 
+            width=15></TD>
+                <TD align=right background="../cdn/images/r_b2.jpg"><IMG height=11 alt="" 
+            src="../cdn/images/r_b3.jpg" 
+            width=8></TD>
+              </TR>
+            </TBODY>
+      </TABLE></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+</BODY></HTML>

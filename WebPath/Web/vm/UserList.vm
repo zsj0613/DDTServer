@@ -1,0 +1,172 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>玩家信息</title>
+<style type="text/css">
+<!--
+.style5 {color: #FF0000}
+.style6 {	color: #0066FF;
+	text-decoration: none;
+}
+.style9 {	color: #009966;
+	text-decoration: none;
+}
+h3{
+	font-size:14px;
+}
+-->
+*{
+	margin:0px;
+}
+</style>
+<style>
+body {
+	padding:0px;
+	font-size:14px;
+	font-family:Verdana, Geneva, sans-serif;
+	BACKGROUND-COLOR: #ffffff;
+}
+html {
+	SCROLLBAR-FACE-COLOR: #bbd0e3;
+	FONT-SIZE: 12px;
+	SCROLLBAR-SHADOW-COLOR: #4c84b3;
+	COLOR: #000000;
+	SCROLLBAR-3DLIGHT-COLOR: #bcd1e2;
+	FONT-FAMILY: '宋体';
+	SCROLLBAR-DARKSHADOW-COLOR: #284259;
+	BACKGROUND-COLOR: #cee5ff;
+}
+form {
+	margin:0px auto;
+	padding:0px;
+}
+.table2{
+	background:#ffffff;
+	border-top-width: 1;
+	border-right-width: 0;
+	border-bottom-width: 0;
+	border-left-width: 1;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #999;
+}
+.td2{
+	border-top-width: 0;
+	border-right-width: 1;
+	border-bottom-width: 1;
+	border-left-width: 0;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #999;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #999;
+        line-height:24px;
+}
+</style>
+<link type="text/css" rel="stylesheet" href="../cdn/style/Style.css" />
+<script type="text/javascript" src="../cdn/js/Calendar3.js"></script>
+<script type="text/javascript" src="../cdn/js/Jquery.js"></script>
+<script type="text/javascript" src="../cdn/js/Purpose.js"></script>
+<script type="text/javascript" src="../cdn/js/Calendar3.js"></script>
+</head>
+<body>
+<h3 align="center">玩家信息</h3>
+<form name="form1" method="post" action="?page=userlist" id="form1">
+  <div style="padding-top:16px; padding-left:16px;"> 关键字：
+    <input name="Tb_SearchKeys" class="txtStyle" type="text"  value="$Search" id="Tb_SearchKeys" />
+    (请输入用户名或昵称)
+    <input type="submit" name="Tb_Return" value=" 查 询 " id="Tb_Return" style="width:55px;" />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在线人数：$OnlineCount
+  </div>
+  <br />
+  <table class="stripe" id="theTable" width="98%" cellpadding="0" cellspacing="0" border="0" class="table2" align="center">
+    <thead>
+      <tr>
+        <th bgcolor="#CCCCCC" class="td2">用户编号</th>
+        <th bgcolor="#CCCCCC" class="td2">用户类型</th>
+        <th bgcolor="#CCCCCC" class="td2">用户名</th>
+        <th bgcolor="#CCCCCC" class="td2">用户昵称</th>
+		<th bgcolor="#CCCCCC" class="td2">等级</th>
+        <th bgcolor="#CCCCCC" class="td2">性别</th>
+        <th bgcolor="#CCCCCC" class="td2">点劵</th>
+        <th bgcolor="#CCCCCC" class="td2">最后活动日期</th>
+		<th bgcolor="#CCCCCC" class="td2">最后登录IP</th>
+        <th bgcolor="#CCCCCC" class="td2">邀请者ID</th>
+        <th bgcolor="#CCCCCC" class="td2">充值金额</th>
+        <th bgcolor="#CCCCCC" class="td2">状态</th>
+        <th bgcolor="#CCCCCC" class="td2">操作</th>
+      </tr>
+    #foreach( $c in $Result)
+    <tr>
+      <td class="td2">&nbsp;$c.UserID</td>
+      <td class="td2">&nbsp;$c.UserType</td>
+      <td class="td2">&nbsp;$c.UserName</td>      
+      <td class="td2">&nbsp;$c.NickName</td>
+      <td class="td2">&nbsp;$c.Grade</td>
+      <td class="td2">&nbsp;#if($c.Sex)男#else女#end</td>
+      <td class="td2">&nbsp;$c.Money</td>
+      <td class="td2">&nbsp;$c.Date</td>
+      <td class="td2">&nbsp;$c.ActiveIP</td>
+      <td class="td2">&nbsp;$c.InviteID</td>
+      <td class="td2">&nbsp;$c.ChargedMoney</td>
+      <td class="td2">#if(!$c.IsExist)<font color="#FF0000"> 封停 #else #if($c.State==0) 离线 #else <font color="#009900"> 在线 </font> #end#end</td>
+      <td class="td2">&nbsp;#if($c.State==0) #if($c.IsExist)<a href="#" onclick ="show($c.UserID)">封停账号</a> #else <a href="#" onclick ="show2($c.UserID)">解封账号</a>#end #else<a href ="GMAction.action?method=kitoff&UserID=$c.UserID">踢Ta下线</a>#end
+	  <a href ="#" onclick="showcharge($c.UserID)">&nbsp;一键充值</a>
+	  <a href ="../game.htm?ForceLoginUsername=$c.UserName" target="_blank">&nbsp;一键登录</a>
+      <a href ="GMAction.action?method=loginkey&UserName=$c.UserName">生成登录key</a>
+	  </td>
+	</tr>
+    #end
+    </thead>
+    
+  </table>
+    #set ($tempa = $Page + 1)
+    #set ($tempb = $Page - 1)
+    <center>共$Count条记录,当前第$Page页,共$TocalPage页 
+        #if ($Page> 1) <a href="?page=userlist&pages=$tempb">上一页 #end
+        #if ($Page< $TocalPage) <a href="?page=userlist&pages=$tempa">下一页 #end
+    </center>
+  <br />
+  <br />
+  <br />
+  <script language="JavaScript">  
+
+
+
+function show(userID)
+{
+    var a = prompt("请输入封停时间，以天为单位", "1");
+    if (a == null)
+        return;
+    var day = parseInt(a);
+    var reason = prompt("请输入封停原因");
+    window.location.href = "GMAction.action?method=forbid&UserID=" + userID + "&day=" + day + "&reason=" + reason;
+
+}
+function show2(userID) {
+    window.location.href = "GMAction.action?method=forbid&UserID=" + userID + "&day=" + -1 + "&reason=" + " ";
+
+}
+function showcharge(userID) {
+    var a = prompt("请输入充值金额", "1");
+    if (a == null)
+        return;
+    var b= parseInt(a);
+    window.location.href = "GMAction.action?method=charge&UserID=" + userID + "&money=" + b;
+
+}
+
+
+ 
+  </script>
+</form>
+</body>
+</html>

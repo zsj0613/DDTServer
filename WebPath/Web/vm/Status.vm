@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<body>
+    <h3 align="center">服务器状态</h3>
+    <table>
+        <tr>
+            <td>服务器</td>
+            <td>状态</td>
+            <td>操作</td>
+        </tr>
+        <tr>
+            <td>中心服务器状态</td>
+            <td>#if(!$Runmgr.get(0))<font color="#FF0000"> 停止</font>  #else #if(!$IsConnected) 连接失败 #else <font color="#009900"> 已启动 </font> #end#end</td>
+            <td>#if(!$Runmgr.get(0))<a href="GMAction.action?method=start&type=center">启动</a> #else #if(!$IsConnected) <a href="GMAction.action?method=reconnect&type=center">重新连接</a> #else <a href="GMAction.action?method=stop&type=center">停止</a> #end#end</td>
+        </tr>
+        <tr>
+            <td>战斗服务器状态</td>
+            <td>#if(!$Runmgr.get(1))<font color="#FF0000"> 停止 </font> #else <font color="#009900"> 已启动 </font> #end</td>
+            <td>#if(!$Runmgr.get(1))<a href="GMAction.action?method=start&type=fight">启动</a> #else <a href="GMAction.action?method=stop&type=fight">停止</a> #end</td>
+        </tr>
+        <tr>
+            <td>游戏服务器状态</td>
+            <td>#if(!$Runmgr.get(2))<font color="#FF0000"> 停止 </font> #else <font color="#009900"> 已启动 </font> #end</td>
+            <td>#if(!$Runmgr.get(2))<a href="GMAction.action?method=start&type=game">启动</a> #else <a href="GMAction.action?method=stop&type=game">停止</a> #end</td>
+        </tr>
+    </table>
+</body>
+</html>

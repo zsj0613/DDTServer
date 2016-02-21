@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+***********************************************************************************************
+website.publishproj
+
+警告: 请勿修改此文件，它将用于 Web 发布过程。
+
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{766d072d-9598-4371-9a23-d33a0d7fce59}</ProjectGuid>
+    <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
+    <SourceWebVirtualPath>/NewWeb</SourceWebVirtualPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SourceWebProject>http://127.0.0.1:12345</SourceWebProject>
+    <SourceWebMetabasePath>/LM/W3SVC/1/ROOT</SourceWebMetabasePath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- for VS2010 we need to use 10.5 but for VS2012+ we should use VisualStudioVersion -->
+    <WebPublishTargetsVersion Condition=" '$(WebPublishTargetsVersion)' =='' and '$(VisualStudioVersion)' == 10.0 ">10.5</WebPublishTargetsVersion>
+    <WebPublishTargetsVersion Condition=" '$(WebPublishTargetsVersion)'=='' ">$(VisualStudioVersion)</WebPublishTargetsVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(WebPublishTargetsVersion)</VSToolsPath>
+    <_WebPublishTargetsPath Condition=" '$(_WebPublishTargetsPath)'=='' ">$(VSToolsPath)</_WebPublishTargetsPath>
+    <AssemblyFileVersion Condition="'$(AssemblyFileVersion)' == ''">1.0.0.0</AssemblyFileVersion>
+    <AssemblyVersion Condition="'$(AssemblyVersion)' == ''">1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttributes Include="AssemblyFileVersion">
+      <Value>$(AssemblyFileVersion)</Value>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyVersion">
+      <Value>$(AssemblyVersion)</Value>
+    </AssemblyAttributes>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DDTServer\Common\Bussiness\Bussiness.csproj">
+      <Project>{AC36126F-BF61-4775-9FF6-C411C9DC902B}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DDTServer\Common\Game.Language\Game.Language.csproj">
+      <Project>{86DFB123-9E12-4351-9A61-C738C11C1C7E}</Project>
+      <Name>Game.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DDTServer\Common\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{C4267EBB-742F-4698-833E-4B743CAAD015}</Project>
+      <Name>SqlDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lsjutil\Lsj.Util.Native\Lsj.Util.Native.vcxproj">
+      <Project>{9C7A6205-33D6-4A0A-85FE-459556AFF800}</Project>
+      <Name>Lsj.Util.Native</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lsjutil\lsj.util\Lsj.Util.csproj">
+      <Project>{B0EBCB56-0AE1-4E59-B5E6-7CD17D4764C2}</Project>
+      <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NVelocity\NVelocityTemplateEngine\NVelocityTemplateEngine.csproj">
+      <Project>{37CE504D-055A-4C15-9C08-A3F477D1C44B}</Project>
+      <Name>NVelocityTemplateEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NVelocity\NVelocity\NVelocity.csproj">
+      <Project>{FB70A974-BF61-4640-93EE-27BD88DC57B8}</Project>
+      <Name>NVelocity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
+</Project>

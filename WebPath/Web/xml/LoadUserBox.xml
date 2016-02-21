@@ -1,0 +1,15 @@
+<Result value="true" message="Success!">
+  <Item ID="1" Type="0" Level="100" Condition="5" TemplateID="1120090" />
+  <Item ID="2" Type="0" Level="100" Condition="15" TemplateID="1120091" />
+  <Item ID="3" Type="0" Level="100" Condition="30" TemplateID="1120092" />
+  <Item ID="4" Type="0" Level="100" Condition="60" TemplateID="1120093" />
+  <Item ID="5" Type="0" Level="100" Condition="120" TemplateID="1120094" />
+  <Item ID="6" Type="1" Level="4" Condition="1" TemplateID="1120071" />
+  <Item ID="7" Type="1" Level="5" Condition="1" TemplateID="1120072" />
+  <Item ID="8" Type="1" Level="8" Condition="1" TemplateID="1120073" />
+  <Item ID="9" Type="1" Level="10" Condition="1" TemplateID="1120074" />
+  <Item ID="10" Type="1" Level="4" Condition="0" TemplateID="1120081" />
+  <Item ID="11" Type="1" Level="5" Condition="0" TemplateID="1120082" />
+  <Item ID="12" Type="1" Level="8" Condition="0" TemplateID="1120083" />
+  <Item ID="13" Type="1" Level="10" Condition="0" TemplateID="1120084" />
+</Result>
