@@ -120,7 +120,7 @@ namespace Game.Server.Managers
         }
 
 
-        static object @lock;
+        static object @lock = new object();
 
         public static void TakeDamage(int damage,int PlayerID)
         {

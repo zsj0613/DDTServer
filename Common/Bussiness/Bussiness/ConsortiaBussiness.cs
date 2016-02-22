@@ -7,7 +7,15 @@ namespace Bussiness
 {
 	public class ConsortiaBussiness : BaseBussiness
 	{
-		public bool AddConsortia(ConsortiaInfo info, ref string msg, ref ConsortiaDutyInfo dutyInfo)
+        public ConsortiaBussiness(SqlConnection conn) : base(conn)
+        {
+        }
+
+        public ConsortiaBussiness()
+        {
+        }
+
+        public bool AddConsortia(ConsortiaInfo info, ref string msg, ref ConsortiaDutyInfo dutyInfo)
 		{
 			bool result = false;
 			try
@@ -1176,7 +1184,39 @@ namespace Bussiness
 			}
 			return infos.ToArray();
 		}
-		public bool AddConsortiaInviteUsers(ConsortiaInviteUserInfo info, ref string msg)
+
+        //public ConsortiaApplyUserInfo[] GetConsortiaApplyUserAll()
+        //{
+        //    SqlDataReader reader = null;
+        //    var infos = new List<ConsortiaApplyUserInfo>();
+        //    try
+        //    {
+        //        this.db.GetReader(ref reader, "SP_Consortia_Apply_Users_All");
+        //        while (reader.Read())
+        //        {
+        //            infos.Add(this.InitConsortiaApplyUsers(reader));
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        if (true)
+        //        {
+        //            BaseBussiness.log.Error("Init", e);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        if (reader != null && !reader.IsClosed)
+        //        {
+        //            reader.Close();
+        //        }
+        //    }
+        //    return infos.ToArray();
+        //}
+
+
+
+        public bool AddConsortiaInviteUsers(ConsortiaInviteUserInfo info, ref string msg)
 		{
 			bool result = false;
 			try

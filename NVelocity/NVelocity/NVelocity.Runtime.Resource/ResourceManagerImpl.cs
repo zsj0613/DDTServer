@@ -115,7 +115,7 @@ namespace NVelocity.Runtime.Resource
 				{
 					this.RefreshResource(resource, encoding);
 				}
-				catch (ResourceNotFoundException var_1_26)
+				catch (ResourceNotFoundException)
 				{
 					this.globalCache.remove(resourceName);
 					result = this.GetResource(resourceName, resourceType, encoding);

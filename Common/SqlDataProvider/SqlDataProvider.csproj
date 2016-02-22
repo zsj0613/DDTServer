@@ -45,6 +45,7 @@
     <Compile Include="SqlDataProvider.Data\ActiveAwardInfo.cs" />
     <Compile Include="SqlDataProvider.Data\ActiveConditionInfo.cs" />
     <Compile Include="SqlDataProvider.Data\ActiveInfo.cs" />
+    <Compile Include="SqlDataProvider.Data\ActiveNumber.cs" />
     <Compile Include="SqlDataProvider.Data\AuctionInfo.cs" />
     <Compile Include="SqlDataProvider.Data\BallInfo.cs" />
     <Compile Include="SqlDataProvider.Data\BestEquipInfo.cs" />

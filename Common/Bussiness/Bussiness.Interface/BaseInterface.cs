@@ -1,5 +1,4 @@
 using Bussiness.CenterService;
-
 using SqlDataProvider.Data;
 using System;
 using System.Configuration;
@@ -8,7 +7,6 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Web.Security;
-
 using Lsj.Util.Config;
 using Lsj.Util;
 using Lsj.Util.Logs;
@@ -84,10 +82,6 @@ namespace Bussiness.Interface
                         {
                             message = LanguageMgr.GetTranslation("Tank.Request.Login.Fail10", new object[0]);
                             isActive = true;
-                            using (CenterServiceClient client = new CenterServiceClient())
-                            {   
-                                client.ActivePlayer(true);
-                            }
                         }
 					}
 					else

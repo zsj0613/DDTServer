@@ -18,7 +18,11 @@ namespace SqlDataProvider.BaseClass
 		}
         public Sql_DbObject(string conn)
         {
-                this._SqlConnection = new SqlConnection(conn);
+            this._SqlConnection = new SqlConnection(conn);
+        }
+        public Sql_DbObject(SqlConnection conn)
+        {
+            this._SqlConnection = conn;
         }
         public static bool TryConnection()
         {
@@ -62,7 +66,7 @@ namespace SqlDataProvider.BaseClass
 		private static bool OpenConnection(SqlConnection _SqlConnection)
 		{
 			bool result = false;
-			//try
+            try
 			{
 				if (_SqlConnection.State != ConnectionState.Open)
 				{
@@ -74,11 +78,11 @@ namespace SqlDataProvider.BaseClass
 					result = true;
 				}
 			}
-			//catch (SqlException ex)
-			//{
-			//	ApplicationLog.WriteError("打开数据库连接错误:" + ex.Message.Trim());
-			//	result = false;
-			//}
+			catch (SqlException ex)
+			{
+			    LogProvider.Default.Error("打开数据库连接错误:" + ex.Message.Trim());
+				result = false;
+			}
 			return result;
 		}
 		public bool Exesqlcomm(string Sqlcomm)

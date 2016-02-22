@@ -37,71 +37,7 @@ namespace Center.Server
 			}
 			return list;
 		}
-		
-		public bool SendAreaBigBugle(int playerID, int areaID, string nickName, string msg)
-		{
-			GSPacketIn pkg = new GSPacketIn(25);
-			pkg.WriteInt(areaID);
-			pkg.WriteInt(playerID);
-			pkg.WriteString(nickName);
-			pkg.WriteString(msg);
-			ServerClient[] clients = CenterServer.Instance.GetAllClients();
-			ServerClient[] array = clients;
-			for (int i = 0; i < array.Length; i++)
-			{
-				ServerClient client = array[i];
-				client.SendAreaBigBugleToServer(pkg);
-			}
-			return true;
-		}
-		
-		public bool ChargeGiftToken(int userID, int giftToken)
-		{
-			PlayerInfo info = null;
-			bool result;
-			using (PlayerBussiness db = new PlayerBussiness())
-			{
-				info = db.GetUserSingleByUserID(userID);
-				if (info == null)
-				{
-					result = false;
-					return result;
-				}
-			}
-			MailInfo mail = new MailInfo();
-			mail.Content = LanguageMgr.GetTranslation("ChargeGiftTokenToUser.Content", new object[]
-			{
-				giftToken
-			});
-			mail.Title = LanguageMgr.GetTranslation("ChargeGiftTokenToUser.Title", new object[0]);
-			mail.Gold = 0;
-			mail.IsExist = true;
-			mail.Money = 0;
-			mail.GiftToken = giftToken;
-			mail.Receiver = info.NickName;
-			mail.ReceiverID = info.ID;
-			mail.Sender = info.NickName;
-			mail.SenderID = info.ID;
-			mail.Type = 1;
-			using (PlayerBussiness db = new PlayerBussiness())
-			{
-				if (db.SendMail(mail))
-				{
-					ServerClient client = LoginMgr.GetServerClient(userID);
-					if (client != null)
-					{
-						GSPacketIn pkg = new GSPacketIn(117);
-						pkg.WriteInt(userID);
-						pkg.WriteInt(1);
-						CenterServer.Instance.SendToALL(pkg);
-					}
-					result = true;
-					return result;
-				}
-			}
-			result = false;
-			return result;
-		}
+			
 		public bool SystemNotice(string msg)
 		{
 			bool result;
@@ -163,36 +99,6 @@ namespace Center.Server
 			result = false;
 			return result;
 		}
-		//public bool AASUpdateState(bool state)
-		//{
-		//	bool result;
-		//	try
-		//	{
-		//		GameProperties.ASS_STATE = state;
-		//		GameProperties.Save();
-		//		result = CenterServer.Instance.ClientsExecuteCmd("/load /property");
-		//		return result;
-		//	}
-		//	catch
-		//	{
-		//	}
-		//	result = false;
-		//	return result;
-		//}
-		//public int AASGetState()
-		//{
-		//	int result;
-		//	try
-		//	{
-		//		result = (GameProperties.ASS_STATE ? 1 : 0);
-		//		return result;
-		//	}
-		//	catch
-		//	{
-		//	}
-		//	result = 2;
-		//	return result;
-		//}
 		public int ExperienceRateUpdate(int serverId)
 		{
 			int result;
@@ -207,64 +113,6 @@ namespace Center.Server
 			result = 2;
 			return result;
 		}
-		public int NoticeServerUpdate(int serverId, int type)
-		{
-			int result;
-			try
-			{
-				result = CenterServer.Instance.NoticeServerUpdate(serverId, type);
-				return result;
-			}
-			catch
-			{
-			}
-			result = 2;
-			return result;
-		}
-		//public bool UpdateConfigState(int type, bool state)
-		//{
-		//	bool result;
-		//	try
-		//	{
-		//		if (type == 1)
-		//		{
-		//			GameProperties.ASS_STATE = state;
-		//		}
-		//		else
-		//		{
-		//			GameProperties.DAILY_AWARD_STATE = state;
-		//		}
-		//		GameProperties.Save();
-		//		result = CenterServer.Instance.ClientsExecuteCmd("/load /property");
-		//		return result;
-		//	}
-		//	catch
-		//	{
-		//	}
-		//	result = false;
-		//	return result;
-		//}
-		//public int GetConfigState(int type)
-		//{
-		//	int result;
-		//	try
-		//	{
-		//		switch (type)
-		//		{
-		//		case 1:
-		//			result = (GameProperties.ASS_STATE ? 1 : 0);
-		//			return result;
-		//		case 2:
-		//			result = (GameProperties.DAILY_AWARD_STATE ? 1 : 0);
-		//			return result;
-		//		}
-		//	}
-		//	catch
-		//	{
-		//	}
-		//	result = 2;
-		//	return result;
-		//}
 		public bool Reload(string type)
 		{
 			bool result;
@@ -272,24 +120,6 @@ namespace Center.Server
 			{
 				result = CenterServer.Instance.ClientsExecuteCmd("/load /" + type);
 				return result;
-			}
-			catch
-			{
-			}
-			result = false;
-			return result;
-		}
-		public bool ActivePlayer(bool isActive)
-		{
-			bool result;
-			try
-			{
-				if (isActive)
-				{
-					//LogMgr.AddRegCount();
-					result = true;
-					return result;
-				}
 			}
 			catch
 			{

@@ -56,7 +56,7 @@ namespace CrossFighting.Server.GameObjects
 		{
 			get
 			{
-				return CrossFightServer.Instance.Configuration.ServerType != 0;
+				return true;
 			}
 		}
 		public int GamePlayerId

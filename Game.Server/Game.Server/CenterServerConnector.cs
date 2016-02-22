@@ -410,7 +410,6 @@ namespace Game.Server
                 pkgMsg.WriteInt(playerID);
                 pkgMsg.WriteInt(1);
                 client.Out.SendTCP(pkgMsg);
-                //
             }
         }
         public void HandleCmd(GSPacketIn packet)

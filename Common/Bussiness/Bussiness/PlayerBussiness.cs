@@ -12,6 +12,13 @@ namespace Bussiness
 {
     public class PlayerBussiness : BaseBussiness
     {
+        public PlayerBussiness(SqlConnection conn) : base(conn)
+        {
+        }
+
+        public PlayerBussiness()
+        {
+        }
 
         public bool CreateUsername(string username, int inviteid)
         {
@@ -2632,6 +2639,34 @@ namespace Bussiness
             }
             result = null;
             return result;
+        }
+        public AuctionInfo[] GetAuctionAll()
+        {
+            SqlDataReader reader = null;
+            var infos = new List<AuctionInfo>();
+            try
+            {
+                this.db.GetReader(ref reader, "SP_Auction_All");
+                while (reader.Read())
+                {
+                    infos.Add(this.InitAuctionInfo(reader));
+                }
+            }
+            catch (Exception e)
+            {
+                if (true)
+                {
+                    BaseBussiness.log.Error("Init", e);
+                }
+            }
+            finally
+            {
+                if (reader != null && !reader.IsClosed)
+                {
+                    reader.Close();
+                }
+            }
+            return infos.ToArray();
         }
         public bool AddAuction(AuctionInfo info)
         {

@@ -236,7 +236,7 @@ namespace CrossFighting.Server.Rooms
 					}
 					if (matchRoom != null)
 					{
-						if (Math.Abs(red.AvgLevel - matchRoom.AvgLevel) < 5 || red.PickUpCount >= 2)
+						if (red.PickUpCount >= 2)
 						{
 							pairs++;
 							ProxyRoomMgr.StartMatchGame(red, matchRoom);

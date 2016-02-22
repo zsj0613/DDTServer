@@ -590,29 +590,7 @@ namespace Center.Server
             result = 1;
             return result;
         }
-        public int NoticeServerUpdate(int serverId, int type)
-        {
-            ServerClient[] list = this.GetAllClients();
-            int result;
-            if (list != null)
-            {
-                ServerClient[] array = list;
-                for (int i = 0; i < array.Length; i++)
-                {
-                    ServerClient client = array[i];
-                    if (client.Info.ID == serverId)
-                    {
-                        GSPacketIn pkg = new GSPacketIn(11);
-                        pkg.WriteInt(type);
-                        client.SendTCP(pkg);
-                        result = 0;
-                        return result;
-                    }
-                }
-            }
-            result = 1;
-            return result;
-        }
+        
         public bool ClientsExecuteCmd(string cmdLine)
         {
             bool result;

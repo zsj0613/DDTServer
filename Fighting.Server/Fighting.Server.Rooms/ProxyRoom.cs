@@ -67,7 +67,7 @@ namespace Fighting.Server.Rooms
 			this.m_players.AddRange(players);
 			this.m_client = client;
 			this.FightPower = totalFightPower;
-			this.AvgLevel = totallevel / players.Count<IGamePlayer>();
+			this.AvgLevel = totallevel / players.Count();
 			this.PickUpCount = 0;
             this.IsArea = IsArea;
 		}

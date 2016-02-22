@@ -72,7 +72,6 @@
     <Compile Include="Commons.Collections\PropertiesReader.cs" />
     <Compile Include="Commons.Collections\PropertiesTokenizer.cs" />
     <Compile Include="Commons.Collections\StringTokenizer.cs" />
-    <Compile Include="MyCookieContainer.cs" />
     <Compile Include="NVelocity.App.Events\EventCartridge.cs" />
     <Compile Include="NVelocity.App.Events\EventHandler.cs" />
     <Compile Include="NVelocity.App.Events\MethodExceptionEventArgs.cs" />

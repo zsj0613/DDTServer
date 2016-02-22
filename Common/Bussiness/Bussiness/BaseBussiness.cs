@@ -15,6 +15,10 @@ namespace Bussiness
 		{
 			this.db = new Sql_DbObject("AppConfig", "conString");
 		}
+        public BaseBussiness(SqlConnection conn)
+        {
+            this.db = new Sql_DbObject(conn);
+        }
 		public DataTable GetPage(string queryStr, string queryWhere, int pageCurrent, int pageSize, string fdShow, string fdOreder, string fdKey, ref int total)
 		{
 			DataTable result;

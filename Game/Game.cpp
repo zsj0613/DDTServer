@@ -66,7 +66,7 @@ bool WINAPI ConsoleHandler(DWORD CEvent)
 	case CTRL_CLOSE_EVENT:
 	case CTRL_LOGOFF_EVENT:
 	case CTRL_SHUTDOWN_EVENT:
-		return StopServer();
+		return StopServer()?1:0;
 	default:
 		return FALSE;
 	}

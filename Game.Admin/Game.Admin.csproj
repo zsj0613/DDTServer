@@ -9,29 +9,44 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Game.Admin</RootNamespace>
     <AssemblyName>Game.Admin</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +55,243 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievement.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Achievement_Condition.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Achievement_Data.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Achievement_Reward.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Active.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Active_Award.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Active_Condition.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Active_Number.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Auction.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bag_Init.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ball.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Ally.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Apply_Ally.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Apply_Users.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Duty.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Equip_Control.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Event.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Invite_Users.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Level.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Consortia_Users.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Daily_Award.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db_Game.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Db_Game.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db_Game.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db_Game.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Db_Game.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Drop_Condiction.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Drop_Item.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fight_Rate.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fusion.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Game_Map.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item_Fusion.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item_Record_Type.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item_Strengthen.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item_Strengthen_Goods.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Map_Server.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Map_Week.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Marry_Apply.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Marry_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Marry_Room_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mission_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NPC_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pve_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Quest.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestData.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Quest_Condiction.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Quest_Goods.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rate.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rename_Consortia.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rename_Nick.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Server_List.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shop.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shop_Goods.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shop_Goods_Box.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shop_Goods_Categorys.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Spa_Room_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Buff.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Charge.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Detail.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Fight.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Friends.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Goods.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Info.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Messages.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Order.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Password.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sys_Users_Record.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User_Get_Box.cs">
+      <DependentUpon>Db_Game.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Db_Game.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Db_Game.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Db_Game.edmx.diagram">
+      <DependentUpon>Db_Game.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Db_Game.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Db_Game.edmx</DependentUpon>
+      <LastGenOutput>Db_Game.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Db_Game.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Db_Game.edmx</DependentUpon>
+      <LastGenOutput>Db_Game.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

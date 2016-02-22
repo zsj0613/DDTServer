@@ -48,7 +48,7 @@ namespace NVelocity.Runtime.Parser
 
 		public bool lookingAhead;
 
-		private bool jj_semLA;
+		//private bool jj_semLA;
 
 		private int jj_gen;
 

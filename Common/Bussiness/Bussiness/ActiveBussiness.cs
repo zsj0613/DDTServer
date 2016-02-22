@@ -7,7 +7,15 @@ namespace Bussiness
 {
 	public class ActiveBussiness : BaseBussiness
 	{
-		public ActiveInfo[] GetAllActives()
+        public ActiveBussiness()
+        {
+        }
+
+        public ActiveBussiness(SqlConnection conn) : base(conn)
+        {
+        }
+
+        public ActiveInfo[] GetAllActives()
 		{
 			List<ActiveInfo> infos = new List<ActiveInfo>();
 			SqlDataReader reader = null;
@@ -35,7 +43,45 @@ namespace Bussiness
 			}
 			return infos.ToArray();
 		}
-		public ActiveInfo GetSingleActives(int activeID)
+        public ActiveNumberInfo[] GetAllActiveNumbers()
+        {
+            List<ActiveNumberInfo> infos = new List<ActiveNumberInfo>();
+            SqlDataReader reader = null;
+            try
+            {
+                this.db.GetReader(ref reader, "SP_Active_Number_All");
+                while (reader.Read())
+                {
+                    infos.Add(this.InitActiveNumberInfo(reader));
+                }
+            }
+            catch (Exception e)
+            {
+                if (true)
+                {
+                    BaseBussiness.log.Error("Init", e);
+                }
+            }
+            finally
+            {
+                if (reader != null && !reader.IsClosed)
+                {
+                    reader.Close();
+                }
+            }
+            return infos.ToArray();
+        }
+        public ActiveNumberInfo InitActiveNumberInfo(SqlDataReader reader)
+        {
+            ActiveNumberInfo info = new ActiveNumberInfo();
+            info.ActiveID = (int)reader["ActiveID"];
+            info.AwardID = reader["AwardID"].ToString();
+            info.GetDate = (DateTime)reader["GetDate"];
+            info.Mark = (int)reader["Mark"];
+            info.UserID = (int)reader["UserID"];
+            return info;
+        }
+        public ActiveInfo GetSingleActives(int activeID)
 		{
 			SqlDataReader reader = null;
 			ActiveInfo result;

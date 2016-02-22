@@ -4,9 +4,9 @@ namespace NVelocity.Util.Introspection
 {
 	internal class Twonk
 	{
-		public int distance;
+        //public int distance;
 
-		public int[] vec;
+        public int[] vec;
 
 		public Twonk(int size)
 		{

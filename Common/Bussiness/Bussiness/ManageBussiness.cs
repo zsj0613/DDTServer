@@ -106,10 +106,10 @@ namespace Bussiness
         {
             try
             {
-                    using (CenterServiceClient temp = new CenterServiceClient())
-                    {
+                using (CenterServiceClient temp = new CenterServiceClient())
+                {
                     temp.MailNotice(userID);
-                    }
+                }
             }
             catch (Exception e)
             {

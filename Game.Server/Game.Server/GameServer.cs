@@ -39,7 +39,6 @@ namespace Game.Server
 		private Queue m_packetBufPool;
 		private bool m_debugMenory = false;
 		private static int m_tryCount = 4;
-		private static bool m_compiled = false;
 		private Timer _shutdownTimer;
 		private int _shutdownCount = 6;
 		protected Timer m_saveDbTimer;

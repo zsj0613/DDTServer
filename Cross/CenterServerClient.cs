@@ -70,9 +70,6 @@ namespace Cross
             x.WriteString(Name);
             x.WriteString(pkg.ReadString());
             x.WriteString(pkg.ReadString());
-
-
-
             foreach (var a in server.GetAllClients())
             {
                 a.SendTCP(x);
