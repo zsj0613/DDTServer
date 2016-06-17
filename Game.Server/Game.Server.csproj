@@ -417,9 +417,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game.Server\battle.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
@@ -446,9 +443,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game.exe.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="lsj.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

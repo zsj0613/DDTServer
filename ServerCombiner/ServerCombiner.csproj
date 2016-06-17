@@ -60,10 +60,6 @@
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Game.Admin\Game.Admin.csproj">
-      <Project>{c7c4a8b9-8016-4a68-8284-051dfe2ea9b8}</Project>
-      <Name>Game.Admin</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

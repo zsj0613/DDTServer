@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.IO;
 using Game.Base;
+using Lsj.Util.Logs;
 
 namespace Game.Launcher
 {
@@ -20,9 +21,11 @@ namespace Game.Launcher
         {
             InitializeComponent();
             this.runmgr = runmgr;
+            LogProvider.Default.Config.RichTextBox = this.LogView;
+            LogProvider.Default.Config.UseRichTextBox = true;
+            this.LogView.ReadOnly = true;
+            this.LogView.BackColor = Color.White;
         }
-
-        string key = "$^&^(*&)*(J1534765";
 
 
         RunMgr runmgr;
@@ -31,11 +34,6 @@ namespace Game.Launcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Opacity = 0.7;
-            //透明度设置
-
-            UpdateView();
-
             IsLoaded = true;
             CheckStatus();
             NotifyIcon.ContextMenuStrip = NotifyMenuStrip;
@@ -43,10 +41,6 @@ namespace Game.Launcher
 
         }
 
-        private void UpdateView()
-        {
-            IsSlient.Checked = false;
-        }
 
 
         private void StatusTimer_Tick(object sender, EventArgs e)
@@ -151,7 +145,7 @@ namespace Game.Launcher
             if (!runmgr.CenterStatus)
             {
                 
-                if (!runmgr.StartCenter(key, IsSlient.Checked))
+                if (!runmgr.StartCenter())
                 {
                     MessageBox.Show("启动Center出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -175,7 +169,7 @@ namespace Game.Launcher
             }
             if (!runmgr.FightStatus)
             {
-                if (!runmgr.StartFight(key, IsSlient.Checked))
+                if (!runmgr.StartFight())
                 {
                     MessageBox.Show("启动Fight出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -199,7 +193,7 @@ namespace Game.Launcher
             if (!runmgr.GameStatus)
             {
  
-                if (!runmgr.StartGame(key, IsSlient.Checked))
+                if (!runmgr.StartGame())
                 {
                     MessageBox.Show("启动Game出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -222,7 +216,7 @@ namespace Game.Launcher
             if (!runmgr.WebStatus)
             {
 
-                if (!runmgr.StartWeb(key, IsSlient.Checked))
+                if (!runmgr.StartWeb())
                 {
                     MessageBox.Show("启动WEB出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -261,7 +255,7 @@ namespace Game.Launcher
                 if (!runmgr.CenterStatus)
                 {
                     
-                    if (!runmgr.StartCenter(key, IsSlient.Checked))
+                    if (!runmgr.StartCenter())
                     {
                         MessageBox.Show("启动Center出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -269,7 +263,7 @@ namespace Game.Launcher
                 }
                 if (!runmgr.FightStatus)
                 {
-                    if (!runmgr.StartFight(key, IsSlient.Checked))
+                    if (!runmgr.StartFight())
                     {
                         MessageBox.Show("启动Fight出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -277,7 +271,7 @@ namespace Game.Launcher
                 }
                 if (!runmgr.GameStatus)
                 {
-                    if (!runmgr.StartGame(key, IsSlient.Checked))
+                    if (!runmgr.StartGame())
                     {
                         MessageBox.Show("启动Game出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -285,7 +279,7 @@ namespace Game.Launcher
                 }
                 if (!runmgr.WebStatus)
                 {
-                    if (!runmgr.StartWeb(key, IsSlient.Checked))
+                    if (!runmgr.StartWeb())
                     {
                         MessageBox.Show("启动Web出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -293,11 +287,6 @@ namespace Game.Launcher
                 }
 
             }
-        }
-
-        private void IsSlient_CheckedChanged(object sender, EventArgs e)
-        {
-            runmgr.ChangeSlient(IsSlient.Checked);
         }
 
 

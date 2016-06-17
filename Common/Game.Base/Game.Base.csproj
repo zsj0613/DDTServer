@@ -60,7 +60,6 @@
     <Compile Include="Game.Base.Events\ScriptEvent.cs" />
     <Compile Include="Game.Base.Events\ScriptLoadedEventAttribute.cs" />
     <Compile Include="Game.Base.Events\ScriptUnloadedEventAttribute.cs" />
-    <Compile Include="Game.Base.Managers\RunMgr.cs" />
     <Compile Include="Game.Base.Packets\eMessageType.cs" />
     <Compile Include="Game.Base.Packets\EmptyAsyncResult.cs" />
     <Compile Include="Game.Base.Packets\FSM.cs" />

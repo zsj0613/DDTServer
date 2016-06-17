@@ -23,42 +23,17 @@ namespace Game.Server.Battle
 		public static string OpenCloseTime;
 		public static bool AutoReconnect = true;
         public static bool IsOpenAreaFight = false;
-		public static bool Setup()
+		public static bool Setup(GameServerConfig config)
 		{
 			BattleMgr.m_list.Clear();
-            if (!File.Exists("battle.xml"))
-            {
-                log.Warn("Cannot find battle.xml");
-            }
             if (File.Exists("battle.xml"))
 			{
 				try
 				{
-					XDocument doc = XDocument.Load("battle.xml");
-					using (IEnumerator<XNode> enumerator = doc.Root.Nodes().GetEnumerator())
-					{
-						while (enumerator.MoveNext())
-						{
-							XElement server = (XElement)enumerator.Current;
-							try
-							{
-								int id = int.Parse(server.Attribute("id").Value);
-								string ip = server.Attribute("ip").Value;
-								int port = int.Parse(server.Attribute("port").Value);
-								string key = server.Attribute("key").Value;
-								bool isOpen = bool.Parse(server.Attribute("IsOpen").Value);
-                                bool isArea = bool.Parse(server.Attribute("IsArea").Value);
-                                BattleMgr.AddBattleServer(new BattleServer(id, ip, port, key, isOpen,isArea));
-								BattleMgr.log.DebugFormat("Battle server {0}:{1} loaded...", ip, port);
-							}
-							catch (Exception ex)
-							{
-								BattleMgr.log.Error("BattleMgr setup error:", ex);
-							}
-						}
-					}
-                    if (m_list.Count == 2)
+                    BattleMgr.AddBattleServer(new BattleServer(1, config.FightIP, config.FightPort, config.FightKey, true, false));
+                    if(config.IsOpenCrossFight)
                     {
+                        BattleMgr.AddBattleServer(new BattleServer(2, config.CrossFightIP, config.CrossFightPort, config.CrossFightKey, true, true));
                         IsOpenAreaFight = true;
                     }
 				}
@@ -168,20 +143,6 @@ namespace Game.Server.Battle
 				server.RetryCount = BattleMgr.MAX_RECONNECT_TIME;
 				server.Stop();
 			}
-		}
-		public static void ReconnectAllBattle()
-		{
-			foreach (BattleServer server in BattleMgr.GetAllBattles())
-			{
-				if (server != null)
-				{
-					server.LastRetryTime = DateTime.Now;
-					server.RetryCount = BattleMgr.MAX_RECONNECT_TIME;
-					server.m_server_Disconnected(server.Server);
-				}
-			}
-			BattleMgr.Setup();
-			BattleMgr.Start();
 		}
 		public static BattleServer GetServer(int id)
 		{

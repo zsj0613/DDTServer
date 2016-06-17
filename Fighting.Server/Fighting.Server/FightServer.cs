@@ -24,7 +24,8 @@ namespace Fighting.Server
 		private FightServerConfig m_config;
 		private bool m_running;
 		private static FightServer m_instance;
-		public FightServerConfig Configuration
+        private int IsRunning = -1;
+        public FightServerConfig Configuration
 		{
 			get
 			{
@@ -45,10 +46,9 @@ namespace Fighting.Server
 		public override bool Start()
 		{
 			bool result;
-
+            IsRunning = 0;
 				try
 				{
-                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/fight/" });
                 this.m_running = true;
 					Thread.CurrentThread.Priority = ThreadPriority.Normal;
 					AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
@@ -62,7 +62,7 @@ namespace Fighting.Server
                     }
                     FightServer.log.Info("数据库连接成功!");
 
-                    if (!this.InitSocket(IPAddress.Parse(this.m_config.IP), this.m_config.Port))
+                    if (!this.InitSocket(IPAddress.Parse(this.m_config.FightIP), this.m_config.FightPort))
                     {
                         result = false;
                         FightServer.log.Error("初始化监听端口失败，请检查!");
@@ -160,6 +160,7 @@ namespace Fighting.Server
                     GC.Collect(GC.MaxGeneration);
                     FightServer.log.Warn("战斗服务器已启动!");
                     result = true;
+                IsRunning = 1;
 
                 }
 
@@ -219,6 +220,7 @@ namespace Fighting.Server
 				try
 				{
 					this.m_running = false;
+                    this.IsRunning = -1;
 					GameMgr.Stop();
 					ProxyRoomMgr.Stop();
 				}
@@ -273,12 +275,17 @@ namespace Fighting.Server
 		{
 			this.m_config = config;
 		}
-		public static void CreateInstance(FightServerConfig config)
-		{
-			if (FightServer.m_instance == null)
-			{
-				FightServer.m_instance = new FightServer(config);
-			}
-		}
-	}
+        public static bool IsRun => Instance?.IsRunning == 1;
+        public static void StartServer()
+        {
+            if (FightServer.Instance?.IsRunning >= 0)
+            {
+                return;
+            }
+            FightServer.m_instance = new FightServer(new FightServerConfig());
+            FightServer.Instance.Start();
+        }
+        public static void StopServer() => FightServer.Instance?.Stop();
+
+    }
 }

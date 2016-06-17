@@ -23,14 +23,14 @@ namespace Game.Server
 		public int ServerID;
 		[ConfigProperty("ServerName", "频道的名称", "7Road")]
 		public string ServerName;
-		[ConfigProperty("IP", "频道的IP", "127.0.0.1")]
-		public string IP;
-		[ConfigProperty("Port", "频道开放端口", 9200)]
-		public int Port;
+		[ConfigProperty("GameIP", "频道的IP", "127.0.0.1")]
+		public string GameIP;
+		[ConfigProperty("GamePort", "频道开放端口", 9200)]
+		public int GamePort;
 		[ConfigProperty("LoginServerIp", "中心服务器的IP", "192.168.0.2")]
 		public string LoginServerIp;
-		[ConfigProperty("LoginServerPort", "中心服务器的端口", 9202)]
-		public int LoginServerPort;
+		[ConfigProperty("CenterPort", "中心服务器的端口", 9202)]
+		public int CenterPort;
 		[ConfigProperty("SaveRecordInterval", "统计信息保存的时间间隔,分钟为单位", 5)]
 		public int SaveRecordInterval;
 		[ConfigProperty("PrivateKey", "RSA的私钥", "")]
@@ -49,6 +49,22 @@ namespace Game.Server
         public string VIP_MONEYS;
         [ConfigProperty("Expericence", "经验", "0,2147483647")]
         public string Levels;
+        [ConfigProperty("FightIP", "IP地址", "127.0.0.1")]
+        public string FightIP = "127.0.0.1";
+        [ConfigProperty("FightPort", "监听的端口", 9208)]
+        public int FightPort = 9208;
+        [ConfigProperty("FightKey", "服务器Key", "")]
+        public string FightKey = "";
+        [ConfigProperty("CrossFightIP", "IP地址", "127.0.0.1")]
+        public string CrossFightIP = "127.0.0.1";
+        [ConfigProperty("CrossFightPort", "监听的端口", 9208)]
+        public int CrossFightPort = 9208;
+        [ConfigProperty("CrossFightKey", "服务器Key", "")]
+        public string CrossFightKey = "";
+        [ConfigProperty("IsOpenCrossFight", "", "false")]
+        public bool IsOpenCrossFight = false;
+
+
         public GameServerConfig()
 		{
 			this.Load(typeof(GameServerConfig));
@@ -69,20 +85,6 @@ namespace Game.Server
 				this.RootDirectory = new FileInfo(Assembly.GetAssembly(typeof(GameServer)).Location).DirectoryName;
 			}
 			base.Load(type);
-			using (ServiceBussiness sb = new ServiceBussiness())
-			{
-				ServerInfo info = sb.GetServiceSingle(this.ServerID);
-				if (info == null)
-				{
-					GameServerConfig.log.ErrorFormat("Can't find server config,server id {0}", this.ServerID);
-				}
-				else
-				{
-					this.ServerName = info.Name;
-					this.MaxRoomCount = info.Room;
-					this.MaxPlayerCount = info.Total;
-				}
-			}
 		}
 	}
 }

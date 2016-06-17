@@ -8,10 +8,10 @@ namespace Center.Server
 	public class CenterServerConfig : BaseAppConfig
 	{
 		private static LogProvider log => CenterServer.log;
-		[ConfigProperty("IP", "中心服务器监听IP", "127.0.0.1")]
-		public string IP;
-		[ConfigProperty("Port", "中心服务器监听端口", 9202)]
-		public int Port;
+		[ConfigProperty("CenterIP", "中心服务器监听IP", "127.0.0.1")]
+		public string CenterIP;
+		[ConfigProperty("CenterPort", "中心服务器监听端口", 9202)]
+		public int CenterPort;
 		[ConfigProperty("LoginLapseInterval", "登陆超时时间,分钟为单位", 1)]
 		public int LoginLapseInterval;
 		[ConfigProperty("SaveInterval", "数据保存周期,分钟为单位", 1)]

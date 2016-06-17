@@ -23,8 +23,8 @@ namespace Center.Server
         private Timer m_scanMail;
         private Timer m_scanConsortia;
         private Timer m_ChargeTimer;
-        private static CenterServer m_instance;
         private Timer m_RenameCheckTimer;
+        private int IsRunning = -1;
         public CrossServerConnector connector
         {
             get;
@@ -38,6 +38,10 @@ namespace Center.Server
                 return this.m_config;
             }
         }
+
+
+
+        private static CenterServer m_instance;
         public static CenterServer Instance
         {
             get
@@ -45,6 +49,7 @@ namespace Center.Server
                 return CenterServer.m_instance;
             }
         }
+
 
 
         private CenterServer(CenterServerConfig config)
@@ -57,10 +62,10 @@ namespace Center.Server
         }
         public override bool Start()
         {
+            this.IsRunning = 0;
             bool result = true;
             try
             {
-                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/center/" });
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
 
@@ -93,7 +98,7 @@ namespace Center.Server
                 }
                 CenterServer.log.Info("数据库连接成功!");
 
-                if (!this.InitSocket(IPAddress.Parse(this.m_config.IP), this.m_config.Port))
+                if (!this.InitSocket(IPAddress.Parse(this.m_config.CenterIP), this.m_config.CenterPort))
                 {
                     result = false;
                     CenterServer.log.Error("初始化监听端口失败，请检查!");
@@ -170,6 +175,7 @@ namespace Center.Server
                 }
                 GC.Collect(GC.MaxGeneration);
                 CenterServer.log.Warn("中心服务器已启动!");
+                this.IsRunning = 1;
 
 
             }
@@ -506,10 +512,12 @@ namespace Center.Server
         {
             try
             {
+                this.IsRunning = -1;
                 this.DisposeGlobalTimers();
                 this.SaveTimerProc(null);
                 CenterService.Stop();
                 base.Stop();
+
             }
             catch (Exception ex)
             {
@@ -590,7 +598,7 @@ namespace Center.Server
             result = 1;
             return result;
         }
-        
+
         public bool ClientsExecuteCmd(string cmdLine)
         {
             bool result;
@@ -617,13 +625,21 @@ namespace Center.Server
             result = false;
             return result;
         }
-        public static void CreateInstance(CenterServerConfig config)
+
+
+
+        public static bool IsRun => Instance?.IsRunning == 1;
+        public static void StartServer()
         {
-            if (CenterServer.m_instance != null)
+            if(CenterServer.Instance?.IsRunning>=0)
             {
-                throw new Exception("Can't create more than one CenterServer!");
+                return;
             }
-            CenterServer.m_instance = new CenterServer(config);
+            CenterServer.m_instance = new CenterServer(new CenterServerConfig());
+            CenterServer.Instance.Start();
         }
+        public static void StopServer() => CenterServer.Instance?.Stop();
+
+
     }
 }

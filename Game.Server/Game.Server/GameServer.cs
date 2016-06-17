@@ -33,7 +33,6 @@ namespace Game.Server
 		public static bool KeepRunning = false;
 		public static bool ManagerLogined = false;
 		private static GameServer m_instance = null;
-		private bool m_isRunning;
 		private GameServerConfig m_config;
 		private CenterServerConnector _loginServer;
 		private Queue m_packetBufPool;
@@ -48,18 +47,12 @@ namespace Game.Server
 		protected Timer m_fightServerTimer;
 		protected Timer m_messageClearTimer;
 		protected Timer m_limitItemRefreshTimer;
-		public static GameServer Instance
+        private int IsRunning = -1;
+        public static GameServer Instance
 		{
 			get
 			{
 				return GameServer.m_instance;
-			}
-		}
-		public bool IsRunning
-		{
-			get
-			{
-				return this.m_isRunning;
 			}
 		}
 		public GameServerConfig Configuration
@@ -185,7 +178,7 @@ namespace Game.Server
             bool result = true;
             try
             {
-                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/game/" });
+                IsRunning = 0;
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
 
@@ -210,7 +203,7 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化脚本成功!");
 
-                if (!this.InitSocket(IPAddress.Parse(this.Configuration.IP), this.Configuration.Port))
+                if (!this.InitSocket(IPAddress.Parse(this.Configuration.GameIP), this.Configuration.GamePort))
                 {
                     result = false;
                     GameServer.log.Error("初始化监听端口失败，请检查!");
@@ -437,7 +430,7 @@ namespace Game.Server
                 GameServer.log.Info("初始化宏观掉落成功!");
 
 
-                if (!BattleMgr.Setup())
+                if (!BattleMgr.Setup(this.Configuration))
                 {
                     result = false;
                     GameServer.log.Error("加载战斗管理服务失败，请检查!");
@@ -517,13 +510,13 @@ namespace Game.Server
                     GameServer.log.Error("启动基础服务失败，请检查!");
                     return result;
                 }
-                GameServer.log.Info("启动基础服务成功!");
-                this.m_isRunning = true;
+                GameServer.log.Info("启动基础服务成功!"); 
 
                 GameEventMgr.Notify(ScriptEvent.Loaded);
                 GC.Collect(GC.MaxGeneration);
                 //LogMgr.Setup(1, 1, 1);
                 GameServer.log.Warn("游戏服务器启动成功!");
+                IsRunning = 1;
 
 
 
@@ -538,13 +531,13 @@ namespace Game.Server
         }
 		private bool InitLoginServer()
 		{
-			this._loginServer = new CenterServerConnector(this.m_config.LoginServerIp, this.m_config.LoginServerPort, this.m_config.ServerID, this.m_config.ServerName, this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
+			this._loginServer = new CenterServerConnector(this.m_config.LoginServerIp, this.m_config.CenterPort, this.m_config.ServerID, this.m_config.ServerName, this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
 			this._loginServer.Disconnected += new ClientEventHandle(this.loginServer_Disconnected);
 			return this._loginServer.Connect();
 		}
 		private void loginServer_Disconnected(BaseClient client)
 		{
-			bool running = this.m_isRunning;
+			bool running = this.IsRunning == 1;
 			this.Stop();
 			if (running && GameServer.m_tryCount > 0)
 			{
@@ -648,9 +641,9 @@ namespace Game.Server
 		}
 		public override void Stop()
 		{
-			if (this.m_isRunning)
+			if (this.IsRunning==1)
 			{
-				this.m_isRunning = false;
+				this.IsRunning = -1;
 				if (!MarryRoomMgr.UpdateBreakTimeWhereServerStop())
 				{
 					Console.WriteLine("Update Marry BreakTime failed");
@@ -1083,5 +1076,17 @@ namespace Game.Server
 				}
 			}
 		}
-	}
+
+        public static bool IsRun => Instance?.IsRunning == 1;
+        public static void StartServer()
+        {
+            if (Instance?.IsRunning >= 0)
+            {
+                return;
+            }
+            m_instance = new GameServer(new GameServerConfig());
+            Instance.Start();
+        }
+        public static void StopServer() => Instance?.Stop();
+    }
 }

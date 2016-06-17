@@ -1,5 +1,3 @@
-
-
 #include "stdafx.h"
 #include <string>
 #include <Windows.h>
@@ -13,8 +11,7 @@ using namespace Game::Base;
 
 
 
-void MarshalString(String ^ s, string& os);
-void Start();
+void Start(String^ a);
 bool WINAPI ConsoleHandler(DWORD CEvent);
 bool WINAPI StopServer();
 
@@ -26,16 +23,14 @@ int main(array<System::String^> ^args)
 {
 	if (args->Length>=1)
 	{
-		string key = "$^&^(*&)*(J1534765";
-		string a = "";
-		MarshalString(args[0], a);
-		if (a == key)
+		String^ a = args[0];
+		if (a != "")
 		{
-			Start();
+			Start(a);
 		}
 		else
 		{
-			WinForm::Notice("Error Key!");
+			WinForm::Notice("No Key!");
 		}
 	}
 	else
@@ -44,9 +39,9 @@ int main(array<System::String^> ^args)
 	}
 }
 
-void Start()
+void Start(String^ a)
 {
-	Console::Title = "DDTank Center Service";
+	Console::Title = a;
 	Console::WriteLine("Starting the Server ... Please Wait!");
 	CenterServer::CreateInstance(gcnew CenterServerConfig());
 	CenterServer::Instance->Start();
@@ -79,11 +74,4 @@ bool WINAPI StopServer()
 	}
 	SetConsoleCtrlHandler((PHANDLER_ROUTINE)ConsoleHandler, false);
 	return TRUE;
-}
-
-void MarshalString(String ^ s, string& os) {
-	const char* chars =
-		(const char*)(Runtime::InteropServices::Marshal::StringToHGlobalAnsi(s)).ToPointer();
-	os = chars;
-	Runtime::InteropServices::Marshal::FreeHGlobal(IntPtr((void*)chars));
 }

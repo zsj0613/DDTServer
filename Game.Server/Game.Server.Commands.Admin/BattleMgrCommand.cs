@@ -69,18 +69,6 @@ namespace Game.Server.Commands.Admin
 						}
 					}
 					break;
-				case "-reconnect":
-					if (args.Length == 2)
-					{
-						BattleMgr.ReconnectAllBattle();
-						foreach (BattleServer server in BattleMgr.GetAllBattles())
-						{
-							this.DisplayMessage(client, string.Format("{0},{1} connect completed!", server.Ip, server.Port));
-						}
-						result = true;
-						return result;
-					}
-					break;
 				}
 			}
 			this.DisplaySyntax(client);

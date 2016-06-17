@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using Game.Base;
+using Lsj.Util.Logs;
 
 namespace Game.Launcher
 {
@@ -24,6 +25,10 @@ namespace Game.Launcher
         {
             Thread thread = new Thread(run);
             thread.Start();
+            LogProvider.Default = new LogProvider(new LogConfig
+            {
+                UseMessageBox = true
+            });
 
 
 

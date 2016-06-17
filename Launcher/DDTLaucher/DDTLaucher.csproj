@@ -52,7 +52,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\..\..\Server\</OutputPath>
+    <OutputPath>..\..\..\DDT\Server\</OutputPath>
     <Optimize>true</Optimize>
     <PlatformTarget>x64</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -92,6 +92,7 @@
     <Compile Include="Game.Launcher\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game.Launcher\RunMgr.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Game.Launcher\Loading.resx">
@@ -147,15 +148,31 @@
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Center.Server\Center.Server.csproj">
+      <Project>{5ea5980b-80c2-4bfc-a014-ad9b63199bda}</Project>
+      <Name>Center.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Game.Base\Game.Base.csproj">
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Fighting.Server\Fighting.Server.csproj">
+      <Project>{a1ddbdf6-b2d5-4875-94fc-7138c39424da}</Project>
+      <Name>Fighting.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Game.Server\Game.Server.csproj">
+      <Project>{c4bffbc1-d64e-42d8-a848-bda617a8d413}</Project>
+      <Name>Game.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Web.Server\Web.Server.csproj">
+      <Project>{510b8eb1-fade-4e77-9eb6-c729ec9886cd}</Project>
+      <Name>Web.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reactor_Enabled="0" Reactor_Deploy="0" />
+      <UserProperties Reactor_Deploy="0" Reactor_Enabled="0" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
