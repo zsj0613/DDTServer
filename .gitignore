@@ -52,6 +52,7 @@ build/
 *.opensdf
 *.sdf
 *.opendb
+*.db
 
 # Visual C++ cache files
 ipch/
