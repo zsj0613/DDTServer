@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace Web.Server.Managers
+namespace Web.Server.Manager
 {
     public class PlayerManager
     {

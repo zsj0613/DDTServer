@@ -11,7 +11,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
 using System.Xml.Linq;
-using Web.Server.Managers;
+using Web.Server.Manager;
 using Lsj.Util.Collections;
 using Lsj.Util.Config;
 using Lsj.Util;
@@ -311,7 +311,7 @@ namespace Web.Server
 
         public List<bool> GetRunMgr()
         {
-            var x = WebServer.Instance.runmgr;
+            var x = WebServer.Runmgr;
             var a = new bool[] { x.CenterStatus, x.FightStatus, x.GameStatus, };
             return a.ToList();
         }
@@ -357,7 +357,7 @@ namespace Web.Server
         {
             string msg = "错误";
             var dic = new SafeStringToStringDirectionary(param);
-            var runmgr = WebServer.Instance.runmgr;
+            var runmgr = WebServer.Runmgr;
             var WebPath = AppConfig.AppSettings["WebPath"].ToSafeString();
             string path = WebPath + @"xml\";
             switch (action)

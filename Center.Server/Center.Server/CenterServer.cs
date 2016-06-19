@@ -631,14 +631,15 @@ namespace Center.Server
         public static bool IsRun => Instance?.IsRunning == 1;
         public static void StartServer()
         {
-            if(CenterServer.Instance?.IsRunning>=0)
+            if(Instance?.IsRunning>=0)
             {
                 return;
             }
-            CenterServer.m_instance = new CenterServer(new CenterServerConfig());
-            CenterServer.Instance.Start();
+            m_instance = new CenterServer(new CenterServerConfig());
+            Instance.Start();
+            return;
         }
-        public static void StopServer() => CenterServer.Instance?.Stop();
+        public static void StopServer() => Instance?.Stop();
 
 
     }

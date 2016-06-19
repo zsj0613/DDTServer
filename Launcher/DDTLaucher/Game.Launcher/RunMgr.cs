@@ -4,17 +4,21 @@ using System.Runtime.InteropServices;
 using System.Timers;
 using Lsj.Util;
 using Center.Server;
+using Web.Server.Manager;
+using Fighting.Server;
+using Game.Server;
+using Web.Server;
+using System.Threading;
 
 namespace Game.Launcher
 {
-    public class RunMgr : DisposableClass, IDisposable
+    public class RunMgr : DisposableClass, IDisposable,IRunMgr
     {
         public RunMgr()
         {
             UpdateStatus();
-            GetIntptr();
-            Timer aTimer = new Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(GetIntptr);
+            var aTimer = new System.Timers.Timer();
+            aTimer.Elapsed += new ElapsedEventHandler(UpdateStatus);
             aTimer.Interval = 1 * 1000;    //1s
             aTimer.Enabled = true;
         }
@@ -62,11 +66,6 @@ namespace Game.Launcher
         }
 
 
-        private IntPtr Centerintptr = IntPtr.Zero;
-        private IntPtr Fightintptr = IntPtr.Zero;
-        private IntPtr Gameintptr = IntPtr.Zero;
-        private IntPtr Webintptr = IntPtr.Zero;
-
 
         public bool UpdateStatus()
         {
@@ -75,16 +74,16 @@ namespace Game.Launcher
             else
                 m_CenterStatus = false;
 
-            if (Process.GetProcessesByName("Fight").Length > 0)
+            if (FightServer.IsRun)
                 m_FightStatus = true;
             else
                 m_FightStatus = false;
 
-            if (Process.GetProcessesByName("Game").Length > 0)
+            if (GameServer.IsRun)
                 m_GameStatus = true;
             else
                 m_GameStatus = false;
-            if (Process.GetProcessesByName("Web").Length > 0)
+            if (WebServer.IsRun)
                 m_WebStatus = true;
             else
                 m_WebStatus = false;
@@ -97,116 +96,108 @@ namespace Game.Launcher
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        private void GetIntptr(object source, ElapsedEventArgs e)
+        private void UpdateStatus(object source, ElapsedEventArgs e)
         {
             UpdateStatus();
-            GetIntptr();
-        }
-
-        private void GetIntptr()
-        {
-            Centerintptr = FindWindow("ConsoleWindowClass", "DDTank Center Service");
-            Fightintptr = FindWindow("ConsoleWindowClass", "DDTank Fighting Service");
-            Gameintptr = FindWindow("ConsoleWindowClass", "DDTank Game Service");
-            Webintptr = FindWindow("ConsoleWindowClass", "DDTank Web Service");
         }
 
         public bool StartCenter()
         {
-            return true;
-        }
-        public bool StopCenter()
-        {
-            if (Centerintptr != IntPtr.Zero)
+            if (!CenterStatus)
             {
-                ShowWindow(Centerintptr, 1);
-                Process.GetProcessesByName("Center")[0].CloseMainWindow();
+                new Thread(()=> { CenterServer.StartServer(); }).Start();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Center")[0].Close();
+                return false;
+            }
+        }
+        public bool StopCenter()
+        {
+            if (CenterStatus)
+            {
+                CenterServer.StopServer();
                 return true;
+            }
+            else
+            {       
+                return false;
             }
         }
         public bool StartFight()
         {
-            return true;
+            if (!FightStatus)
+            {
+                new Thread(() => { FightServer.StartServer(); }).Start();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool StopFight()
         {
-            if (Fightintptr != IntPtr.Zero)
+            if (FightStatus)
             {
-                ShowWindow(Fightintptr, 1);
-                Process.GetProcessesByName("Fight")[0].CloseMainWindow();
+                FightServer.StopServer();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Fight")[0].Close();
-                return true;
+                return false;
             }
         }
         public bool StartGame()
-        {          
-                return true;
-        }
-        public bool StopGame()
         {
-            if (Gameintptr != IntPtr.Zero)
+            if (!GameStatus)
             {
-                ShowWindow(Gameintptr, 1);
-                Process.GetProcessesByName("Game")[0].CloseMainWindow();
+                new Thread(() => { GameServer.StartServer(); }).Start();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Game")[0].Close();
+                return false;
+            }
+        }
+        public bool StopGame()
+        {
+            if (GameStatus)
+            {
+                GameServer.StopServer();
                 return true;
+            }
+            else
+            {
+                return false;
             }
         }
         public bool StartWeb()
         {
-         
-                return true;
-        
-        }
-        public bool StopWeb()
-        {
-            if (Webintptr != IntPtr.Zero)
+
+            if (!WebStatus)
             {
-                ShowWindow(Webintptr, 1);
-                Process.GetProcessesByName("Web")[0].CloseMainWindow();
+                new Thread(() => { WebServer.StartServer(); }).Start();
                 return true;
             }
             else
             {
-                Process.GetProcessesByName("Web")[0].Close();
+                return false;
+            }
+
+        }
+        public bool StopWeb()
+        {
+            if (WebStatus)
+            {
+                WebServer.StopServer();
                 return true;
             }
-        }
-        public void ChangeSlient(bool IsSlient)
-        {
-            if (Centerintptr != IntPtr.Zero)
-                ShowWindow(Centerintptr, (IsSlient ? (uint)0 : (uint)1));
-            if (Fightintptr != IntPtr.Zero)
-                ShowWindow(Fightintptr, (IsSlient ? (uint)0 : (uint)1));
-            if (Gameintptr != IntPtr.Zero)
-                ShowWindow(Gameintptr, (IsSlient ? (uint)0 : (uint)1));
-            if (Webintptr != IntPtr.Zero)
-                ShowWindow(Webintptr, (IsSlient ? (uint)0 : (uint)1));
-        }
-        protected override void CleanUpManagedResources()
-        {
-            System.Runtime.InteropServices.Marshal.FreeHGlobal(Centerintptr);
-            Centerintptr = IntPtr.Zero;
-            System.Runtime.InteropServices.Marshal.FreeHGlobal(Fightintptr);
-            Fightintptr = IntPtr.Zero;
-            System.Runtime.InteropServices.Marshal.FreeHGlobal(Fightintptr);
-            Fightintptr = IntPtr.Zero;
-            System.Runtime.InteropServices.Marshal.FreeHGlobal(Webintptr);
-            Webintptr = IntPtr.Zero;
-            base.CleanUpManagedResources();
+            else
+            {
+                return false;
+            }
         }
     }
 }

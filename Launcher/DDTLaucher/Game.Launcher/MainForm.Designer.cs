@@ -43,7 +43,8 @@
             this.LauncherButton = new System.Windows.Forms.Button();
             this.TabControlMain = new System.Windows.Forms.TabControl();
             this.TabLog = new System.Windows.Forms.TabPage();
-            this.LogView = new System.Windows.Forms.RichTextBox();
+            this.LogView = Loading.LogView;
+
             this.NotifyMenuStrip.SuspendLayout();
             this.TabLauncher.SuspendLayout();
             this.TabControlMain.SuspendLayout();
@@ -226,6 +227,7 @@
         private System.Windows.Forms.TabControl TabControlMain;
         private System.Windows.Forms.TabPage TabLog;
         private System.Windows.Forms.RichTextBox LogView;
+
     }
 }
 

@@ -12,6 +12,7 @@ using System.Collections;
 using Game.Base.Events;
 using Game.Base.Config;
 using Lsj.Util.Logs;
+using Web.Server.Manager;
 
 namespace Web.Server
 {
@@ -27,12 +28,10 @@ namespace Web.Server
             get;
             private set;
         }=false;
-        public RunMgr runmgr
+        public static IRunMgr Runmgr
         {
-            get
-            {
-                return m_runmgr;
-            }
+            get;
+            set;
         }
 
         public static WebServer Instance
@@ -41,16 +40,6 @@ namespace Web.Server
             {
                 return WebServer.m_instance;
             }
-        }
-
-
-        public static void CreateInstance()
-        {
-            if (WebServer.m_instance != null)
-            {
-                throw new Exception("Can't create more than one WebServer!");
-            }
-            m_instance = new WebServer();
         }
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
@@ -61,7 +50,7 @@ namespace Web.Server
             bool result = true;
             try
             {
-                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/web/" });
+                IsRunning = 0;
                 AllocatePacketBuffers();
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
@@ -93,13 +82,12 @@ namespace Web.Server
                 {
                     WebServer.log.Info("Succeed to Start WCFService!");
                 }
-
-                this.m_runmgr = new RunMgr();
                 GameEventMgr.Notify(ScriptEvent.Loaded);
 
                
                 //server.Start();
                 WebServer.log.Warn("WebHelper Service Started!");
+                IsRunning = 1;
 
 
 
@@ -120,7 +108,6 @@ namespace Web.Server
             return this.m_centerServer.Connect();
         }
         private Queue m_packetBufPool;
-        private RunMgr m_runmgr;
 
         private bool AllocatePacketBuffers()
         {
@@ -234,5 +221,17 @@ namespace Web.Server
                 return false;
             }
         }
+        private int IsRunning = -1;
+        public static bool IsRun => Instance?.IsRunning == 1;
+        public static void StartServer()
+        {
+            if (Instance?.IsRunning >= 0)
+            {
+                return;
+            }
+            m_instance = new WebServer();
+            Instance.Start();
+        }
+        public static void StopServer() => Instance?.Stop();
     }
 }

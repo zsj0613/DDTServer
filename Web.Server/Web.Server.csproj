@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web.Server.Manager\IRunMgr.cs" />
     <Compile Include="Web.Server.Manager\PlayerManager.cs" />
     <Compile Include="Web.Server\CenterServerConnector.cs" />
     <Compile Include="Web.Server\IWebHelperService.cs" />

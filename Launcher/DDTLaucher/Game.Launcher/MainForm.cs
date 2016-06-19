@@ -21,8 +21,6 @@ namespace Game.Launcher
         {
             InitializeComponent();
             this.runmgr = runmgr;
-            LogProvider.Default.Config.RichTextBox = this.LogView;
-            LogProvider.Default.Config.UseRichTextBox = true;
             this.LogView.ReadOnly = true;
             this.LogView.BackColor = Color.White;
         }

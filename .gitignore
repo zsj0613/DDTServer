@@ -43,16 +43,15 @@ build/
 *.tlh
 *.tmp
 *.tmp_proj
-*.log
 *.vspscc
 *.vssscc
 .builds
 *.pidb
-*.log
 *.scc
 *.key
 *.opensdf
 *.sdf
+*.opendb
 
 # Visual C++ cache files
 ipch/

@@ -14,28 +14,40 @@ namespace Game.Launcher
 {
     public partial class Loading : Form
     {
+
+        internal static System.Windows.Forms.RichTextBox LogView;
+
+
         private delegate void ShowMain(RunMgr runmgr);
         public Loading()
         {
             InitializeComponent();
+            LogView = new System.Windows.Forms.RichTextBox();
             this.TopMost = true;
         }
         RunMgr runmgr;
         private void Init(Object sender, EventArgs e)
         {
-            Thread thread = new Thread(run);
-            thread.Start();
+
             LogProvider.Default = new LogProvider(new LogConfig
             {
-                UseMessageBox = true
+                UseMessageBox = true,
+                RichTextBox = LogView,
+                UseRichTextBox = true
             });
+            this.runmgr = new RunMgr();
+            Web.Server.WebServer.Runmgr = this.runmgr;
 
 
+
+
+            Thread thread = new Thread(run);
+            thread.Start();
 
         }
         private void run()
         {
-            this.runmgr = new RunMgr();
+
             this.Invoke(new ShowMain(Installed),runmgr);
         }
         private void Installed(RunMgr runmgr)
