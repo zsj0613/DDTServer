@@ -96,6 +96,9 @@ namespace NVelocity.App.Event
             result = ((IMethodExceptionEventHandler)handler).MethodException(claz, method, e);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IMethodExceptionEventHandler : IEventHandler
     {
         /// <summary> Called when a method throws an exception.

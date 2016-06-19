@@ -37,7 +37,7 @@
             this.ToolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.TabLauncher = new System.Windows.Forms.TabPage();
             this.WebButton = new System.Windows.Forms.Button();
-            this.RoadButton = new System.Windows.Forms.Button();
+            this.GameButton = new System.Windows.Forms.Button();
             this.FightButton = new System.Windows.Forms.Button();
             this.CenterButton = new System.Windows.Forms.Button();
             this.LauncherButton = new System.Windows.Forms.Button();
@@ -92,7 +92,7 @@
             // TabLauncher
             // 
             this.TabLauncher.Controls.Add(this.WebButton);
-            this.TabLauncher.Controls.Add(this.RoadButton);
+            this.TabLauncher.Controls.Add(this.GameButton);
             this.TabLauncher.Controls.Add(this.FightButton);
             this.TabLauncher.Controls.Add(this.CenterButton);
             this.TabLauncher.Controls.Add(this.LauncherButton);
@@ -118,14 +118,14 @@
             // 
             // RoadButton
             // 
-            this.RoadButton.Location = new System.Drawing.Point(507, 229);
-            this.RoadButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.RoadButton.Name = "RoadButton";
-            this.RoadButton.Size = new System.Drawing.Size(256, 50);
-            this.RoadButton.TabIndex = 4;
-            this.RoadButton.Text = "RoadButton";
-            this.RoadButton.UseVisualStyleBackColor = true;
-            this.RoadButton.Click += new System.EventHandler(this.RoadButton_Click);
+            this.GameButton.Location = new System.Drawing.Point(507, 229);
+            this.GameButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GameButton.Name = "RoadButton";
+            this.GameButton.Size = new System.Drawing.Size(256, 50);
+            this.GameButton.TabIndex = 4;
+            this.GameButton.Text = "RoadButton";
+            this.GameButton.UseVisualStyleBackColor = true;
+            this.GameButton.Click += new System.EventHandler(this.RoadButton_Click);
             // 
             // FightButton
             // 
@@ -189,7 +189,6 @@
             this.LogView.Name = "LogView";
             this.LogView.Size = new System.Drawing.Size(1152, 400);
             this.LogView.TabIndex = 0;
-            this.LogView.Text = "";
             // 
             // MainForm
             // 
@@ -220,7 +219,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Exit;
         private System.Windows.Forms.TabPage TabLauncher;
         private System.Windows.Forms.Button WebButton;
-        private System.Windows.Forms.Button RoadButton;
+        private System.Windows.Forms.Button GameButton;
         private System.Windows.Forms.Button FightButton;
         private System.Windows.Forms.Button CenterButton;
         private System.Windows.Forms.Button LauncherButton;

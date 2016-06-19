@@ -201,7 +201,7 @@ namespace Game.Server.Managers
 
         public static bool Init()
         {
-            levels = GameServer.Instance.Configuration.Levels.Split(',').ConvertToIntArray();
+            levels = GameServer.Instance.Config.Levels.Split(',').ConvertToIntArray();
             return true;
         }
     }

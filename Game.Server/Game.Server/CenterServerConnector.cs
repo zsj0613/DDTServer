@@ -25,7 +25,7 @@ namespace Game.Server
 	{
         private new static LogProvider log => GameServer.log;
 		private int m_serverId;
-		private string m_loginKey;
+		private string m_loginKey = "asdfhkjshd$%#adas512";
 		protected override void OnConnect()
 		{
 			base.OnConnect();
@@ -257,7 +257,7 @@ namespace Game.Server
 			RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
 			rsa.ImportParameters(para);
 			this.SendRSALogin(rsa, this.m_loginKey);
-			this.SendListenIPPort(IPAddress.Parse(GameServer.Instance.Configuration.IP), GameServer.Instance.Configuration.Port);
+			this.SendListenIPPort(IPAddress.Parse(GameServer.Instance.Config.GameIP), GameServer.Instance.Config.GamePort);
 		}
 		protected void HandleKitoffPlayer(object stateInfo)
 		{
@@ -909,6 +909,11 @@ namespace Game.Server
 		{
 			GSPacketIn pkg = new GSPacketIn(1);
 			pkg.Write(rsa.Encrypt(Encoding.UTF8.GetBytes(key), false));
+            var config = GameServer.Instance.Config;
+            pkg.WriteInt(config.ServerID);
+            pkg.WriteString(config.GameIP);
+            pkg.WriteString(config.ServerName);
+            pkg.WriteInt(config.GamePort);
 			this.SendTCP(pkg);
 		}
 		public void SendListenIPPort(IPAddress ip, int port)
@@ -1212,7 +1217,6 @@ namespace Game.Server
 		public CenterServerConnector(string ip, int port, int serverid, string name, byte[] readBuffer, byte[] sendBuffer) : base(ip, port, true, readBuffer, sendBuffer)
 		{
 			this.m_serverId = serverid;
-			this.m_loginKey = string.Format("{0},{1}", serverid, name);
 			base.Strict = false;
 		}
 	}

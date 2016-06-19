@@ -22,7 +22,7 @@ namespace Game.Server.Commands.Admin
 			if (client != null)
 			{
 				this.m_client = client;
-				this.m_count = GameServer.Instance.Configuration.SHUTDOWN_MINUTS;
+				this.m_count = GameServer.Instance.Config.SHUTDOWN_MINUTS;
 				if (args.Length > 1)
 				{
 					int.TryParse(args[1], out this.m_count);

@@ -53,14 +53,7 @@ namespace Fighting.Server
 					Thread.CurrentThread.Priority = ThreadPriority.Normal;
 					AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
 
-                    FightServer.log.Warn("正在初始化…………");
-                    if (!Sql_DbObject.TryConnection())
-                    {
-                        result = false;
-                        FightServer.log.Error("数据库连接失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("数据库连接成功!");
+                   
 
                     if (!this.InitSocket(IPAddress.Parse(this.m_config.FightIP), this.m_config.FightPort))
                     {
@@ -72,61 +65,10 @@ namespace Fighting.Server
 
 
 
-                    if (!MapMgr.Init())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化地图失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化地图成功!");
+                    
 
-                    if (!ItemMgr.Init())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化物品失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化物品成功!");
 
-                    if (!PropItemMgr.Init())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化道具失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化道具成功!");
 
-                    if (!BallMgr.Init())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化炸弹失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化炸弹成功!");
-
-                    if (!DropMgr.Init())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化掉落失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化掉落成功!");
-
-                    if (!NPCInfoMgr.Init())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化npc失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化npc成功!");
-
-                    if (!LanguageMgr.Load())
-                    {
-                        result = false;
-                        FightServer.log.Error("初始化语言包失败，请检查!");
-                        return result;
-                    }
-                    FightServer.log.Info("初始化语言包成功!");
 
 
                     if (!base.Start())

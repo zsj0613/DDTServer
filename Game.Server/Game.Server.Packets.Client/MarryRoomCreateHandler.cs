@@ -53,7 +53,7 @@ namespace Game.Server.Packets.Client
 						info.MaxCount = packet.ReadInt();
 						info.GuestInvite = packet.ReadBoolean();
 						info.RoomIntroduction = packet.ReadString();
-						info.ServerID = GameServer.Instance.Configuration.ServerID;
+						info.ServerID = GameServer.Instance.Config.ServerID;
 						info.IsHymeneal = false;
 						string[] array = new string[]
 						{

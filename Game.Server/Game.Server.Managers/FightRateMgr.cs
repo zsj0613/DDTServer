@@ -73,7 +73,7 @@ namespace Game.Server.Managers
 		{
 			using (ServiceBussiness db = new ServiceBussiness())
 			{
-				FightRateInfo[] infos = db.GetFightRate(GameServer.Instance.Configuration.ServerID);
+				FightRateInfo[] infos = db.GetFightRate(GameServer.Instance.Config.ServerID);
 				FightRateInfo[] array = infos;
 				for (int i = 0; i < array.Length; i++)
 				{

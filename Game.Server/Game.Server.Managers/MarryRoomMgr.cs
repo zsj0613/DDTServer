@@ -39,7 +39,7 @@ namespace Game.Server.Managers
 				for (int i = 0; i < array.Length; i++)
 				{
 					MarryRoomInfo roomInfo = array[i];
-					if (roomInfo.ServerID == GameServer.Instance.Configuration.ServerID)
+					if (roomInfo.ServerID == GameServer.Instance.Config.ServerID)
 					{
 						TimeSpan usedTime = DateTime.Now - roomInfo.BeginTime;
 						int timeLeft = roomInfo.AvailTime * 60 - (int)usedTime.TotalMinutes;

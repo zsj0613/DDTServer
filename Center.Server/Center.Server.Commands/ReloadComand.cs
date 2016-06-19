@@ -25,11 +25,7 @@ namespace Center.Server.Commands
 					CenterServer.Instance.InitGlobalTimers();
 					this.DisplayMessage(client, "Reload config success!");
 				}
-				if (args.Contains("/serverlist"))
-				{
-					ServerMgr.ReLoadServerList();
-					this.DisplayMessage(client, "Reload server list success!");
-				}
+
 				//if (args.Contains("/property"))
 				//{
 					//GameProperties.Refresh();

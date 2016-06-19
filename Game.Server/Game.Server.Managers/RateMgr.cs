@@ -42,7 +42,7 @@ namespace Game.Server.Managers
         }
         public static bool ReLoad()
 		{
-			return RateMgr.Init(GameServer.Instance.Configuration);
+			return RateMgr.Init(GameServer.Instance.Config);
 
         }
 		public static float GetRate(eRateType eType)

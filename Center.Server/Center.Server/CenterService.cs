@@ -73,10 +73,6 @@ namespace Center.Server
 			result = false;
 			return result;
 		}
-		public bool ReLoadServerList()
-		{
-			return ServerMgr.ReLoadServerList();
-		}
 		public bool MailNotice(int playerID)
 		{
 			bool result;

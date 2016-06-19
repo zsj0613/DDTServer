@@ -34,15 +34,9 @@ namespace Game.Server.Commands.Admin
 				}
 				if (args.Contains("/config"))
 				{
-					GameServer.Instance.Configuration.Refresh();
+					GameServer.Instance.Config.Refresh();
 					this.DisplayMessage(client, "Application config file load success!");
 					success.Append("/config,");
-				}
-				if (args.Contains("/property"))
-				{
-					GameServer.Instance.RefreshGameProperties();
-					this.DisplayMessage(client, "Game properties load success!");
-					success.Append("/property,");
 				}
 				if (args.Contains("/item"))
 				{

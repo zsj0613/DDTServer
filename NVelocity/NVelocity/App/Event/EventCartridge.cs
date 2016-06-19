@@ -39,7 +39,7 @@ namespace NVelocity.App.Event
     /// appropriate event handlers are called in the sequence they were added to the
     /// Event Cartridge. See the javadocs of the specific event handler interfaces
     /// for more details.
-    /// 
+    /// </P>
     /// </summary>
     /// <author>  <a href="mailto:wglass@wglass@forio.com">Will Glass-Husain </a>
     /// </author>

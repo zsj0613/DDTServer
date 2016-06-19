@@ -47,11 +47,11 @@ namespace Game.Server.Managers
 			try
 			{
 				WorldMgr.m_rsa = new RSACryptoServiceProvider();
-				WorldMgr.m_rsa.FromXmlString(GameServer.Instance.Configuration.PrivateKey);
+				WorldMgr.m_rsa.FromXmlString(GameServer.Instance.Config.PrivateKey);
 				WorldMgr.m_players.Clear();
 				using (ServiceBussiness db = new ServiceBussiness())
 				{
-					ServerInfo info = db.GetServiceSingle(GameServer.Instance.Configuration.ServerID);
+					ServerInfo info = db.GetServiceSingle(GameServer.Instance.Config.ServerID);
 					if (info != null)
 					{
 						WorldMgr._marryScene = new Scene(info);

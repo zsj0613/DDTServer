@@ -68,35 +68,7 @@ namespace Center.Server
             {
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
-
-                CenterServer.log.Warn("正在初始化…………");
-
-
-                if (!Sql_DbObject.TryConnection())
-                {
-                    result = false;
-                    CenterServer.log.Error("数据库连接失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("数据库连接成功!");
-                //GameProperties.Refresh();
-
-
-
-                //  if (!this.InitComponent(GameProperties.EDITION == CenterServer.Edition, "检查服务端版本:" + CenterServer.Edition))
-                //  {
-                //      result = false;
-                //      CenterServer.log.Error("检查服务端版本错误，请检查!");
-                //     return result;
-                // }
-
-                if (!Sql_DbObject.TryConnection())
-                {
-                    result = false;
-                    CenterServer.log.Error("数据库连接失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("数据库连接成功!");
+            
 
                 if (!this.InitSocket(IPAddress.Parse(this.m_config.CenterIP), this.m_config.CenterPort))
                 {
@@ -113,24 +85,7 @@ namespace Center.Server
                     return result;
                 }
                 CenterServer.log.Info("启动服务成功!");
-
-                if (!ServerMgr.Start())
-                {
-                    result = false;
-                    CenterServer.log.Error("加载服务器列表失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("加载服务器列表成功!");
-
-
-
-                if (!LanguageMgr.Load())
-                {
-                    result = false;
-                    CenterServer.log.Error("初始化语言包失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("初始化语言包成功!");
+         
 
                 if (!this.InitGlobalTimers())
                 {
@@ -329,7 +284,6 @@ namespace Center.Server
                 CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
                 ThreadPriority oldprio = Thread.CurrentThread.Priority;
                 Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-                ServerMgr.SaveToDatabase();
                 Thread.CurrentThread.Priority = oldprio;
                 startTick = Environment.TickCount - startTick;
                 CenterServer.log.Debug("Saving database complete!");

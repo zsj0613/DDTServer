@@ -55,7 +55,7 @@ namespace Game.Server
 				return GameServer.m_instance;
 			}
 		}
-		public GameServerConfig Configuration
+		public GameServerConfig Config
 		{
 			get
 			{
@@ -76,34 +76,20 @@ namespace Game.Server
 				return this.m_packetBufPool.Count;
 			}
 		}
-		public static void CreateInstance(GameServerConfig config)
-		{
-			if (GameServer.m_instance == null)
-			{
-				GameServer.m_instance = new GameServer(config);
-			}
-		}
 		protected GameServer(GameServerConfig config)
 		{
 			this.m_config = config;
 			//if (GameServer.log.IsDebugEnabled)
 			//{
 				GameServer.log.Debug("Current directory is: " + Directory.GetCurrentDirectory());
-				GameServer.log.Debug("Gameserver root directory is: " + this.Configuration.RootDirectory);
+				GameServer.log.Debug("Gameserver root directory is: " + this.Config.RootDirectory);
 				GameServer.log.Debug("Changing directory to root directory");
 			//}
-			Directory.SetCurrentDirectory(this.Configuration.RootDirectory);
-		}
-		public bool RefreshGameProperties()
-		{
-			//GameProperties.Refresh();
-			//AwardMgr.DailyAwardState = GameProperties.DAILY_AWARD_STATE;
-			//AntiAddictionMgr.SetASSState(GameProperties.ASS_STATE);
-			return true;
+			Directory.SetCurrentDirectory(this.Config.RootDirectory);
 		}
 		private bool AllocatePacketBuffers()
 		{
-			int count = this.Configuration.MaxClientCount * 3;
+			int count = this.Config.MaxClientCount * 3;
 			this.m_packetBufPool = new Queue(count);
 			for (int i = 0; i < count; i++)
 			{
@@ -182,18 +168,6 @@ namespace Game.Server
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
 
-                GameServer.log.Warn("正在初始化…………");
-
-
-               
-                if (!Sql_DbObject.TryConnection())
-                {
-                    result = false;
-                    GameServer.log.Error("数据库连接失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("数据库连接成功!");
-                RefreshGameProperties();
 
                 if (!this.StartScriptComponents())
                 {
@@ -203,7 +177,7 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化脚本成功!");
 
-                if (!this.InitSocket(IPAddress.Parse(this.Configuration.GameIP), this.Configuration.GamePort))
+                if (!this.InitSocket(IPAddress.Parse(this.Config.GameIP), this.Config.GamePort))
                 {
                     result = false;
                     GameServer.log.Error("初始化监听端口失败，请检查!");
@@ -229,37 +203,12 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化世界场景成功!");
 
-                if (!MapMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化地图失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化地图成功!");
 
-                if (!ItemMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化物品失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化物品成功!");
+              
 
-                if (!ItemBoxMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化宝箱失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化宝箱成功!");
+               
 
-                if (!BallMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化炸弹失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化炸弹成功!");
+              
 
                 if (!FusionMgr.Init())
                 {
@@ -277,13 +226,6 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化奖励成功!");
 
-                if (!NPCInfoMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化npc信息失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化npc信息成功!");
 
                 if (!MissionInfoMgr.Init())
                 {
@@ -301,13 +243,7 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化pve成功!");
 
-                if (!DropMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化掉落失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化掉落成功!");
+               
 
                 if (!FightRateMgr.Init())
                 {
@@ -332,14 +268,6 @@ namespace Game.Server
                     return result;
                 }
                 GameServer.log.Info("初始化强化成功!");
-
-                if (!PropItemMgr.Init())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化道具失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化道具成功!");
 
                 if (!ShopMgr.Init())
                 {
@@ -381,7 +309,7 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化成就成功!");
 
-                if (!RoomMgr.Setup(this.Configuration.MaxRoomCount))
+                if (!RoomMgr.Setup(this.Config.MaxRoomCount))
                 {
                     result = false;
                     GameServer.log.Error("初始化房间管理服务失败，请检查!");
@@ -405,15 +333,8 @@ namespace Game.Server
                 }
                 GameServer.log.Info("初始化公会成功!");
 
-                if (!LanguageMgr.Load())
-                {
-                    result = false;
-                    GameServer.log.Error("初始化语言包失败，请检查!");
-                    return result;
-                }
-                GameServer.log.Info("初始化语言包成功!");
 
-                if (!Game.Server.Managers.RateMgr.Init(this.Configuration))
+                if (!Game.Server.Managers.RateMgr.Init(this.Config))
                 {
                     result = false;
                     GameServer.log.Error("初始化经验倍率管理服务失败，请检查!");
@@ -430,7 +351,7 @@ namespace Game.Server
                 GameServer.log.Info("初始化宏观掉落成功!");
 
 
-                if (!BattleMgr.Setup(this.Configuration))
+                if (!BattleMgr.Setup(this.Config))
                 {
                     result = false;
                     GameServer.log.Error("加载战斗管理服务失败，请检查!");
@@ -699,7 +620,7 @@ namespace Game.Server
 		}
 		public void Shutdown()
 		{
-			GameServer.Instance.LoginServer.DisplayMessage(string.Format(GameServer.Instance.Configuration.ServerID + "Server begin stoping !", new object[0]));
+			GameServer.Instance.LoginServer.DisplayMessage(string.Format(GameServer.Instance.Config.ServerID + "Server begin stoping !", new object[0]));
 			this._shutdownTimer = new Timer(new TimerCallback(this.ShutDownCallBack), null, 0, 60000);
 		}
 		private void ShutDownCallBack(object state)
@@ -721,7 +642,7 @@ namespace Game.Server
 				if (this._shutdownCount == 0)
 				{
 					Console.WriteLine("Server has stopped!");
-					GameServer.Instance.LoginServer.DisplayMessage(string.Format(GameServer.Instance.Configuration.ServerID + "Server has stopped!", new object[0]));
+					GameServer.Instance.LoginServer.DisplayMessage(string.Format(GameServer.Instance.Config.ServerID + "Server has stopped!", new object[0]));
 					this._shutdownTimer.Dispose();
 					this._shutdownTimer = null;
 					GameServer.Instance.Stop();
@@ -734,7 +655,7 @@ namespace Game.Server
 		}
 		public bool InitGlobalTimer()
 		{
-			int interval = this.Configuration.DBSaveInterval * 60 * 1000;
+			int interval = this.Config.DBSaveInterval * 60 * 1000;
 			if (this.m_saveDbTimer == null)
 			{
 				this.m_saveDbTimer = new Timer(new TimerCallback(this.SaveTimerProc), null, interval, interval);
@@ -743,7 +664,7 @@ namespace Game.Server
 			{
 				this.m_saveDbTimer.Change(interval, interval);
 			}
-			interval = this.Configuration.PingCheckInterval * 60 * 1000;
+			interval = this.Config.PingCheckInterval * 60 * 1000;
 			if (this.m_pingCheckTimer == null)
 			{
 				this.m_pingCheckTimer = new Timer(new TimerCallback(this.PingCheck), null, interval, interval);
@@ -752,7 +673,7 @@ namespace Game.Server
 			{
 				this.m_pingCheckTimer.Change(interval, interval);
 			}
-			interval = this.Configuration.SaveRecordInterval * 60 * 1000;
+			interval = this.Config.SaveRecordInterval * 60 * 1000;
 			if (this.m_saveRecordTimer == null)
 			{
 				this.m_saveRecordTimer = new Timer(new TimerCallback(this.SaveRecordProc), null, interval, interval);
@@ -802,7 +723,7 @@ namespace Game.Server
 			try
 			{
 				GameServer.log.Info("Begin ping check....");
-				long interval = (long)this.Configuration.PingCheckInterval * 60L * 1000L * 1000L * 10L;
+				long interval = (long)this.Config.PingCheckInterval * 60L * 1000L * 1000L * 10L;
 				GameClient[] list = this.GetAllClients();
 				if (list != null)
 				{

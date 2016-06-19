@@ -12,6 +12,7 @@ using System.Threading;
 using System.IO;
 using Game.Base;
 using Lsj.Util.Logs;
+using Lsj.Util;
 
 namespace Game.Launcher
 {
@@ -35,6 +36,15 @@ namespace Game.Launcher
             IsLoaded = true;
             CheckStatus();
             NotifyIcon.ContextMenuStrip = NotifyMenuStrip;
+            if(Loading.flag==false)
+            {
+                WinForm.Notice("初始化失败，请查看日志。");
+                CenterButton.Enabled = false;
+                FightButton.Enabled = false;
+                GameButton.Enabled = false;
+                WebButton.Enabled = false;
+                LauncherButton.Enabled = false;
+            }
 
 
         }
@@ -80,13 +90,13 @@ namespace Game.Launcher
 
                 if (runmgr.GameStatus)
                 {
-                    RoadButton.Text = "结束游戏服务端";
-                    RoadButton.ForeColor = Color.Red;
+                    GameButton.Text = "结束游戏服务端";
+                    GameButton.ForeColor = Color.Red;
                 }
                 else
                 {
-                    RoadButton.Text = "启动游戏服务端";
-                    RoadButton.ForeColor = Color.Green;
+                    GameButton.Text = "启动游戏服务端";
+                    GameButton.ForeColor = Color.Green;
                 }
                 if (runmgr.WebStatus)
                 {

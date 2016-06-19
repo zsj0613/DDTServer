@@ -48,7 +48,7 @@ namespace Game.Server.Packets.Client
 				info.Pwd = packet.ReadString();
 				info.RoomIntroduction = packet.ReadString();
 				info.MaxCount = packet.ReadInt();
-				info.ServerID = GameServer.Instance.Configuration.ServerID;
+				info.ServerID = GameServer.Instance.Config.ServerID;
 				info.AvailTime = SpaRoomMgr.priRoomInit_MinLimit;
 				info.RoomType = 3;
 				string[] array = new string[]

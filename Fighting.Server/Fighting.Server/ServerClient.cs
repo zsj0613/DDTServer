@@ -320,7 +320,7 @@ namespace Fighting.Server
 				this.m_rsa = null;
 				int id = int.Parse(temp[0]);
 				base.Strict = false;
-                if (temp[1] != FightServer.Instance.Configuration.Key)
+                if (temp[1] != FightServer.Instance.Configuration.FightKey)
                 {
                     log.Debug(temp[1]);
                     ServerClient.log.ErrorFormat("Error Login Packet from {0}", base.TcpEndpoint);

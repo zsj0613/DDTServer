@@ -152,9 +152,25 @@
       <Project>{5ea5980b-80c2-4bfc-a014-ad9b63199bda}</Project>
       <Name>Center.Server</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Bussiness\Bussiness.csproj">
+      <Project>{AC36126F-BF61-4775-9FF6-C411C9DC902B}</Project>
+      <Name>Bussiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Game.Base\Game.Base.csproj">
       <Project>{ceca9c66-ca0b-4565-8cff-5343f6878bbd}</Project>
       <Name>Game.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Game.Language\Game.Language.csproj">
+      <Project>{86dfb123-9e12-4351-9a61-c738c11c1c7e}</Project>
+      <Name>Game.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Game.Logic\Game.Logic.csproj">
+      <Project>{0B216B04-55C0-412E-8987-FA8FBD525110}</Project>
+      <Name>Game.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\SqlDataProvider\SqlDataProvider.csproj">
+      <Project>{C4267EBB-742F-4698-833E-4B743CAAD015}</Project>
+      <Name>SqlDataProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Fighting.Server\Fighting.Server.csproj">
       <Project>{a1ddbdf6-b2d5-4875-94fc-7138c39424da}</Project>
@@ -172,7 +188,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reactor_Enabled="0" Reactor_Deploy="0" />
+      <UserProperties Reactor_Deploy="0" Reactor_Enabled="0" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

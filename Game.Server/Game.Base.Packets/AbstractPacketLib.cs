@@ -86,7 +86,7 @@ namespace Game.Base.Packets
 			{
 				GSPacketIn pkg = new GSPacketIn(1, this.m_gameClient.Player.PlayerCharacter.ID);
 				pkg.WriteByte(0);
-				pkg.WriteInt(GameServer.Instance.Configuration.AreaID);
+				pkg.WriteInt(GameServer.Instance.Config.AreaID);
 				pkg.WriteInt(this.m_gameClient.Player.PlayerCharacter.Attack);
 				pkg.WriteInt(this.m_gameClient.Player.PlayerCharacter.Defence);
 				pkg.WriteInt(this.m_gameClient.Player.PlayerCharacter.Agility);

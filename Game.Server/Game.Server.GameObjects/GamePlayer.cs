@@ -787,14 +787,14 @@ namespace Game.Server.GameObjects
         {
             get
             {
-                return GameServer.Instance.Configuration.AreaID;
+                return GameServer.Instance.Config.AreaID;
             }
         }
         public string AreaName
         {
             get
             {
-                return GameServer.Instance.Configuration.AreaName;
+                return GameServer.Instance.Config.AreaName;
             }
         }
         public int m_ChargedMoney;

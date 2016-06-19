@@ -30,7 +30,7 @@ namespace Game.Server.Managers
 
         public static bool Init()
         {
-            moneys = GameServer.Instance.Configuration.VIP_MONEYS.Split(',').ConvertToIntArray();
+            moneys = GameServer.Instance.Config.VIP_MONEYS.Split(',').ConvertToIntArray();
             return true;
         }
 

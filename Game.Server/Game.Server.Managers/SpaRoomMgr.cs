@@ -107,7 +107,7 @@ namespace Game.Server.Managers
 			{
 				string str = array2[i];
 				SpaRoomMgr.needToCreatePubRoom = false;
-				if (str == GameServer.Instance.Configuration.ServerID.ToString())
+				if (str == GameServer.Instance.Config.ServerID.ToString())
 				{
 					SpaRoomMgr.needToCreatePubRoom = true;
 					break;
@@ -203,7 +203,7 @@ namespace Game.Server.Managers
 				for (int i = 0; i < array.Length; i++)
 				{
 					SpaRoomInfo roomInfo = array[i];
-					if (roomInfo.ServerID == GameServer.Instance.Configuration.ServerID)
+					if (roomInfo.ServerID == GameServer.Instance.Config.ServerID)
 					{
 						int timeLeft;
 						if (roomInfo.AvailTime > 0)
@@ -335,7 +335,7 @@ namespace Game.Server.Managers
 					pubRoomInfo.BreakTime = beginTime;
 					pubRoomInfo.RoomIntroduction = LanguageMgr.GetTranslation("SpaRoom.PubRoomIntroduction", new object[0]);
 					pubRoomInfo.RoomNumber = SpaRoomMgr.FindRoomNumber();
-					pubRoomInfo.ServerID = GameServer.Instance.Configuration.ServerID;
+					pubRoomInfo.ServerID = GameServer.Instance.Config.ServerID;
 					pubRoomInfo.RoomType = roomType;
 					pubRoomInfo.Pwd = "";
 					if (roomType == 1)
@@ -673,7 +673,7 @@ namespace Game.Server.Managers
 				info.PlayerName = player.PlayerCharacter.NickName;
 				info.BeginTime = beginTime;
 				info.BreakTime = beginTime;
-				info.ServerID = GameServer.Instance.Configuration.ServerID;
+				info.ServerID = GameServer.Instance.Config.ServerID;
 				info.RoomNumber = SpaRoomMgr.FindRoomNumber();
 				using (PlayerBussiness db = new PlayerBussiness())
 				{

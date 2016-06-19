@@ -41,9 +41,21 @@ namespace Web.Server
                 return WebServer.m_instance;
             }
         }
+        public WebServerConfig Config
+        {
+            get
+            {
+                return this.m_config;
+            }
+        }
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             WebServer.log.Error("Unhandled exception!\n" + e.ExceptionObject.ToString());
+        }
+
+        public WebServer(WebServerConfig config)
+        {
+            this.m_config = config;
         }
         public bool Start()
         {
@@ -54,15 +66,7 @@ namespace Web.Server
                 AllocatePacketBuffers();
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
-                WebServer.log.Warn("Initiating…………");
-
-                if (!Sql_DbObject.TryConnection())
-                {
-                    result = false;
-                    WebServer.log.Error("Fail to connect to SQL!");
-                    return result;
-                }
-                WebServer.log.Info("Succeed to connect to SQL!");
+                
               //  server = new Server(IPAddress.Parse(config.WebIP), config.WebPort,  "./WebPath/");
         
                 if (!this.ConnecteToCenterServer())
@@ -74,14 +78,7 @@ namespace Web.Server
                     this.IsOpen = true;
                     WebServer.log.Info("Succeed to Connect to Center Server!");
                 }
-                if (!WebHelperService.Start())
-                {
-                    WebServer.log.Error("Fail to Start WCFService");
-                }
-                else
-                {
-                    WebServer.log.Info("Succeed to Start WCFService!");
-                }
+               
                 GameEventMgr.Notify(ScriptEvent.Loaded);
 
                
@@ -222,6 +219,8 @@ namespace Web.Server
             }
         }
         private int IsRunning = -1;
+        private WebServerConfig m_config;
+
         public static bool IsRun => Instance?.IsRunning == 1;
         public static void StartServer()
         {
@@ -229,7 +228,7 @@ namespace Web.Server
             {
                 return;
             }
-            m_instance = new WebServer();
+            m_instance = new WebServer(new WebServerConfig());
             Instance.Start();
         }
         public static void StopServer() => Instance?.Stop();

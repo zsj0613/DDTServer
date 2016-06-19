@@ -369,7 +369,7 @@ namespace Web.Server
                     {
                         if (!runmgr.CenterStatus)
                         {
-                            if (runmgr.StartCenter(key, false))
+                            if (runmgr.StartCenter())
                             {
                                 WebServer.Instance.Reconnect();
                                 msg = "成功";
@@ -380,7 +380,7 @@ namespace Web.Server
                     {
                         if (!runmgr.FightStatus)
                         {
-                            if (runmgr.StartFight(key, false))
+                            if (runmgr.StartFight())
                                 msg = "成功";
                         }
                     }
@@ -388,7 +388,7 @@ namespace Web.Server
                     {
                         if (!runmgr.GameStatus)
                         {
-                            if (runmgr.StartGame(key, false))
+                            if (runmgr.StartGame())
                                 msg = "成功";
                         }
                     }

@@ -76,6 +76,7 @@
     <Compile Include="Web.Server.Manager\IRunMgr.cs" />
     <Compile Include="Web.Server.Manager\PlayerManager.cs" />
     <Compile Include="Web.Server\CenterServerConnector.cs" />
+    <Compile Include="Web.Server\WebServerConfig.cs" />
     <Compile Include="Web.Server\IWebHelperService.cs" />
     <Compile Include="Web.Server\WebHelperService.cs" />
     <Compile Include="Web.Server\WebServer.cs" />
@@ -105,9 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lsj.pfx" />
-    <Content Include="Web.exe.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

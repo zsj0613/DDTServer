@@ -13,8 +13,6 @@ namespace Center.Server
 		[OperationContract]
 		bool KitoffUser(int playerID, string msg);
 		[OperationContract]
-		bool ReLoadServerList();
-		[OperationContract]
 		bool MailNotice(int playerID);
 		[OperationContract]
 		bool CreatePlayer(int id, string name, string password, bool isFirst);

@@ -375,7 +375,7 @@ namespace Game.Server.Battle
 			pkg.WriteInt(room.RoomId);
 			pkg.WriteInt((int)room.GameType);
 			pkg.WriteInt(room.GuildId);
-			pkg.WriteInt(GameServer.Instance.Configuration.AreaID);
+			pkg.WriteInt(GameServer.Instance.Config.AreaID);
             pkg.WriteBoolean(room.IsArea);
             List<GamePlayer> players = room.GetPlayers();
 			pkg.WriteInt(players.Count);

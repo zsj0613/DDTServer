@@ -256,11 +256,11 @@ namespace NVelocity.App.Event
         /// </param>
         /// <param name="reference">complete invalid reference
         /// </param>
-        /// <param name="object">object from reference, or null if not available
+        /// <param name="object_Renamed">object from reference, or null if not available
         /// </param>
         /// <param name="property">name of property, or null if not relevant
         /// </param>
-        /// <param name="Info">contains Info on template, line, col
+        /// <param name="info">contains Info on template, line, col
         /// </param>
         /// <returns> substitute return value for missing reference, or null if no substitute
         /// </returns>

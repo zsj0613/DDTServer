@@ -22,6 +22,7 @@ namespace Center.Server
         public bool IsManager = false;
         public bool NeedSyncMacroDrop = false;
         public static readonly string MANAGER_KEY = "a3sdfi792kkliasfasdfshu290l-z:)(*";
+        public static readonly string CLIENT_KEY = "asdfhkjshd$%#adas512";
         public ServerInfo Info
         {
             get;
@@ -270,25 +271,34 @@ namespace Center.Server
                 CenterServer.log.Info($"Connected to manager  {this.TcpEndpoint}");
                 return;
             }
-            string[] temp = content.Split(new char[]
-            {
-                ','
-            });
-            if (temp!=null&temp.Length == 2)
+            else if(content == CLIENT_KEY)
             {
                 this._rsa = null;
-                int id = int.Parse(temp[0]);
-                this.Info = ServerMgr.GetServerInfo(id);
-                if (this.Info == null || this.Info.State != 1)
+
+
+                int id = pkg.ReadInt();
+                this.Info = new ServerInfo();
+                base.Strict = false;
+                var info = this.Info;
+                
+                info.ID = id;
+                info.IP = pkg.ReadString();
+                info.LowestLevel = 0;
+                info.MustLevel = 100;
+                info.Name = pkg.ReadString();
+                info.Online = 0;
+                info.Port = pkg.ReadInt();
+                info.State = 4;
+
+
+
+                if(ServerMgr.Add(id,Info))
                 {
-                    ServerClient.log.ErrorFormat("Error Login Packet from {0} want to login serverid:{1}", base.TcpEndpoint, id);
-                    this.Disconnect();
+
                 }
                 else
                 {
-                    base.Strict = false;
-                    this.Info.Online = 0;
-                    this.Info.State = 2;
+                    this.Disconnect();
                 }
             }
             else
@@ -321,6 +331,7 @@ namespace Center.Server
                 int playerid = pkg.ReadInt();
                 int consortiaid = pkg.ReadInt();
                 LoginMgr.PlayerLogined(playerid, this);
+                this.Info.Online++;
             }
             this._svr.SendToALL(pkg, this);
         }
@@ -333,6 +344,7 @@ namespace Center.Server
                 int playerid = pkg.ReadInt();
                 int consortiaid = pkg.ReadInt();
                 LoginMgr.PlayerLoginOut(playerid, this);
+                this.Info.Online--;
             }
             this._svr.SendToALL(pkg);
         }
@@ -364,7 +376,7 @@ namespace Center.Server
         public void HandlePing(GSPacketIn pkg)
         {
             this.Info.Online = pkg.ReadInt();
-            this.Info.State = ServerMgr.GetState(this.Info.Online, this.Info.Total);
+            this.Info.State = 4;
         }
         public void HandleChatPersonal(GSPacketIn pkg)
         {
