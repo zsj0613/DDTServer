@@ -17,6 +17,7 @@ using Lsj.Util.Config;
 using Lsj.Util;
 using Bussiness.CenterService;
 using System.Web;
+using Lsj.Util.Text;
 
 namespace Web.Server
 {

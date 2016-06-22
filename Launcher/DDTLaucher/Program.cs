@@ -18,8 +18,6 @@ namespace Game.Launcher
         static void Main()
         {
             WinForm.CatchAll();
-            LogProvider.Default = new LogProvider(new LogConfig { FilePath = "log/Laucher/", UseConsole = false });
-            LogProvider.Default.Debug("Start Laucher!");
             
 
 

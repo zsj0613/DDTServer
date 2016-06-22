@@ -225,7 +225,10 @@ namespace Fighting.Server
                 return;
             }
             FightServer.m_instance = new FightServer(new FightServerConfig());
-            FightServer.Instance.Start();
+            if (Instance.Start() == false)
+            {
+                Instance.IsRunning = -1;
+            }
         }
         public static void StopServer() => FightServer.Instance?.Stop();
 

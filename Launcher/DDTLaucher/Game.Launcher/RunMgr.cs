@@ -117,7 +117,9 @@ namespace Game.Launcher
         {
             if (CenterStatus)
             {
-                CenterServer.StopServer();
+                new Thread(() => {
+                    CenterServer.StopServer();
+                }).Start();
                 return true;
             }
             else
@@ -141,7 +143,9 @@ namespace Game.Launcher
         {
             if (FightStatus)
             {
-                FightServer.StopServer();
+                new Thread(() => {
+                    FightServer.StopServer();
+                }).Start();
                 return true;
             }
             else
@@ -165,7 +169,9 @@ namespace Game.Launcher
         {
             if (GameStatus)
             {
-                GameServer.StopServer();
+                new Thread(() => {
+                    GameServer.StopServer();
+                }).Start();
                 return true;
             }
             else
@@ -191,7 +197,9 @@ namespace Game.Launcher
         {
             if (WebStatus)
             {
-                WebServer.StopServer();
+                new Thread(() => {
+                    WebServer.StopServer();
+                }).Start();
                 return true;
             }
             else

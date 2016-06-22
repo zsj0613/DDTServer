@@ -7,6 +7,7 @@ using Lsj.Util;
 using Game.Logic;
 using SqlDataProvider.Data;
 using Game.Server.Packets;
+using Lsj.Util.Text;
 
 namespace Game.Server.Managers
 {

@@ -48,7 +48,7 @@ namespace CrossFighting.Server
 
 				try
 				{
-                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/fight/" });
+                LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/fight/", UseConsole = true, UseFile = true });
                 this.m_running = true;
 					Thread.CurrentThread.Priority = ThreadPriority.Normal;
 					AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);

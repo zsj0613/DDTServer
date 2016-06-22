@@ -1,5 +1,7 @@
 using System;
 using Lsj.Util;
+using Lsj.Util.Text;
+
 namespace Game.Server.Managers
 {
 	public class LevelMgr

@@ -9,6 +9,7 @@ using Lsj.Util.Logs;
 using Lsj.Util.Config;
 using Lsj.Util;
 using Center.Server.Managers;
+using Lsj.Util.Text;
 
 namespace Center.Server
 {
@@ -590,7 +591,10 @@ namespace Center.Server
                 return;
             }
             m_instance = new CenterServer(new CenterServerConfig());
-            Instance.Start();
+            if (Instance.Start() == false)
+            {
+                Instance.IsRunning = -1;
+            }
             return;
         }
         public static void StopServer() => Instance?.Stop();

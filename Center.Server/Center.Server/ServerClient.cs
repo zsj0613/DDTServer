@@ -262,7 +262,8 @@ namespace Center.Server
         }
         public void HandleLogin(GSPacketIn pkg)
         {
-            byte[] rgb = pkg.ReadBytes();
+            var x = pkg.ReadInt();
+            byte[] rgb = pkg.ReadBytes(x);
             string content = Encoding.UTF8.GetString(this._rsa.Decrypt(rgb, false));
             if (content == MANAGER_KEY)
             {

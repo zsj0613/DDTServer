@@ -5,6 +5,7 @@ using Game.Server.GameObjects;
 using Game.Server.Managers;
 using Lsj.Util;
 using Lsj.Util.Config;
+using Lsj.Util.Text;
 using SqlDataProvider.Data;
 using System;
 using System.Text;

@@ -49,16 +49,14 @@ namespace Game.Server.Managers
 				WorldMgr.m_rsa = new RSACryptoServiceProvider();
 				WorldMgr.m_rsa.FromXmlString(GameServer.Instance.Config.PrivateKey);
 				WorldMgr.m_players.Clear();
-				using (ServiceBussiness db = new ServiceBussiness())
-				{
-					ServerInfo info = db.GetServiceSingle(GameServer.Instance.Config.ServerID);
+
+                ServerInfo info = new ServerInfo { ID = GameServer.Instance.Config.ServerID,Name=GameServer.Instance.Config.ServerName};
 					if (info != null)
 					{
 						WorldMgr._marryScene = new Scene(info);
 						WorldMgr._spaScene = new Scene(info);
 						result = true;
 					}
-				}
 			}
 			catch (Exception e)
 			{

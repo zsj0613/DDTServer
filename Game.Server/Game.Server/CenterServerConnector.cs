@@ -908,7 +908,9 @@ namespace Game.Server
 		public void SendRSALogin(RSACryptoServiceProvider rsa, string key)
 		{
 			GSPacketIn pkg = new GSPacketIn(1);
-			pkg.Write(rsa.Encrypt(Encoding.UTF8.GetBytes(key), false));
+            var x = rsa.Encrypt(Encoding.UTF8.GetBytes(key), false);
+            pkg.WriteInt(x.Length);
+            pkg.Write(x);
             var config = GameServer.Instance.Config;
             pkg.WriteInt(config.ServerID);
             pkg.WriteString(config.GameIP);

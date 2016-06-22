@@ -13,6 +13,7 @@ using Game.Base.Events;
 using Game.Base.Config;
 using Lsj.Util.Logs;
 using Web.Server.Manager;
+using Lsj.Util.Text;
 
 namespace Web.Server
 {
@@ -199,7 +200,8 @@ namespace Web.Server
             {
                 if(m_centerServer!=null&&m_centerServer.IsConnected)
                 m_centerServer.Disconnect();
-               // server.Stop();
+                this.IsRunning = -1;
+                    // server.Stop();
             }
             catch
             {
@@ -229,7 +231,10 @@ namespace Web.Server
                 return;
             }
             m_instance = new WebServer(new WebServerConfig());
-            Instance.Start();
+            if (Instance.Start() == false)
+            {
+                Instance.IsRunning = -1;
+            }
         }
         public static void StopServer() => Instance?.Stop();
     }

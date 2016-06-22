@@ -61,7 +61,7 @@ namespace Game.Server
         public int CrossFightPort = 9208;
         [ConfigProperty("CrossFightKey", "服务器Key", "")]
         public string CrossFightKey = "";
-        [ConfigProperty("IsOpenCrossFight", "", "false")]
+        [ConfigProperty("IsOpenCrossFight", "", false)]
         public bool IsOpenCrossFight = false;
 
 

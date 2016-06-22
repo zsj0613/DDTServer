@@ -358,10 +358,9 @@ namespace Bussiness
 			}
 			catch (Exception e)
 			{
-				if (true)
-				{
+				
 					BaseBussiness.log.Error("Init", e);
-				}
+				
 			}
 			finally
 			{

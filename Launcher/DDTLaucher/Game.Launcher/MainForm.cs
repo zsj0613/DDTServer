@@ -22,8 +22,7 @@ namespace Game.Launcher
         {
             InitializeComponent();
             this.runmgr = runmgr;
-            this.LogView.ReadOnly = true;
-            this.LogView.BackColor = Color.White;
+
         }
 
 
@@ -34,17 +33,16 @@ namespace Game.Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             IsLoaded = true;
+            
             CheckStatus();
             NotifyIcon.ContextMenuStrip = NotifyMenuStrip;
-            if(Loading.flag==false)
-            {
-                WinForm.Notice("初始化失败，请查看日志。");
+            this.FixedSize();
+
                 CenterButton.Enabled = false;
                 FightButton.Enabled = false;
                 GameButton.Enabled = false;
                 WebButton.Enabled = false;
                 LauncherButton.Enabled = false;
-            }
 
 
         }
@@ -59,75 +57,84 @@ namespace Game.Launcher
 
         private void CheckStatus()
         {
-
-            if (runmgr.UpdateStatus())
+            if (Loading.flag == true)
             {
-                if (runmgr.CenterStatus)
+
+                CenterButton.Enabled = true;
+                FightButton.Enabled = true;
+                GameButton.Enabled = true;
+                WebButton.Enabled = true;
+                LauncherButton.Enabled = true;
+                if (runmgr.UpdateStatus())
                 {
-                    CenterButton.Text = "结束中心服务端";
-                    CenterButton.ForeColor = Color.Red;
+                    if (runmgr.CenterStatus)
+                    {
+                        CenterButton.Text = "结束中心服务端";
+                        CenterButton.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        CenterButton.Text = "启动中心服务端";
+                        CenterButton.ForeColor = Color.Green;
+                    }
+
+
+
+                    if (runmgr.FightStatus)
+                    {
+                        FightButton.Text = "结束战斗服务端";
+                        FightButton.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        FightButton.Text = "启动战斗服务端";
+                        FightButton.ForeColor = Color.Green;
+                    }
+
+
+
+                    if (runmgr.GameStatus)
+                    {
+                        GameButton.Text = "结束游戏服务端";
+                        GameButton.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        GameButton.Text = "启动游戏服务端";
+                        GameButton.ForeColor = Color.Green;
+                    }
+                    if (runmgr.WebStatus)
+                    {
+                        WebButton.Text = "结束WEB服务";
+                        WebButton.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        WebButton.Text = "启动WEB服务";
+                        WebButton.ForeColor = Color.Green;
+                    }
+
+
+                    if (runmgr.IsAllRun)
+                    {
+                        LauncherButton.Text = "一键结束";
+                        LauncherButton.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        LauncherButton.Text = "一键启动";
+                        LauncherButton.ForeColor = Color.Green;
+                    }
+
+
+
                 }
                 else
                 {
-                    CenterButton.Text = "启动中心服务端";
-                    CenterButton.ForeColor = Color.Green;
+                    MessageBox.Show("获取状态错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
-
-                if (runmgr.FightStatus)
-                {
-                    FightButton.Text = "结束战斗服务端";
-                    FightButton.ForeColor = Color.Red;
-                }
-                else
-                {
-                    FightButton.Text = "启动战斗服务端";
-                    FightButton.ForeColor = Color.Green;
-                }
-
-
-
-                if (runmgr.GameStatus)
-                {
-                    GameButton.Text = "结束游戏服务端";
-                    GameButton.ForeColor = Color.Red;
-                }
-                else
-                {
-                    GameButton.Text = "启动游戏服务端";
-                    GameButton.ForeColor = Color.Green;
-                }
-                if (runmgr.WebStatus)
-                {
-                    WebButton.Text = "结束WEB服务";
-                    WebButton.ForeColor = Color.Red;
-                }
-                else
-                {
-                    WebButton.Text = "启动WEB服务";
-                    WebButton.ForeColor = Color.Green;
-                }
-
-
-                if (runmgr.IsAllRun)
-                {
-                    LauncherButton.Text = "一键结束";
-                    LauncherButton.ForeColor = Color.Red;
-                }
-                else
-                {
-                    LauncherButton.Text = "一键启动";
-                    LauncherButton.ForeColor = Color.Green;
-                }
-
-
-
             }
-            else
-            {
-                MessageBox.Show("获取状态错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
 
         }
 
@@ -308,10 +315,14 @@ namespace Game.Launcher
                     return;
                 }
                 NotifyIcon.Dispose();
+                runmgr.StopCenter();
+                runmgr.StopFight();
+                runmgr.StopGame();
+                runmgr.StopWeb();
                 runmgr.Dispose();
                 flag = true;
             }
-            Application.Exit();
+            System.Environment.Exit(0);
         }
         bool flag = false;
 

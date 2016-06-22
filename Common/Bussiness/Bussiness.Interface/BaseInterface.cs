@@ -10,6 +10,7 @@ using System.Web.Security;
 using Lsj.Util.Config;
 using Lsj.Util;
 using Lsj.Util.Logs;
+using Lsj.Util.Text;
 
 namespace Bussiness.Interface
 {

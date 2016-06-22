@@ -1,4 +1,6 @@
-﻿namespace Game.Launcher
+﻿using Lsj.Util.Logs.WinForms;
+
+namespace Game.Launcher
 {
     partial class MainForm
     {
@@ -225,7 +227,7 @@
         private System.Windows.Forms.Button LauncherButton;
         private System.Windows.Forms.TabControl TabControlMain;
         private System.Windows.Forms.TabPage TabLog;
-        private System.Windows.Forms.RichTextBox LogView;
+        private LogView LogView;
 
     }
 }

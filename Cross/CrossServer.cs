@@ -2,6 +2,7 @@
 using Lsj.Util;
 using Lsj.Util.Config;
 using Lsj.Util.Logs;
+using Lsj.Util.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Cross
         public override bool Start()
         {
             this.InitSocket(IPAddress.Parse(AppConfig.AppSettings["IP"]), AppConfig.AppSettings["Port"].ConvertToInt(30000));
-            LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/Cross/" });
+            LogProvider.Default = new LogProvider(new LogConfig { FilePath = "./log/Cross/",UseConsole =true,UseFile=true });
             base.Start();
             log.Info("CrossServer Started");
             return true;

@@ -1006,7 +1006,11 @@ namespace Game.Server
                 return;
             }
             m_instance = new GameServer(new GameServerConfig());
-            Instance.Start();
+            if (Instance.Start() == false)
+            {
+                Instance.IsRunning = -1;
+            }
+
         }
         public static void StopServer() => Instance?.Stop();
     }

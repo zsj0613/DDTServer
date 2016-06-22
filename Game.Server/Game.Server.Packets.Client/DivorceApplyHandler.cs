@@ -6,6 +6,7 @@ using Game.Server.Managers;
 using Game.Server.SceneMarryRooms;
 using Lsj.Util;
 using Lsj.Util.Config;
+using Lsj.Util.Text;
 using SqlDataProvider.Data;
 using System;
 
