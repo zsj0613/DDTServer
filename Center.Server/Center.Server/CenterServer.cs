@@ -16,10 +16,9 @@ namespace Center.Server
     public class CenterServer : BaseServer
     {
         public new static LogProvider log = LogProvider.Default;
-        public static readonly string Edition = "11000";
+        public static readonly string Edition = CONFIG.EDITION;
         private CenterServerConfig m_config;
         private Timer m_loginLapseTimer;
-        private Timer m_saveDBTimer;
         private Timer m_scanAuction;
         private Timer m_scanMail;
         private Timer m_scanConsortia;
@@ -77,16 +76,7 @@ namespace Center.Server
                     CenterServer.log.Error("初始化监听端口失败，请检查!");
                     return result;
                 }
-                CenterServer.log.Info("初始化监听端口成功!");
-
-                if (!CenterService.Start())
-                {
-                    result = false;
-                    CenterServer.log.Error("启动服务失败，请检查!");
-                    return result;
-                }
-                CenterServer.log.Info("启动服务成功!");
-         
+                CenterServer.log.Info("初始化监听端口成功!");        
 
                 if (!this.InitGlobalTimers())
                 {
@@ -114,13 +104,12 @@ namespace Center.Server
 
                 if (!this.ConnectToCrossServer())
                 {
-
-                    result = false;
                     CenterServer.log.Error("Failed to Connect to CrossServer");
-                    return result;
                 }
-
-                CenterServer.log.Info("Succeed to Connect to CrossServer");
+                else
+                {
+                    CenterServer.log.Info("Succeed to Connect to CrossServer");
+                }
 
                 if (!base.Start())
                 {
@@ -145,15 +134,6 @@ namespace Center.Server
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             CenterServer.log.Error("Unhandled exception!\n" + e.ExceptionObject.ToString());
-        }
-        protected bool InitComponent(bool componentInitState, string text)
-        {
-            CenterServer.log.Debug(text + ": " + componentInitState);
-            if (!componentInitState)
-            {
-                this.Stop();
-            }
-            return componentInitState;
         }
         private bool ConnectToCrossServer()
         {
@@ -187,7 +167,6 @@ namespace Center.Server
 
         private void CheckRename(object state)
         {
-            CenterServer.log.Debug("检查改名中...");
             ThreadPriority oldprio = Thread.CurrentThread.Priority;
             Thread.CurrentThread.Priority = ThreadPriority.Lowest;
             RenameMgr.Do();
@@ -195,16 +174,7 @@ namespace Center.Server
 
         public bool InitGlobalTimers()
         {
-            int interval = this.m_config.SaveIntervalInterval * 60 * 1000;
-            if (this.m_saveDBTimer == null)
-            {
-                this.m_saveDBTimer = new Timer(new TimerCallback(this.SaveTimerProc), null, interval, interval);
-            }
-            else
-            {
-                this.m_saveDBTimer.Change(interval, interval);
-            }
-            interval = 60000;
+            int interval = 60000;
             if (this.m_loginLapseTimer == null)
             {
                 this.m_loginLapseTimer = new Timer(new TimerCallback(this.LoginLapseTimerProc), null, interval, interval);
@@ -244,10 +214,6 @@ namespace Center.Server
         }
         public void DisposeGlobalTimers()
         {
-            if (this.m_saveDBTimer != null)
-            {
-                this.m_saveDBTimer.Dispose();
-            }
             if (this.m_loginLapseTimer != null)
             {
                 this.m_loginLapseTimer.Dispose();
@@ -268,35 +234,18 @@ namespace Center.Server
             {
                 this.m_ChargeTimer.Dispose();
             }
+            if (this.m_RenameCheckTimer != null)
+            {
+                this.m_RenameCheckTimer.Dispose();
+            }
         }
         protected void CheckCharge(object sender)
         {
-            CenterServer.log.Debug("检查充值中...");
             ThreadPriority oldprio = Thread.CurrentThread.Priority;
             Thread.CurrentThread.Priority = ThreadPriority.Lowest;
             ChargeMgr.Do();
         }
-        protected void SaveTimerProc(object state)
-        {
-            try
-            {
-                int startTick = Environment.TickCount;
-                CenterServer.log.Debug("Saving database...");
-                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-                ThreadPriority oldprio = Thread.CurrentThread.Priority;
-                Thread.CurrentThread.Priority = ThreadPriority.Lowest;
-                Thread.CurrentThread.Priority = oldprio;
-                startTick = Environment.TickCount - startTick;
-                CenterServer.log.Debug("Saving database complete!");
-                CenterServer.log.Debug("Saved all databases " + startTick + "ms");
-            }
-            catch (Exception e)
-            {
 
-                CenterServer.log.Error("SaveTimerProc", e);
-
-            }
-        }
         protected void LoginLapseTimerProc(object sender)
         {
             try
@@ -333,8 +282,6 @@ namespace Center.Server
             try
             {
                 int startTick = Environment.TickCount;
-                CenterServer.log.Debug("Saving Record...");
-                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
                 ThreadPriority oldprio = Thread.CurrentThread.Priority;
                 Thread.CurrentThread.Priority = ThreadPriority.Lowest;
                 string noticeUserID = "";
@@ -360,7 +307,6 @@ namespace Center.Server
                 }
                 Thread.CurrentThread.Priority = oldprio;
                 startTick = Environment.TickCount - startTick;
-                CenterServer.log.Debug("Scan Auction complete!");
                 if (startTick > 120000)
                 {
                     CenterServer.log.WarnFormat("Scan all Auction  in {0} ms", startTick);
@@ -378,8 +324,6 @@ namespace Center.Server
             try
             {
                 int startTick = Environment.TickCount;
-                CenterServer.log.Debug("Saving Record...");
-                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
                 ThreadPriority oldprio = Thread.CurrentThread.Priority;
                 Thread.CurrentThread.Priority = ThreadPriority.Lowest;
                 string noticeUserID = "";
@@ -405,7 +349,6 @@ namespace Center.Server
                 }
                 Thread.CurrentThread.Priority = oldprio;
                 startTick = Environment.TickCount - startTick;
-                CenterServer.log.Debug("Scan Mail complete!");
                 if (startTick > 120000)
                 {
                     CenterServer.log.WarnFormat("Scan all Mail in {0} ms", startTick);
@@ -423,8 +366,6 @@ namespace Center.Server
             try
             {
                 int startTick = Environment.TickCount;
-                CenterServer.log.Debug("Saving Record...");
-                CenterServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
                 ThreadPriority oldprio = Thread.CurrentThread.Priority;
                 Thread.CurrentThread.Priority = ThreadPriority.Lowest;
                 string noticeID = "";
@@ -450,7 +391,6 @@ namespace Center.Server
                 }
                 Thread.CurrentThread.Priority = oldprio;
                 startTick = Environment.TickCount - startTick;
-                CenterServer.log.Debug("Scan Consortia complete!");
                 if (startTick > 120000)
                 {
                     CenterServer.log.WarnFormat("Scan all Consortia in {0} ms", startTick);
@@ -469,8 +409,6 @@ namespace Center.Server
             {
                 this.IsRunning = -1;
                 this.DisposeGlobalTimers();
-                this.SaveTimerProc(null);
-                CenterService.Stop();
                 base.Stop();
 
             }
@@ -554,35 +492,6 @@ namespace Center.Server
             return result;
         }
 
-        public bool ClientsExecuteCmd(string cmdLine)
-        {
-            bool result;
-            try
-            {
-                LogClient client = new LogClient();
-                ServerClient[] list = CenterServer.Instance.GetAllClients();
-                if (list != null)
-                {
-                    ServerClient[] array = list;
-                    for (int i = 0; i < array.Length; i++)
-                    {
-                        ServerClient c = array[i];
-                        c.SendCmd(client, cmdLine);
-                    }
-                }
-                result = true;
-                return result;
-            }
-            catch (Exception ex)
-            {
-                CenterServer.log.Error(ex.Message, ex);
-            }
-            result = false;
-            return result;
-        }
-
-
-
         public static bool IsRun => Instance?.IsRunning == 1;
         public static void StartServer()
         {
@@ -593,6 +502,7 @@ namespace Center.Server
             m_instance = new CenterServer(new CenterServerConfig());
             if (Instance.Start() == false)
             {
+                Instance.Stop();
                 Instance.IsRunning = -1;
             }
             return;

@@ -7,7 +7,6 @@ using Game.Logic.AI.Mission;
 using Game.Logic.LogEnum;
 using Game.Logic.Phy.Maps;
 using Game.Logic.Phy.Object;
-using Game.Server.Managers;
 using Lsj.Util.Logs;
 using SqlDataProvider.Data;
 using System;

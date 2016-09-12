@@ -7,7 +7,6 @@ using Game.Base.Events;
 using Game.Base.Packets;
 using Game.Logic;
 using Game.Base.Managers;
-using Game.Server.Managers;
 using Lsj.Util.Logs;
 using System;
 using System.IO;

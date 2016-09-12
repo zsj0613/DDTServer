@@ -14,10 +14,6 @@ namespace Center.Server
 		public int CenterPort;
 		[ConfigProperty("LoginLapseInterval", "登陆超时时间,分钟为单位", 1)]
 		public int LoginLapseInterval;
-		[ConfigProperty("SaveInterval", "数据保存周期,分钟为单位", 1)]
-		public int SaveIntervalInterval;
-		[ConfigProperty("SaveRecordInterval", "日志保存周期,分钟为单位", 1)]
-		public int SaveRecordInterval;
 		[ConfigProperty("ScanAuctionInterval", "排名行扫描周期,分钟为单位", 60)]
 		public int ScanAuctionInterval;
 		[ConfigProperty("ScanMailInterval", "邮件扫描周期,分钟为单位", 60)]

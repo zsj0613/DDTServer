@@ -46,11 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fighting.Server.Commands.admin\ClientMgrCommand.cs" />
-    <Compile Include="Fighting.Server.Commands.admin\ConsoleStartCommand.cs" />
-    <Compile Include="Fighting.Server.Commands.admin\ListObjectsCommand.cs" />
-    <Compile Include="Fighting.Server.Commands.admin\ReloadCommand.cs" />
-    <Compile Include="Fighting.Server.Commands.admin\RoomMgrCommand.cs" />
     <Compile Include="Fighting.Server.GameObjects\ProxyPlayer.cs" />
     <Compile Include="Fighting.Server.GameObjects\ProxyPlayerInfo.cs" />
     <Compile Include="Fighting.Server.Games\BattleGame.cs" />

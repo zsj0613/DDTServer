@@ -1,4 +1,3 @@
-using Bussiness.CenterService;
 using Bussiness.Managers;
 using Lsj.Util.Logs;
 using SqlDataProvider.Data;
@@ -743,7 +742,7 @@ namespace Bussiness
             result = null;
             return result;
         }
-        public PlayerInfo[] GetUserSingleByUserName(string userName)
+        public PlayerInfo[] GetUserByUserName(string userName)
         {
             SqlDataReader reader = null;
             List<PlayerInfo> result = new List<PlayerInfo>();
@@ -1780,13 +1779,6 @@ namespace Bussiness
                 result = this.db.RunProcedure("SP_Admin_SendUserItem", para);
                 returnValue = (int)para[33].Value;
                 result = (returnValue == 0);
-                if (result)
-                {
-                    using (CenterServiceClient client = new CenterServiceClient())
-                    {
-                        client.MailNotice(mail.ReceiverID);
-                    }
-                }
             }
             catch (Exception e)
             {
@@ -1921,13 +1913,6 @@ namespace Bussiness
                 bool result = this.db.RunProcedure("SP_Admin_SendAllItem", para);
                 returnValue = (int)para[7].Value;
                 result = (returnValue == 0);
-                if (result)
-                {
-                    using (CenterServiceClient client = new CenterServiceClient())
-                    {
-                        client.MailNotice(userID);
-                    }
-                }
             }
             catch (Exception e)
             {

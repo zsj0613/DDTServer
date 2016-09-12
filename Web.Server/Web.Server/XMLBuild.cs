@@ -10,6 +10,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using zlib;
+using Lsj.Util.Text;
 
 namespace Web.Server
 {
@@ -33,71 +34,23 @@ namespace Web.Server
             s.Close();
             return ms.ToArray();
         }
-        public static string CreateCompressXml(string path, XElement result, string file, bool isCompress, string message)
+        public static byte[] CreateCompressXml(XElement result, bool isCompress)
         {
-            string result2;
-            try
+
+            if (isCompress)
             {
-                file += ".xml";
-                path += file;
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    if (isCompress)
-                    {
-                        using (BinaryWriter writer = new BinaryWriter(fs))
-                        {
-                            writer.Write(Compress(result.ToString(false)));
-                        }
-                    }
-                    else
-                    {
-                        using (StreamWriter wirter = new StreamWriter(fs))
-                        {
-                            wirter.Write(result.ToString(false));
-                        }
-                    }
-                }
-                result2 = "Build:" + file + "," + message;
+                return Compress(result.ToString(false));
             }
-            catch (Exception ex)
+            else
             {
-                result2 = "Build:" + file + ",Fail!";
+                return result.ToString(false).ConvertToBytes();
             }
-            return result2;
+
         }
-        public static string CreateCompressXml(string path, XElement result, string file, bool isCompress)
-        {
-            string result2;
-            try
-            {
-                file += ".xml";
-                path += file;
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    if (isCompress)
-                    {
-                        using (BinaryWriter writer = new BinaryWriter(fs))
-                        {
-                            writer.Write(Compress(result.ToString(false)));
-                        }
-                    }
-                    else
-                    {
-                        using (StreamWriter wirter = new StreamWriter(fs))
-                        {
-                            wirter.Write(result.ToString(false));
-                        }
-                    }
-                }
-                result2 = "Build:" + file + ", Success!";
-            }
-            catch (Exception ex)
-            {
-                result2 = "Build:" + file + ",Fail!";
-            }
-            return result2;
-        }
-        public static string LoadBoxTempBuild(string path)
+
+
+
+        public static byte[] BoxTemplateList()
         {
             bool value = false;
             string message = "Fail";
@@ -131,9 +84,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "BoxTemplateList", false, message);
+            return CreateCompressXml(result, false);
         }
-        public static string FightLabDropItemListBulid(string path)
+        public static byte[] FightLabDropItemList()
         {
             bool value = false;
             string message = "Fail!";
@@ -269,10 +222,10 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "FightLabDropItemList", true, message);
+            return CreateCompressXml(result, true);
         }
 
-        public static string LoadUserBoxBuild(string path)
+        public static byte[] LoadUserBox()
         {
             bool value = false;
             string message = "Fail";
@@ -304,9 +257,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "LoadUserBox", false, message);
+            return CreateCompressXml(result, false);
         }
-        public static string AchievementListBulid(string path)
+        public static byte[] AchievementList()
         {
             bool value = false;
             string message = "Fail!";
@@ -360,9 +313,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "AchievementList", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string DropItemForNewRegisterBulid(string path)
+        public static byte[] DropList()
         {
             bool value = false;
             string message = "Fail!";
@@ -396,10 +349,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "DropList", true, message);
+            return CreateCompressXml(result, true);
         }
-
-        public static string NPCInfoListBulid(string path)
+        public static byte[] NPCInfoList()
         {
             bool value = false;
             string message = "Fail!";
@@ -433,9 +385,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "NPCInfoList", true, message);
+            return CreateCompressXml(result,true);
         }
-        public static string DailyAwardListBulid(string path)
+        public static byte[] DailyAwardList()
         {
             bool value = false;
             string message = "Fail!";
@@ -469,9 +421,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "DailyAwardList", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string ConsortiaLevelListBulid(string path)
+        public static byte[] ConsortiaLevelList()
         {
             bool value = false;
             string message = "Fail!";
@@ -505,9 +457,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "ConsortiaLevelList", true, message);
+            return CreateCompressXml(result,  true);
         }
-        public static string MapServerListBulid(string path)
+        public static byte[] MapServerList()
         {
             bool value = false;
             string message = "Fail";
@@ -541,9 +493,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "MapServerList", true, message);
+            return CreateCompressXml(result,true);
         }
-        public static string ItemStrengthenListBulid(string path)
+        public static byte[] ItemStrengthenList()
         {
             bool value = false;
             string message = "Fail";
@@ -577,9 +529,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "ItemStrengthenList", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string LoadItemsCategoryBulid(string path)
+        public static byte[] ItemsCategory()
         {
             bool value = false;
             string message = "Fail!";
@@ -613,9 +565,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "ItemsCategory", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string ShopItemListBulid(string path)
+        public static byte[] ShopItemList()
         {
             bool value = false;
             string message = "Fail!";
@@ -651,9 +603,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "ShopItemList", true, message);
+            return CreateCompressXml(result,  true);
         }
-        public static string TemplateAllListBulid(string path)
+        public static byte[] TemplateAllList()
         {
             bool value = false;
             string message = "Fail!";
@@ -689,9 +641,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "TemplateAlllist", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string QuestListBulid(string path)
+        public static byte[] QuestList()
         {
             bool value = false;
             string message = "Fail!";
@@ -745,15 +697,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "QuestList", true, message);
-        }
-        private static void AppendAttribute(XmlDocument doc, XmlNode node, string attr, string value)
-        {
-            XmlAttribute at = doc.CreateAttribute(attr);
-            at.Value = value;
-            node.Attributes.Append(at);
-        }
-        public static string LoadPVEItemsBuild(string path)
+            return CreateCompressXml(result, true);
+        }       
+        public static byte[] PVEList()
         {
             bool value = false;
             string message = "Fail";
@@ -790,9 +736,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "PVEList", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string LoadMapsItemsBulid(string path)
+        public static byte[] MapList()
         {
             bool value = false;
             string message = "Fail";
@@ -826,9 +772,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "MapList", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string BallListBulid(string path)
+        public static byte[] BallList()
         {
             bool value = false;
             string message = "Fail!";
@@ -862,9 +808,9 @@ namespace Web.Server
             }
             result.Add(new XAttribute("value", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "BallList", true, message);
+            return CreateCompressXml(result, true);
         }
-        public static string ActiveListBulid(string path)
+        public static byte[] ActiveList()
         {
             bool value = false;
             string message = "Fail!";
@@ -899,11 +845,14 @@ namespace Web.Server
 
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "ActiveList", true, message);
+            return CreateCompressXml(result,true);
         }
 
 
-        public static string CelebByDayBestEquipBuild(string path)
+
+
+
+        public static byte[] CelebForBestEquip()
         {
             bool value = false;
             string message = "Fail!";
@@ -923,20 +872,16 @@ namespace Web.Server
                     message = "Success!";
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
-            return CreateCompressXml(path, result, "CelebForBestEquip", false);
+            return CreateCompressXml(result, false);
         }
 
-        public static string BuildCelebConsortia(string path, string file, int order)
-        {
-            return BuildCelebConsortia(path, file, order, "");
-        }
-        public static string BuildCelebConsortia(string path, string file, int order, string fileNotCompress)
+        public static byte[] BuildCelebConsortia(int order)
         {
             bool value = false;
             string message = "Fail!";
@@ -976,23 +921,15 @@ namespace Web.Server
             }
             catch (Exception ex)
             {
-                WebServer.log.Error(file + " is fail!", ex);
+                
             }
             result.Add(new XAttribute("total", total));
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
             result.Add(new XAttribute("date", DateTime.Now.ToString("MM-dd HH:mm")));
-            if (!string.IsNullOrEmpty(fileNotCompress))
-            {
-                CreateCompressXml(path, result, fileNotCompress, false);
-            }
-            return CreateCompressXml(path, result, file, true);
+            return CreateCompressXml(result, true);
         }
-        public static string BuildCelebUsers(string path, string file, int order)
-        {
-            return BuildCelebUsers(path, file, order, "");
-        }
-        public static string BuildCelebUsers(string path, string file, int order, string fileNotCompress)
+        public static byte[] BuildCelebUsers(int order)
         {
             bool value = false;
             string message = "Fail!";
@@ -1020,18 +957,14 @@ namespace Web.Server
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                WebServer.log.Error(file + " is fail!", ex);
+                
             }
             result.Add(new XAttribute("vaule", value));
             result.Add(new XAttribute("message", message));
             result.Add(new XAttribute("date", DateTime.Now.ToString("MM-dd HH:mm")));
-            if (!string.IsNullOrEmpty(fileNotCompress))
-            {
-                CreateCompressXml(path, result, fileNotCompress, false);
-            }
-            return CreateCompressXml(path, result, file, true);
+            return CreateCompressXml(result, true);
         }
     }
 
@@ -1902,5 +1835,11 @@ namespace Web.Server
                 new XAttribute("Count", count)
             });
         }
+        private static void AppendAttribute(XmlDocument doc, XmlNode node, string attr, string value)
+        {
+            XmlAttribute at = doc.CreateAttribute(attr);
+            at.Value = value;
+            node.Attributes.Append(at);
+        }
     }
-    }
+}

@@ -275,6 +275,8 @@ namespace Game.Launcher
                         MessageBox.Show("启动Center出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     CheckStatus();
+                    Thread.Sleep(1000);
+
                 }
                 if (!runmgr.FightStatus)
                 {
@@ -283,6 +285,7 @@ namespace Game.Launcher
                         MessageBox.Show("启动Fight出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     CheckStatus();
+                    Thread.Sleep(1000);
                 }
                 if (!runmgr.GameStatus)
                 {
@@ -291,6 +294,7 @@ namespace Game.Launcher
                         MessageBox.Show("启动Game出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     CheckStatus();
+                    Thread.Sleep(1000);
                 }
                 if (!runmgr.WebStatus)
                 {
@@ -299,6 +303,7 @@ namespace Game.Launcher
                         MessageBox.Show("启动Web出错！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     CheckStatus();
+                    Thread.Sleep(1000);
                 }
 
             }

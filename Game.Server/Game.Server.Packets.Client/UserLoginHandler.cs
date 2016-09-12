@@ -6,149 +6,160 @@ using Game.Server.Managers;
 using SqlDataProvider.Data;
 using System;
 using System.Text;
+using Center.Server;
 
 namespace Game.Server.Packets.Client
 {
-	[PacketHandler(1, "User Login handler")]
-	public class UserLoginHandler : IPacketHandler
-	{
-		public int HandlePacket(GameClient client, GSPacketIn packet)
-		{
-            GameServer.log.Debug("User Login handler");
+    [PacketHandler(1, "User Login handler")]
+    public class UserLoginHandler : IPacketHandler
+    {
+        public int HandlePacket(GameClient client, GSPacketIn packet)
+        {
             int result;
-			try
-			{
-				GSPacketIn pkg = packet.Clone();
-				pkg.ClearContext();
-				if (client.Player == null)
-				{
-                  //  GameServer.log.Debug("TryLogin");
+            try
+            {
+                GSPacketIn pkg = packet.Clone();
+                pkg.ClearContext();
+                if (client.Player == null)
+                {
                     int version = packet.ReadInt();
-					int clientType = packet.ReadInt();
-					byte[] src = packet.ReadBytes();
-					try
-					{
-						src = WorldMgr.RsaCryptor.Decrypt(src, false);
-					}
-					//catch (ExecutionEngineException e)
-					//{
-					//	client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.RsaCryptorError", new object[0]));
-					///	client.Disconnect();
-					//	GameServer.log.Error("ExecutionEngineException", e);
-					//	result = 0;
-					//	return result;
-					//}
-					catch (Exception ex)
-					{
-						client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.RsaCryptorError", new object[0]));
-						client.Disconnect();
-						GameServer.log.Error("RsaCryptor", ex);
-						result = 0;
-						return result;
-					}
-					int fms_key = ((int)src[7] << 8) + (int)src[8];
-					client.SetFsm(fms_key, version);
-					string edition = GameServer.Edition;
-					if (version < int.Parse(GameServer.Edition) ||version >= int.Parse(GameServer.Edition)+1000)
-					{
-						client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.EditionError", new object[0]));
-                       // GameServer.log.Error("Edition Error");
+                    int clientType = packet.ReadInt();
+                    byte[] src = packet.ReadBytes();
+                    try
+                    {
+                        src = WorldMgr.RsaCryptor.Decrypt(src, false);
+                    }
+                    //catch (ExecutionEngineException e)
+                    //{
+                    //	client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.RsaCryptorError", new object[0]));
+                    ///	client.Disconnect();
+                    //	GameServer.log.Error("ExecutionEngineException", e);
+                    //	result = 0;
+                    //	return result;
+                    //}
+                    catch (Exception ex)
+                    {
+                        client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.RsaCryptorError", new object[0]));
                         client.Disconnect();
-						result = 0;
-						return result;
-					}
-					string[] temp = Encoding.UTF8.GetString(src, 9, src.Length - 9).Split(new char[]
-					{
-						','
-					});
-                  //  GameServer.log.Debug("Debug1");
+                        GameServer.log.Error("RsaCryptor", ex);
+                        result = 0;
+                        return result;
+                    }
+                    int fms_key = ((int)src[7] << 8) + (int)src[8];
+                    client.SetFsm(fms_key, version);
+                    string edition = GameServer.Edition;
+                    if (version < int.Parse(GameServer.Edition) || version >= int.Parse(GameServer.Edition) + 1000)
+                    {
+                        client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.EditionError", new object[0]));
+                        GameServer.log.Error("Edition Error");
+                        client.Disconnect();
+                        result = 0;
+                        return result;
+                    }
+                    string[] temp = Encoding.UTF8.GetString(src, 9, src.Length - 9).Split(new char[]
+                    {
+                        ','
+                    });
+ 
                     if (temp.Length == 2)
-					{
-						string user = temp[0];
-						string pass = temp[1];
-                       // GameServer.log.Debug("Debug2");
+                    {
+                        string user = temp[0];
+                        string pass = temp[1];
+
                         if (!LoginMgr.ContainsUser(user))
-						{
-                          //  GameServer.log.Debug("Debug3");
+                        {
+               
                             bool isFirst = false;
-							BaseInterface inter = BaseInterface.CreateInterface();
-							PlayerInfo cha = inter.LoginGame(user, pass, ref isFirst);
-                           
+                            LSJInterface inter = LSJInterface.CreateInterface();
+                            PlayerInfo cha = null;
+
+                            int userID = 0;
+                            if (OpenAPIs.ValidateLoginAndGetID(user, pass, ref userID, ref isFirst))
+                            {
+                                cha = new PlayerInfo
+                                {
+                                    ID = userID,
+                                    UserName = user
+                                };
+                            }
+
+
+
+
+
                             if (cha != null && cha.ID != 0)
-							{
-                            //    GameServer.log.Debug("Debug4");
+                            {
+                 
                                 if (cha.ID == -2)
-								{
-                              //      GameServer.log.Debug("Debug5");
+                                {
                                     client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.Forbid", new object[0]));
-									client.Disconnect();
-									result = 0;
-									return result;
-								}
-								if (!isFirst)
-								{
-									client.Player = new GamePlayer(cha.ID, user, client, cha, this.GetClientType(clientType));
-									LoginMgr.Add(cha.ID, client);
-									client.Server.LoginServer.SendAllowUserLogin(cha.ID);
-									client.Version = version;
-                                  //  GameServer.log.Warn("Logined");
+                                    client.Disconnect();
+                                    result = 0;
+                                    return result;
                                 }
-								else
-								{
-                                  //  GameServer.log.Debug("Debug6");
+                                if (!isFirst)
+                                {
+                                    client.Player = new GamePlayer(cha.ID, user, client, cha, this.GetClientType(clientType));
+                                    LoginMgr.Add(cha.ID, client);
+                                    client.Server.LoginServer.SendAllowUserLogin(cha.ID);
+                                    client.Version = version;
+                           
+                                }
+                                else
+                                {
+              
                                     client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.Register", new object[0]));
-									client.Disconnect();
-								}
-							}
-							else
-							{
-                            //    GameServer.log.Debug("Debug7");
-                             //   GameServer.log.Debug("cha.ID");
+                                    client.Disconnect();
+                                }
+                            }
+                            else
+                            {
+                
                                 client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.OverTime", new object[0]));
-								client.Disconnect();
-							}
-						}
-						else
-						{
-                            //GameServer.log.Debug("Debug8");
+                                client.Disconnect();
+                            }
+                        }
+                        else
+                        {
+                       
                             client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.LoginError", new object[0]));
-							client.Disconnect();
-						}
-					}
-					else
-					{
-                        //GameServer.log.Debug("Debug9");
+                            client.Disconnect();
+                        }
+                    }
+                    else
+                    {
+             
                         client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.LengthError", new object[0]));
-						client.Disconnect();
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-                //GameServer.log.Debug("Debug10");
+                        client.Disconnect();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+       
                 client.Out.SendKitoff(LanguageMgr.GetTranslation("UserLoginHandler.ServerError", new object[0]));
-				client.Disconnect();
-				GameServer.log.Error(LanguageMgr.GetTranslation("UserLoginHandler.ServerError", new object[0]), ex);
-			}
-			result = 1;
-			return result;
-		}
-		private eClientType GetClientType(int clientType)
-		{
-			eClientType result;
-			switch (clientType)
-			{
-			case 0:
-				result = eClientType.WEB;
-				break;
-			case 1:
-				result = eClientType.Auncher;
-				break;
-			default:
-				result = eClientType.WEB;
-				break;
-			}
-			return result;
-		}
-	}
+                client.Disconnect();
+                GameServer.log.Error(LanguageMgr.GetTranslation("UserLoginHandler.ServerError", new object[0]), ex);
+            }
+            result = 1;
+            return result;
+        }
+        private eClientType GetClientType(int clientType)
+        {
+            eClientType result;
+            switch (clientType)
+            {
+                case 0:
+                    result = eClientType.WEB;
+                    break;
+                case 1:
+                    result = eClientType.Auncher;
+                    break;
+                default:
+                    result = eClientType.WEB;
+                    break;
+            }
+            return result;
+        }
+    }
 }

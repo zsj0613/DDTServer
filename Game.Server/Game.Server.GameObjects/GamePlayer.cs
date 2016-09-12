@@ -2030,7 +2030,7 @@ namespace Game.Server.GameObjects
 						this.Out.SendCheckCode();
                        // GamePlayer.log.Debug("ChargedMoney:" + ChargedMoney.ToString() + "VIPLevel:" + VIPLevel.ToString());
                         this.Out.SendUpdateVIP(this);
-                        AntiAddictionMgr.AASStateGet(this);
+                        //AntiAddictionMgr.AASStateGet(this);
 						this.Out.SendDailyAward(this, 0);
 						this.Out.SendDailyAward(this, 1);
 						this.LoadMarryMessage();

@@ -1039,41 +1039,7 @@ namespace Bussiness
 			}
 			return result;
 		}
-		public string GetASSInfoSingle(int UserID)
-		{
-			SqlDataReader reader = null;
-			string result;
-			try
-			{
-				SqlParameter[] para = new SqlParameter[]
-				{
-					new SqlParameter("@UserID", UserID)
-				};
-				this.db.GetReader(ref reader, "SP_ASSInfo_Single", para);
-				if (reader.Read())
-				{
-					string ID = reader["IDNumber"].ToString();
-					result = ID;
-					return result;
-				}
-			}
-			catch (Exception e)
-			{
-				if (true)
-				{
-					BaseBussiness.log.Error("GetASSInfoSingle", e);
-				}
-			}
-			finally
-			{
-				if (reader != null && !reader.IsClosed)
-				{
-					reader.Close();
-				}
-			}
-			result = "";
-			return result;
-		}
+
 		public DailyAwardInfo[] GetAllDailyAward()
 		{
 			List<DailyAwardInfo> infos = new List<DailyAwardInfo>();

@@ -60,21 +60,6 @@ namespace Game.Server.Managers
 			bool result = true;
 			player.IsAASInfo = false;
 			player.IsMinor = true;
-			using (ProduceBussiness db = new ProduceBussiness())
-			{
-				string ID = db.GetASSInfoSingle(userID);
-				if (ID != "")
-				{
-					player.IsAASInfo = true;
-					result = false;
-					int Age = Convert.ToInt32(ID.Substring(6, 4));
-					int month = Convert.ToInt32(ID.Substring(10, 2));
-					if (DateTime.Now.Year.CompareTo(Age + 18) > 0 || (DateTime.Now.Year.CompareTo(Age + 18) == 0 && DateTime.Now.Month.CompareTo(month) >= 0))
-					{
-						player.IsMinor = false;
-					}
-				}
-			}
 			if (result && player.PlayerCharacter.IsFirst != 0 && player.PlayerCharacter.DayLoginCount < 1 && AntiAddictionMgr.ISASSon)
 			{
 				player.Out.SendAASState(result);

@@ -73,6 +73,7 @@
     <Compile Include="Game.Base\ClientEventHandle.cs" />
     <Compile Include="Game.Base\CmdAttribute.cs" />
     <Compile Include="Game.Base\CommandMgr.cs" />
+    <Compile Include="Game.Base\CONFIG.cs" />
     <Compile Include="Game.Base\ConsoleClient.cs" />
     <Compile Include="Game.Base\ePrivLevel.cs" />
     <Compile Include="Game.Base\GameCommand.cs" />

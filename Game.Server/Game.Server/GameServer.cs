@@ -29,8 +29,8 @@ namespace Game.Server
 	{
 		private const int BUF_SIZE = 2048;
 		public new static LogProvider log => LogProvider.Default;
-		public static readonly string Edition = "11000";
-		public static bool KeepRunning = false;
+        public static readonly string Edition = CONFIG.EDITION;
+        public static bool KeepRunning = false;
 		public static bool ManagerLogined = false;
 		private static GameServer m_instance = null;
 		private GameServerConfig m_config;
@@ -412,14 +412,14 @@ namespace Game.Server
                     return result;
                 }
                 GameServer.log.Info("初始化等级成功!");
-                if (!WorldBossMgr.Init())
+              /*  if (!WorldBossMgr.Init())
                 {
                     result = false;
                     GameServer.log.Error("初始化世界Boss失败，请检查!");
                     return result;
                 }
                 GameServer.log.Info("初始化世界Boss成功!");
-
+             */
                 RoomMgr.Start();
                 GameMgr.Start();
                 BattleMgr.Start();
@@ -452,7 +452,7 @@ namespace Game.Server
         }
 		private bool InitLoginServer()
 		{
-			this._loginServer = new CenterServerConnector(this.m_config.LoginServerIp, this.m_config.CenterPort, this.m_config.ServerID, this.m_config.ServerName, this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
+			this._loginServer = new CenterServerConnector(this.m_config.CenterIP, this.m_config.CenterPort, this.m_config.ServerID, this.m_config.ServerName, this.AcquirePacketBuffer(), this.AcquirePacketBuffer());
 			this._loginServer.Disconnected += new ClientEventHandle(this.loginServer_Disconnected);
 			return this._loginServer.Connect();
 		}
@@ -722,7 +722,6 @@ namespace Game.Server
 		{
 			try
 			{
-				GameServer.log.Info("Begin ping check....");
 				long interval = (long)this.Config.PingCheckInterval * 60L * 1000L * 1000L * 10L;
 				GameClient[] list = this.GetAllClients();
 				if (list != null)
@@ -736,14 +735,6 @@ namespace Game.Server
 							if (client.Player != null)
 							{
 								client.Out.SendPingTime(client.Player);
-								if (AntiAddictionMgr.ISASSon && client.Player.ASSonSend)
-								{
-									if (client.Player.PlayerCharacter.IsFirst == 0 && (DateTime.Now - client.Player.PlayerCharacter.AntiDate).TotalMinutes >= 30.0)
-									{
-										client.Player.Out.SendAASState(true);
-									}
-									client.Player.ASSonSend = false;
-								}
 							}
 							else
 							{
@@ -759,7 +750,6 @@ namespace Game.Server
 						}
 					}
 				}
-				GameServer.log.Info("End ping check....");
 			}
 			catch (Exception e)
 			{
@@ -770,9 +760,9 @@ namespace Game.Server
 			}
 			try
 			{
-				GameServer.log.Info("Begin ping center check....");
+	
 				GameServer.Instance.LoginServer.SendPingCenter();
-				GameServer.log.Info("End ping center check....");
+
 			}
 			catch (Exception e)
 			{
@@ -786,18 +776,17 @@ namespace Game.Server
 		{
 			try
 			{
-				GameServer.log.Info("Begin loading ShopLimitCount....");
+			
 				if ( DateTime.Now.ToString("hh:mm") == "20:00")
 				{
 					ShopMgr.RefreshLimitCount();
 				}
-				GameServer.log.Info("End loading ShopLimitCount....");
 			}
 			catch (Exception e)
 			{
 				//if (GameServer.log.IsErrorEnabled)
 				//{
-					GameServer.log.Error("LoadShopLimitCountcallback", e);
+
 				//}
 			}
 		}
@@ -808,8 +797,7 @@ namespace Game.Server
 				int startTick = Environment.TickCount;
 				//if (GameServer.log.IsInfoEnabled)
 				//{
-					GameServer.log.Info("Saving database...");
-					GameServer.log.Debug("Save ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+
 				//}
 				int saveCount = 0;
 				ThreadPriority oldprio = Thread.CurrentThread.Priority;
@@ -825,16 +813,7 @@ namespace Game.Server
 				Thread.CurrentThread.Priority = oldprio;
 				startTick = Environment.TickCount - startTick;
 				//if (GameServer.log.IsInfoEnabled)
-				//{
-					GameServer.log.Info("Saving database complete!");
-					GameServer.log.Info(string.Concat(new object[]
-					{
-						"Saved all databases and ",
-						saveCount,
-						" players in ",
-						startTick,
-						"ms"
-					}));
+
 				//}
 				if (startTick > 120000)
 				{
@@ -892,8 +871,7 @@ namespace Game.Server
 				int startTick = Environment.TickCount;
 				//if (GameServer.log.IsInfoEnabled)
 				{
-					GameServer.log.Info("Buff Scaning ...");
-					GameServer.log.Debug("BuffScan ThreadId=" + Thread.CurrentThread.ManagedThreadId);
+
 				}
 				int saveCount = 0;
 				ThreadPriority oldprio = Thread.CurrentThread.Priority;
@@ -912,17 +890,7 @@ namespace Game.Server
 				Thread.CurrentThread.Priority = oldprio;
 				startTick = Environment.TickCount - startTick;
 				//if (GameServer.log.IsInfoEnabled)
-				{
-					GameServer.log.Info("Buff Scan complete!");
-					GameServer.log.Info(string.Concat(new object[]
-					{
-						"Buff all ",
-						saveCount,
-						" players in ",
-						startTick,
-						"ms"
-					}));
-				}
+
 				if (startTick > 120000)
 				{
 					GameServer.log.WarnFormat("Scan all Buff and {0} players in {1} ms", saveCount, startTick);
@@ -941,19 +909,11 @@ namespace Game.Server
 			try
 			{
 				int startTick = Environment.TickCount;
-				//if (GameServer.log.IsInfoEnabled)
-				{
-					GameServer.log.Debug("FightServerScan Scaning ...");
-					GameServer.log.Debug("FightServerScan ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				}
+
 				ThreadPriority oldprio = Thread.CurrentThread.Priority;
 				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 				Thread.CurrentThread.Priority = oldprio;
-				startTick = Environment.TickCount - startTick;
-				//if (GameServer.log.IsInfoEnabled)
-				{
-					GameServer.log.Debug("FightServerScan  complete!");
-				}
+
 				if (startTick > 120000)
 				{
 				}
@@ -971,20 +931,13 @@ namespace Game.Server
 			try
 			{
 				int startTick = Environment.TickCount;
-				//if (GameServer.log.IsInfoEnabled)
-				{
-					GameServer.log.Info("MessageClearScan Scaning ...");
-					GameServer.log.Debug("MessageClearScan ThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				}
+
 				ThreadPriority oldprio = Thread.CurrentThread.Priority;
 				Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 				MessageMgr.RemoveMessageRecord();
 				Thread.CurrentThread.Priority = oldprio;
 				startTick = Environment.TickCount - startTick;
-				//if (GameServer.log.IsInfoEnabled)
-				{
-					GameServer.log.Info("MessageClearScan  complete!");
-				}
+
 				if (startTick > 120000)
 				{
 				}

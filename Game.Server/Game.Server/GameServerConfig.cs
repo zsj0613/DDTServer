@@ -27,8 +27,8 @@ namespace Game.Server
 		public string GameIP;
 		[ConfigProperty("GamePort", "频道开放端口", 9200)]
 		public int GamePort;
-		[ConfigProperty("LoginServerIp", "中心服务器的IP", "192.168.0.2")]
-		public string LoginServerIp;
+		[ConfigProperty("CenterIP", "中心服务器的IP", "192.168.0.2")]
+		public string CenterIP;
 		[ConfigProperty("CenterPort", "中心服务器的端口", 9202)]
 		public int CenterPort;
 		[ConfigProperty("SaveRecordInterval", "统计信息保存的时间间隔,分钟为单位", 5)]

@@ -20,19 +20,16 @@ namespace Game.Base.Packets
 		}
 		public void HandlePacket(GSPacketIn packet)
 		{
-           // PacketProcessor.log.Debug("HandlePacket!");
             int code = (int)packet.Code;
 			Statistics.BytesIn += (long)packet.Length;
 			Statistics.PacketsIn += 1L;
 			IPacketHandler packetHandler = null;
-            //PacketProcessor.log.Debug("code"+ code.ToString());
             if (code < PacketProcessor.m_packetHandlers.Length)
 			{
 				packetHandler = PacketProcessor.m_packetHandlers[code];
 			}
 			else
 			{
-				//if (PacketProcessor.log.IsErrorEnabled)
 				{
 					PacketProcessor.log.ErrorFormat("Received packet code is outside of m_packetHandlers array bounds! " + this.m_client.ToString(), new object[0]);
 					PacketProcessor.log.Error(Marshal.ToHexDump(string.Format("===> <{2}> Packet 0x{0:X2} (0x{1:X2}) length: {3} (ThreadId={4})", new object[]
@@ -45,18 +42,18 @@ namespace Game.Base.Packets
 					}), packet.Buffer));
 				}
 			}
-          //  PacketProcessor.log.Debug("PacketProcessorDebug1");
+
             if (packetHandler != null)
 			{
 				long start = (long)Environment.TickCount;
 				try
 				{
-                   // PacketProcessor.log.Debug("PacketProcessorDebug2");
+         
                     packetHandler.HandlePacket(this.m_client, packet);
 				}
 				catch (Exception e)
 				{
-					//if (PacketProcessor.log.IsErrorEnabled)
+		
 					{
 						string client = this.m_client.TcpEndpoint;
 						PacketProcessor.log.Error(string.Concat(new string[]
@@ -72,15 +69,10 @@ namespace Game.Base.Packets
 				}
 				long timeUsed = (long)Environment.TickCount - start;
 				this.m_activePacketHandler = null;
-				//if (PacketProcessor.log.IsDebugEnabled)
-				{
-					PacketProcessor.log.Debug("Package process Time:" + timeUsed + "ms!");
-				}
 				if (timeUsed > 1000L)
 				{
 					string source = this.m_client.TcpEndpoint;
-					//if (PacketProcessor.log.IsWarnEnabled)
-					//{
+
 						PacketProcessor.log.Warn(string.Concat(new object[]
 						{
 							"(",
@@ -93,7 +85,7 @@ namespace Game.Base.Packets
 							timeUsed,
 							"ms!"
 						}));
-					//}
+
 				}
 			}
 		}
@@ -102,10 +94,9 @@ namespace Game.Base.Packets
 		{
 			Array.Clear(PacketProcessor.m_packetHandlers, 0, PacketProcessor.m_packetHandlers.Length);
 			int count = PacketProcessor.SearchPacketHandlers("v168", Assembly.GetAssembly(typeof(GameServer)));
-			//if (PacketProcessor.log.IsInfoEnabled)
-			//{
+
 				PacketProcessor.log.Info("PacketProcessor: Loaded " + count + " handlers from GameServer Assembly!");
-			//}
+
 		}
 		public static void RegisterPacketHandler(int packetCode, IPacketHandler handler)
 		{

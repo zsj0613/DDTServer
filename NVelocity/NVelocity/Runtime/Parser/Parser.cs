@@ -372,7 +372,7 @@ namespace NVelocity.Runtime.Parser
                 {
                     {
                         if (true)
-                            throw (ParseException)jjte000;
+                        throw (ParseException)jjte000;
                     }
                 }
                 {

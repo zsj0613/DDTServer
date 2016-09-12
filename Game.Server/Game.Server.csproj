@@ -109,15 +109,6 @@
     <Compile Include="Game.Server.Buffer\OfferMultipleBuffer.cs" />
     <Compile Include="Game.Server.Buffer\PropsBuffer.cs" />
     <Compile Include="Game.Server.ChatServer\eChatServerPacket.cs" />
-    <Compile Include="Game.Server.Commands.Admin\BattleMgrCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\ClearCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\DataTimeCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\DropInfoMgrCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\GameDetailsCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\ListObjectsCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\MapManagerCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\ReloadCommand.cs" />
-    <Compile Include="Game.Server.Commands.Admin\ShutDownCommand.cs" />
     <Compile Include="Game.Server.Enumerate\eConsumerType.cs" />
     <Compile Include="Game.Server.Enumerate\eSubConsumerType.cs" />
     <Compile Include="Game.Server.GameObjects\eClientType.cs" />
@@ -131,6 +122,7 @@
     <Compile Include="Game.Server.Managers\AntiAddictionMgr.cs" />
     <Compile Include="Game.Server.Managers\AwardMgr.cs" />
     <Compile Include="Game.Server.Managers\BoxMgr.cs" />
+    <Compile Include="Game.Server.Managers\ConsortiaLevelMgr.cs" />
     <Compile Include="Game.Server.Managers\ConsortiaMgr.cs" />
     <Compile Include="Game.Server.Managers\eGetWay.cs" />
     <Compile Include="Game.Server.Managers\eRateType.cs" />
@@ -420,6 +412,10 @@
     <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Center.Server\Center.Server.csproj">
+      <Project>{5EA5980B-80C2-4BFC-A014-AD9B63199BDA}</Project>
+      <Name>Center.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Bussiness\Bussiness.csproj">
       <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>

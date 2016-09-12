@@ -6,9 +6,9 @@ using System.Data.SqlClient;
 using System.Reflection;
 namespace Bussiness
 {
-	public class MemberShipbussiness : BaseBussiness
+	public class MemberShipBussiness : BaseBussiness
 	{
-        public MemberShipbussiness()
+        public MemberShipBussiness()
         {
             this.db = new Sql_DbObject("AppConfig", "conmemString");
         }

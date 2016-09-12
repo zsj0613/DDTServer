@@ -5,7 +5,6 @@ using Game.Base.Packets;
 using Game.Logic;
 using Game.Logic.Phy.Maps;
 using Game.Logic.Phy.Object;
-using Game.Server.Managers;
 using Lsj.Util.Logs;
 using SqlDataProvider.Data;
 using System;

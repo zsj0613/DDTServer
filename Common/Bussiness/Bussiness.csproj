@@ -52,13 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Bussiness.CenterService\CenterServiceClient.cs" />
-    <Compile Include="Bussiness.CenterService\ICenterService.cs" />
-    <Compile Include="Bussiness.CenterService\ICenterServiceChannel.cs" />
-    <Compile Include="Bussiness.CenterService\ServerData.cs" />
     <Compile Include="Bussiness.Interface\BaseInterface.cs" />
-    <Compile Include="Bussiness.Interface\InterfaceType.cs" />
-    <Compile Include="Bussiness.Interface\LsjInterface.cs" />
     <Compile Include="Bussiness.Managers\AchievementMgr.cs" />
     <Compile Include="Bussiness.Managers\ActiveMgr.cs" />
     <Compile Include="Bussiness.Managers\DropMgr.cs" />
@@ -68,25 +62,6 @@
     <Compile Include="Bussiness.Managers\ShopMgr.cs" />
     <Compile Include="Bussiness.Protocol\eDropType.cs" />
     <Compile Include="Bussiness.Protocol\eReloadType.cs" />
-    <Compile Include="Bussiness.WebLogin\ChenckValidateRequest.cs" />
-    <Compile Include="Bussiness.WebLogin\ChenckValidateRequest1.cs" />
-    <Compile Include="Bussiness.WebLogin\ChenckValidateResponse.cs" />
-    <Compile Include="Bussiness.WebLogin\ChenckValidateResponse1.cs" />
-    <Compile Include="Bussiness.WebLogin\Get_UserSexRequest.cs" />
-    <Compile Include="Bussiness.WebLogin\Get_UserSexRequest1.cs" />
-    <Compile Include="Bussiness.WebLogin\Get_UserSexRequest2.cs" />
-    <Compile Include="Bussiness.WebLogin\Get_UserSexResponse.cs" />
-    <Compile Include="Bussiness.WebLogin\Get_UserSexResponse1.cs" />
-    <Compile Include="Bussiness.WebLogin\Get_UserSexResponse2.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortHttpGet.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortHttpGetChannel.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortHttpGetClient.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortHttpPost.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortHttpPostChannel.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortHttpPostClient.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortSoap.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortSoapChannel.cs" />
-    <Compile Include="Bussiness.WebLogin\PassPortSoapClient.cs" />
     <Compile Include="Bussiness\ActiveBussiness.cs" />
     <Compile Include="Bussiness\BaseBussiness.cs" />
     <Compile Include="Bussiness\CheckCode.cs" />
@@ -102,7 +77,6 @@
     <Compile Include="Bussiness\ServiceBussiness.cs" />
     <Compile Include="Bussiness\ThreadSafeRandom.cs" />
     <Compile Include="Bussiness\XmlExtends.cs" />
-    <Compile Include="Game.Server.Managers\ConsortiaLevelMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\lsjutil\lsj.util\Lsj.Util.csproj">

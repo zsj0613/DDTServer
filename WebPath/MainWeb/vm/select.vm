@@ -2,90 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>花千骨弹弹堂</title>
+    <title>弹弹堂</title>
     <link href="cdn/style/loginManager.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript" src="cdn/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="cdn/js/md5.js"></script>
-    <script>
-    var a = false;
-    function fEvent(sType,oInput){
-        switch (sType){
-            case "focus" :
-                oInput.isfocus = true;
-                oInput.style.backgroundColor='#FFFF66';
-            case "mouseover" :
-                oInput.style.borderColor = '#FFFF66';
-                break;
-            case "blur" :
-                oInput.isfocus = false;
-                oInput.style.backgroundColor="";
-            case "mouseout" :
-                if(!oInput.isfocus){
-                    oInput.style.borderColor='#FFFF66';
-                }
-                break;
-        }
-    }
-    function register() {
-        if (a)
-            return false;
-        if (document.form1.user.value == "") {
-            document.form1.user.focus();
-            alert("用户名不能为空！！！");
-            return false;
-        }
-        else if (document.form1.pass.value == "") {
-            document.form1.pass.focus();
-            alert("密码不能为空！！！");
-            return false;
-        }
-        else {
-            a = true;
-            document.form1.password1.value = md5(document.form1.pass.value);
-            document.form1.action = 'login?method=register';
-            document.form1.method = 'post';
-            document.form1.submit();
-        }
-    }
-    function login() {
-        if (a)
-            return false;
-        if (document.form1.user.value == "") {
-            document.form1.user.focus();
-            alert("用户名不能为空！！");
-	    return false;
-
-        }
-        else if (document.form1.pass.value == "") {
-            document.form1.pass.focus();
-            alert("密码不能为空！！");
-            return false;
-        }
-        else {
-            a = true;
-
-            document.form1.password1.value = md5(document.form1.pass.value);
-            document.form1.action = 'login?method=login';
-            document.form1.method = 'post';
-            document.form1.submit();
-        }
-    }
-
-    window.onload=function()  {
-              document.form1.user.focus();
-    }
-    function BindEnter(obj) {
-        if (obj.keyCode == 13) {
-            login();
-        }
-    }
-
-
-
-
-    </script>
-
-
 </head>
  
 <body onkeydown="BindEnter(event)" >
@@ -104,11 +22,11 @@
 							</br>
 							</br>
 							</br>
-                                <a href = "http://s1.hqgddt.com"><font color="#FF00000">花千骨弹弹堂1区</font></a>
+                                <a href = "http://s1.ddt.sdlsj.net"><font color="#FF00000">弹弹堂1区</font></a>
 								</br>
 								</br>
 								</br>
-								<a href = "login?method=logout">注销</a></h3>
+								<a href = "login.aspx?method=logout">注销</a></h3>
                             </td>
                         </tr>
                         <tr>
@@ -122,29 +40,5 @@
     </form>
 
 <link type="text/css" rel="stylesheet" href="cdn/style/css.css"/>
-<div class="sq-tip-inset sq-tip" style="right: 1px; z-index: 101; display: block;">
-<div class="sq-tip-head">
-<p> <font color="#FF00000">★花千骨唯一客服QQ：726325986★<font color="#00000"></p><a class="sq-tip-close" title="关闭" href="javascript:;"></a>
-</div>
-<div class="sq-tip-content">
-<div>
-<a href="http://jq.qq.com/?_wv=1027&k=amNeaa" ><font color="#FF0099">[顶]花千骨弹弹堂官方群：306759-★点击加入★</font></a><br>
-<a href="http://swjt.yeyou360.com" target="_blank" ><font color="#8000ff">高端神武九天私服★点击进入游戏★</font></a><br>
-<a href="http://www.hqgddt.com" target="_blank" ><font color="#ff0080">花千骨弹弹堂测试-test3-★点击进入查询★</font></a><br>
-<a href="http://www.hqgddt.com" target="_blank" ><font color="#006600">花千骨弹弹堂测试-test4-★点击进入查询★</font></a><br>
-<a href="http://www.hqgddt.com" target="_blank" ><font color="#0080ff">花千骨弹弹堂测试-test5-★点击进入查询★</font></a><br>
-<a href="http://www.hqgddt.com" target="_blank" ><font color="#ff0000">花千骨弹弹堂测试-test6-★点击进入查询★</font></a><br>
-<a href="http://www.hqgddt.com" target="_blank" ><font color="#CC0099">花千骨弹弹堂测试-test7-★点击进入查询★</font></a><br>
-</div>
-</div>
-</div>
-<script>
-$(function(){
-	//$('.sq-tip-inset').animate({left:'0'},0);
-	$('.sq-tip-inset .sq-tip-close').click(function(){
-	   $('.sq-tip-inset').animate({right:'-300px'},200);
-	});
-});
-</script>
 </body>
 </html>

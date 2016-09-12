@@ -56,6 +56,14 @@
     <AssemblyOriginatorKeyFile>lsj.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NVelocity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2daafd37d5bd6bfc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="NVelocityTemplateEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NVelocityTemplateEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -72,13 +80,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Web.Server.Modules.Admin\AdminPage.cs" />
+    <Compile Include="Web.Server.Modules.Admin\GMAction.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaInviteUsersList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\Login.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\LoginSelectList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\MailSenderList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\UserMail.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\VisualizeRegister.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ServerList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\MarryInfoPageList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\LoadUserEquip.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\IMListLoad.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaUsersList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaNameCheck.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaEventList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaEquipControlList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaDutyList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\ConsortiaApplyUsersList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\CheckNickName.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\AuctionPageList.cs" />
+    <Compile Include="Web.Server.Modules.Ashx\csFunction.cs" />
+    <Compile Include="Web.Server.Modules\CDNModule.cs" />
+    <Compile Include="Web.Server.Modules\CrossdomainModule.cs" />
+    <Compile Include="Web.Server.Modules\DDTAPIModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web.Server.Manager\IRunMgr.cs" />
     <Compile Include="Web.Server.Manager\PlayerManager.cs" />
+    <Compile Include="Web.Server.Modules\AshxModule.cs" />
+    <Compile Include="Web.Server.Modules\AdminModule.cs" />
+    <Compile Include="Web.Server.Modules\XMLModule.cs" />
     <Compile Include="Web.Server\CenterServerConnector.cs" />
+    <Compile Include="Web.Server\Server.cs" />
     <Compile Include="Web.Server\WebServerConfig.cs" />
-    <Compile Include="Web.Server\IWebHelperService.cs" />
-    <Compile Include="Web.Server\WebHelperService.cs" />
     <Compile Include="Web.Server\WebServer.cs" />
     <Compile Include="Web.Server\XMLBuild.cs" />
   </ItemGroup>
@@ -87,9 +122,17 @@
       <Project>{35fa4756-1cfd-40f8-a324-d620ab422590}</Project>
       <Name>Lsj.Util.Net.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\lsjutil\Lsj.Util.Net\Lsj.Util.Net.csproj">
+      <Project>{3089c6c9-7687-4cb1-b86e-5045ceef17f9}</Project>
+      <Name>Lsj.Util.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\lsjutil\lsj.util\Lsj.Util.csproj">
       <Project>{b0ebcb56-0ae1-4e59-b5e6-7cd17d4764c2}</Project>
       <Name>Lsj.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Center.Server\Center.Server.csproj">
+      <Project>{5EA5980B-80C2-4BFC-A014-AD9B63199BDA}</Project>
+      <Name>Center.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Bussiness\Bussiness.csproj">
       <Project>{ac36126f-bf61-4775-9ff6-c411c9dc902b}</Project>
@@ -106,7 +149,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="lsj.pfx" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\Admin.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\Admin_Left.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\Admin_Top.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\Admin_Version.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\Mail.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\Status.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\SysNotice.vm" />
+    <EmbeddedResource Include="Web.Server.Modules.Admin\UserList.vm" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

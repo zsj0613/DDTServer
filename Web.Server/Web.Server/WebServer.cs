@@ -14,6 +14,7 @@ using Game.Base.Config;
 using Lsj.Util.Logs;
 using Web.Server.Manager;
 using Lsj.Util.Text;
+using Lsj.Util.Net.Web.Listener;
 
 namespace Web.Server
 {
@@ -22,7 +23,6 @@ namespace Web.Server
         public static LogProvider log = LogProvider.Default;
         public static readonly string Edition = "10000";
         private static WebServer m_instance;
-       // private Server server;
         private CenterServerConnector m_centerServer;
         public bool IsOpen
         {
@@ -67,8 +67,8 @@ namespace Web.Server
                 AllocatePacketBuffers();
                 Thread.CurrentThread.Priority = ThreadPriority.Normal;
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(this.CurrentDomain_UnhandledException);
-                
-              //  server = new Server(IPAddress.Parse(config.WebIP), config.WebPort,  "./WebPath/");
+
+
         
                 if (!this.ConnecteToCenterServer())
                 {                    
@@ -82,9 +82,13 @@ namespace Web.Server
                
                 GameEventMgr.Notify(ScriptEvent.Loaded);
 
-               
-                //server.Start();
-                WebServer.log.Warn("WebHelper Service Started!");
+                this.server = new Server();
+                this.listener = new SocketListener();
+                listener.IP = Config.WebIP.ConvertToIPAddress();
+                listener.Port = Config.WebPort;
+                server.AddListener(listener);
+                server.Start();
+                WebServer.log.Warn("Web Server Started!");
                 IsRunning = 1;
 
 
@@ -201,7 +205,7 @@ namespace Web.Server
                 if(m_centerServer!=null&&m_centerServer.IsConnected)
                 m_centerServer.Disconnect();
                 this.IsRunning = -1;
-                    // server.Stop();
+                server.Stop();
             }
             catch
             {
@@ -222,6 +226,8 @@ namespace Web.Server
         }
         private int IsRunning = -1;
         private WebServerConfig m_config;
+        private Server server;
+        private SocketListener listener;
 
         public static bool IsRun => Instance?.IsRunning == 1;
         public static void StartServer()

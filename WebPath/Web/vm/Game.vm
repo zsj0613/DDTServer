@@ -113,10 +113,16 @@
 <body onload= "setFlashFocus()">
 <div id="daohangtiao">
   <ul class="menu" id="daohangtiao_nav">
+
+
     <li><a>欢迎你，#if ($UserType>= 2 )管理员#else玩家#end$Username</a></li>
+
+
 #if ($UserType>= 2 )
     <li><a href='admin/' target="_blank">进入管理平台</a></li>
 #end
+
+
     <li><a href='/' >刷新游戏</a></li>
     <li><a href='/?method=getinvite&user=$Username' target="_blank">复制我的邀请链接</a></li>
 	<li><a href='/?method=pay&username=$Username' target="_blank">充值</a></li>

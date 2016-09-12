@@ -10,13 +10,13 @@ public partial class Select : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.Cookies["username"].GetSafeValue() != "" && Request.Cookies["password"].GetSafeValue() != "")
+        if (Request.Cookies["user"].GetSafeValue() != "" && Request.Cookies["pass"].GetSafeValue() != "")
         {
             Response.WriteFile("vm/select.vm");
         }
         else
         {
-            Response.Redirect("login");
+            Response.Redirect("login.aspx");
         }
     }
 }

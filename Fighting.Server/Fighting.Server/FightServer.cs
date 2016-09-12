@@ -7,7 +7,6 @@ using Game.Base.Events;
 using Game.Base.Packets;
 using Game.Logic;
 using Game.Base.Managers;
-using Game.Server.Managers;
 using Lsj.Util.Logs;
 using System;
 using System.IO;
@@ -20,8 +19,9 @@ namespace Fighting.Server
 {
 	public class FightServer : BaseServer
     {
-		//private static bool KeepRunning = false;
-		private FightServerConfig m_config;
+        public static readonly string Edition = CONFIG.EDITION;
+        //private static bool KeepRunning = false;
+        private FightServerConfig m_config;
 		private bool m_running;
 		private static FightServer m_instance;
         private int IsRunning = -1;
